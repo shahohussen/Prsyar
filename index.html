@@ -1,0 +1,2044 @@
+<!DOCTYPE html>
+
+<html lang="ckb" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Survivor Ultra Pro | جەنگی زانیاری</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Rudaw&family=Cairo:wght@300;400;600;700;900&family=Amiri:wght@400;700&display=swap');
+
+```
+    :root {
+        /* Enhanced Color Palette */
+        --bg-ultra-dark: #000000;
+        --bg-darker: #0a0118;
+        --bg-dark: #120828;
+        --bg-medium: #1a0f35;
+        
+        --primary: #7c3aed;
+        --primary-dark: #6d28d9;
+        --primary-light: #a78bfa;
+        --primary-glow: rgba(124, 58, 237, 0.5);
+        
+        --accent: #ec4899;
+        --accent-dark: #db2777;
+        --accent-light: #f9a8d4;
+        --accent-glow: rgba(236, 72, 153, 0.5);
+        
+        --success: #10b981;
+        --success-light: #34d399;
+        --warning: #f59e0b;
+        --danger: #ef4444;
+        
+        --text: #ffffff;
+        --text-secondary: #c7d2fe;
+        --text-tertiary: #a5b4fc;
+        --text-muted: #818cf8;
+        
+        /* Glass Effect */
+        --glass-light: rgba(255, 255, 255, 0.05);
+        --glass-medium: rgba(255, 255, 255, 0.1);
+        --glass-dark: rgba(0, 0, 0, 0.3);
+        
+        /* Gradients */
+        --gradient-primary: linear-gradient(135deg, #7c3aed 0%, #a78bfa 50%, #c4b5fd 100%);
+        --gradient-accent: linear-gradient(135deg, #ec4899 0%, #f472b6 50%, #f9a8d4 100%);
+        --gradient-success: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+        --gradient-warning: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
+        --gradient-danger: linear-gradient(135deg, #ef4444 0%, #f87171 100%);
+        --gradient-dark: linear-gradient(180deg, var(--bg-darker) 0%, var(--bg-dark) 100%);
+        --gradient-rainbow: linear-gradient(135deg, #7c3aed, #ec4899, #f59e0b, #10b981, #3b82f6);
+        
+        /* Shadows */
+        --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+        --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
+        --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.6);
+        --shadow-xl: 0 20px 50px rgba(0, 0, 0, 0.7);
+        --shadow-primary: 0 10px 40px var(--primary-glow);
+        --shadow-accent: 0 10px 40px var(--accent-glow);
+        
+        /* Neon Glows */
+        --neon-primary: 0 0 20px var(--primary-glow), 0 0 40px var(--primary-glow);
+        --neon-accent: 0 0 20px var(--accent-glow), 0 0 40px var(--accent-glow);
+        --neon-success: 0 0 20px rgba(16, 185, 129, 0.5);
+        
+        /* Transitions */
+        --transition-ultra: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        --transition-smooth: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        background: var(--bg-ultra-dark);
+        color: var(--text);
+        font-family: 'Cairo', 'Amiri', sans-serif;
+        height: 100vh;
+        width: 100vw;
+        overflow: hidden;
+        position: relative;
+    }
+
+    /* Enhanced Animated Background */
+    .animated-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        overflow: hidden;
+    }
+
+    .bg-gradient-orb {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(80px);
+        animation: float 20s infinite ease-in-out;
+        opacity: 0.3;
+    }
+
+    .orb-1 {
+        width: 500px;
+        height: 500px;
+        background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+        top: -10%;
+        right: -10%;
+        animation-delay: 0s;
+    }
+
+    .orb-2 {
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+        bottom: -10%;
+        left: -10%;
+        animation-delay: 5s;
+    }
+
+    .orb-3 {
+        width: 350px;
+        height: 350px;
+        background: radial-gradient(circle, var(--success) 0%, transparent 70%);
+        top: 30%;
+        left: 20%;
+        animation-delay: 10s;
+    }
+
+    /* Particle Canvas */
+    #particles-js {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 1;
+    }
+
+    /* Grid Background */
+    .grid-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: 
+            linear-gradient(rgba(124, 58, 237, 0.05) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(124, 58, 237, 0.05) 1px, transparent 1px);
+        background-size: 50px 50px;
+        z-index: 1;
+        animation: gridMove 20s linear infinite;
+    }
+
+    /* Screens */
+    .screen {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        opacity: 0;
+        transition: opacity var(--transition-ultra);
+        z-index: 2;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .screen.active {
+        display: flex;
+        opacity: 1;
+        z-index: 10;
+        animation: screenFadeIn 0.8s ease-out;
+    }
+
+    /* Enhanced Profile Screen */
+    .profile-container {
+        width: 100%;
+        max-width: 1400px;
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        animation: slideInUp 1s ease-out;
+    }
+
+    .profile-header {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .profile-title {
+        font-size: 4rem;
+        font-weight: 900;
+        margin-bottom: 20px;
+        background: var(--gradient-primary);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 0 10px 30px var(--primary-glow);
+        letter-spacing: 3px;
+        animation: titleGlow 3s infinite;
+        position: relative;
+    }
+
+    .profile-title::after {
+        content: 'ULTRA';
+        position: absolute;
+        top: -15px;
+        right: -80px;
+        font-size: 1.5rem;
+        background: var(--gradient-accent);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: pulse 2s infinite;
+    }
+
+    .profile-subtitle {
+        color: var(--text-secondary);
+        font-size: 1.4rem;
+        line-height: 1.8;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .profile-main-content {
+        display: grid;
+        grid-template-columns: 1fr 2fr 1fr;
+        gap: 30px;
+        width: 100%;
+    }
+
+    /* Glass Card */
+    .glass-card {
+        background: var(--glass-light);
+        backdrop-filter: blur(30px) saturate(180%);
+        border-radius: 30px;
+        padding: 40px;
+        border: 2px solid var(--glass-medium);
+        box-shadow: var(--shadow-xl);
+        position: relative;
+        overflow: hidden;
+        transition: transform var(--transition-smooth), box-shadow var(--transition-smooth);
+    }
+
+    .glass-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--gradient-primary);
+        opacity: 0.05;
+        z-index: 0;
+        transition: opacity var(--transition-smooth);
+    }
+
+    .glass-card:hover {
+        transform: translateY(-10px);
+        box-shadow: var(--shadow-xl), var(--shadow-primary);
+    }
+
+    .glass-card:hover::before {
+        opacity: 0.1;
+    }
+
+    .glass-card > * {
+        position: relative;
+        z-index: 1;
+    }
+
+    /* Profile Avatar Section */
+    .profile-left {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .avatar-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 25px;
+    }
+
+    .avatar-wrapper {
+        position: relative;
+        width: 200px;
+        height: 200px;
+    }
+
+    .avatar-main {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background: var(--gradient-primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 5rem;
+        font-weight: 900;
+        color: white;
+        border: 5px solid var(--glass-medium);
+        box-shadow: var(--shadow-primary), inset 0 0 30px rgba(0,0,0,0.3);
+        position: relative;
+        z-index: 3;
+        animation: avatarPulse 4s infinite;
+    }
+
+    .avatar-ring {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+        border: 3px solid;
+        animation: rotate 15s linear infinite;
+    }
+
+    .avatar-ring-1 {
+        width: 220px;
+        height: 220px;
+        border-color: var(--primary);
+        opacity: 0.5;
+    }
+
+    .avatar-ring-2 {
+        width: 250px;
+        height: 250px;
+        border-color: var(--accent);
+        opacity: 0.3;
+        animation-direction: reverse;
+        animation-duration: 20s;
+    }
+
+    .avatar-ring-3 {
+        width: 280px;
+        height: 280px;
+        border-color: var(--success);
+        opacity: 0.2;
+        animation-duration: 25s;
+    }
+
+    .player-name-section {
+        text-align: center;
+    }
+
+    .player-name {
+        font-size: 2.5rem;
+        font-weight: 900;
+        margin-bottom: 15px;
+        background: var(--gradient-primary);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .player-level-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        background: var(--glass-medium);
+        padding: 12px 25px;
+        border-radius: 50px;
+        border: 2px solid var(--primary);
+        box-shadow: var(--neon-primary);
+        font-size: 1.2rem;
+        font-weight: 700;
+    }
+
+    .level-icon {
+        width: 35px;
+        height: 35px;
+        background: var(--gradient-accent);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Stats Grid */
+    .stats-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+
+    .stat-card {
+        background: var(--glass-dark);
+        border-radius: 20px;
+        padding: 25px;
+        text-align: center;
+        border: 2px solid var(--glass-medium);
+        transition: all var(--transition-smooth);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .stat-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: var(--gradient-primary);
+        transform: scaleX(0);
+        transition: transform var(--transition-smooth);
+    }
+
+    .stat-card:hover::before {
+        transform: scaleX(1);
+    }
+
+    .stat-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--primary);
+        box-shadow: var(--shadow-primary);
+    }
+
+    .stat-value {
+        font-size: 3rem;
+        font-weight: 900;
+        background: var(--gradient-primary);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 10px;
+        line-height: 1;
+    }
+
+    .stat-value.accent {
+        background: var(--gradient-accent);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .stat-value.success {
+        background: var(--gradient-success);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .stat-label {
+        color: var(--text-secondary);
+        font-size: 1.1rem;
+        font-weight: 600;
+    }
+
+    /* Center Column - Countdown */
+    .countdown-section {
+        display: flex;
+        flex-direction: column;
+        gap: 35px;
+    }
+
+    .countdown-header {
+        text-align: center;
+    }
+
+    .countdown-title {
+        font-size: 2.5rem;
+        font-weight: 900;
+        margin-bottom: 15px;
+        background: var(--gradient-accent);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .countdown-subtitle {
+        color: var(--text-secondary);
+        font-size: 1.2rem;
+        line-height: 1.6;
+    }
+
+    .countdown-display {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        padding: 40px 0;
+    }
+
+    .countdown-unit {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .countdown-digit {
+        width: 120px;
+        height: 140px;
+        background: var(--glass-dark);
+        border-radius: 20px;
+        border: 2px solid var(--primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 4.5rem;
+        font-weight: 900;
+        color: var(--primary-light);
+        box-shadow: var(--shadow-primary), inset 0 0 20px rgba(0,0,0,0.5);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .countdown-digit::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+        animation: shimmer 3s infinite;
+    }
+
+    .countdown-digit span {
+        text-shadow: var(--neon-primary);
+        animation: digitGlow 2s infinite;
+    }
+
+    .countdown-label {
+        color: var(--text-tertiary);
+        font-size: 1.1rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+    .countdown-colon {
+        font-size: 4rem;
+        color: var(--primary);
+        align-self: center;
+        animation: blink 2s infinite;
+        margin-top: -30px;
+    }
+
+    .countdown-progress {
+        width: 100%;
+        height: 12px;
+        background: var(--glass-dark);
+        border-radius: 20px;
+        overflow: hidden;
+        border: 2px solid var(--glass-medium);
+        position: relative;
+    }
+
+    .countdown-progress-fill {
+        height: 100%;
+        background: var(--gradient-primary);
+        width: 0%;
+        transition: width 1s linear;
+        position: relative;
+        box-shadow: 0 0 20px var(--primary-glow);
+    }
+
+    .countdown-progress-fill::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+        animation: shimmer 2s infinite;
+    }
+
+    /* Ad Preview */
+    .ad-preview-card {
+        background: rgba(245, 158, 11, 0.1);
+        border-radius: 25px;
+        padding: 30px;
+        border: 2px solid var(--warning);
+        box-shadow: 0 0 30px rgba(245, 158, 11, 0.3);
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .ad-preview-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, transparent, rgba(245, 158, 11, 0.1), transparent);
+        animation: shimmer 4s infinite;
+    }
+
+    .ad-icon {
+        font-size: 3.5rem;
+        color: var(--warning);
+        margin-bottom: 20px;
+        animation: bounce 2s infinite;
+    }
+
+    .ad-preview-title {
+        font-size: 1.8rem;
+        font-weight: 900;
+        color: var(--warning);
+        margin-bottom: 15px;
+    }
+
+    .ad-preview-desc {
+        color: var(--text-secondary);
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin-bottom: 20px;
+    }
+
+    .ad-preview-timer {
+        font-size: 2.5rem;
+        font-weight: 900;
+        color: var(--warning);
+        text-shadow: 0 0 20px rgba(245, 158, 11, 0.5);
+    }
+
+    /* Right Column - Actions & Info */
+    .profile-right {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    /* Quick Actions */
+    .quick-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .action-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--text);
+        margin-bottom: 10px;
+    }
+
+    .action-btn {
+        width: 100%;
+        padding: 20px;
+        border-radius: 20px;
+        border: none;
+        font-size: 1.2rem;
+        font-weight: 700;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+        transition: all var(--transition-smooth);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .action-btn::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.2);
+        transform: translate(-50%, -50%);
+        transition: width 0.6s, height 0.6s;
+    }
+
+    .action-btn:hover::before {
+        width: 300px;
+        height: 300px;
+    }
+
+    .action-btn span {
+        position: relative;
+        z-index: 1;
+    }
+
+    .action-btn i {
+        position: relative;
+        z-index: 1;
+    }
+
+    .btn-primary {
+        background: var(--gradient-primary);
+        color: white;
+        box-shadow: var(--shadow-primary);
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 50px var(--primary-glow);
+    }
+
+    .btn-secondary {
+        background: var(--glass-medium);
+        color: var(--text);
+        border: 2px solid var(--glass-medium);
+    }
+
+    .btn-secondary:hover {
+        background: var(--glass-light);
+        border-color: var(--primary);
+        transform: translateY(-5px);
+    }
+
+    .btn-accent {
+        background: var(--gradient-accent);
+        color: white;
+        box-shadow: var(--shadow-accent);
+    }
+
+    .btn-accent:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 50px var(--accent-glow);
+    }
+
+    /* Achievements Preview */
+    .achievements-preview {
+        background: var(--glass-dark);
+        border-radius: 20px;
+        padding: 25px;
+        border: 2px solid var(--glass-medium);
+    }
+
+    .achievements-title {
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .achievement-item {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        padding: 15px;
+        background: var(--glass-light);
+        border-radius: 15px;
+        margin-bottom: 12px;
+        transition: all var(--transition-fast);
+    }
+
+    .achievement-item:hover {
+        background: var(--glass-medium);
+        transform: translateX(-5px);
+    }
+
+    .achievement-icon {
+        width: 50px;
+        height: 50px;
+        background: var(--gradient-accent);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+    }
+
+    .achievement-icon.locked {
+        background: var(--glass-dark);
+        opacity: 0.5;
+    }
+
+    .achievement-info {
+        flex: 1;
+    }
+
+    .achievement-name {
+        font-weight: 700;
+        margin-bottom: 5px;
+    }
+
+    .achievement-progress {
+        font-size: 0.9rem;
+        color: var(--text-tertiary);
+    }
+
+    /* Name Input */
+    .name-input-section {
+        background: var(--glass-dark);
+        border-radius: 20px;
+        padding: 25px;
+        border: 2px solid var(--glass-medium);
+    }
+
+    .input-label {
+        display: block;
+        color: var(--text-secondary);
+        font-size: 1.1rem;
+        margin-bottom: 15px;
+        font-weight: 600;
+    }
+
+    .player-name-input {
+        width: 100%;
+        padding: 18px 25px;
+        border-radius: 15px;
+        border: 2px solid var(--glass-medium);
+        background: var(--glass-light);
+        color: var(--text);
+        font-size: 1.2rem;
+        font-family: inherit;
+        transition: all var(--transition-smooth);
+        outline: none;
+    }
+
+    .player-name-input:focus {
+        border-color: var(--primary);
+        box-shadow: var(--shadow-primary);
+        background: var(--glass-medium);
+    }
+
+    .player-name-input::placeholder {
+        color: var(--text-muted);
+    }
+
+    /* Game Countdown Screen */
+    .game-countdown-container {
+        max-width: 1200px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 50px;
+        animation: zoomIn 1s ease-out;
+    }
+
+    .game-title-section {
+        text-align: center;
+    }
+
+    .game-main-title {
+        font-size: 6rem;
+        font-weight: 900;
+        background: var(--gradient-rainbow);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 20px;
+        letter-spacing: 5px;
+        animation: titleRainbow 5s infinite, titleFloat 3s infinite;
+    }
+
+    .game-subtitle {
+        font-size: 2rem;
+        color: var(--text);
+        margin-bottom: 15px;
+    }
+
+    .game-description {
+        color: var(--text-secondary);
+        font-size: 1.4rem;
+        max-width: 700px;
+        line-height: 1.8;
+    }
+
+    .game-countdown-large {
+        display: flex;
+        gap: 30px;
+        padding: 50px 0;
+    }
+
+    .large-countdown-unit {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .large-digit-box {
+        width: 180px;
+        height: 200px;
+        background: var(--glass-dark);
+        border-radius: 25px;
+        border: 3px solid var(--primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 7rem;
+        font-weight: 900;
+        color: var(--primary-light);
+        box-shadow: var(--shadow-xl), var(--shadow-primary);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .large-digit-box::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, var(--primary-glow), transparent);
+        opacity: 0.3;
+    }
+
+    .large-digit-box span {
+        position: relative;
+        z-index: 2;
+        text-shadow: var(--neon-primary);
+        animation: digitPulse 1s infinite;
+    }
+
+    .large-countdown-label {
+        color: var(--text-tertiary);
+        font-size: 1.4rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+    }
+
+    .large-colon {
+        font-size: 6rem;
+        color: var(--primary);
+        align-self: center;
+        margin-top: -40px;
+        animation: blink 2s infinite;
+    }
+
+    /* Players Ready */
+    .players-ready-section {
+        width: 100%;
+        max-width: 900px;
+    }
+
+    .players-ready-title {
+        font-size: 1.8rem;
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 25px;
+        color: var(--success);
+    }
+
+    .players-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+    }
+
+    .player-ready-card {
+        background: var(--glass-light);
+        border-radius: 15px;
+        padding: 15px 20px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        border: 2px solid var(--success);
+        box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+        animation: slideInLeft 0.6s ease-out;
+    }
+
+    .player-ready-avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: var(--gradient-success);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 900;
+        font-size: 1.2rem;
+        box-shadow: var(--neon-success);
+    }
+
+    .player-ready-name {
+        font-weight: 700;
+        font-size: 1.1rem;
+    }
+
+    /* Ad Warning */
+    .ad-warning-card {
+        width: 100%;
+        max-width: 800px;
+        background: rgba(245, 158, 11, 0.15);
+        border-radius: 25px;
+        padding: 35px;
+        border: 3px solid var(--warning);
+        box-shadow: 0 0 40px rgba(245, 158, 11, 0.4);
+        animation: pulseWarning 3s infinite;
+        text-align: center;
+    }
+
+    .ad-warning-icon {
+        font-size: 4rem;
+        color: var(--warning);
+        margin-bottom: 20px;
+    }
+
+    .ad-warning-title {
+        font-size: 2rem;
+        font-weight: 900;
+        color: var(--warning);
+        margin-bottom: 15px;
+    }
+
+    .ad-warning-text {
+        color: var(--text-secondary);
+        font-size: 1.3rem;
+        line-height: 1.8;
+    }
+
+    /* Ad Screen */
+    .ad-main-container {
+        max-width: 1000px;
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        animation: fadeInScale 0.8s ease-out;
+    }
+
+    .ad-header-section {
+        text-align: center;
+    }
+
+    .ad-main-title {
+        font-size: 3.5rem;
+        font-weight: 900;
+        background: var(--gradient-warning);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 20px;
+    }
+
+    .ad-main-subtitle {
+        color: var(--text-secondary);
+        font-size: 1.4rem;
+        line-height: 1.7;
+    }
+
+    .ad-video-section {
+        width: 100%;
+        background: var(--glass-dark);
+        border-radius: 30px;
+        overflow: hidden;
+        border: 3px solid var(--warning);
+        box-shadow: 0 0 50px rgba(245, 158, 11, 0.4);
+    }
+
+    .ad-video-content {
+        width: 100%;
+        height: 500px;
+        background: linear-gradient(135deg, #1e293b, #334155);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .ad-video-content::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(45deg, transparent, rgba(255,255,255,0.05), transparent);
+        animation: shimmer 4s infinite;
+    }
+
+    .ad-video-play {
+        font-size: 8rem;
+        color: var(--warning);
+        margin-bottom: 30px;
+        text-shadow: 0 0 40px rgba(245, 158, 11, 0.7);
+        animation: pulse 2s infinite;
+        cursor: pointer;
+        transition: transform var(--transition-smooth);
+    }
+
+    .ad-video-play:hover {
+        transform: scale(1.2);
+    }
+
+    .ad-video-title {
+        font-size: 2.5rem;
+        font-weight: 900;
+        color: white;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+
+    .ad-video-desc {
+        color: var(--text-secondary);
+        font-size: 1.3rem;
+        text-align: center;
+        max-width: 600px;
+    }
+
+    .ad-timer-section {
+        background: var(--glass-dark);
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 25px;
+    }
+
+    .ad-timer-label {
+        font-size: 1.5rem;
+        color: var(--text);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .ad-timer-display {
+        font-size: 4.5rem;
+        font-weight: 900;
+        color: var(--warning);
+        text-shadow: 0 0 30px rgba(245, 158, 11, 0.7);
+        animation: timerPulse 1s infinite;
+    }
+
+    .ad-progress-bar-container {
+        width: 100%;
+        height: 14px;
+        background: var(--glass-light);
+        border-radius: 20px;
+        overflow: hidden;
+        border: 2px solid var(--warning);
+    }
+
+    .ad-progress-bar-fill {
+        height: 100%;
+        background: var(--gradient-warning);
+        width: 0%;
+        transition: width 1s linear;
+        box-shadow: 0 0 20px rgba(245, 158, 11, 0.5);
+        position: relative;
+    }
+
+    .ad-progress-bar-fill::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+        animation: shimmer 2s infinite;
+    }
+
+    /* Ad Rewards */
+    .ad-rewards-section {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 25px;
+    }
+
+    .reward-card {
+        background: var(--glass-light);
+        border-radius: 25px;
+        padding: 30px;
+        text-align: center;
+        border: 2px solid var(--glass-medium);
+        transition: all var(--transition-smooth);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .reward-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, transparent, rgba(245, 158, 11, 0.1), transparent);
+        opacity: 0;
+        transition: opacity var(--transition-smooth);
+    }
+
+    .reward-card:hover {
+        transform: translateY(-10px);
+        border-color: var(--warning);
+        box-shadow: 0 15px 40px rgba(245, 158, 11, 0.3);
+    }
+
+    .reward-card:hover::before {
+        opacity: 1;
+    }
+
+    .reward-icon {
+        font-size: 4rem;
+        color: var(--warning);
+        margin-bottom: 20px;
+    }
+
+    .reward-title {
+        font-size: 1.6rem;
+        font-weight: 900;
+        color: var(--text);
+        margin-bottom: 12px;
+    }
+
+    .reward-desc {
+        color: var(--text-secondary);
+        font-size: 1.1rem;
+        line-height: 1.6;
+    }
+
+    /* Ad Skip */
+    .ad-skip-section {
+        text-align: center;
+    }
+
+    .ad-skip-button {
+        padding: 20px 45px;
+        border-radius: 20px;
+        border: 2px solid var(--glass-medium);
+        background: var(--glass-light);
+        color: var(--text-secondary);
+        font-size: 1.3rem;
+        font-weight: 700;
+        cursor: not-allowed;
+        display: inline-flex;
+        align-items: center;
+        gap: 15px;
+        transition: all var(--transition-smooth);
+    }
+
+    .ad-skip-button:not(:disabled) {
+        cursor: pointer;
+        background: var(--glass-medium);
+        color: var(--text);
+        border-color: var(--primary);
+    }
+
+    .ad-skip-button:not(:disabled):hover {
+        background: var(--primary);
+        color: white;
+        box-shadow: var(--shadow-primary);
+        transform: translateY(-5px);
+    }
+
+    .ad-skip-info {
+        margin-top: 15px;
+        color: var(--text-tertiary);
+        font-size: 1.1rem;
+    }
+
+    /* Animations */
+    @keyframes screenFadeIn {
+        from { opacity: 0; transform: scale(0.95); }
+        to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes slideInUp {
+        from { opacity: 0; transform: translateY(50px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideInLeft {
+        from { opacity: 0; transform: translateX(-30px); }
+        to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes zoomIn {
+        from { opacity: 0; transform: scale(0.8); }
+        to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes fadeInScale {
+        from { opacity: 0; transform: scale(0.9); }
+        to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-30px); }
+    }
+
+    @keyframes rotate {
+        from { transform: translate(-50%, -50%) rotate(0deg); }
+        to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    @keyframes shimmer {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100%); }
+    }
+
+    @keyframes pulse {
+        0%, 100% { transform: scale(1); opacity: 1; }
+        50% { transform: scale(1.1); opacity: 0.8; }
+    }
+
+    @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-20px); }
+    }
+
+    @keyframes blink {
+        0%, 49%, 100% { opacity: 1; }
+        50%, 99% { opacity: 0.3; }
+    }
+
+    @keyframes titleGlow {
+        0%, 100% { text-shadow: 0 10px 30px var(--primary-glow); }
+        50% { text-shadow: 0 10px 50px var(--primary-glow), 0 0 30px var(--primary-glow); }
+    }
+
+    @keyframes titleRainbow {
+        0% { filter: hue-rotate(0deg); }
+        100% { filter: hue-rotate(360deg); }
+    }
+
+    @keyframes titleFloat {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-15px); }
+    }
+
+    @keyframes avatarPulse {
+        0%, 100% { box-shadow: var(--shadow-primary), inset 0 0 30px rgba(0,0,0,0.3); }
+        50% { box-shadow: 0 0 50px var(--primary-glow), inset 0 0 30px rgba(0,0,0,0.3); }
+    }
+
+    @keyframes digitGlow {
+        0%, 100% { text-shadow: var(--neon-primary); }
+        50% { text-shadow: 0 0 40px var(--primary-glow); }
+    }
+
+    @keyframes digitPulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+    }
+
+    @keyframes pulseWarning {
+        0%, 100% { box-shadow: 0 0 40px rgba(245, 158, 11, 0.4); }
+        50% { box-shadow: 0 0 60px rgba(245, 158, 11, 0.6); }
+    }
+
+    @keyframes timerPulse {
+        0%, 100% { transform: scale(1); text-shadow: 0 0 30px rgba(245, 158, 11, 0.7); }
+        50% { transform: scale(1.05); text-shadow: 0 0 50px rgba(245, 158, 11, 0.9); }
+    }
+
+    @keyframes gridMove {
+        0% { background-position: 0 0; }
+        100% { background-position: 50px 50px; }
+    }
+
+    /* Responsive */
+    @media (max-width: 1200px) {
+        .profile-main-content {
+            grid-template-columns: 1fr;
+        }
+        
+        .profile-left, .profile-right {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .profile-title { font-size: 2.5rem; }
+        .game-main-title { font-size: 3.5rem; }
+        .countdown-display { flex-wrap: wrap; }
+        .game-countdown-large { flex-wrap: wrap; }
+        .large-digit-box { width: 130px; height: 150px; font-size: 5rem; }
+        .stats-grid { grid-template-columns: 1fr; }
+        .ad-video-content { height: 350px; }
+        .ad-rewards-section { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 480px) {
+        .profile-title { font-size: 2rem; }
+        .game-main-title { font-size: 2.5rem; }
+        .countdown-digit { width: 90px; height: 110px; font-size: 3rem; }
+        .large-digit-box { width: 100px; height: 120px; font-size: 4rem; }
+        .avatar-main { font-size: 3.5rem; }
+        .glass-card { padding: 25px; }
+    }
+</style>
+```
+
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="animated-bg">
+        <div class="bg-gradient-orb orb-1"></div>
+        <div class="bg-gradient-orb orb-2"></div>
+        <div class="bg-gradient-orb orb-3"></div>
+    </div>
+
+```
+<!-- Grid Background -->
+<div class="grid-bg"></div>
+
+<!-- Particles -->
+<div id="particles-js"></div>
+
+<!-- Profile Screen -->
+<div id="screen-profile" class="screen active">
+    <div class="profile-container">
+        <div class="profile-header">
+            <h1 class="profile-title">SURVIVOR ULTRA</h1>
+            <p class="profile-subtitle">ئامادە بە بۆ گەورەترین جەنگی زانیاری! هەموو شەو کاتژمێر ٨ی ئێوارە، تەنها یەک کەس ڕزگاری دەبێت</p>
+        </div>
+
+        <div class="profile-main-content">
+            <!-- Left Column: Avatar & Stats -->
+            <div class="profile-left">
+                <div class="glass-card">
+                    <div class="avatar-section">
+                        <div class="avatar-wrapper">
+                            <div class="avatar-main" id="profile-avatar">?</div>
+                            <div class="avatar-ring avatar-ring-1"></div>
+                            <div class="avatar-ring avatar-ring-2"></div>
+                            <div class="avatar-ring avatar-ring-3"></div>
+                        </div>
+
+                        <div class="player-name-section">
+                            <h2 class="player-name" id="profile-name">یاریزان</h2>
+                            <div class="player-level-badge">
+                                <div class="level-icon">
+                                    <i class="fas fa-crown"></i>
+                                </div>
+                                <span>ئاست <span id="profile-level">١</span></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-value" id="profile-score">٠</div>
+                            <div class="stat-label">کۆی خاڵەکان</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value success" id="profile-wins">٠</div>
+                            <div class="stat-label">بردنەوە</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value accent" id="profile-streak">٠</div>
+                            <div class="stat-label">زنجیرەی ئێستا</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="profile-rank">#٠</div>
+                            <div class="stat-label">پلە لە ڕیزبەندی</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="name-input-section glass-card">
+                    <label class="input-label">
+                        <i class="fas fa-user-edit"></i> دەستکاری ناو
+                    </label>
+                    <input 
+                        type="text" 
+                        id="player-name-input" 
+                        class="player-name-input" 
+                        placeholder="ناوی خۆت بنووسە..."
+                        maxlength="20"
+                    />
+                </div>
+            </div>
+
+            <!-- Center Column: Countdown -->
+            <div class="countdown-section glass-card">
+                <div class="countdown-header">
+                    <h3 class="countdown-title">کاونتداونی یاری داھاتوو</h3>
+                    <p class="countdown-subtitle">یاریەکە ھەموو شەو کاتژمێر ٨ی ئێوارە دەست پێ دەکات. ئامادە بە!</p>
+                </div>
+
+                <div class="countdown-display">
+                    <div class="countdown-unit">
+                        <div class="countdown-digit">
+                            <span id="countdown-hours">٠٠</span>
+                        </div>
+                        <div class="countdown-label">کاتژمێر</div>
+                    </div>
+                    <div class="countdown-colon">:</div>
+                    <div class="countdown-unit">
+                        <div class="countdown-digit">
+                            <span id="countdown-minutes">٠٠</span>
+                        </div>
+                        <div class="countdown-label">خولەک</div>
+                    </div>
+                    <div class="countdown-colon">:</div>
+                    <div class="countdown-unit">
+                        <div class="countdown-digit">
+                            <span id="countdown-seconds">٠٠</span>
+                        </div>
+                        <div class="countdown-label">چرکە</div>
+                    </div>
+                </div>
+
+                <div class="countdown-progress">
+                    <div class="countdown-progress-fill" id="countdown-progress"></div>
+                </div>
+
+                <div class="ad-preview-card">
+                    <div class="ad-icon">
+                        <i class="fas fa-film"></i>
+                    </div>
+                    <h4 class="ad-preview-title">ڕیکلامی پێش یاری</h4>
+                    <p class="ad-preview-desc">١ خولەک پێش دەستپێکردنی یاری، ڕیکلامێکی کورت دەبینیت بۆ پشتگیری پڕۆژەکە</p>
+                    <div class="ad-preview-timer">
+                        <i class="fas fa-clock"></i>
+                        <span id="ad-preview-time">٠١:٠٠</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Actions & Achievements -->
+            <div class="profile-right">
+                <div class="quick-actions glass-card">
+                    <h3 class="action-title">
+                        <i class="fas fa-gamepad"></i> کردارە خێراکان
+                    </h3>
+                    <button class="action-btn btn-primary" onclick="enterGameQueue()">
+                        <i class="fas fa-play-circle"></i>
+                        <span>چوونە ناو یاری</span>
+                    </button>
+                    <button class="action-btn btn-accent" onclick="showLeaderboard()">
+                        <i class="fas fa-trophy"></i>
+                        <span>ڕیزبەندی</span>
+                    </button>
+                    <button class="action-btn btn-secondary" onclick="showAchievements()">
+                        <i class="fas fa-medal"></i>
+                        <span>دەستکەوتەکان</span>
+                    </button>
+                </div>
+
+                <div class="achievements-preview glass-card">
+                    <h3 class="achievements-title">
+                        <i class="fas fa-star"></i>
+                        دوایین دەستکەوتەکان
+                    </h3>
+                    <div class="achievement-item">
+                        <div class="achievement-icon">
+                            <i class="fas fa-fire"></i>
+                        </div>
+                        <div class="achievement-info">
+                            <div class="achievement-name">زنجیرەی ئاگر</div>
+                            <div class="achievement-progress">٣ لە ٥ بردنەوە</div>
+                        </div>
+                    </div>
+                    <div class="achievement-item">
+                        <div class="achievement-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <div class="achievement-info">
+                            <div class="achievement-name">خێرایی برق</div>
+                            <div class="achievement-progress">٨ لە ١٠ وەڵامی خێرا</div>
+                        </div>
+                    </div>
+                    <div class="achievement-item">
+                        <div class="achievement-icon locked">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <div class="achievement-info">
+                            <div class="achievement-name">پاشا</div>
+                            <div class="achievement-progress">داخراو</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Game Countdown Screen -->
+<div id="screen-game-countdown" class="screen">
+    <div class="game-countdown-container">
+        <div class="game-title-section">
+            <h1 class="game-main-title">SURVIVOR ULTRA</h1>
+            <h2 class="game-subtitle">یاریەکە بەم زووانە دەست پێ دەکات!</h2>
+            <p class="game-description">ئامادە بە بۆ جەنگی زانیاری. تەنها ١ کەس لە ١٠٠ یاریزان ڕزگاری دەبێت. دەتوانیت ببیتە براوە؟</p>
+        </div>
+
+        <div class="game-countdown-large">
+            <div class="large-countdown-unit">
+                <div class="large-digit-box">
+                    <span id="game-countdown-minutes">٠٥</span>
+                </div>
+                <div class="large-countdown-label">خولەک</div>
+            </div>
+            <div class="large-colon">:</div>
+            <div class="large-countdown-unit">
+                <div class="large-digit-box">
+                    <span id="game-countdown-seconds">٠٠</span>
+                </div>
+                <div class="large-countdown-label">چرکە</div>
+            </div>
+        </div>
+
+        <div class="players-ready-section">
+            <h3 class="players-ready-title">
+                <i class="fas fa-users"></i>
+                یاریزانەکانی ئامادە (١٠)
+            </h3>
+            <div class="players-grid" id="players-ready-grid">
+                <!-- Players will be added dynamically -->
+            </div>
+        </div>
+
+        <div class="ad-warning-card" id="ad-warning">
+            <div class="ad-warning-icon">
+                <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <h3 class="ad-warning-title">ئاگاداری ڕیکلام</h3>
+            <p class="ad-warning-text">
+                ١ خولەک پێش دەستپێکردنی یاری، ڕیکلامێکی ١٥ چرکەیی دەردەکەوێت.<br>
+                بینینی ڕیکلام <strong>+١٠٠ خاڵ</strong> و <strong>+١ ژیانی زیاد</strong> پێت دەدات!
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- Ad Screen -->
+<div id="screen-ad" class="screen">
+    <div class="ad-main-container">
+        <div class="ad-header-section">
+            <h1 class="ad-main-title">ڕیکلامی پشتگیری</h1>
+            <p class="ad-main-subtitle">
+                سوپاس بۆ بینینی ئەم ڕیکلامە! تۆ یارمەتی گەشەپێدانی پڕۆژەکە دەدەیت
+            </p>
+        </div>
+
+        <div class="ad-video-section">
+            <div class="ad-video-content">
+                <i class="fas fa-play-circle ad-video-play"></i>
+                <h2 class="ad-video-title">پڕۆژەی Survivor Ultra</h2>
+                <p class="ad-video-desc">
+                    پشتگیریت زۆر بەنرخە! بەم ڕێگایە دەتوانین تایبەتمەندی نوێ و جێگەی یاری زیاد بکەین
+                </p>
+            </div>
+
+            <div class="ad-timer-section">
+                <div class="ad-timer-label">
+                    <i class="fas fa-hourglass-half"></i>
+                    کاتی ماوە:
+                </div>
+                <div class="ad-timer-display" id="ad-timer">١٥</div>
+
+                <div class="ad-progress-bar-container">
+                    <div class="ad-progress-bar-fill" id="ad-progress"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ad-rewards-section">
+            <div class="reward-card">
+                <div class="reward-icon">
+                    <i class="fas fa-coins"></i>
+                </div>
+                <h4 class="reward-title">+١٠٠ خاڵ</h4>
+                <p class="reward-desc">خاڵی زیاد بۆ پڕۆفایلت</p>
+            </div>
+
+            <div class="reward-card">
+                <div class="reward-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <h4 class="reward-title">+١ ژیان</h4>
+                <p class="reward-desc">ژیانی زیاد لە یاریدا</p>
+            </div>
+
+            <div class="reward-card">
+                <div class="reward-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h4 class="reward-title">+٥ چرکە</h4>
+                <p class="reward-desc">کاتی زیاد بۆ وەڵامدان</p>
+            </div>
+        </div>
+
+        <div class="ad-skip-section">
+            <button class="ad-skip-button" id="ad-skip-btn" onclick="skipAd()" disabled>
+                <i class="fas fa-forward"></i>
+                <span>تێپەڕاندنی ڕیکلام</span>
+            </button>
+            <p class="ad-skip-info">
+                دەتوانیت لە دوای <span id="skip-timer">٥</span> چرکە تێپەڕێنی
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script>
+    // Game Data
+    const botNames = [
+        "ئەحمەد", "سارا", "کەروان", "لینا", "ڕێبین", 
+        "ھانا", "عەلی", "زەھرا", "بارزان", "داریا"
+    ];
+
+    // Game State
+    let playerName = "یاریزان";
+    let playerScore = 450;
+    let playerWins = 7;
+    let playerStreak = 4;
+    let playerRank = 28;
+    let playerLevel = 6;
+    let nextGameTime = null;
+    let countdownInterval = null;
+    let gameCountdownInterval = null;
+    let adInterval = null;
+    let adTimer = 15;
+    let skipTimer = 5;
+
+    // Initialize Particles
+    function initParticles() {
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 100, density: { enable: true, value_area: 800 } },
+                color: { value: "#7c3aed" },
+                shape: { type: "circle" },
+                opacity: { value: 0.4, random: true },
+                size: { value: 4, random: true },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: "#a78bfa",
+                    opacity: 0.3,
+                    width: 1.5
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: "none",
+                    random: true,
+                    straight: false,
+                    out_mode: "out",
+                    bounce: false
+                }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: { enable: true, mode: "grab" },
+                    onclick: { enable: true, mode: "push" },
+                    resize: true
+                },
+                modes: {
+                    grab: {
+                        distance: 200,
+                        line_linked: { opacity: 0.6 }
+                    },
+                    push: { particles_nb: 4 }
+                }
+            },
+            retina_detect: true
+        });
+    }
+
+    // Update Profile Display
+    function updateProfile() {
+        document.getElementById('profile-name').textContent = playerName;
+        document.getElementById('profile-score').textContent = playerScore.toLocaleString('ar');
+        document.getElementById('profile-wins').textContent = playerWins.toLocaleString('ar');
+        document.getElementById('profile-streak').textContent = playerStreak.toLocaleString('ar');
+        document.getElementById('profile-rank').textContent = `#${playerRank.toLocaleString('ar')}`;
+        document.getElementById('profile-level').textContent = playerLevel.toLocaleString('ar');
+
+        // Update avatar
+        const nameParts = playerName.trim().split(' ');
+        const avatarText = nameParts.length > 1 
+            ? nameParts[0][0] + nameParts[nameParts.length - 1][0]
+            : playerName.substring(0, 2);
+        document.getElementById('profile-avatar').textContent = avatarText.toUpperCase();
+
+        // Update input
+        document.getElementById('player-name-input').value = playerName;
+    }
+
+    // Calculate Next Game Time (8 PM)
+    function calculateNextGameTime() {
+        const now = new Date();
+        const today8PM = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 20, 0, 0);
+        
+        if (now > today8PM) {
+            today8PM.setDate(today8PM.getDate() + 1);
+        }
+        
+        return today8PM;
+    }
+
+    // Start Main Countdown
+    function startMainCountdown() {
+        nextGameTime = calculateNextGameTime();
+        
+        function update() {
+            const now = new Date();
+            const diff = nextGameTime - now;
+            
+            if (diff <= 0) {
+                clearInterval(countdownInterval);
+                document.getElementById('countdown-hours').textContent = '٠٠';
+                document.getElementById('countdown-minutes').textContent = '٠٠';
+                document.getElementById('countdown-seconds').textContent = '٠٠';
+                document.getElementById('countdown-progress').style.width = '100%';
+                return;
+            }
+            
+            const hours = Math.floor(diff / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            document.getElementById('countdown-hours').textContent = 
+                hours.toString().padStart(2, '0').replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
+            document.getElementById('countdown-minutes').textContent = 
+                minutes.toString().padStart(2, '0').replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
+            document.getElementById('countdown-seconds').textContent = 
+                seconds.toString().padStart(2, '0').replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
+            
+            // Progress
+            const totalSeconds = 24 * 60 * 60;
+            const passedSeconds = totalSeconds - (diff / 1000);
+            const progress = (passedSeconds / totalSeconds) * 100;
+            document.getElementById('countdown-progress').style.width = `${progress}%`;
+            
+            // Update ad preview
+            if (hours === 0 && minutes <= 1) {
+                const adTime = `٠٠:${seconds.toString().padStart(2, '0').replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d])}`;
+                document.getElementById('ad-preview-time').textContent = adTime;
+            }
+        }
+        
+        update();
+        countdownInterval = setInterval(update, 1000);
+    }
+
+    // Enter Game Queue
+    function enterGameQueue() {
+        const nameInput = document.getElementById('player-name-input').value.trim();
+        if (nameInput) {
+            playerName = nameInput;
+            localStorage.setItem('survivor-player-name', playerName);
+            updateProfile();
+        }
+        
+        showScreen('screen-game-countdown');
+        startGameCountdown();
+    }
+
+    // Start Game Countdown (5 min before game)
+    function startGameCountdown() {
+        // Update current player
+        const nameParts = playerName.split(' ');
+        const avatarText = nameParts.length > 1 
+            ? nameParts[0][0] + nameParts[nameParts.length - 1][0]
+            : playerName.substring(0, 2);
+        
+        // Add players
+        const grid = document.getElementById('players-ready-grid');
+        grid.innerHTML = '';
+        
+        // Add current player
+        const currentPlayer = document.createElement('div');
+        currentPlayer.className = 'player-ready-card';
+        currentPlayer.innerHTML = `
+            <div class="player-ready-avatar">${avatarText.toUpperCase()}</div>
+            <div class="player-ready-name">${playerName} (تۆ)</div>
+        `;
+        grid.appendChild(currentPlayer);
+        
+        // Add bots
+        botNames.forEach((name, i) => {
+            setTimeout(() => {
+                const bot = document.createElement('div');
+                bot.className = 'player-ready-card';
+                bot.style.animationDelay = `${i * 0.1}s`;
+                bot.innerHTML = `
+                    <div class="player-ready-avatar">${name.substring(0, 2).toUpperCase()}</div>
+                    <div class="player-ready-name">${name}</div>
+                `;
+                grid.appendChild(bot);
+            }, i * 200);
+        });
+        
+        // Countdown
+        let time = 5 * 60;
+        
+        function update() {
+            if (time <= 0) {
+                clearInterval(gameCountdownInterval);
+                startAdScreen();
+                return;
+            }
+            
+            const mins = Math.floor(time / 60);
+            const secs = time % 60;
+            
+            document.getElementById('game-countdown-minutes').textContent = 
+                mins.toString().padStart(2, '0').replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
+            document.getElementById('game-countdown-seconds').textContent = 
+                secs.toString().padStart(2, '0').replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
+            
+            // Hide warning at 1 min
+            if (time === 60) {
+                document.getElementById('ad-warning').style.display = 'none';
+            }
+            
+            time--;
+        }
+        
+        update();
+        gameCountdownInterval = setInterval(update, 1000);
+    }
+
+    // Start Ad Screen
+    function startAdScreen() {
+        showScreen('screen-ad');
+        
+        adTimer = 15;
+        skipTimer = 5;
+        
+        document.getElementById('ad-timer').textContent = 
+            adTimer.toString().replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
+        document.getElementById('skip-timer').textContent = 
+            skipTimer.toString().replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
+        document.getElementById('ad-progress').style.width = '0%';
+        document.getElementById('ad-skip-btn').disabled = true;
+        
+        function update() {
+            adTimer--;
+            
+            const progress = ((15 - adTimer) / 15) * 100;
+            document.getElementById('ad-progress').style.width = `${progress}%`;
+            document.getElementById('ad-timer').textContent = 
+                adTimer.toString().replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
+            
+            // Enable skip
+            if (adTimer <= 10) {
+                const skipTime = Math.max(0, 5 - (15 - adTimer - 5));
+                document.getElementById('skip-timer').textContent = 
+                    skipTime.toString().replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
+                
+                if (skipTime === 0) {
+                    document.getElementById('ad-skip-btn').disabled = false;
+                }
+            }
+            
+            if (adTimer <= 0) {
+                clearInterval(adInterval);
+                finishAd();
+            }
+        }
+        
+        update();
+        adInterval = setInterval(update, 1000);
+    }
+
+    // Finish Ad
+    function finishAd() {
+        playerScore += 100;
+        updateProfile();
+        localStorage.setItem('survivor-player-score', playerScore);
+        
+        alert('🎉 سوپاس! +١٠٠ خاڵ و +١ ژیانت وەرگرت');
+        showScreen('screen-profile');
+    }
+
+    // Skip Ad
+    function skipAd() {
+        clearInterval(adInterval);
+        playerScore += 50;
+        updateProfile();
+        localStorage.setItem('survivor-player-score', playerScore);
+        
+        alert('ڕیکلام تێپەڕێندرا. +٥٠ خاڵت وەرگرت');
+        showScreen('screen-profile');
+    }
+
+    // Show Screen
+    function showScreen(id) {
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+    }
+
+    // Placeholder Functions
+    function showLeaderboard() {
+        alert('تایبەتمەندی ڕیزبەندی بەزووانە زیاد دەکرێت! 🏆');
+    }
+
+    function showAchievements() {
+        alert('تایبەتمەندی دەستکەوتەکان بەزووانە زیاد دەکرێت! 🏅');
+    }
+
+    // Name Input Handler
+    document.addEventListener('DOMContentLoaded', function() {
+        const nameInput = document.getElementById('player-name-input');
+        let timeout;
+        
+        nameInput.addEventListener('input', function() {
+            clearTimeout(timeout);
+            const value = this.value.trim();
+            
+            if (value) {
+                // Update avatar preview
+                const nameParts = value.split(' ');
+                const avatarText = nameParts.length > 1 
+                    ? nameParts[0][0] + nameParts[nameParts.length - 1][0]
+                    : value.substring(0, 2);
+                document.getElementById('profile-avatar').textContent = avatarText.toUpperCase();
+                document.getElementById('profile-name').textContent = value;
+                
+                // Auto-save after 1 second
+                timeout = setTimeout(() => {
+                    playerName = value;
+                    localStorage.setItem('survivor-player-name', playerName);
+                }, 1000);
+            }
+        });
+    });
+
+    // Initialize
+    window.addEventListener('load', function() {
+        initParticles();
+        
+        // Load saved data
+        const savedName = localStorage.getItem('survivor-player-name');
+        const savedScore = localStorage.getItem('survivor-player-score');
+        
+        if (savedName) playerName = savedName;
+        if (savedScore) playerScore = parseInt(savedScore);
+        
+        updateProfile();
+        startMainCountdown();
+    });
+</script>
+```
+
+</body>
+</html>
