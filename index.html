@@ -3,1900 +3,1775 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="theme-color" content="#0d0221">
-    <title>⚡ SURVIVOR ULTRA | جەنگی زانیاری</title>
+    <meta name="theme-color" content="#090014">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>SURVIVOR ULTRA | SUPER ULTRA EDITION</title>
     
-    <!-- Kurdish Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-storage-compat.js"></script>
     
-    <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
-    <!-- Firebase -->
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rudaw:wght@400;700;900&family=Noto+Sans+Arabic:wght@300;400;500;700;800&display=swap" rel="stylesheet">
     
     <style>
-        /* ==================== KURDISH FONTS ==================== */
-        @font-face {
-            font-family: 'Rabar';
-            src: url('https://cdn.jsdelivr.net/gh/rastikerdar/rabar@v1.0.0/fonts/rabar.woff2') format('woff2');
-            font-weight: normal;
-            font-style: normal;
-        }
-
-        @font-face {
-            font-family: 'Rudaw';
-            src: url('https://cdn.jsdelivr.net/gh/rastikerdar/rudaw@v1.0.0/fonts/rudaw.woff2') format('woff2');
-            font-weight: normal;
-            font-style: normal;
-        }
-
-        /* ==================== ROOT VARIABLES ==================== */
+        /* ==================== 1. DESIGN SYSTEM (ROOT) ==================== */
         :root {
-            /* Ultra Dark Cosmic Theme */
-            --bg-void: #0d0221;
-            --bg-deep: #190039;
-            --bg-dark: #240046;
-            --bg-mid: #3c096c;
-            --bg-light: #5a189a;
+            /* Core Palette */
+            --void-bg: #05000a;
+            --deep-space: #0f001e;
+            --glass-surface: rgba(20, 20, 35, 0.6);
+            --glass-border: rgba(255, 255, 255, 0.08);
             
-            /* Neon Electric Colors */
-            --electric-blue: #00d9ff;
-            --electric-purple: #b300ff;
-            --electric-pink: #ff006e;
-            --electric-orange: #ff6d00;
-            --electric-green: #00ff88;
-            --electric-yellow: #ffea00;
+            /* Neon Accents */
+            --neon-cyan: #00f3ff;
+            --neon-purple: #bc13fe;
+            --neon-pink: #ff0055;
+            --neon-gold: #ffd700;
+            --neon-green: #00ff9d;
             
             /* Gradients */
-            --gradient-cosmic: linear-gradient(135deg, #b300ff 0%, #00d9ff 100%);
-            --gradient-fire: linear-gradient(135deg, #ff006e 0%, #ff6d00 100%);
-            --gradient-energy: linear-gradient(135deg, #00d9ff, #b300ff, #ff006e, #ffea00);
-            --gradient-success: linear-gradient(135deg, #00ff88 0%, #00d9ff 100%);
-            
-            /* Glass Effect */
-            --glass-bg: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --glass-hover: rgba(255, 255, 255, 0.08);
-            
-            /* Shadows & Glows */
-            --glow-blue: 0 0 40px rgba(0, 217, 255, 0.6);
-            --glow-purple: 0 0 40px rgba(179, 0, 255, 0.6);
-            --glow-pink: 0 0 40px rgba(255, 0, 110, 0.6);
-            --shadow-deep: 0 20px 60px rgba(0, 0, 0, 0.9);
+            --grad-main: linear-gradient(135deg, var(--neon-purple), var(--neon-cyan));
+            --grad-fire: linear-gradient(135deg, var(--neon-pink), #ff5e00);
+            --grad-glass: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
             
             /* Typography */
-            --font-kurdish: 'Rabar', 'Rudaw', 'Noto Sans Arabic', sans-serif;
-            --font-display: 'Bebas Neue', Impact, sans-serif;
-            --font-mono: 'Courier New', monospace;
+            --font-kurdish: 'Noto Sans Arabic', sans-serif;
+            --font-numbers: 'Orbitron', sans-serif;
             
-            /* Transitions */
-            --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
-            --ease-elastic: cubic-bezier(0.68, -0.6, 0.32, 1.6);
+            /* Effects */
+            --shadow-glow: 0 0 20px rgba(188, 19, 254, 0.3);
+            --shadow-card: 0 10px 40px rgba(0,0,0,0.5);
         }
 
-        /* ==================== RESET ==================== */
+        /* ==================== 2. GLOBAL RESET & BASE ==================== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none; /* Prevent text selection for app-like feel */
         }
 
-        html, body {
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            font-family: var(--font-kurdish);
-            background: var(--bg-void);
+        body {
+            background-color: var(--void-bg);
             color: white;
+            font-family: var(--font-kurdish);
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden; /* No scrolling allowed */
+            display: flex;
+            flex-direction: column;
+            position: relative;
         }
 
-        /* ==================== 3D ANIMATED BACKGROUND ==================== */
-        .cosmic-scene {
+        /* ==================== 3. CINEMATIC BACKGROUND ==================== */
+        .universe-container {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
             perspective: 1000px;
-            transform-style: preserve-3d;
+            overflow: hidden;
+            background: radial-gradient(circle at center, #1a0033 0%, var(--void-bg) 70%);
         }
 
-        .cosmic-layer {
+        /* Moving Grid Floor */
+        .cyber-grid {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        /* Animated Gradient Background */
-        .gradient-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(ellipse at top left, var(--bg-deep) 0%, transparent 50%),
-                radial-gradient(ellipse at bottom right, var(--bg-dark) 0%, transparent 50%),
-                radial-gradient(ellipse at center, var(--bg-mid) 0%, var(--bg-void) 100%);
-            animation: gradientShift 20s ease infinite;
-        }
-
-        @keyframes gradientShift {
-            0%, 100% { filter: hue-rotate(0deg) brightness(1); }
-            50% { filter: hue-rotate(30deg) brightness(1.2); }
-        }
-
-        /* 3D Floating Particles */
-        .particle-layer {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            transform-style: preserve-3d;
-        }
-
-        .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: white;
-            border-radius: 50%;
-            box-shadow: 0 0 10px white;
-            animation: float3D 15s infinite ease-in-out;
-        }
-
-        @keyframes float3D {
-            0%, 100% {
-                transform: translate3d(0, 0, 0) scale(1);
-                opacity: 0.6;
-            }
-            50% {
-                transform: translate3d(var(--tx), var(--ty), var(--tz)) scale(1.5);
-                opacity: 1;
-            }
-        }
-
-        /* Energy Grid with 3D Effect */
-        .energy-grid-3d {
-            position: absolute;
-            width: 100%;
-            height: 100%;
+            width: 200%; height: 200%;
+            bottom: -50%; left: -50%;
             background-image: 
-                linear-gradient(rgba(0, 217, 255, 0.1) 2px, transparent 2px),
-                linear-gradient(90deg, rgba(0, 217, 255, 0.1) 2px, transparent 2px);
-            background-size: 100px 100px;
-            transform: rotateX(60deg) translateZ(-200px);
-            animation: gridFlow 30s linear infinite;
-            opacity: 0.3;
+                linear-gradient(var(--neon-purple) 1px, transparent 1px),
+                linear-gradient(90deg, var(--neon-purple) 1px, transparent 1px);
+            background-size: 60px 60px;
+            background-position: 0 0;
+            transform: rotateX(60deg);
+            opacity: 0.15;
+            animation: gridFlow 20s linear infinite;
+            mask-image: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 80%);
         }
 
         @keyframes gridFlow {
-            0% { background-position: 0 0; }
-            100% { background-position: 100px 100px; }
+            0% { transform: rotateX(60deg) translateY(0); }
+            100% { transform: rotateX(60deg) translateY(60px); }
         }
 
-        /* Neon Orbs with 3D Transform */
-        .neon-orb {
+        /* Floating Orbs */
+        .nebula-orb {
             position: absolute;
             border-radius: 50%;
-            filter: blur(80px);
+            filter: blur(100px);
             opacity: 0.4;
-            animation: orb3D 20s ease-in-out infinite;
+            animation: floatOrb 10s ease-in-out infinite alternate;
+        }
+        .orb-1 { width: 400px; height: 400px; background: var(--neon-cyan); top: -100px; right: -100px; }
+        .orb-2 { width: 300px; height: 300px; background: var(--neon-pink); bottom: -50px; left: -50px; animation-delay: -5s; }
+
+        @keyframes floatOrb {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(30px, 50px) scale(1.1); }
         }
 
-        .neon-orb-1 {
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, var(--electric-purple), transparent);
-            top: -15%;
-            right: -10%;
-        }
-
-        .neon-orb-2 {
-            width: 450px;
-            height: 450px;
-            background: radial-gradient(circle, var(--electric-blue), transparent);
-            bottom: -15%;
-            left: -10%;
-            animation-delay: 7s;
-        }
-
-        .neon-orb-3 {
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, var(--electric-pink), transparent);
-            top: 30%;
-            left: 40%;
-            animation-delay: 14s;
-        }
-
-        @keyframes orb3D {
-            0%, 100% {
-                transform: translate3d(0, 0, 0) scale(1);
-            }
-            33% {
-                transform: translate3d(50px, -50px, 100px) scale(1.2);
-            }
-            66% {
-                transform: translate3d(-30px, 30px, -50px) scale(0.9);
-            }
-        }
-
-        /* Shooting Stars */
-        .shooting-star {
+        /* Particles */
+        .stars {
             position: absolute;
-            width: 2px;
-            height: 2px;
-            background: white;
-            box-shadow: 0 0 10px white;
-            animation: shoot 3s ease-out infinite;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: radial-gradient(white 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.3;
+            animation: starTwinkle 4s infinite;
         }
 
-        @keyframes shoot {
-            0% {
-                transform: translate(0, 0) rotate(-45deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translate(300px, 300px) rotate(-45deg);
-                opacity: 0;
-            }
+        @keyframes starTwinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.1); }
         }
 
-        /* ==================== GLASS MORPHISM COMPONENTS ==================== */
-        .glass-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(30px) saturate(180%);
-            border-radius: 28px;
-            border: 1px solid var(--glass-border);
-            padding: 35px;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.5s var(--ease-smooth);
-        }
-
-        .glass-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--gradient-cosmic);
-            opacity: 0.03;
-            transition: opacity 0.5s;
-        }
-
-        .glass-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            border-color: var(--glass-hover);
-            box-shadow: var(--shadow-deep), var(--glow-blue);
-        }
-
-        .glass-card:hover::before {
-            opacity: 0.08;
-        }
-
-        /* 3D Card Effect */
-        .card-3d {
-            transform-style: preserve-3d;
-            transition: transform 0.6s var(--ease-smooth);
-        }
-
-        .card-3d:hover {
-            transform: perspective(1000px) rotateY(5deg) rotateX(-5deg);
-        }
-
-        /* Shimmer Effect */
-        .shimmer::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            animation: shimmer 3s infinite;
-        }
-
-        @keyframes shimmer {
-            to { left: 100%; }
-        }
-
-        /* ==================== SCREENS ==================== */
-        .screen {
+        /* ==================== 4. LOADING SCREEN ==================== */
+        #loader-overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: none;
-            z-index: 10;
-            overflow-y: auto;
-            overflow-x: hidden;
-            padding: 20px;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--void-bg);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.8s ease, visibility 0.8s;
+        }
+
+        .loader-content {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .spinner-ring {
+            position: absolute;
+            width: 100%; height: 100%;
+            border: 4px solid transparent;
+            border-top-color: var(--neon-cyan);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        .spinner-ring::before {
+            content: ''; position: absolute; top: 10px; left: 10px; right: 10px; bottom: 10px;
+            border: 4px solid transparent;
+            border-top-color: var(--neon-pink);
+            border-radius: 50%;
+            animation: spin 2s linear infinite reverse;
+        }
+
+        .loader-logo {
+            font-family: var(--font-numbers);
+            font-size: 2rem;
+            font-weight: 900;
+            background: var(--grad-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: pulse 2s infinite;
+        }
+
+        .loading-text {
+            margin-top: 2rem;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.7; transform: scale(0.95); } }
+        @keyframes blink { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+
+        /* ==================== 5. UI COMPONENT STYLES ==================== */
+        
+        /* Screen Transitions */
+        .screen-container {
+            position: relative;
+            width: 100%; height: 100%;
+            display: flex; justify-content: center;
+            overflow: hidden;
+        }
+
+        .screen {
+            position: absolute;
+            inset: 0;
+            padding: 24px;
+            display: flex; flex-direction: column;
+            opacity: 0;
+            pointer-events: none;
+            transform: scale(0.95) translateY(20px);
+            transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+            backdrop-filter: blur(0px); /* Performance Optimization */
         }
 
         .screen.active {
-            display: flex;
-            animation: screenReveal 1s var(--ease-elastic);
+            opacity: 1;
+            pointer-events: all;
+            transform: scale(1) translateY(0);
+            z-index: 10;
         }
 
-        @keyframes screenReveal {
-            0% {
-                opacity: 0;
-                transform: scale(0.9) rotateX(-10deg);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1) rotateX(0);
-            }
+        /* Glass Cards */
+        .glass-card {
+            background: linear-gradient(160deg, rgba(255,255,255,0.1), rgba(255,255,255,0.02));
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            padding: 20px;
         }
 
-        .screen-container {
-            width: 100%;
-            max-width: 1600px;
-            margin: auto;
+        /* Neon Buttons */
+        .btn {
             position: relative;
-            z-index: 1;
-        }
-
-        /* ==================== LOGO & HEADER ==================== */
-        .brand-section {
-            text-align: center;
-            margin-bottom: 50px;
-            position: relative;
-        }
-
-        .logo-wrapper {
-            position: relative;
-            display: inline-block;
-            margin-bottom: 25px;
-        }
-
-        .logo-glow-effect {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 200px;
-            height: 200px;
-            background: radial-gradient(circle, var(--electric-blue), transparent);
-            filter: blur(60px);
-            opacity: 0.8;
-            animation: logoBreath 4s ease-in-out infinite;
-        }
-
-        @keyframes logoBreath {
-            0%, 100% {
-                transform: translate(-50%, -50%) scale(1);
-                opacity: 0.8;
-            }
-            50% {
-                transform: translate(-50%, -50%) scale(1.3);
-                opacity: 1;
-            }
-        }
-
-        .main-logo {
-            font-family: var(--font-display);
-            font-size: clamp(3.5rem, 10vw, 8rem);
-            font-weight: 900;
-            letter-spacing: 12px;
-            background: var(--gradient-energy);
-            background-size: 200% 200%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: gradientFlow 8s ease infinite, logoFloat 4s ease-in-out infinite;
-            position: relative;
-            text-shadow: 0 0 80px rgba(0, 217, 255, 0.5);
-        }
-
-        @keyframes gradientFlow {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        @keyframes logoFloat {
-            0%, 100% { transform: translateY(0px) scale(1); }
-            50% { transform: translateY(-15px) scale(1.05); }
-        }
-
-        .logo-subtitle {
+            border: none; outline: none;
+            background: rgba(255,255,255,0.05);
+            color: white;
+            padding: 18px 24px;
+            border-radius: 16px;
             font-family: var(--font-kurdish);
-            font-size: clamp(1.2rem, 3vw, 2rem);
             font-weight: 700;
-            color: var(--electric-blue);
-            letter-spacing: 6px;
-            text-transform: uppercase;
-            margin-bottom: 15px;
-            animation: pulse 3s ease-in-out infinite;
-        }
-
-        .tagline {
-            font-size: clamp(1rem, 2vw, 1.4rem);
-            color: rgba(255, 255, 255, 0.7);
-            max-width: 900px;
-            margin: 0 auto;
-            line-height: 2;
-            font-weight: 400;
-        }
-
-        /* ==================== LIVE STATS BAR ==================== */
-        .live-stats-bar {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border-radius: 50px;
-            padding: 15px 30px;
-            display: flex;
-            justify-content: center;
-            gap: 50px;
-            margin: 30px auto;
-            max-width: 800px;
-            border: 1px solid var(--glass-border);
-            box-shadow: var(--glow-blue);
-            animation: slideDown 0.8s var(--ease-bounce);
-        }
-
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .stat-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .stat-icon {
-            width: 40px;
-            height: 40px;
-            background: var(--gradient-cosmic);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.1rem;
-            box-shadow: var(--glow-purple);
-            animation: iconPulse 2s ease-in-out infinite;
-        }
-
-        @keyframes iconPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-
-        .stat-info {
-            text-align: left;
-        }
-
-        .stat-value {
-            font-size: 1.5rem;
-            font-weight: 900;
-            font-family: var(--font-mono);
-            background: var(--gradient-cosmic);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            line-height: 1;
-        }
-
-        .stat-label {
-            font-size: 0.85rem;
-            color: rgba(255, 255, 255, 0.6);
-            font-weight: 500;
-        }
-
-        /* ==================== PROFILE GRID ==================== */
-        #screen-profile {
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .profile-layout {
-            display: grid;
-            grid-template-columns: 380px 1fr 380px;
-            gap: 35px;
-            width: 100%;
-            margin-top: 20px;
-        }
-
-        /* ==================== AVATAR SECTION ==================== */
-        .player-card {
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-        }
-
-        .avatar-3d-container {
-            position: relative;
-            width: 220px;
-            height: 220px;
-            margin: 0 auto;
-            perspective: 1000px;
-        }
-
-        .avatar-3d-rings {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 100%;
-            height: 100%;
-            transform-style: preserve-3d;
-        }
-
-        .ring-3d {
-            position: absolute;
-            border-radius: 50%;
-            border: 3px solid;
-            animation: ring3DRotate 25s linear infinite;
-            transform-style: preserve-3d;
-        }
-
-        .ring-3d:nth-child(1) {
-            top: -15px;
-            left: -15px;
-            right: -15px;
-            bottom: -15px;
-            border-color: var(--electric-blue);
-            opacity: 0.6;
-            animation-duration: 20s;
-        }
-
-        .ring-3d:nth-child(2) {
-            top: -30px;
-            left: -30px;
-            right: -30px;
-            bottom: -30px;
-            border-color: var(--electric-purple);
-            opacity: 0.4;
-            animation-direction: reverse;
-            animation-duration: 15s;
-        }
-
-        .ring-3d:nth-child(3) {
-            top: -45px;
-            left: -45px;
-            right: -45px;
-            bottom: -45px;
-            border-color: var(--electric-pink);
-            opacity: 0.3;
-            animation-duration: 30s;
-        }
-
-        @keyframes ring3DRotate {
-            from {
-                transform: translate(-50%, -50%) rotateY(0deg) rotateX(60deg);
-            }
-            to {
-                transform: translate(-50%, -50%) rotateY(360deg) rotateX(60deg);
-            }
-        }
-
-        .avatar-display {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background: var(--gradient-cosmic);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 5.5rem;
-            font-weight: 900;
-            box-shadow: 
-                var(--shadow-deep),
-                inset 0 0 50px rgba(0, 0, 0, 0.5);
-            border: 4px solid var(--glass-border);
-            animation: avatarGlow 4s ease-in-out infinite;
-            transform-style: preserve-3d;
-            transition: transform 0.6s var(--ease-smooth);
-        }
-
-        .avatar-display:hover {
-            transform: scale(1.1) rotateY(15deg);
-        }
-
-        @keyframes avatarGlow {
-            0%, 100% {
-                box-shadow: 
-                    var(--shadow-deep),
-                    var(--glow-blue),
-                    inset 0 0 50px rgba(0, 0, 0, 0.5);
-            }
-            50% {
-                box-shadow: 
-                    var(--shadow-deep),
-                    var(--glow-purple),
-                    inset 0 0 50px rgba(0, 0, 0, 0.5);
-            }
-        }
-
-        .player-info-section {
-            text-align: center;
-        }
-
-        .player-name-text {
-            font-size: 2.2rem;
-            font-weight: 900;
-            margin-bottom: 18px;
-            background: var(--gradient-cosmic);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: textGlow 3s ease-in-out infinite;
-        }
-
-        @keyframes textGlow {
-            0%, 100% { filter: brightness(1); }
-            50% { filter: brightness(1.3); }
-        }
-
-        .level-badge-3d {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            background: var(--glass-bg);
-            border: 2px solid var(--electric-blue);
-            border-radius: 50px;
-            padding: 12px 25px;
-            box-shadow: var(--glow-blue);
-            animation: badgeFloat 3s ease-in-out infinite;
-            transition: transform 0.4s var(--ease-bounce);
-        }
-
-        .level-badge-3d:hover {
-            transform: scale(1.1) rotateZ(-5deg);
-        }
-
-        @keyframes badgeFloat {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-8px); }
-        }
-
-        .level-icon-3d {
-            width: 35px;
-            height: 35px;
-            background: var(--gradient-fire);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             font-size: 1rem;
-            box-shadow: var(--glow-pink);
-            animation: iconSpin 10s linear infinite;
-        }
-
-        @keyframes iconSpin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        /* Stats Grid */
-        .stats-grid-3d {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 18px;
-            margin-top: 25px;
-        }
-
-        .stat-box-3d {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 25px;
-            text-align: center;
-            position: relative;
+            cursor: pointer;
             overflow: hidden;
-            transition: all 0.4s var(--ease-smooth);
-            transform-style: preserve-3d;
+            transition: all 0.3s ease;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
-        .stat-box-3d::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
+        .btn:active { transform: scale(0.95); }
+
+        .btn-primary {
+            background: var(--grad-main);
+            box-shadow: 0 4px 15px rgba(188, 19, 254, 0.4);
+            border: none;
+        }
+        
+        .btn-primary:hover { box-shadow: 0 6px 25px rgba(188, 19, 254, 0.6); }
+
+        .btn-game {
             width: 100%;
-            height: 4px;
-            background: var(--gradient-cosmic);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.5s var(--ease-smooth);
+            justify-content: space-between;
+            background: rgba(15, 23, 42, 0.6);
+            margin-bottom: 12px;
+            text-align: right;
+            border-right: 4px solid transparent;
         }
 
-        .stat-box-3d:hover {
-            transform: translateY(-8px) perspective(500px) rotateX(10deg);
-            border-color: var(--glass-hover);
-            box-shadow: var(--glow-blue);
+        .btn-game.selected { border-right-color: white; background: rgba(255,255,255,0.1); }
+        .btn-game.correct { background: rgba(0, 255, 157, 0.2); border-color: var(--neon-green); color: var(--neon-green); }
+        .btn-game.wrong { background: rgba(255, 0, 85, 0.2); border-color: var(--neon-pink); color: var(--neon-pink); }
+
+        /* Icon Buttons (Top Bar) */
+        .btn-icon {
+            width: 45px; height: 45px;
+            border-radius: 12px;
+            padding: 0;
+            background: rgba(255,255,255,0.05);
+            font-size: 1.2rem;
         }
 
-        .stat-box-3d:hover::before {
-            transform: scaleX(1);
-        }
-
-        .stat-number {
+        /* Typography & Badges */
+        .game-title {
+            font-family: var(--font-numbers);
             font-size: 3rem;
-            font-weight: 900;
-            font-family: var(--font-mono);
-            background: var(--gradient-cosmic);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
             line-height: 1;
             margin-bottom: 10px;
-            animation: numberPulse 2s ease-in-out infinite;
-        }
-
-        @keyframes numberPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.08); }
-        }
-
-        .stat-text {
-            font-size: 1rem;
-            color: rgba(255, 255, 255, 0.7);
-            font-weight: 600;
-        }
-
-        /* Name Input */
-        .name-input-section {
-            margin-top: 25px;
-        }
-
-        .input-label-3d {
-            display: block;
-            font-size: 1rem;
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 12px;
-            font-weight: 600;
-        }
-
-        .name-input-3d {
-            width: 100%;
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border: 2px solid var(--glass-border);
-            border-radius: 16px;
-            padding: 16px 20px;
-            color: white;
-            font-size: 1.2rem;
-            font-family: var(--font-kurdish);
-            outline: none;
-            transition: all 0.4s var(--ease-smooth);
-        }
-
-        .name-input-3d:focus {
-            border-color: var(--electric-blue);
-            background: var(--glass-hover);
-            box-shadow: var(--glow-blue);
-            transform: scale(1.02);
-        }
-
-        .name-input-3d::placeholder {
-            color: rgba(255, 255, 255, 0.4);
-        }
-
-        /* ==================== COUNTDOWN SECTION ==================== */
-        .countdown-main {
-            display: flex;
-            flex-direction: column;
-            gap: 35px;
-        }
-
-        .countdown-header-3d {
-            text-align: center;
-        }
-
-        .countdown-title-3d {
-            font-size: 2.5rem;
-            font-weight: 900;
-            background: var(--gradient-fire);
+            background: linear-gradient(to bottom, #fff, #aaa);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 12px;
-            animation: titleShine 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));
         }
 
-        @keyframes titleShine {
-            0%, 100% { filter: brightness(1) saturate(1); }
-            50% { filter: brightness(1.4) saturate(1.5); }
+        .level-badge {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--neon-cyan);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            color: var(--neon-cyan);
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.2);
+            display: inline-block;
         }
 
-        .countdown-desc {
-            font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.7);
-            line-height: 1.8;
+        /* Timer Bar */
+        .timer-container {
+            width: 100%; height: 6px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        .timer-bar {
+            height: 100%; width: 100%;
+            background: var(--grad-fire);
+            box-shadow: 0 0 10px var(--neon-pink);
+            transform-origin: left;
         }
 
-        /* Timer Display */
-        .timer-3d-display {
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            padding: 40px 0;
+        /* Powerups Grid */
+        .powerup-row {
+            display: flex; gap: 12px; justify-content: center; margin-top: auto;
+        }
+        .p-item {
+            position: relative;
+            width: 65px; height: 65px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 18px;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            color: white; font-size: 1.2rem; cursor: pointer;
+            transition: 0.2s;
+        }
+        .p-item span { font-size: 0.6rem; margin-top: 4px; opacity: 0.7; font-family: var(--font-numbers); }
+        .p-item:active { transform: scale(0.9); }
+        .p-item.disabled { opacity: 0.3; filter: grayscale(1); cursor: not-allowed; }
+        
+        .p-badge {
+            position: absolute; top: -5px; right: -5px;
+            background: var(--neon-gold); color: black;
+            font-size: 0.6rem; font-weight: bold;
+            width: 20px; height: 20px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
         }
 
-        .timer-unit-3d {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        /* ==================== 6. NEW COMPONENTS ==================== */
+        
+        /* Admin Panel */
+        .admin-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
             gap: 15px;
+            margin-top: 20px;
+            overflow-y: auto;
+            max-height: 400px;
         }
 
-        .timer-box-3d {
-            width: 110px;
-            height: 130px;
-            background: var(--glass-bg);
-            backdrop-filter: blur(30px);
-            border: 3px solid var(--electric-blue);
+        .admin-card {
+            background: rgba(255, 0, 85, 0.1);
+            border: 1px solid var(--neon-pink);
             border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        /* Countdown Display */
+        #countdown-display {
+            font-family: var(--font-numbers);
             font-size: 4rem;
             font-weight: 900;
-            font-family: var(--font-mono);
-            color: var(--electric-blue);
-            box-shadow: var(--glow-blue), var(--shadow-deep);
-            position: relative;
-            overflow: hidden;
-            transform-style: preserve-3d;
-            animation: timerGlow3D 2s ease-in-out infinite;
-            transition: transform 0.4s var(--ease-bounce);
+            color: var(--neon-cyan);
+            text-shadow: 0 0 20px var(--neon-cyan);
+            margin: 20px 0;
+            text-align: center;
         }
 
-        .timer-box-3d:hover {
-            transform: perspective(500px) rotateY(15deg) scale(1.05);
+        .countdown-message {
+            text-align: center;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 10px;
         }
 
-        @keyframes timerGlow3D {
-            0%, 100% {
-                box-shadow: var(--glow-blue), var(--shadow-deep);
-            }
-            50% {
-                box-shadow: 0 0 60px rgba(0, 217, 255, 1), var(--shadow-deep);
-            }
+        /* Ad Container */
+        #ad-container {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            display: none;
         }
 
-        .timer-box-3d::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -150%;
-            width: 150%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            animation: timerShimmer 4s infinite;
-        }
-
-        @keyframes timerShimmer {
-            to { left: 150%; }
-        }
-
-        .timer-label-3d {
-            font-size: 0.95rem;
-            color: rgba(255, 255, 255, 0.6);
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            font-weight: 700;
-        }
-
-        .timer-separator-3d {
-            font-size: 3.5rem;
-            color: var(--electric-blue);
-            align-self: center;
-            margin-top: -25px;
-            animation: blink 2s infinite;
-        }
-
-        @keyframes blink {
-            0%, 49%, 100% { opacity: 1; }
-            50%, 99% { opacity: 0.2; }
-        }
-
-        /* Progress Bar */
-        .progress-bar-3d {
-            width: 100%;
-            height: 10px;
-            background: var(--glass-bg);
+        .ad-video {
+            width: 90%;
+            max-width: 400px;
             border-radius: 20px;
             overflow: hidden;
-            border: 1px solid var(--glass-border);
-            position: relative;
+            box-shadow: 0 0 50px rgba(188, 19, 254, 0.5);
         }
 
-        .progress-fill-3d {
-            height: 100%;
-            background: var(--gradient-cosmic);
-            width: 0%;
-            transition: width 1s linear;
-            box-shadow: 0 0 30px var(--electric-blue);
-            position: relative;
+        .skip-ad {
+            margin-top: 20px;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
         }
 
-        .progress-fill-3d::after {
-            content: '';
+        /* Profile Picture Upload */
+        .profile-pic-container {
+            width: 120px;
+            height: 120px;
+            margin: 20px auto;
+            border-radius: 50%;
+            overflow: hidden;
+            background: var(--grad-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .profile-pic-overlay {
             position: absolute;
-            top: 0;
-            left: 0;
+            bottom: 0;
             width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
-            animation: shimmer 2s infinite;
+            background: rgba(0,0,0,0.7);
+            padding: 5px;
+            font-size: 0.8rem;
+            text-align: center;
+            display: none;
         }
 
-        /* Ad Preview */
-        .ad-preview-3d {
-            background: rgba(255, 109, 0, 0.12);
-            border: 3px solid var(--electric-orange);
+        .profile-pic-container:hover .profile-pic-overlay {
+            display: block;
+        }
+
+        /* Shop Admin */
+        .shop-admin-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            margin-bottom: 10px;
+        }
+
+        .shop-admin-controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Login Form */
+        .login-form {
+            background: var(--glass-surface);
             border-radius: 24px;
             padding: 30px;
-            text-align: center;
-            box-shadow: 0 0 40px rgba(255, 109, 0, 0.4);
-            animation: adPulse3D 4s ease-in-out infinite;
-            transition: transform 0.4s var(--ease-smooth);
+            max-width: 400px;
+            width: 90%;
+            margin: auto;
         }
 
-        .ad-preview-3d:hover {
-            transform: scale(1.05);
+        .form-group {
+            margin-bottom: 20px;
         }
 
-        @keyframes adPulse3D {
-            0%, 100% {
-                box-shadow: 0 0 40px rgba(255, 109, 0, 0.4);
-            }
-            50% {
-                box-shadow: 0 0 70px rgba(255, 109, 0, 0.7);
-            }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: rgba(255,255,255,0.7);
         }
 
-        .ad-icon-3d {
-            font-size: 3.5rem;
-            color: var(--electric-orange);
-            margin-bottom: 18px;
-            animation: bounce3D 2.5s ease-in-out infinite;
-        }
-
-        @keyframes bounce3D {
-            0%, 100% {
-                transform: translateY(0) rotateZ(0deg);
-            }
-            50% {
-                transform: translateY(-20px) rotateZ(10deg);
-            }
-        }
-
-        .ad-title-3d {
-            font-size: 1.8rem;
-            font-weight: 900;
-            color: var(--electric-orange);
-            margin-bottom: 12px;
-        }
-
-        .ad-text-3d {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 1.1rem;
-            line-height: 1.7;
-        }
-
-        /* ==================== ACTION BUTTONS ==================== */
-        .actions-panel {
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-        }
-
-        .panel-title {
-            font-size: 1.5rem;
-            font-weight: 800;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .action-btn-3d {
+        .form-group input {
             width: 100%;
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border: 2px solid var(--glass-border);
-            border-radius: 18px;
-            padding: 20px 28px;
+            padding: 15px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
             color: white;
-            font-size: 1.15rem;
-            font-weight: 700;
             font-family: var(--font-kurdish);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 14px;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s var(--ease-smooth);
-            transform-style: preserve-3d;
+            font-size: 1rem;
         }
 
-        .action-btn-3d::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.2);
-            transition: width 0.6s, height 0.6s;
-        }
-
-        .action-btn-3d:hover::before {
-            width: 400px;
-            height: 400px;
-        }
-
-        .action-btn-3d:hover {
-            transform: translateY(-8px) perspective(500px) rotateX(10deg);
-            box-shadow: var(--shadow-deep);
-        }
-
-        .action-btn-3d span,
-        .action-btn-3d i {
-            position: relative;
-            z-index: 1;
-        }
-
-        .btn-primary-3d {
-            background: var(--gradient-cosmic);
-            border-color: var(--electric-blue);
-            box-shadow: var(--glow-blue);
-        }
-
-        .btn-primary-3d:hover {
-            box-shadow: 0 0 60px rgba(0, 217, 255, 1), var(--shadow-deep);
-        }
-
-        .btn-accent-3d {
-            background: var(--gradient-fire);
-            border-color: var(--electric-pink);
-            box-shadow: var(--glow-pink);
-        }
-
-        .btn-accent-3d:hover {
-            box-shadow: 0 0 60px rgba(255, 0, 110, 1), var(--shadow-deep);
-        }
-
-        .btn-success-3d {
-            background: var(--gradient-success);
-            border-color: var(--electric-green);
-            box-shadow: 0 0 30px rgba(0, 255, 136, 0.5);
-        }
-
-        .btn-success-3d:hover {
-            box-shadow: 0 0 60px rgba(0, 255, 136, 1), var(--shadow-deep);
-        }
-
-        /* ==================== ACHIEVEMENTS ==================== */
-        .achievements-panel {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .achievement-card {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 16px;
-            padding: 14px 18px;
-            transition: all 0.4s var(--ease-smooth);
-        }
-
-        .achievement-card:hover {
-            background: var(--glass-hover);
-            transform: translateX(-10px) scale(1.02);
-            border-color: var(--glass-hover);
-        }
-
-        .achievement-icon-3d {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: var(--gradient-fire);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.4rem;
-            box-shadow: var(--glow-pink);
-            flex-shrink: 0;
-        }
-
-        .achievement-icon-3d.locked {
-            background: var(--glass-bg);
-            opacity: 0.4;
-            box-shadow: none;
-        }
-
-        .achievement-details {
-            flex: 1;
-        }
-
-        .achievement-title {
-            font-weight: 800;
-            font-size: 1.05rem;
-            margin-bottom: 5px;
-        }
-
-        .achievement-progress-text {
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.6);
-        }
-
-        /* ==================== LOADING SCREEN ==================== */
-        .loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--bg-void);
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            transition: opacity 1s, visibility 1s;
-        }
-
-        .loading-screen.hidden {
-            opacity: 0;
-            visibility: hidden;
-        }
-
-        .loading-logo {
-            font-family: var(--font-display);
-            font-size: 6rem;
-            font-weight: 900;
-            background: var(--gradient-energy);
-            background-size: 200% 200%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: gradientFlow 3s ease infinite, loadingPulse 2s ease-in-out infinite;
-        }
-
-        @keyframes loadingPulse {
-            0%, 100% {
-                transform: scale(1);
-                opacity: 1;
-            }
-            50% {
-                transform: scale(1.15);
-                opacity: 0.8;
-            }
-        }
-
-        .loading-spinner {
-            width: 100px;
-            height: 100px;
-            margin: 40px 0;
-            border: 5px solid var(--glass-border);
-            border-top-color: var(--electric-blue);
-            border-radius: 50%;
-            animation: spin 1.2s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        .loading-status {
-            font-size: 1.4rem;
-            color: rgba(255, 255, 255, 0.7);
-            margin-top: 20px;
-        }
-
-        /* ==================== RESPONSIVE ==================== */
-        @media (max-width: 1400px) {
-            .profile-layout {
-                grid-template-columns: 1fr;
-                max-width: 700px;
-                margin: 0 auto;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .main-logo {
-                font-size: 3.5rem;
-                letter-spacing: 6px;
-            }
-
-            .timer-box-3d {
-                width: 90px;
-                height: 110px;
-                font-size: 3rem;
-            }
-
-            .avatar-display {
-                font-size: 4rem;
-            }
-
-            .stats-grid-3d {
-                grid-template-columns: 1fr;
-            }
-
-            .live-stats-bar {
-                flex-direction: column;
-                gap: 20px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .main-logo {
-                font-size: 2.8rem;
-            }
-
-            .timer-box-3d {
-                width: 75px;
-                height: 95px;
-                font-size: 2.5rem;
-            }
-
-            .glass-card {
-                padding: 25px;
-            }
-        }
-
-        /* ==================== FIREBASE CONNECTION INDICATOR ==================== */
-        .connection-status {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 50px;
-            padding: 10px 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            z-index: 1000;
-            font-size: 0.9rem;
-            animation: slideInLeft 0.8s var(--ease-bounce);
-        }
-
-        @keyframes slideInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        .status-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: var(--electric-green);
-            box-shadow: 0 0 15px var(--electric-green);
-            animation: dotPulse 2s ease-in-out infinite;
-        }
-
-        .status-dot.disconnected {
-            background: var(--electric-orange);
-            box-shadow: 0 0 15px var(--electric-orange);
-        }
-
-        @keyframes dotPulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.5; transform: scale(1.3); }
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--neon-cyan);
         }
     </style>
 </head>
 <body>
-    <!-- Loading Screen -->
-    <div class="loading-screen" id="loadingScreen">
-        <div class="loading-logo">SURVIVOR ULTRA</div>
-        <div class="loading-spinner"></div>
-        <div class="loading-status" id="loadingStatus">گرێدان بە سێرڤەر...</div>
+    <div class="universe-container">
+        <div class="cyber-grid"></div>
+        <div class="nebula-orb orb-1"></div>
+        <div class="nebula-orb orb-2"></div>
+        <div class="stars"></div>
     </div>
 
-    <!-- Connection Status -->
-    <div class="connection-status" id="connectionStatus" style="display: none;">
-        <div class="status-dot" id="statusDot"></div>
-        <span id="statusText">پەیوەندیدار</span>
-    </div>
-
-    <!-- 3D Animated Background -->
-    <div class="cosmic-scene">
-        <div class="cosmic-layer">
-            <div class="gradient-bg"></div>
-            <div class="energy-grid-3d"></div>
-            <div class="neon-orb neon-orb-1"></div>
-            <div class="neon-orb neon-orb-2"></div>
-            <div class="neon-orb neon-orb-3"></div>
+    <div id="loader-overlay">
+        <div class="loader-content">
+            <div class="spinner-ring"></div>
+            <div class="loader-logo">S-U</div>
         </div>
-        <div class="particle-layer" id="particleLayer"></div>
+        <div class="loading-text">INITIALIZING SYSTEM...</div>
     </div>
 
-    <!-- Profile Screen -->
-    <div id="screen-profile" class="screen">
-        <div class="screen-container">
-            <!-- Brand Section -->
-            <div class="brand-section">
-                <div class="logo-wrapper">
-                    <div class="logo-glow-effect"></div>
-                    <div class="main-logo">SURVIVOR ULTRA</div>
+    <!-- Ad Container -->
+    <div id="ad-container">
+        <video id="ad-video" class="ad-video" controls>
+            <source src="" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <button class="skip-ad" onclick="hideAd()">تێپەڕاندنی ڕیکلام (5s)</button>
+    </div>
+
+    <main class="screen-container">
+        
+        <!-- Login Screen -->
+        <section id="screen-login" class="screen active">
+            <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                <h1 class="game-title" style="margin-bottom: 40px;">SURVIVOR<br><span style="color:var(--neon-cyan)">ULTRA</span></h1>
+                
+                <div class="login-form">
+                    <div class="form-group">
+                        <label for="login-email"><i class="fas fa-envelope"></i> ئیمەیڵ</label>
+                        <input type="email" id="login-email" placeholder="example@gmail.com">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="login-password"><i class="fas fa-lock"></i> وشەی نهێنی</label>
+                        <input type="password" id="login-password" placeholder="••••••••">
+                    </div>
+                    
+                    <button class="btn btn-primary" style="width: 100%;" onclick="Auth.login()">
+                        <i class="fas fa-sign-in-alt"></i> چوونەژوورەوە
+                    </button>
+                    
+                    <div style="text-align: center; margin-top: 20px;">
+                        <a href="#" style="color: var(--neon-cyan); text-decoration: none;" onclick="Auth.showRegister()">
+                            <i class="fas fa-user-plus"></i> تۆمارکردنی نوێ
+                        </a>
+                    </div>
                 </div>
-                <div class="logo-subtitle">⚡ جەنگی زانیاری ⚡</div>
-                <p class="tagline">
-                    ئامادە بە بۆ گەورەترین تاقیکردنەوەی زانیاری! هەموو شەو کاتژمێر ٨ی ئێوارە، تەنها یەک کەس ڕزگاری دەبێت.
-                </p>
+                
+                <div style="margin-top: 30px; text-align: center; color: rgba(255,255,255,0.5);">
+                    <p>نوێکارەیت؟ بەبێ تۆمارکردن تاقی بکەوە:</p>
+                    <button class="btn" onclick="Auth.guestLogin()">
+                        <i class="fas fa-user"></i> یاریکردن بەبێ تۆمارکردن
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Admin Login Screen -->
+        <section id="screen-admin-login" class="screen">
+            <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                <h1 class="game-title" style="margin-bottom: 40px; color: var(--neon-pink);">
+                    ADMIN<br>PANEL
+                </h1>
+                
+                <div class="login-form">
+                    <div class="form-group">
+                        <label for="admin-email"><i class="fas fa-user-shield"></i> ئیمەیڵی ئەدمین</label>
+                        <input type="email" id="admin-email" placeholder="admin@survivor.com">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="admin-password"><i class="fas fa-key"></i> وشەی نهێنی</label>
+                        <input type="password" id="admin-password" placeholder="••••••••">
+                    </div>
+                    
+                    <button class="btn" style="width: 100%; background: var(--grad-fire);" onclick="Admin.login()">
+                        <i class="fas fa-lock"></i> چوونەژوورەوەی ئەدمین
+                    </button>
+                    
+                    <button class="btn" style="width: 100%; margin-top: 10px;" onclick="UI.nav('screen-home')">
+                        <i class="fas fa-arrow-right"></i> گەڕانەوە
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Home Screen -->
+        <section id="screen-home" class="screen">
+            <!-- Countdown Display (Visible only before 8 PM) -->
+            <div id="countdown-section" style="display: none;">
+                <div class="glass-card" style="text-align: center; margin-bottom: 20px;">
+                    <h3 style="color: var(--neon-pink); margin-bottom: 10px;"><i class="fas fa-clock"></i> یاری دەست ناکات تا</h3>
+                    <div id="countdown-display">20:00:00</div>
+                    <p class="countdown-message">یاری لە کاتژمێر ٨ شەوانە دەست پێدەکات!</p>
+                </div>
             </div>
 
-            <!-- Live Stats Bar -->
-            <div class="live-stats-bar">
-                <div class="stat-item">
-                    <div class="stat-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <div class="stat-info">
-                        <div class="stat-value" id="onlinePlayers">0</div>
-                        <div class="stat-label">یاریزانی ئۆنلاین</div>
-                    </div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-icon">
-                        <i class="fas fa-fire"></i>
-                    </div>
-                    <div class="stat-info">
-                        <div class="stat-value" id="totalGames">0</div>
-                        <div class="stat-label">کۆی یاریەکان</div>
-                    </div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-icon">
-                        <i class="fas fa-trophy"></i>
-                    </div>
-                    <div class="stat-info">
-                        <div class="stat-value" id="topPlayer">---</div>
-                        <div class="stat-label">یاریزانی یەکەم</div>
-                    </div>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <button class="btn btn-icon" onclick="UI.toggleSettings()"><i class="fas fa-cog"></i></button>
+                <div class="level-badge"><i class="fas fa-crown"></i> LVL <span id="home-lvl">1</span></div>
+                <div class="level-badge" style="border-color: var(--neon-gold); color: var(--neon-gold);">
+                    <i class="fas fa-coins"></i> <span id="home-coins">0</span>
                 </div>
             </div>
 
-            <!-- Main Profile Layout -->
-            <div class="profile-layout">
-                <!-- Left: Player Card -->
-                <div class="glass-card card-3d player-card">
-                    <div class="avatar-3d-container">
-                        <div class="avatar-3d-rings">
-                            <div class="ring-3d"></div>
-                            <div class="ring-3d"></div>
-                            <div class="ring-3d"></div>
-                        </div>
-                        <div class="avatar-display" id="avatarDisplay">?</div>
-                    </div>
+            <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+                <div id="home-avatar" style="font-size: 5rem; margin-bottom: 20px; animation: floatOrb 6s infinite;">🪐</div>
+                <h1 class="game-title">SURVIVOR<br><span style="color:var(--neon-cyan)">ULTRA</span></h1>
+                <p style="opacity: 0.7; margin-top: 10px;">باشترین یاری زانیاری گشتی</p>
+                <p id="welcome-text" style="margin-top: 5px; color: var(--neon-cyan);">بەخێربێیت!</p>
+            </div>
 
-                    <div class="player-info-section">
-                        <div class="player-name-text" id="playerNameDisplay">یاریزان</div>
-                        <div class="level-badge-3d">
-                            <div class="level-icon-3d">
-                                <i class="fas fa-crown"></i>
-                            </div>
-                            <span>ئاست <span id="playerLevel">١</span></span>
-                        </div>
-                    </div>
+            <div style="display: flex; flex-direction: column; gap: 15px; margin-bottom: 20px;">
+                <button id="start-game-btn" class="btn btn-primary" onclick="Game.init()">
+                    <i class="fas fa-play"></i> دەستپێکردن
+                </button>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <button class="btn" onclick="UI.nav('screen-shop')"><i class="fas fa-store"></i> کۆگا</button>
+                    <button class="btn" onclick="UI.nav('screen-profile')"><i class="fas fa-user"></i> پڕۆفایل</button>
+                </div>
+                <button class="btn" style="background: rgba(255,0,85,0.1); border-color: var(--neon-pink);" onclick="UI.nav('screen-admin-login')">
+                    <i class="fas fa-user-shield"></i> پەڕەی ئەدمین
+                </button>
+            </div>
+        </section>
 
-                    <div class="stats-grid-3d">
-                        <div class="stat-box-3d shimmer">
-                            <div class="stat-number" id="playerScore">٠</div>
-                            <div class="stat-text">کۆی خاڵەکان</div>
-                        </div>
-                        <div class="stat-box-3d shimmer">
-                            <div class="stat-number" id="playerWins">٠</div>
-                            <div class="stat-text">بردنەوە</div>
-                        </div>
-                        <div class="stat-box-3d shimmer">
-                            <div class="stat-number" id="playerStreak">٠</div>
-                            <div class="stat-text">زنجیرە</div>
-                        </div>
-                        <div class="stat-box-3d shimmer">
-                            <div class="stat-number" id="playerRank">#٠</div>
-                            <div class="stat-text">پلە</div>
-                        </div>
-                    </div>
+        <!-- Game Screen -->
+        <section id="screen-game" class="screen">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <button class="btn btn-icon" onclick="Game.pause()"><i class="fas fa-pause"></i></button>
+                <div style="font-family: var(--font-numbers); font-size: 1.4rem; color: var(--neon-cyan);">
+                    <span id="game-score">0</span> PTS
+                </div>
+            </div>
 
-                    <div class="name-input-section">
-                        <label class="input-label-3d">
-                            <i class="fas fa-user-edit"></i> دەستکاری ناو
-                        </label>
-                        <input 
-                            type="text" 
-                            id="nameInput" 
-                            class="name-input-3d" 
-                            placeholder="ناوی خۆت بنووسە..."
-                            maxlength="25"
-                        />
+            <div class="timer-container"><div id="timer-bar" class="timer-bar"></div></div>
+
+            <div class="glass-card" style="min-height: 180px; display: flex; align-items: center; justify-content: center; margin-bottom: 25px; text-align: center;">
+                <h2 id="question-text" style="font-size: 1.4rem; line-height: 1.6;">Text loads here...</h2>
+            </div>
+
+            <div id="answers-grid">
+                <!-- Answers will be inserted here -->
+            </div>
+
+            <div class="powerup-row">
+                <button class="p-item" id="pu-5050" onclick="Game.usePowerup('5050')">
+                    <i class="fas fa-ban"></i> <span>50/50</span> <div class="p-badge" id="cost-5050">20</div>
+                </button>
+                <button class="p-item" id="pu-time" onclick="Game.usePowerup('time')">
+                    <i class="fas fa-clock"></i> <span>Time</span> <div class="p-badge" id="cost-time">15</div>
+                </button>
+                <button class="p-item" id="pu-skip" onclick="Game.usePowerup('skip')">
+                    <i class="fas fa-forward"></i> <span>Skip</span> <div class="p-badge" id="cost-skip">30</div>
+                </button>
+            </div>
+        </section>
+
+        <!-- Profile Screen -->
+        <section id="screen-profile" class="screen">
+            <div class="glass-card" style="text-align: center; margin-bottom: 20px; padding-top: 40px;">
+                <button class="btn btn-icon" style="position: absolute; top: 15px; right: 15px;" onclick="UI.nav('screen-home')">
+                    <i class="fas fa-times"></i>
+                </button>
+                
+                <div class="profile-pic-container" onclick="Profile.uploadPicture()">
+                    <div id="profile-avatar">👻</div>
+                    <div class="profile-pic-overlay">گۆڕینی وێنە</div>
+                </div>
+                
+                <h2 id="profile-name" style="font-size: 1.8rem;">Survival Player</h2>
+                <div class="level-badge" style="margin-top: 10px;">LEVEL <span id="profile-lvl">1</span></div>
+                
+                <button class="btn" style="margin-top: 15px; padding: 10px;" onclick="Profile.editName()">
+                    <i class="fas fa-edit"></i> گۆڕینی ناو
+                </button>
+            </div>
+
+            <div class="glass-card">
+                <h3 style="margin-bottom: 15px; border-bottom: 1px solid var(--glass-border); padding-bottom: 10px;">ئامارەکان</h3>
+                
+                <div class="stat-row"><span>XP بۆ ئاستی داهاتوو</span> <span id="xp-text">0/500</span></div>
+                <div class="progress-bg" style="margin-bottom: 15px;"><div id="xp-bar" class="progress-fill"></div></div>
+
+                <div class="stat-row"><span>بەرزترین خاڵ (High Score)</span> <span id="profile-highscore" style="color: var(--neon-cyan)">0</span></div>
+                <div class="stat-row"><span>کۆی یارییەکان</span> <span id="profile-games">0</span></div>
+                <div class="stat-row"><span>تۆکنەکان</span> <span id="profile-coins" style="color: var(--neon-gold)">0</span></div>
+            </div>
+        </section>
+
+        <!-- Shop Screen -->
+        <section id="screen-shop" class="screen">
+            <div class="glass-card" style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+                <button class="btn btn-icon" onclick="UI.nav('screen-home')"><i class="fas fa-arrow-right"></i></button>
+                <h2 style="font-size: 1.5rem;">کۆگا</h2>
+                <div class="level-badge" style="color: var(--neon-gold); border-color: var(--neon-gold);">
+                    <span id="shop-coins">0</span> <i class="fas fa-coins"></i>
+                </div>
+            </div>
+
+            <div id="shop-items" class="shop-grid">
+                <!-- Shop items will be loaded from Firebase -->
+            </div>
+        </section>
+
+        <!-- Admin Panel -->
+        <section id="screen-admin" class="screen">
+            <div class="glass-card" style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+                <button class="btn btn-icon" onclick="UI.nav('screen-home')"><i class="fas fa-arrow-right"></i></button>
+                <h2 style="font-size: 1.5rem; color: var(--neon-pink);"><i class="fas fa-user-shield"></i> پەڕەی ئەدمین</h2>
+                <button class="btn btn-icon" onclick="Admin.logout()"><i class="fas fa-sign-out-alt"></i></button>
+            </div>
+
+            <div style="overflow-y: auto; padding-bottom: 20px;">
+                <!-- Question Management -->
+                <div class="glass-card" style="margin-bottom: 20px;">
+                    <h3 style="margin-bottom: 15px;"><i class="fas fa-question-circle"></i> بەڕێوەبردنی پرسیارەکان</h3>
+                    <div class="admin-grid">
+                        <div class="admin-card" onclick="Admin.showAddQuestion()">
+                            <i class="fas fa-plus" style="font-size: 2rem; margin-bottom: 10px;"></i>
+                            <h4>زیادکردنی پرسیار</h4>
+                        </div>
+                        <div class="admin-card" onclick="Admin.showQuestionsList()">
+                            <i class="fas fa-list" style="font-size: 2rem; margin-bottom: 10px;"></i>
+                            <h4>بینینی پرسیارەکان</h4>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Center: Countdown -->
-                <div class="glass-card card-3d countdown-main">
-                    <div class="countdown-header-3d">
-                        <h3 class="countdown-title-3d">کاونتداونی یاری داھاتوو</h3>
-                        <p class="countdown-desc">
-                            یاریەکە ھەموو شەو کاتژمێر ٨ی ئێوارە دەست پێ دەکات. ئامادە بە!
-                        </p>
-                    </div>
-
-                    <div class="timer-3d-display">
-                        <div class="timer-unit-3d">
-                            <div class="timer-box-3d shimmer">
-                                <span id="timerHours">٠٠</span>
-                            </div>
-                            <div class="timer-label-3d">کاتژمێر</div>
+                <!-- Shop Management -->
+                <div class="glass-card" style="margin-bottom: 20px;">
+                    <h3 style="margin-bottom: 15px;"><i class="fas fa-store"></i> بەڕێوەبردنی کۆگا</h3>
+                    <div class="admin-grid">
+                        <div class="admin-card" onclick="Admin.showAddShopItem()">
+                            <i class="fas fa-plus" style="font-size: 2rem; margin-bottom: 10px;"></i>
+                            <h4>زیادکردنی کاڵا</h4>
                         </div>
-                        <div class="timer-separator-3d">:</div>
-                        <div class="timer-unit-3d">
-                            <div class="timer-box-3d shimmer">
-                                <span id="timerMinutes">٠٠</span>
-                            </div>
-                            <div class="timer-label-3d">خولەک</div>
-                        </div>
-                        <div class="timer-separator-3d">:</div>
-                        <div class="timer-unit-3d">
-                            <div class="timer-box-3d shimmer">
-                                <span id="timerSeconds">٠٠</span>
-                            </div>
-                            <div class="timer-label-3d">چرکە</div>
-                        </div>
-                    </div>
-
-                    <div class="progress-bar-3d">
-                        <div class="progress-fill-3d" id="progressFill"></div>
-                    </div>
-
-                    <div class="ad-preview-3d">
-                        <div class="ad-icon-3d">
-                            <i class="fas fa-film"></i>
-                        </div>
-                        <h4 class="ad-title-3d">ڕیکلامی پێش یاری</h4>
-                        <p class="ad-text-3d">
-                            پاداشتی بینین: <strong>+١٠٠ خاڵ</strong> و <strong>+١ ژیانی زیاد</strong>
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Right: Actions -->
-                <div class="glass-card card-3d">
-                    <div class="actions-panel">
-                        <h3 class="panel-title">
-                            <i class="fas fa-gamepad"></i> کردارەکان
-                        </h3>
-                        <button class="action-btn-3d btn-primary-3d" onclick="enterGameQueue()">
-                            <i class="fas fa-play-circle"></i>
-                            <span>چوونە ناو یاری</span>
-                        </button>
-                        <button class="action-btn-3d btn-accent-3d" onclick="showLeaderboard()">
-                            <i class="fas fa-trophy"></i>
-                            <span>ڕیزبەندی</span>
-                        </button>
-                        <button class="action-btn-3d btn-success-3d" onclick="showAchievements()">
-                            <i class="fas fa-medal"></i>
-                            <span>دەستکەوتەکان</span>
-                        </button>
-                    </div>
-
-                    <div class="panel-title" style="margin-top: 35px;">
-                        <i class="fas fa-star"></i> دوایین دەستکەوتەکان
-                    </div>
-                    <div class="achievements-panel">
-                        <div class="achievement-card">
-                            <div class="achievement-icon-3d">
-                                <i class="fas fa-fire"></i>
-                            </div>
-                            <div class="achievement-details">
-                                <div class="achievement-title">زنجیرەی ئاگر</div>
-                                <div class="achievement-progress-text">٣ لە ٥ بردنەوە</div>
-                            </div>
-                        </div>
-                        <div class="achievement-card">
-                            <div class="achievement-icon-3d">
-                                <i class="fas fa-bolt"></i>
-                            </div>
-                            <div class="achievement-details">
-                                <div class="achievement-title">خێرایی برق</div>
-                                <div class="achievement-progress-text">٨ لە ١٠ وەڵامی خێرا</div>
-                            </div>
-                        </div>
-                        <div class="achievement-card">
-                            <div class="achievement-icon-3d locked">
-                                <i class="fas fa-lock"></i>
-                            </div>
-                            <div class="achievement-details">
-                                <div class="achievement-title">پاشا</div>
-                                <div class="achievement-progress-text">داخراو</div>
-                            </div>
+                        <div class="admin-card" onclick="Admin.showShopItems()">
+                            <i class="fas fa-edit" style="font-size: 2rem; margin-bottom: 10px;"></i>
+                            <h4>دەستکاری کاڵاکان</h4>
                         </div>
                     </div>
                 </div>
+
+                <!-- Ad Management -->
+                <div class="glass-card" style="margin-bottom: 20px;">
+                    <h3 style="margin-bottom: 15px;"><i class="fas fa-video"></i> بەڕێوەبردنی ڕیکلام</h3>
+                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                        <input type="file" id="ad-video-upload" accept="video/*" style="display: none;" onchange="Admin.uploadAd(this.files[0])">
+                        <button class="btn" onclick="document.getElementById('ad-video-upload').click()">
+                            <i class="fas fa-upload"></i> بارکردنی ڤیدیۆی ڕیکلام
+                        </button>
+                        <button class="btn" onclick="Admin.testAd()">
+                            <i class="fas fa-play"></i> تاقیکردنەوەی ڕیکلام
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Game Settings -->
+                <div class="glass-card">
+                    <h3 style="margin-bottom: 15px;"><i class="fas fa-sliders-h"></i> ڕێکخستنەکانی یاری</h3>
+                    <div style="display: flex; flex-direction: column; gap: 15px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span>کاتژمێری دەستپێکردنی یاری:</span>
+                            <input type="time" id="game-start-time" value="20:00" style="background: rgba(255,255,255,0.1); border: 1px solid var(--glass-border); color: white; padding: 8px; border-radius: 8px;">
+                        </div>
+                        <button class="btn btn-primary" onclick="Admin.saveSettings()">
+                            <i class="fas fa-save"></i> پاشەکەوتکردن
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Result Modal -->
+    <div id="modal-result" class="modal-overlay">
+        <div class="glass-card modal-content">
+            <div id="res-icon" style="font-size: 5rem; margin-bottom: 10px; filter: drop-shadow(0 0 20px rgba(255,255,255,0.5));">🏆</div>
+            <h2 id="res-title" style="font-size: 2rem; margin-bottom: 5px;">سەرکەوتن!</h2>
+            <p style="opacity: 0.7;">کۆی خاڵەکانت</p>
+            
+            <div class="score-big" id="res-score">0</div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0;">
+                <div class="glass-card" style="padding: 10px;">
+                    <div style="color: var(--neon-gold); font-size: 1.2rem;"><i class="fas fa-coins"></i></div>
+                    <div style="font-family: var(--font-numbers); font-weight: bold;" id="res-coins">+0</div>
+                </div>
+                <div class="glass-card" style="padding: 10px;">
+                    <div style="color: var(--neon-cyan); font-size: 1.2rem;"><i class="fas fa-bolt"></i></div>
+                    <div style="font-family: var(--font-numbers); font-weight: bold;" id="res-xp">+0 XP</div>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 10px;">
+                <button class="btn" style="flex: 1;" onclick="UI.nav('screen-home'); UI.closeModal()"><i class="fas fa-home"></i></button>
+                <button class="btn btn-primary" style="flex: 2;" onclick="Game.init(); UI.closeModal()"><i class="fas fa-redo"></i> دووبارە</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Modals -->
+    <div id="modal-add-question" class="modal-overlay">
+        <div class="glass-card modal-content" style="max-width: 500px;">
+            <h2 style="margin-bottom: 20px;"><i class="fas fa-plus"></i> زیادکردنی پرسیاری نوێ</h2>
+            
+            <div class="form-group">
+                <label>پرسیار</label>
+                <textarea id="new-question" rows="3" style="width: 100%; padding: 15px; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); border-radius: 12px; color: white;"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label>وەڵامەکان</label>
+                <input type="text" id="new-answer1" placeholder="وەڵامی ١ (وەڵامی ڕاست)" style="margin-bottom: 10px;">
+                <input type="text" id="new-answer2" placeholder="وەڵامی ٢" style="margin-bottom: 10px;">
+                <input type="text" id="new-answer3" placeholder="وەڵامی ٣" style="margin-bottom: 10px;">
+                <input type="text" id="new-answer4" placeholder="وەڵامی ٤">
+            </div>
+            
+            <div class="form-group">
+                <label>ژمارەی وەڵامی ڕاست (١-٤)</label>
+                <input type="number" id="new-correct" min="1" max="4" value="1">
+            </div>
+            
+            <div style="display: flex; gap: 10px; margin-top: 20px;">
+                <button class="btn" style="flex: 1;" onclick="UI.closeModal()"><i class="fas fa-times"></i> هەڵوەشاندنەوە</button>
+                <button class="btn btn-primary" style="flex: 1;" onclick="Admin.addQuestion()"><i class="fas fa-save"></i> پاشەکەوتکردن</button>
             </div>
         </div>
     </div>
 
     <script>
-        // ==================== FIREBASE CONFIGURATION ====================
-        // تکایە ئەم کۆنفیگە بگۆڕە بە کۆنفیگی خۆت لە Firebase Console
+        /**
+         * ==========================================
+         * FIREBASE CONFIGURATION
+         * ==========================================
+         */
+        
+        // 🔥 REPLACE WITH YOUR FIREBASE CONFIG
         const firebaseConfig = {
-            apiKey: "YOUR_API_KEY",
-            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-            databaseURL: "https://YOUR_PROJECT_ID.firebaseio.com",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_PROJECT_ID.appspot.com",
-            messagingSenderId: "YOUR_SENDER_ID",
-            appId: "YOUR_APP_ID"
+            apiKey: "AIzaSyYourAPIKeyHere",
+            authDomain: "your-project-id.firebaseapp.com",
+            projectId: "your-project-id",
+            storageBucket: "your-project-id.appspot.com",
+            messagingSenderId: "your-messaging-sender-id",
+            appId: "your-app-id"
         };
 
         // Initialize Firebase
-        let database = null;
-        let isFirebaseEnabled = false;
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+        const storage = firebase.storage();
 
-        try {
-            firebase.initializeApp(firebaseConfig);
-            database = firebase.database();
-            isFirebaseEnabled = true;
-            console.log('✅ Firebase connected successfully!');
-        } catch (error) {
-            console.warn('⚠️ Firebase not configured. Running in demo mode.');
-            console.log('To enable Firebase:');
-            console.log('1. Create a Firebase project at https://console.firebase.google.com');
-            console.log('2. Replace the firebaseConfig above with your project config');
-            console.log('3. Enable Realtime Database in Firebase Console');
-        }
-
-        // ==================== UTILITY FUNCTIONS ====================
-        function toArabicNum(num) {
-            const arabicNums = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
-            return num.toString().split('').map(d => arabicNums[d] || d).join('');
-        }
-
-        function playHaptic(type = 'light') {
-            if ('vibrate' in navigator) {
-                const patterns = {
-                    light: 10,
-                    medium: 30,
-                    heavy: 50,
-                    success: [50, 30, 50],
-                    error: [30, 30, 30, 30, 30]
-                };
-                navigator.vibrate(patterns[type] || 10);
+        /**
+         * ==========================================
+         * 1. AUTHENTICATION SYSTEM
+         * ==========================================
+         */
+        const Auth = {
+            currentUser: null,
+            
+            async login() {
+                const email = document.getElementById('login-email').value;
+                const password = document.getElementById('login-password').value;
+                
+                if (!email || !password) {
+                    alert("تکایە هەموو خانەکان پڕ بکەوە");
+                    return;
+                }
+                
+                try {
+                    const userCredential = await auth.signInWithEmailAndPassword(email, password);
+                    this.currentUser = userCredential.user;
+                    await User.load(this.currentUser.uid);
+                    UI.nav('screen-home');
+                    document.getElementById('welcome-text').innerText = `بەخێربێیت ${User.state.displayName || 'یاریزان'}!`;
+                } catch (error) {
+                    alert(`هەڵە: ${error.message}`);
+                }
+            },
+            
+            async register() {
+                const email = document.getElementById('login-email').value;
+                const password = document.getElementById('login-password').value;
+                
+                if (!email || !password) {
+                    alert("تکایە هەموو خانەکان پڕ بکەوە");
+                    return;
+                }
+                
+                try {
+                    const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+                    this.currentUser = userCredential.user;
+                    
+                    // Create user profile
+                    await db.collection('users').doc(this.currentUser.uid).set({
+                        email: email,
+                        displayName: email.split('@')[0],
+                        coins: 100,
+                        level: 1,
+                        xp: 0,
+                        highScore: 0,
+                        gamesPlayed: 0,
+                        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                        profilePic: null
+                    });
+                    
+                    await User.load(this.currentUser.uid);
+                    UI.nav('screen-home');
+                    document.getElementById('welcome-text').innerText = `بەخێربێیت ${User.state.displayName}!`;
+                } catch (error) {
+                    alert(`هەڵە: ${error.message}`);
+                }
+            },
+            
+            async guestLogin() {
+                // Create anonymous user
+                try {
+                    const userCredential = await auth.signInAnonymously();
+                    this.currentUser = userCredential.user;
+                    
+                    // Create guest profile
+                    await db.collection('users').doc(this.currentUser.uid).set({
+                        email: null,
+                        displayName: 'میوان',
+                        coins: 50,
+                        level: 1,
+                        xp: 0,
+                        highScore: 0,
+                        gamesPlayed: 0,
+                        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                        profilePic: null,
+                        isGuest: true
+                    });
+                    
+                    await User.load(this.currentUser.uid);
+                    UI.nav('screen-home');
+                    document.getElementById('welcome-text').innerText = `بەخێربێیت میوان!`;
+                } catch (error) {
+                    alert(`هەڵە: ${error.message}`);
+                }
+            },
+            
+            showRegister() {
+                document.getElementById('login-email').value = '';
+                document.getElementById('login-password').value = '';
+                alert("تۆمارکردنی نوێ: ئیمەیڵ و وشەی نهێنیت بنووسە و دووبارە کلیک بکە بۆ تۆمارکردن");
+                // In full version, we would show separate register form
+            },
+            
+            logout() {
+                auth.signOut();
+                UI.nav('screen-login');
             }
-        }
-
-        function updateAvatar(name) {
-            const parts = name.trim().split(' ');
-            const initials = parts.length > 1 
-                ? parts[0][0] + parts[parts.length - 1][0]
-                : name.substring(0, 2);
-            document.getElementById('avatarDisplay').textContent = initials.toUpperCase();
-        }
-
-        // ==================== PLAYER DATA ====================
-        let playerData = {
-            id: null,
-            name: "یاریزان",
-            score: 0,
-            wins: 0,
-            streak: 0,
-            rank: 0,
-            level: 1,
-            lastSeen: Date.now()
         };
 
-        // ==================== FIREBASE FUNCTIONS ====================
-        function initializePlayer() {
-            // Generate unique player ID
-            playerData.id = localStorage.getItem('survivor-player-id') || 
-                            'player_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-            localStorage.setItem('survivor-player-id', playerData.id);
-
-            // Load saved data
-            const savedData = localStorage.getItem('survivor-player-data');
-            if (savedData) {
-                const parsed = JSON.parse(savedData);
-                playerData = { ...playerData, ...parsed };
-            }
-
-            updatePlayerUI();
-
-            // Connect to Firebase if enabled
-            if (isFirebaseEnabled) {
-                connectToFirebase();
-            } else {
-                // Demo mode
-                updateConnectionStatus(false);
-                updateLiveStats(5, 127, "ئەحمەد");
-            }
-        }
-
-        function connectToFirebase() {
-            // Set player online status
-            const playerRef = database.ref('players/' + playerData.id);
+        /**
+         * ==========================================
+         * 2. USER PROFILE SYSTEM
+         * ==========================================
+         */
+        const User = {
+            state: {
+                uid: null,
+                email: null,
+                displayName: 'یاریزان',
+                coins: 0,
+                level: 1,
+                xp: 0,
+                highScore: 0,
+                gamesPlayed: 0,
+                profilePic: null,
+                inventory: ['neon'],
+                currentTheme: 'neon'
+            },
             
-            playerRef.set({
-                name: playerData.name,
-                score: playerData.score,
-                wins: playerData.wins,
-                streak: playerData.streak,
-                level: playerData.level,
-                online: true,
-                lastSeen: firebase.database.ServerValue.TIMESTAMP
-            });
-
-            // Remove player when disconnected
-            playerRef.onDisconnect().update({
-                online: false,
-                lastSeen: firebase.database.ServerValue.TIMESTAMP
-            });
-
-            // Update connection status
-            updateConnectionStatus(true);
-
-            // Listen for live stats
-            listenToLiveStats();
-        }
-
-        function updateConnectionStatus(connected) {
-            const statusDiv = document.getElementById('connectionStatus');
-            const statusDot = document.getElementById('statusDot');
-            const statusText = document.getElementById('statusText');
-
-            statusDiv.style.display = 'flex';
-
-            if (connected) {
-                statusDot.classList.remove('disconnected');
-                statusText.textContent = 'پەیوەندیدار';
-            } else {
-                statusDot.classList.add('disconnected');
-                statusText.textContent = 'دێمۆ مۆد';
-            }
-        }
-
-        function listenToLiveStats() {
-            // Online players count
-            database.ref('players').on('value', (snapshot) => {
-                const players = snapshot.val() || {};
-                const onlineCount = Object.values(players).filter(p => p.online).length;
-                updateLiveStats(onlineCount);
-            });
-
-            // Total games
-            database.ref('stats/totalGames').on('value', (snapshot) => {
-                const total = snapshot.val() || 0;
-                document.getElementById('totalGames').textContent = toArabicNum(total);
-            });
-
-            // Top player
-            database.ref('players').orderByChild('score').limitToLast(1).on('value', (snapshot) => {
-                const data = snapshot.val();
-                if (data) {
-                    const topPlayer = Object.values(data)[0];
-                    document.getElementById('topPlayer').textContent = topPlayer.name || '---';
+            async load(uid) {
+                if (!uid) return;
+                
+                const doc = await db.collection('users').doc(uid).get();
+                if (doc.exists) {
+                    this.state = { ...this.state, ...doc.data(), uid: uid };
                 }
-            });
-        }
-
-        function updateLiveStats(online = null, games = null, top = null) {
-            if (online !== null) {
-                document.getElementById('onlinePlayers').textContent = toArabicNum(online);
+                
+                this.applyTheme(this.state.currentTheme);
+                this.updateUI();
+            },
+            
+            async save() {
+                if (!this.state.uid) return;
+                
+                const { uid, ...data } = this.state;
+                await db.collection('users').doc(uid).set(data, { merge: true });
+                this.updateUI();
+            },
+            
+            addCoins(amount) {
+                this.state.coins += amount;
+                // Animate coin counter
+                const el = document.getElementById('home-coins');
+                el.style.transform = "scale(1.5)";
+                setTimeout(() => el.style.transform = "scale(1)", 200);
+                this.save();
+            },
+            
+            addXP(amount) {
+                this.state.xp += amount;
+                const reqXP = this.state.level * 500;
+                
+                if (this.state.xp >= reqXP) {
+                    this.state.level++;
+                    this.state.xp = this.state.xp - reqXP;
+                    AudioSys.play('win');
+                    alert(`🎉 پیرۆزە! گەیشتیتە ئاستی ${this.state.level}`);
+                }
+                this.save();
+            },
+            
+            updateUI() {
+                // Home Screen
+                document.getElementById('home-coins').innerText = this.state.coins;
+                document.getElementById('home-lvl').innerText = this.state.level;
+                document.getElementById('welcome-text').innerText = `بەخێربێیت ${this.state.displayName}!`;
+                
+                // Shop Screen
+                document.getElementById('shop-coins').innerText = this.state.coins;
+                
+                // Profile Screen
+                document.getElementById('profile-name').innerText = this.state.displayName;
+                document.getElementById('profile-lvl').innerText = this.state.level;
+                document.getElementById('profile-highscore').innerText = this.state.highScore;
+                document.getElementById('profile-games').innerText = this.state.gamesPlayed;
+                document.getElementById('profile-coins').innerText = this.state.coins;
+                
+                // XP Bar
+                const reqXP = this.state.level * 500;
+                const pct = (this.state.xp / reqXP) * 100;
+                document.getElementById('xp-bar').style.width = `${pct}%`;
+                document.getElementById('xp-text').innerText = `${this.state.xp} / ${reqXP}`;
+                
+                // Update avatar
+                const avatar = document.getElementById('home-avatar');
+                const profileAvatar = document.getElementById('profile-avatar');
+                if (this.state.profilePic) {
+                    avatar.innerHTML = `<img src="${this.state.profilePic}" style="width: 80px; height: 80px; border-radius: 50%;">`;
+                    profileAvatar.innerHTML = `<img src="${this.state.profilePic}" style="width: 100%; height: 100%; border-radius: 50%;">`;
+                } else {
+                    // Default avatars based on level
+                    const avatars = ['🪐', '🚀', '👨‍🚀', '🛸', '🌠', '⚡', '🔥', '💫'];
+                    const avatarIndex = Math.min(this.state.level - 1, avatars.length - 1);
+                    avatar.innerText = avatars[avatarIndex];
+                    profileAvatar.innerText = avatars[avatarIndex];
+                }
+            },
+            
+            applyTheme(themeName) {
+                const root = document.documentElement;
+                const themes = {
+                    neon: {
+                        cyan: '#00f3ff',
+                        purple: '#bc13fe',
+                        gradient: 'linear-gradient(135deg, #bc13fe, #00f3ff)'
+                    },
+                    gold: {
+                        cyan: '#ffd700',
+                        purple: '#ffaa00',
+                        gradient: 'linear-gradient(135deg, #ffd700, #ffaa00)'
+                    },
+                    fire: {
+                        cyan: '#ff4d00',
+                        purple: '#ff0000',
+                        gradient: 'linear-gradient(135deg, #ff4d00, #ff0000)'
+                    },
+                    matrix: {
+                        cyan: '#00ff00',
+                        purple: '#003300',
+                        gradient: 'linear-gradient(135deg, #00ff00, #004400)'
+                    }
+                };
+                
+                if (themes[themeName]) {
+                    root.style.setProperty('--neon-cyan', themes[themeName].cyan);
+                    root.style.setProperty('--neon-purple', themes[themeName].purple);
+                    root.style.setProperty('--grad-main', themes[themeName].gradient);
+                    this.state.currentTheme = themeName;
+                }
             }
-            if (games !== null) {
-                document.getElementById('totalGames').textContent = toArabicNum(games);
-            }
-            if (top !== null) {
-                document.getElementById('topPlayer').textContent = top;
-            }
-        }
+        };
 
-        function savePlayerData() {
-            localStorage.setItem('survivor-player-data', JSON.stringify(playerData));
+        /**
+         * ==========================================
+         * 3. PROFILE MANAGEMENT
+         * ==========================================
+         */
+        const Profile = {
+            async uploadPicture() {
+                const input = document.createElement('input');
+                input.type = 'file';
+                input.accept = 'image/*';
+                
+                input.onchange = async (e) => {
+                    const file = e.target.files[0];
+                    if (!file) return;
+                    
+                    try {
+                        // Upload to Firebase Storage
+                        const storageRef = storage.ref();
+                        const fileRef = storageRef.child(`profile_pictures/${User.state.uid}/${Date.now()}_${file.name}`);
+                        await fileRef.put(file);
+                        
+                        // Get download URL
+                        const downloadURL = await fileRef.getDownloadURL();
+                        
+                        // Update user profile
+                        User.state.profilePic = downloadURL;
+                        await User.save();
+                        
+                        alert("وێنەکەت بە سەرکەوتوویی بارکرا!");
+                    } catch (error) {
+                        alert(`هەڵە لە بارکردنی وێنە: ${error.message}`);
+                    }
+                };
+                
+                input.click();
+            },
+            
+            editName() {
+                const newName = prompt("ناوی نوێت بنووسە:", User.state.displayName);
+                if (newName && newName.trim() !== '') {
+                    User.state.displayName = newName.trim();
+                    User.save();
+                }
+            }
+        };
 
-            if (isFirebaseEnabled && playerData.id) {
-                database.ref('players/' + playerData.id).update({
-                    name: playerData.name,
-                    score: playerData.score,
-                    wins: playerData.wins,
-                    streak: playerData.streak,
-                    level: playerData.level,
-                    lastSeen: firebase.database.ServerValue.TIMESTAMP
+        /**
+         * ==========================================
+         * 4. ADMIN SYSTEM
+         * ==========================================
+         */
+        const Admin = {
+            isAdmin: false,
+            
+            async login() {
+                const email = document.getElementById('admin-email').value;
+                const password = document.getElementById('admin-password').value;
+                
+                // Hardcoded admin credentials (for demo)
+                // In production, use Firebase Admin SDK or custom claims
+                if (email === "admin@survivor.com" && password === "admin123") {
+                    this.isAdmin = true;
+                    
+                    // Load admin data
+                    await this.loadQuestions();
+                    await this.loadShopItems();
+                    
+                    UI.nav('screen-admin');
+                    alert("بەخێربێیت بە پەڕەی ئەدمین!");
+                } else {
+                    alert("هەڵە: ئیمەیڵ یان وشەی نهێنی هەڵەیە");
+                }
+            },
+            
+            logout() {
+                this.isAdmin = false;
+                UI.nav('screen-home');
+            },
+            
+            async loadQuestions() {
+                // Load questions from Firebase
+                const snapshot = await db.collection('questions').orderBy('createdAt', 'desc').limit(50).get();
+                Game.questionsDB = [];
+                
+                snapshot.forEach(doc => {
+                    const data = doc.data();
+                    Game.questionsDB.push({
+                        id: doc.id,
+                        q: data.question,
+                        a: [data.answer1, data.answer2, data.answer3, data.answer4],
+                        c: data.correctAnswer - 1 // Convert to 0-indexed
+                    });
                 });
+                
+                console.log(`Loaded ${Game.questionsDB.length} questions from Firebase`);
+            },
+            
+            async loadShopItems() {
+                const snapshot = await db.collection('shop_items').orderBy('price').get();
+                const shopGrid = document.getElementById('shop-items');
+                shopGrid.innerHTML = '';
+                
+                snapshot.forEach(doc => {
+                    const item = doc.data();
+                    const div = document.createElement('div');
+                    div.className = 'shop-item';
+                    div.innerHTML = `
+                        <div style="font-size: 2rem; margin-bottom: 10px;">${item.emoji || '🎁'}</div>
+                        <h4>${item.name}</h4>
+                        <p style="font-size: 0.8rem; opacity: 0.6;">${item.description || ''}</p>
+                        <button class="btn" onclick="Shop.buy('${doc.id}', ${item.price})" style="padding: 5px 15px; font-size: 0.8rem; width: 100%; margin-top: 5px;">
+                            ${item.price} <i class="fas fa-coins"></i>
+                        </button>
+                    `;
+                    shopGrid.appendChild(div);
+                });
+            },
+            
+            showAddQuestion() {
+                document.getElementById('modal-add-question').classList.add('open');
+            },
+            
+            async addQuestion() {
+                const question = document.getElementById('new-question').value;
+                const answer1 = document.getElementById('new-answer1').value;
+                const answer2 = document.getElementById('new-answer2').value;
+                const answer3 = document.getElementById('new-answer3').value;
+                const answer4 = document.getElementById('new-answer4').value;
+                const correct = parseInt(document.getElementById('new-correct').value);
+                
+                if (!question || !answer1 || !answer2 || !answer3 || !answer4) {
+                    alert("تکایە هەموو خانەکان پڕ بکەوە");
+                    return;
+                }
+                
+                try {
+                    await db.collection('questions').add({
+                        question: question,
+                        answer1: answer1,
+                        answer2: answer2,
+                        answer3: answer3,
+                        answer4: answer4,
+                        correctAnswer: correct,
+                        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                        addedBy: User.state.uid
+                    });
+                    
+                    alert("پرسیار بە سەرکەوتوویی زیادکرا!");
+                    UI.closeModal();
+                    this.loadQuestions();
+                } catch (error) {
+                    alert(`هەڵە: ${error.message}`);
+                }
+            },
+            
+            showAddShopItem() {
+                // Implementation for adding shop items
+                const name = prompt("ناوی کاڵا:");
+                const price = prompt("نرخ (تۆکن):");
+                const emoji = prompt("ئێمۆجی:");
+                const description = prompt("شڕۆڤە:");
+                
+                if (name && price && emoji) {
+                    db.collection('shop_items').add({
+                        name: name,
+                        price: parseInt(price),
+                        emoji: emoji,
+                        description: description,
+                        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                    }).then(() => {
+                        alert("کاڵا زیادکرا!");
+                        this.loadShopItems();
+                    });
+                }
+            },
+            
+            async uploadAd(file) {
+                if (!file) return;
+                
+                try {
+                    const storageRef = storage.ref();
+                    const adRef = storageRef.child(`ads/main_ad_${Date.now()}`);
+                    await adRef.put(file);
+                    
+                    const downloadURL = await adRef.getDownloadURL();
+                    
+                    // Save ad URL to Firestore
+                    await db.collection('settings').doc('ads').set({
+                        mainAd: downloadURL,
+                        updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+                    }, { merge: true });
+                    
+                    alert("ڕیکلامەکە بە سەرکەوتوویی بارکرا!");
+                } catch (error) {
+                    alert(`هەڵە لە بارکردنی ڕیکلام: ${error.message}`);
+                }
+            },
+            
+            async testAd() {
+                const doc = await db.collection('settings').doc('ads').get();
+                if (doc.exists && doc.data().mainAd) {
+                    showAd(doc.data().mainAd);
+                } else {
+                    alert("هیچ ڕیکلامێک بار نەکراوە!");
+                }
+            },
+            
+            async saveSettings() {
+                const gameTime = document.getElementById('game-start-time').value;
+                
+                await db.collection('settings').doc('game').set({
+                    startTime: gameTime,
+                    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+                }, { merge: true });
+                
+                alert("ڕێکخستنەکان پاشەکەوتکران!");
             }
-        }
+        };
 
-        function updatePlayerUI() {
-            document.getElementById('playerNameDisplay').textContent = playerData.name;
-            document.getElementById('playerLevel').textContent = toArabicNum(playerData.level);
-            document.getElementById('playerScore').textContent = toArabicNum(playerData.score);
-            document.getElementById('playerWins').textContent = toArabicNum(playerData.wins);
-            document.getElementById('playerStreak').textContent = toArabicNum(playerData.streak);
-            document.getElementById('playerRank').textContent = '#' + toArabicNum(playerData.rank || 0);
-            document.getElementById('nameInput').value = playerData.name;
-
-            updateAvatar(playerData.name);
-        }
-
-        // ==================== COUNTDOWN TIMER ====================
-        let countdownInterval = null;
-
-        function calculateNextGame() {
-            const now = new Date();
-            const next = new Date(now);
-            next.setHours(20, 0, 0, 0);
-
-            if (now >= next) {
-                next.setDate(next.getDate() + 1);
-            }
-
-            return next;
-        }
-
-        function startCountdown() {
-            const nextGame = calculateNextGame();
-
-            function update() {
+        /**
+         * ==========================================
+         * 5. GAME COUNTDOWN SYSTEM
+         * ==========================================
+         */
+        const Countdown = {
+            gameStartTime: "20:00", // 8 PM
+            countdownInterval: null,
+            
+            async init() {
+                // Load game time from Firebase
+                try {
+                    const doc = await db.collection('settings').doc('game').get();
+                    if (doc.exists && doc.data().startTime) {
+                        this.gameStartTime = doc.data().startTime;
+                    }
+                    document.getElementById('game-start-time').value = this.gameStartTime;
+                } catch (error) {
+                    console.log("Using default game time");
+                }
+                
+                this.updateCountdown();
+                this.countdownInterval = setInterval(() => this.updateCountdown(), 1000);
+            },
+            
+            updateCountdown() {
                 const now = new Date();
-                const diff = nextGame - now;
+                const [targetHour, targetMinute] = this.gameStartTime.split(':').map(Number);
+                
+                let targetTime = new Date();
+                targetTime.setHours(targetHour, targetMinute, 0, 0);
+                
+                // If target time has passed today, set for tomorrow
+                if (now > targetTime) {
+                    targetTime.setDate(targetTime.getDate() + 1);
+                }
+                
+                const diffMs = targetTime - now;
+                const diffSec = Math.floor(diffMs / 1000);
+                
+                // Check if game should be available
+                const gameAvailable = diffSec <= 0;
+                
+                // Update UI
+                const countdownSection = document.getElementById('countdown-section');
+                const startButton = document.getElementById('start-game-btn');
+                
+                if (gameAvailable) {
+                    countdownSection.style.display = 'none';
+                    startButton.disabled = false;
+                    startButton.innerHTML = '<i class="fas fa-play"></i> دەستپێکردن';
+                } else {
+                    countdownSection.style.display = 'block';
+                    startButton.disabled = true;
+                    startButton.innerHTML = '<i class="fas fa-clock"></i> چاوەڕوان بکە...';
+                    
+                    // Calculate hours, minutes, seconds
+                    const hours = Math.floor(diffSec / 3600);
+                    const minutes = Math.floor((diffSec % 3600) / 60);
+                    const seconds = diffSec % 60;
+                    
+                    // Format as HH:MM:SS
+                    const timeString = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                    document.getElementById('countdown-display').innerText = timeString;
+                    
+                    // Show ad 1 minute before game starts
+                    if (diffSec === 60) {
+                        this.showAdBeforeGame();
+                    }
+                }
+            },
+            
+            async showAdBeforeGame() {
+                try {
+                    const doc = await db.collection('settings').doc('ads').get();
+                    if (doc.exists && doc.data().mainAd) {
+                        showAd(doc.data().mainAd);
+                    }
+                } catch (error) {
+                    console.log("No ad to show");
+                }
+            }
+        };
 
-                if (diff <= 0) {
-                    clearInterval(countdownInterval);
+        /**
+         * ==========================================
+         * 6. SHOP SYSTEM
+         * ==========================================
+         */
+        const Shop = {
+            async buy(itemId, cost) {
+                if (User.state.coins < cost) {
+                    alert("پارەی پێویستت نییە!");
+                    return;
+                }
+                
+                if (confirm(`دەتەوێت ئەم کاڵایە بکڕیت بە ${cost} تۆکن؟`)) {
+                    // Deduct coins
+                    User.addCoins(-cost);
+                    
+                    // Add to inventory
+                    if (!User.state.inventory.includes(itemId)) {
+                        User.state.inventory.push(itemId);
+                        User.save();
+                    }
+                    
+                    alert("پیرۆزە! کاڵاکە کڕدرا!");
+                }
+            }
+        };
+
+        /**
+         * ==========================================
+         * 7. AD SYSTEM
+         * ==========================================
+         */
+        function showAd(videoUrl) {
+            const adContainer = document.getElementById('ad-container');
+            const adVideo = document.getElementById('ad-video');
+            const skipBtn = document.querySelector('.skip-ad');
+            
+            adVideo.src = videoUrl;
+            adContainer.style.display = 'flex';
+            
+            // Auto-skip after 5 seconds
+            let skipTimer = 5;
+            skipBtn.textContent = `تێپەڕاندنی ڕیکلام (${skipTimer}s)`;
+            
+            const skipInterval = setInterval(() => {
+                skipTimer--;
+                skipBtn.textContent = `تێپەڕاندنی ڕیکلام (${skipTimer}s)`;
+                
+                if (skipTimer <= 0) {
+                    clearInterval(skipInterval);
+                    hideAd();
+                }
+            }, 1000);
+        }
+        
+        function hideAd() {
+            document.getElementById('ad-container').style.display = 'none';
+            document.getElementById('ad-video').pause();
+        }
+
+        /**
+         * ==========================================
+         * 8. GAME LOGIC (Updated for Firebase)
+         * ==========================================
+         */
+        const Game = {
+            data: {
+                score: 0,
+                qIndex: 0,
+                questions: [],
+                timer: null,
+                isPaused: false,
+                activePowerups: []
+            },
+            
+            questionsDB: [], // Will be loaded from Firebase
+            
+            async init() {
+                // Check if game is available
+                const now = new Date();
+                const [targetHour, targetMinute] = Countdown.gameStartTime.split(':').map(Number);
+                let targetTime = new Date();
+                targetTime.setHours(targetHour, targetMinute, 0, 0);
+                
+                if (now < targetTime) {
+                    alert(`یاری تەنها لە کاتژمێر ${Countdown.gameStartTime} دەست پێدەکات!`);
+                    return;
+                }
+                
+                UI.nav('screen-game');
+                this.data.score = 0;
+                this.data.qIndex = 0;
+                this.data.activePowerups = [];
+                
+                // Use questions from Firebase or fallback to local
+                if (this.questionsDB.length > 0) {
+                    this.data.questions = [...this.questionsDB].sort(() => 0.5 - Math.random()).slice(0, 10);
+                } else {
+                    // Fallback to local questions
+                    this.data.questions = [...localDB].sort(() => 0.5 - Math.random()).slice(0, 10);
+                }
+                
+                document.querySelectorAll('.p-item').forEach(b => b.classList.remove('disabled'));
+                this.nextQuestion();
+            },
+            
+            nextQuestion() {
+                if (this.data.qIndex >= this.data.questions.length) {
+                    this.gameOver(true);
                     return;
                 }
 
-                const hours = Math.floor(diff / (1000 * 60 * 60));
-                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-                document.getElementById('timerHours').textContent = 
-                    toArabicNum(hours.toString().padStart(2, '0'));
-                document.getElementById('timerMinutes').textContent = 
-                    toArabicNum(minutes.toString().padStart(2, '0'));
-                document.getElementById('timerSeconds').textContent = 
-                    toArabicNum(seconds.toString().padStart(2, '0'));
-
-                // Progress
-                const totalSecs = 24 * 60 * 60;
-                const passedSecs = totalSecs - (diff / 1000);
-                const progress = (passedSecs / totalSecs) * 100;
-                document.getElementById('progressFill').style.width = progress + '%';
-            }
-
-            update();
-            countdownInterval = setInterval(update, 1000);
-        }
-
-        // ==================== 3D PARTICLES ====================
-        function create3DParticles() {
-            const layer = document.getElementById('particleLayer');
-            const particleCount = 50;
-
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
+                const q = this.data.questions[this.data.qIndex];
                 
-                const x = Math.random() * 100;
-                const y = Math.random() * 100;
-                const tx = (Math.random() - 0.5) * 200;
-                const ty = (Math.random() - 0.5) * 200;
-                const tz = (Math.random() - 0.5) * 300;
-                const delay = Math.random() * 15;
+                document.getElementById('game-score').innerText = this.data.score;
+                document.getElementById('question-text').innerText = q.q;
+                
+                const grid = document.getElementById('answers-grid');
+                grid.innerHTML = '';
+                
+                q.a.forEach((ansText, i) => {
+                    const btn = document.createElement('button');
+                    btn.className = 'btn btn-game';
+                    btn.innerHTML = `<span>${ansText}</span> <i class="far fa-circle"></i>`;
+                    btn.onclick = () => this.checkAnswer(i, btn);
+                    grid.appendChild(btn);
+                });
 
-                particle.style.left = x + '%';
-                particle.style.top = y + '%';
-                particle.style.setProperty('--tx', tx + 'px');
-                particle.style.setProperty('--ty', ty + 'px');
-                particle.style.setProperty('--tz', tz + 'px');
-                particle.style.animationDelay = delay + 's';
+                this.startTimer();
+            },
+            
+            startTimer() {
+                clearTimeout(this.data.timer);
+                const bar = document.getElementById('timer-bar');
+                
+                bar.style.transition = 'none';
+                bar.style.width = '100%';
+                void bar.offsetWidth;
+                bar.style.transition = 'width 15s linear';
+                bar.style.width = '0%';
 
-                layer.appendChild(particle);
-            }
-        }
+                this.data.timer = setTimeout(() => {
+                    this.checkAnswer(-1, null);
+                }, 15000);
+            },
+            
+            checkAnswer(selectedIndex, btnElement) {
+                clearTimeout(this.data.timer);
+                const buttons = document.querySelectorAll('.btn-game');
+                buttons.forEach(b => b.disabled = true);
 
-        // ==================== EVENT HANDLERS ====================
-        function enterGameQueue() {
-            playHaptic('medium');
-            alert('تایبەتمەندی یاری بەزووانە زیاد دەکرێت! 🎮');
-        }
+                const correctIndex = this.data.questions[this.data.qIndex].c;
+                const isCorrect = (selectedIndex === correctIndex);
 
-        function showLeaderboard() {
-            playHaptic('light');
-            alert('تایبەتمەندی ڕیزبەندی بەزووانە زیاد دەکرێت! 🏆');
-        }
-
-        function showAchievements() {
-            playHaptic('light');
-            alert('تایبەتمەندی دەستکەوتەکان بەزووانە زیاد دەکرێت! 🏅');
-        }
-
-        // Name input handler
-        document.addEventListener('DOMContentLoaded', function() {
-            const nameInput = document.getElementById('nameInput');
-            let timeout;
-
-            nameInput.addEventListener('input', function() {
-                clearTimeout(timeout);
-                const value = this.value.trim();
-
-                if (value) {
-                    updateAvatar(value);
-                    document.getElementById('playerNameDisplay').textContent = value;
-
-                    timeout = setTimeout(() => {
-                        playerData.name = value;
-                        savePlayerData();
-                        playHaptic('light');
-                    }, 1000);
+                if (isCorrect) {
+                    AudioSys.play('correct');
+                    btnElement.classList.add('correct');
+                    btnElement.querySelector('i').className = 'fas fa-check-circle';
+                    
+                    const timeBonus = parseInt(document.getElementById('timer-bar').offsetWidth / 2);
+                    this.data.score += (100 + timeBonus);
+                } else {
+                    AudioSys.play('wrong');
+                    if (btnElement) {
+                        btnElement.classList.add('wrong');
+                        btnElement.querySelector('i').className = 'fas fa-times-circle';
+                    }
+                    buttons[correctIndex].classList.add('correct');
+                    buttons[correctIndex].querySelector('i').className = 'fas fa-check-circle';
                 }
-            });
-        });
 
-        // ==================== INITIALIZATION ====================
-        window.addEventListener('load', function() {
-            // Create 3D particles
-            create3DParticles();
+                setTimeout(() => {
+                    this.data.qIndex++;
+                    this.nextQuestion();
+                }, 1500);
+            },
+            
+            usePowerup(type) {
+                const btn = document.getElementById(`pu-${type}`);
+                if (btn.classList.contains('disabled')) return;
 
-            // Initialize player
-            initializePlayer();
+                const costs = { '5050': 20, 'time': 15, 'skip': 30 };
+                const cost = costs[type];
 
-            // Start countdown
-            startCountdown();
+                if (User.state.coins < cost) {
+                    alert("پارەی پێویستت نییە!");
+                    return;
+                }
 
-            // Hide loading screen
+                User.addCoins(-cost);
+                btn.classList.add('disabled');
+                AudioSys.play('click');
+
+                if (type === '5050') {
+                    const correct = this.data.questions[this.data.qIndex].c;
+                    const buttons = document.querySelectorAll('.btn-game');
+                    let removed = 0;
+                    buttons.forEach((b, i) => {
+                        if (i !== correct && removed < 2) {
+                            b.style.visibility = 'hidden';
+                            removed++;
+                        }
+                    });
+                } 
+                else if (type === 'time') {
+                    this.startTimer();
+                } 
+                else if (type === 'skip') {
+                    clearTimeout(this.data.timer);
+                    this.data.qIndex++;
+                    this.nextQuestion();
+                }
+            },
+            
+            pause() {
+                alert("یاری وەستا. کلیک بکە بۆ بەردەوامبوون.");
+            },
+            
+            gameOver(completed) {
+                const modal = document.getElementById('modal-result');
+                const title = document.getElementById('res-title');
+                
+                if (completed) {
+                    title.innerText = "سەرکەوتن!";
+                    AudioSys.play('win');
+                } else {
+                    title.innerText = "یاری تەواو!";
+                    AudioSys.play('wrong');
+                }
+
+                // Calculate Rewards
+                const coinsEarned = Math.floor(this.data.score / 10);
+                const xpEarned = Math.floor(this.data.score / 2);
+
+                document.getElementById('res-score').innerText = this.data.score;
+                document.getElementById('res-coins').innerText = "+" + coinsEarned;
+                document.getElementById('res-xp').innerText = "+" + xpEarned + " XP";
+
+                // Update User Data
+                if (this.data.score > User.state.highScore) {
+                    User.state.highScore = this.data.score;
+                }
+                User.state.gamesPlayed++;
+                User.addCoins(coinsEarned);
+                User.addXP(xpEarned);
+
+                modal.classList.add('open');
+            }
+        };
+
+        /**
+         * ==========================================
+         * 9. UI CONTROLLER
+         * ==========================================
+         */
+        const UI = {
+            nav(screenId) {
+                AudioSys.play('click');
+                document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+                document.getElementById(screenId).classList.add('active');
+            },
+
+            toggleSettings() {
+                alert("⚙️ ڕێکخستنەکان:\n- دەنگ: چالاکە\n- وەشان: 2.0 Super Ultra\n- Firebase: چالاکە");
+            },
+
+            closeModal() {
+                document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('open'));
+            }
+        };
+
+        /**
+         * ==========================================
+         * 10. AUDIO SYSTEM
+         * ==========================================
+         */
+        const AudioSys = {
+            ctx: null,
+            init() {
+                if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+            },
+            play(type) {
+                if (!this.ctx) this.init();
+                if (this.ctx.state === 'suspended') this.ctx.resume();
+
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+
+                const now = this.ctx.currentTime;
+
+                if (type === 'click') {
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(800, now);
+                    osc.frequency.exponentialRampToValueAtTime(300, now + 0.1);
+                    gain.gain.setValueAtTime(0.1, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
+                    osc.start(now); osc.stop(now + 0.1);
+                } 
+                else if (type === 'correct') {
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(600, now);
+                    osc.frequency.linearRampToValueAtTime(1200, now + 0.1);
+                    gain.gain.setValueAtTime(0, now);
+                    gain.gain.linearRampToValueAtTime(0.2, now + 0.05);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.4);
+                    osc.start(now); osc.stop(now + 0.4);
+                } 
+                else if (type === 'wrong') {
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(150, now);
+                    osc.frequency.linearRampToValueAtTime(100, now + 0.3);
+                    gain.gain.setValueAtTime(0.2, now);
+                    gain.gain.linearRampToValueAtTime(0, now + 0.3);
+                    osc.start(now); osc.stop(now + 0.3);
+                }
+                else if (type === 'win') {
+                    osc.type = 'square';
+                    osc.frequency.setValueAtTime(440, now);
+                    osc.frequency.setValueAtTime(554, now + 0.1);
+                    osc.frequency.setValueAtTime(659, now + 0.2);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.6);
+                    osc.start(now); osc.stop(now + 0.6);
+                }
+            }
+        };
+
+        /**
+         * ==========================================
+         * 11. LOCAL QUESTION DATABASE (Fallback)
+         * ==========================================
+         */
+        const localDB = [
+            { q: "پایتەختی وڵاتی ژاپۆن کوێیە؟", a: ["تۆکیۆ", "ئۆساکا", "کیۆتۆ", "سیۆل"], c: 0 },
+            { q: "خێرایی ڕووناکی چەندە لە چرکەیەکدا؟", a: ["٣٠٠ هەزار کم", "١٥٠ هەزار کم", "١ ملیۆن کم", "٣٤٠ مەتـر"], c: 0 },
+            { q: "کێ خاوەنی کۆمپانیای تێسلا و سپەیس ئێکسە؟", a: ["جێف بێزۆس", "ئیلۆن مەسک", "بیل گەیتس", "مارک زوکەربێرگ"], c: 1 },
+            { q: "یەکەم ڕۆژنامەی کوردی چی بوو؟", a: ["خەبات", "کوردستان", "ژین", "هاواری کورد"], c: 1 },
+            { q: "گەورەترین کیشوەری جیهان کامەیە؟", a: ["ئەفریقا", "ئەمریکای باکور", "ئاسیا", "ئەورووپا"], c: 2 },
+            { q: "توخمە کیمیایی O هێمایە بۆ چی؟", a: ["زێڕ", "ئۆکسجین", "ئاسن", "زیوە"], c: 1 },
+            { q: "ژمارەی دڵەکانی ئەختەبووت (Octopus) چەندە؟", a: ["١", "٢", "٣", "٤"], c: 2 },
+            { q: "کامەیان سیستەمی وەگەڕخەری مۆبایل نییە؟", a: ["Android", "iOS", "Windows", "HTML"], c: 3 },
+            { q: "بەرزترین لوتکە چیای کوردستان؟", a: ["پیرەمەگرون", "هەڵگورد", "سەفین", "کۆڕەک"], c: 1 },
+            { q: "داهێنەری تۆڕی جیهانی (WWW) کێیە؟", a: ["تیم بێرنەرز لی", "ستیڤ جۆبس", "ئالان تورینگ", "تۆماس ئەدیسۆن"], c: 0 },
+            { q: "کام هەسارە بە 'هەسارەی سوور' ناسراوە؟", a: ["موستەری", "مەریخ", "زوحەل", "عەتارد"], c: 1 },
+            { q: "ساڵی ٢٠٢٤ ساڵی چ ئاژەڵێکە لە ڕۆژمێری چینی؟", a: ["مار", "ئەژدیها", "مەیمون", "پڵنگ"], c: 1 },
+            { q: "کۆمپیوتەر تەنها لە چ دوو ژمارەیەک تێدەگات؟", a: ["1 و 2", "0 و 1", "0 و 9", "A و B"], c: 1 },
+            { q: "چەند % ی جەستەی مرۆڤ لە ئاو پێکهاتووە؟", a: ["٣٠٪", "٥٠٪", "٦٠-٧٠٪", "٩٠٪"], c: 2 },
+            { q: "قووڵترین خاڵ لە زەریادا ناوی چییە؟", a: ["ماریانا", "بەرمۆدا", "ئەتڵەسی", "پاسێفیک"], c: 0 }
+        ];
+
+        /**
+         * ==========================================
+         * 12. INITIALIZATION
+         * ==========================================
+         */
+        window.onload = async () => {
+            // Remove loading screen
             setTimeout(() => {
-                document.getElementById('loadingScreen').classList.add('hidden');
-                document.getElementById('screen-profile').classList.add('active');
-                playHaptic('success');
+                const loader = document.getElementById('loader-overlay');
+                loader.style.opacity = '0';
+                loader.style.visibility = 'hidden';
             }, 2000);
-        });
 
-        // Update last seen every 30 seconds
-        setInterval(() => {
-            if (isFirebaseEnabled && playerData.id) {
-                database.ref('players/' + playerData.id).update({
-                    lastSeen: firebase.database.ServerValue.TIMESTAMP
-                });
-            }
-        }, 30000);
-
-        // Handle page close
-        window.addEventListener('beforeunload', function() {
-            if (isFirebaseEnabled && playerData.id) {
-                database.ref('players/' + playerData.id).update({
-                    online: false,
-                    lastSeen: firebase.database.ServerValue.TIMESTAMP
-                });
-            }
-        });
+            // Initialize countdown system
+            Countdown.init();
+            
+            // Auto login as guest for demo
+            // Comment this out for real authentication
+            setTimeout(() => {
+                Auth.guestLogin();
+            }, 2500);
+        };
     </script>
 </body>
 </html>
