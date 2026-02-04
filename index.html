@@ -6,1771 +6,1568 @@
     <meta name="theme-color" content="#090014">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>SURVIVOR ULTRA | SUPER ULTRA EDITION</title>
-    
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-storage-compat.js"></script>
+    <title>SURVIVOR ULTRA | PRO EDITION</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rudaw:wght@400;700;900&family=Noto+Sans+Arabic:wght@300;400;500;700;800&display=swap" rel="stylesheet">
     
     <style>
-        /* ==================== 1. DESIGN SYSTEM (ROOT) ==================== */
+        /* ==================== 1. SUPER ULTRA DESIGN SYSTEM ==================== */
         :root {
-            /* Core Palette */
-            --void-bg: #05000a;
-            --deep-space: #0f001e;
-            --glass-surface: rgba(20, 20, 35, 0.6);
-            --glass-border: rgba(255, 255, 255, 0.08);
+            /* Galactic Palette */
+            --cosmic-black: #05000a;
+            --nebula-purple: #1a0033;
+            --star-dust: rgba(255, 255, 255, 0.1);
+            --black-hole: rgba(0, 0, 0, 0.8);
             
-            /* Neon Accents */
-            --neon-cyan: #00f3ff;
-            --neon-purple: #bc13fe;
-            --neon-pink: #ff0055;
-            --neon-gold: #ffd700;
-            --neon-green: #00ff9d;
+            /* Neon Spectrum */
+            --quantum-blue: #00f3ff;
+            --cyber-purple: #bc13fe;
+            --plasma-pink: #ff0055;
+            --supernova-gold: #ffd700;
+            --quantum-green: #00ff9d;
+            --nova-orange: #ff5e00;
             
-            /* Gradients */
-            --grad-main: linear-gradient(135deg, var(--neon-purple), var(--neon-cyan));
-            --grad-fire: linear-gradient(135deg, var(--neon-pink), #ff5e00);
-            --grad-glass: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
+            /* Holographic Gradients */
+            --hologram-purple: linear-gradient(135deg, var(--cyber-purple), var(--quantum-blue));
+            --hologram-fire: linear-gradient(135deg, var(--plasma-pink), var(--nova-orange));
+            --hologram-gold: linear-gradient(135deg, var(--supernova-gold), #ffaa00);
+            --hologram-matrix: linear-gradient(135deg, #00ff00, #003300);
+            
+            /* Quantum Glass */
+            --quantum-glass: linear-gradient(145deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+            --quantum-border: rgba(255, 255, 255, 0.15);
             
             /* Typography */
             --font-kurdish: 'Noto Sans Arabic', sans-serif;
-            --font-numbers: 'Orbitron', sans-serif;
+            --font-tech: 'Orbitron', sans-serif;
             
-            /* Effects */
-            --shadow-glow: 0 0 20px rgba(188, 19, 254, 0.3);
-            --shadow-card: 0 10px 40px rgba(0,0,0,0.5);
+            /* Quantum Effects */
+            --quantum-glow: 0 0 30px rgba(188, 19, 254, 0.4);
+            --deep-shadow: 0 15px 50px rgba(0,0,0,0.7);
+            --float-effect: translateY(-5px);
         }
 
-        /* ==================== 2. GLOBAL RESET & BASE ==================== */
+        /* ==================== 2. QUANTUM RESET ==================== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
-            user-select: none; /* Prevent text selection for app-like feel */
+            user-select: none;
         }
 
         body {
-            background-color: var(--void-bg);
+            background-color: var(--cosmic-black);
             color: white;
             font-family: var(--font-kurdish);
             height: 100vh;
             width: 100vw;
-            overflow: hidden; /* No scrolling allowed */
+            overflow: hidden;
             display: flex;
             flex-direction: column;
             position: relative;
         }
 
-        /* ==================== 3. CINEMATIC BACKGROUND ==================== */
-        .universe-container {
+        /* ==================== 3. QUANTUM UNIVERSE BACKGROUND ==================== */
+        .quantum-universe {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1;
-            perspective: 1000px;
             overflow: hidden;
-            background: radial-gradient(circle at center, #1a0033 0%, var(--void-bg) 70%);
+            background: 
+                radial-gradient(circle at 20% 30%, var(--nebula-purple) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(255, 0, 85, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(0, 243, 255, 0.1) 0%, transparent 50%);
         }
 
-        /* Moving Grid Floor */
-        .cyber-grid {
+        .quantum-grid {
             position: absolute;
             width: 200%; height: 200%;
-            bottom: -50%; left: -50%;
+            top: -50%; left: -50%;
             background-image: 
-                linear-gradient(var(--neon-purple) 1px, transparent 1px),
-                linear-gradient(90deg, var(--neon-purple) 1px, transparent 1px);
-            background-size: 60px 60px;
+                linear-gradient(var(--quantum-blue) 1px, transparent 1px),
+                linear-gradient(90deg, var(--quantum-blue) 1px, transparent 1px);
+            background-size: 80px 80px;
             background-position: 0 0;
-            transform: rotateX(60deg);
-            opacity: 0.15;
-            animation: gridFlow 20s linear infinite;
-            mask-image: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 80%);
+            opacity: 0.1;
+            animation: quantumFlow 30s linear infinite;
         }
 
-        @keyframes gridFlow {
-            0% { transform: rotateX(60deg) translateY(0); }
-            100% { transform: rotateX(60deg) translateY(60px); }
+        @keyframes quantumFlow {
+            0% { transform: translateX(0) translateY(0); }
+            100% { transform: translateX(40px) translateY(40px); }
         }
 
-        /* Floating Orbs */
-        .nebula-orb {
+        .quantum-particle {
             position: absolute;
+            width: 3px; height: 3px;
+            background: var(--quantum-blue);
             border-radius: 50%;
-            filter: blur(100px);
-            opacity: 0.4;
-            animation: floatOrb 10s ease-in-out infinite alternate;
-        }
-        .orb-1 { width: 400px; height: 400px; background: var(--neon-cyan); top: -100px; right: -100px; }
-        .orb-2 { width: 300px; height: 300px; background: var(--neon-pink); bottom: -50px; left: -50px; animation-delay: -5s; }
-
-        @keyframes floatOrb {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(30px, 50px) scale(1.1); }
+            filter: blur(1px);
+            animation: particleFloat 20s linear infinite;
         }
 
-        /* Particles */
-        .stars {
+        @keyframes particleFloat {
+            0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100px) translateX(100px); opacity: 0; }
+        }
+
+        /* ==================== 4. SUPER ULTRA BUTTONS ==================== */
+        .quantum-btn {
+            position: relative;
+            border: none;
+            background: var(--quantum-glass);
+            backdrop-filter: blur(20px);
+            border: 2px solid var(--quantum-border);
+            color: white;
+            padding: 18px 28px;
+            border-radius: 20px;
+            font-family: var(--font-kurdish);
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            box-shadow: var(--quantum-glow);
+        }
+
+        .quantum-btn::before {
+            content: '';
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: radial-gradient(white 1px, transparent 1px);
-            background-size: 50px 50px;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.6s;
+        }
+
+        .quantum-btn:hover::before {
+            left: 100%;
+        }
+
+        .quantum-btn:hover {
+            transform: var(--float-effect);
+            box-shadow: 0 0 40px rgba(188, 19, 254, 0.6);
+            border-color: var(--cyber-purple);
+        }
+
+        .quantum-btn:active {
+            transform: scale(0.95);
+        }
+
+        .quantum-btn-primary {
+            background: var(--hologram-purple);
+            border: none;
+            font-size: 1.2rem;
+            padding: 20px 32px;
+        }
+
+        .quantum-btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid var(--quantum-blue);
+        }
+
+        .quantum-btn-danger {
+            background: var(--hologram-fire);
+            border: none;
+        }
+
+        .quantum-btn-success {
+            background: var(--hologram-matrix);
+            border: none;
+        }
+
+        /* ==================== 5. QUANTUM CARDS ==================== */
+        .quantum-card {
+            background: var(--quantum-glass);
+            backdrop-filter: blur(25px);
+            border: 2px solid var(--quantum-border);
+            border-radius: 28px;
+            padding: 28px;
+            box-shadow: var(--deep-shadow);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .quantum-card::after {
+            content: '';
+            position: absolute;
+            top: -2px; left: -2px;
+            right: -2px; bottom: -2px;
+            background: var(--hologram-purple);
+            border-radius: 30px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .quantum-card:hover::after {
             opacity: 0.3;
-            animation: starTwinkle 4s infinite;
         }
 
-        @keyframes starTwinkle {
-            0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 0.6; transform: scale(1.1); }
+        .quantum-card:hover {
+            transform: var(--float-effect);
+            border-color: var(--cyber-purple);
         }
 
-        /* ==================== 4. LOADING SCREEN ==================== */
-        #loader-overlay {
+        /* ==================== 6. PROFILE SCREEN SUPER DESIGN ==================== */
+        #screen-profile {
+            background: rgba(5, 0, 10, 0.95);
+        }
+
+        .profile-header {
+            position: relative;
+            padding: 40px 30px 30px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .profile-avatar-container {
+            width: 160px;
+            height: 160px;
+            margin: 0 auto 25px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .profile-avatar {
+            width: 100%;
+            height: 100%;
+            background: var(--hologram-purple);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4.5rem;
+            box-shadow: 0 0 50px var(--cyber-purple);
+            border: 4px solid var(--quantum-blue);
+            transition: all 0.4s;
+        }
+
+        .profile-avatar:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 70px var(--cyber-purple);
+        }
+
+        .avatar-edit-btn {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            width: 45px;
+            height: 45px;
+            background: var(--hologram-fire);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .avatar-edit-btn:hover {
+            transform: scale(1.1) rotate(15deg);
+        }
+
+        .profile-name {
+            font-family: var(--font-tech);
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 15px;
+            background: linear-gradient(to right, var(--quantum-blue), var(--cyber-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .profile-badges {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .profile-badge {
+            background: rgba(0, 243, 255, 0.1);
+            border: 2px solid var(--quantum-blue);
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-family: var(--font-tech);
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .profile-badge.gold {
+            background: rgba(255, 215, 0, 0.1);
+            border-color: var(--supernova-gold);
+            color: var(--supernova-gold);
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--quantum-blue);
+        }
+
+        .stat-value {
+            font-family: var(--font-tech);
+            font-size: 2.8rem;
+            font-weight: 900;
+            margin: 10px 0;
+            color: var(--quantum-blue);
+        }
+
+        .stat-label {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.95rem;
+        }
+
+        .progress-ring {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+        }
+
+        .progress-circle {
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+
+        .progress-bg {
+            fill: none;
+            stroke: rgba(255, 255, 255, 0.1);
+            stroke-width: 10;
+        }
+
+        .progress-bar {
+            fill: none;
+            stroke: var(--hologram-purple);
+            stroke-width: 10;
+            stroke-linecap: round;
+            stroke-dasharray: 314;
+            stroke-dashoffset: 314;
+            transition: stroke-dashoffset 1s ease;
+        }
+
+        .profile-actions {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        /* ==================== 7. ADMIN SCREEN SUPER DESIGN ==================== */
+        #screen-admin {
+            background: rgba(10, 0, 20, 0.98);
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(255, 0, 85, 0.1);
+            border-radius: 25px;
+            border: 2px solid var(--plasma-pink);
+        }
+
+        .admin-title {
+            font-family: var(--font-tech);
+            font-size: 2.2rem;
+            background: var(--hologram-fire);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .admin-nav {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .admin-nav-btn {
+            flex: 1;
+            padding: 18px;
+            text-align: center;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: var(--font-kurdish);
+            font-weight: 700;
+        }
+
+        .admin-nav-btn.active {
+            background: rgba(255, 0, 85, 0.15);
+            border-color: var(--plasma-pink);
+            color: var(--plasma-pink);
+        }
+
+        .admin-section {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .admin-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .admin-card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .admin-feature-card {
+            background: rgba(0, 243, 255, 0.05);
+            border: 2px solid var(--quantum-blue);
+            border-radius: 25px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s;
+        }
+
+        .admin-feature-card:hover {
+            transform: var(--float-effect);
+            background: rgba(0, 243, 255, 0.1);
+            box-shadow: 0 0 40px rgba(0, 243, 255, 0.3);
+        }
+
+        .admin-feature-icon {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: var(--quantum-blue);
+        }
+
+        .admin-form {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 25px;
+            padding: 30px;
+            margin-top: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 12px;
+            color: var(--quantum-blue);
+            font-family: var(--font-tech);
+            font-size: 1.1rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 18px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid var(--quantum-border);
+            border-radius: 15px;
+            color: white;
+            font-family: var(--font-kurdish);
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--quantum-blue);
+            background: rgba(0, 243, 255, 0.05);
+        }
+
+        .admin-table {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .table-header {
+            background: rgba(0, 243, 255, 0.1);
+            padding: 20px;
+            font-family: var(--font-tech);
+            font-size: 1.2rem;
+            color: var(--quantum-blue);
+        }
+
+        .table-row {
+            display: flex;
+            padding: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            align-items: center;
+        }
+
+        .table-row:last-child {
+            border-bottom: none;
+        }
+
+        .table-cell {
+            flex: 1;
+            padding: 10px;
+        }
+
+        /* ==================== 8. SHOP SCREEN SUPER DESIGN ==================== */
+        #screen-shop {
+            background: rgba(5, 0, 10, 0.95);
+        }
+
+        .shop-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 25px;
+            background: rgba(255, 215, 0, 0.1);
+            border-radius: 25px;
+            border: 2px solid var(--supernova-gold);
+        }
+
+        .shop-title {
+            font-family: var(--font-tech);
+            font-size: 2.5rem;
+            background: var(--hologram-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .shop-balance {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 15px 25px;
+            border-radius: 50px;
+            border: 2px solid var(--supernova-gold);
+        }
+
+        .shop-coins {
+            font-family: var(--font-tech);
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--supernova-gold);
+        }
+
+        .shop-categories {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            overflow-x: auto;
+            padding-bottom: 15px;
+        }
+
+        .shop-category {
+            padding: 15px 30px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid transparent;
+            border-radius: 50px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s;
+            font-family: var(--font-kurdish);
+            font-weight: 700;
+        }
+
+        .shop-category.active {
+            background: rgba(0, 243, 255, 0.15);
+            border-color: var(--quantum-blue);
+            color: var(--quantum-blue);
+        }
+
+        .shop-items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            padding-bottom: 30px;
+        }
+
+        .shop-item-card {
+            background: var(--quantum-glass);
+            border: 2px solid var(--quantum-border);
+            border-radius: 25px;
+            overflow: hidden;
+            transition: all 0.4s;
+            position: relative;
+        }
+
+        .shop-item-card.featured {
+            border-color: var(--supernova-gold);
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.3);
+        }
+
+        .shop-item-card:hover {
+            transform: var(--float-effect);
+            border-color: var(--cyber-purple);
+            box-shadow: 0 0 50px rgba(188, 19, 254, 0.4);
+        }
+
+        .item-featured-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--hologram-gold);
+            color: black;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-family: var(--font-tech);
+            font-weight: 700;
+            font-size: 0.9rem;
+            z-index: 2;
+        }
+
+        .item-image {
+            width: 100%;
+            height: 180px;
+            background: var(--hologram-purple);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .item-content {
+            padding: 25px;
+        }
+
+        .item-name {
+            font-family: var(--font-tech);
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--quantum-blue);
+        }
+
+        .item-description {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .item-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .item-price {
+            font-family: var(--font-tech);
+            font-size: 1.8rem;
+            color: var(--supernova-gold);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .item-stats {
+            display: flex;
+            gap: 20px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .item-stat {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* ==================== 9. NAVIGATION SUPER DESIGN ==================== */
+        .quantum-navbar {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--void-bg);
-            z-index: 9999;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(5, 0, 10, 0.9);
+            backdrop-filter: blur(20px);
+            border: 2px solid var(--quantum-border);
+            border-radius: 25px;
+            padding: 15px;
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-btn {
+            width: 70px;
+            height: 70px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid transparent;
+            border-radius: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            transition: opacity 0.8s ease, visibility 0.8s;
+            gap: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
         }
 
-        .loader-content {
-            position: relative;
-            width: 150px;
-            height: 150px;
+        .nav-btn i {
+            font-size: 1.5rem;
+        }
+
+        .nav-btn span {
+            font-size: 0.8rem;
+            font-family: var(--font-kurdish);
+        }
+
+        .nav-btn:hover {
+            background: rgba(0, 243, 255, 0.1);
+            border-color: var(--quantum-blue);
+            color: var(--quantum-blue);
+            transform: translateY(-5px);
+        }
+
+        .nav-btn.active {
+            background: var(--hologram-purple);
+            border-color: var(--cyber-purple);
+            color: white;
+            box-shadow: 0 0 30px rgba(188, 19, 254, 0.5);
+        }
+
+        /* ==================== 10. MODALS & OVERLAYS ==================== */
+        .quantum-modal {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(5, 0, 10, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 2000;
             display: flex;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s;
         }
 
-        .spinner-ring {
-            position: absolute;
-            width: 100%; height: 100%;
-            border: 4px solid transparent;
-            border-top-color: var(--neon-cyan);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
+        .quantum-modal.active {
+            opacity: 1;
+            pointer-events: all;
         }
 
-        .spinner-ring::before {
-            content: ''; position: absolute; top: 10px; left: 10px; right: 10px; bottom: 10px;
-            border: 4px solid transparent;
-            border-top-color: var(--neon-pink);
-            border-radius: 50%;
-            animation: spin 2s linear infinite reverse;
+        .modal-content {
+            background: var(--quantum-glass);
+            border: 2px solid var(--quantum-border);
+            border-radius: 30px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            transform: scale(0.9);
+            transition: transform 0.4s;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
         }
 
-        .loader-logo {
-            font-family: var(--font-numbers);
-            font-size: 2rem;
-            font-weight: 900;
-            background: var(--grad-main);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: pulse 2s infinite;
+        .quantum-modal.active .modal-content {
+            transform: scale(1);
         }
 
-        .loading-text {
-            margin-top: 2rem;
-            color: rgba(255,255,255,0.5);
-            font-size: 0.9rem;
-            letter-spacing: 2px;
-            animation: blink 1.5s infinite;
-        }
-
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.7; transform: scale(0.95); } }
-        @keyframes blink { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
-
-        /* ==================== 5. UI COMPONENT STYLES ==================== */
-        
-        /* Screen Transitions */
-        .screen-container {
-            position: relative;
-            width: 100%; height: 100%;
-            display: flex; justify-content: center;
-            overflow: hidden;
-        }
-
+        /* ==================== 11. UTILITY CLASSES ==================== */
         .screen {
             position: absolute;
             inset: 0;
-            padding: 24px;
-            display: flex; flex-direction: column;
+            padding: 30px;
+            overflow-y: auto;
             opacity: 0;
             pointer-events: none;
-            transform: scale(0.95) translateY(20px);
-            transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28);
-            backdrop-filter: blur(0px); /* Performance Optimization */
+            transform: translateY(30px);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .screen.active {
             opacity: 1;
             pointer-events: all;
-            transform: scale(1) translateY(0);
-            z-index: 10;
+            transform: translateY(0);
+            z-index: 100;
         }
 
-        /* Glass Cards */
-        .glass-card {
-            background: linear-gradient(160deg, rgba(255,255,255,0.1), rgba(255,255,255,0.02));
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            padding: 20px;
-        }
-
-        /* Neon Buttons */
-        .btn {
-            position: relative;
-            border: none; outline: none;
-            background: rgba(255,255,255,0.05);
-            color: white;
-            padding: 18px 24px;
-            border-radius: 16px;
-            font-family: var(--font-kurdish);
-            font-weight: 700;
-            font-size: 1rem;
-            cursor: pointer;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            display: flex; align-items: center; justify-content: center; gap: 10px;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .btn:active { transform: scale(0.95); }
-
-        .btn-primary {
-            background: var(--grad-main);
-            box-shadow: 0 4px 15px rgba(188, 19, 254, 0.4);
-            border: none;
-        }
-        
-        .btn-primary:hover { box-shadow: 0 6px 25px rgba(188, 19, 254, 0.6); }
-
-        .btn-game {
-            width: 100%;
-            justify-content: space-between;
-            background: rgba(15, 23, 42, 0.6);
-            margin-bottom: 12px;
-            text-align: right;
-            border-right: 4px solid transparent;
-        }
-
-        .btn-game.selected { border-right-color: white; background: rgba(255,255,255,0.1); }
-        .btn-game.correct { background: rgba(0, 255, 157, 0.2); border-color: var(--neon-green); color: var(--neon-green); }
-        .btn-game.wrong { background: rgba(255, 0, 85, 0.2); border-color: var(--neon-pink); color: var(--neon-pink); }
-
-        /* Icon Buttons (Top Bar) */
-        .btn-icon {
-            width: 45px; height: 45px;
-            border-radius: 12px;
-            padding: 0;
-            background: rgba(255,255,255,0.05);
-            font-size: 1.2rem;
-        }
-
-        /* Typography & Badges */
-        .game-title {
-            font-family: var(--font-numbers);
-            font-size: 3rem;
-            line-height: 1;
-            margin-bottom: 10px;
-            background: linear-gradient(to bottom, #fff, #aaa);
+        .text-gradient {
+            background: var(--hologram-purple);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));
         }
 
-        .level-badge {
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid var(--neon-cyan);
-            padding: 8px 20px;
-            border-radius: 50px;
-            font-size: 0.9rem;
-            color: var(--neon-cyan);
-            box-shadow: 0 0 15px rgba(0, 243, 255, 0.2);
-            display: inline-block;
+        .neon-text {
+            text-shadow: 0 0 10px currentColor;
         }
 
-        /* Timer Bar */
-        .timer-container {
-            width: 100%; height: 6px;
-            background: rgba(255,255,255,0.1);
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        /* ==================== 12. SCROLLBAR DESIGN ==================== */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 10px;
-            margin: 20px 0;
-            overflow: hidden;
-        }
-        .timer-bar {
-            height: 100%; width: 100%;
-            background: var(--grad-fire);
-            box-shadow: 0 0 10px var(--neon-pink);
-            transform-origin: left;
         }
 
-        /* Powerups Grid */
-        .powerup-row {
-            display: flex; gap: 12px; justify-content: center; margin-top: auto;
-        }
-        .p-item {
-            position: relative;
-            width: 65px; height: 65px;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 18px;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            color: white; font-size: 1.2rem; cursor: pointer;
-            transition: 0.2s;
-        }
-        .p-item span { font-size: 0.6rem; margin-top: 4px; opacity: 0.7; font-family: var(--font-numbers); }
-        .p-item:active { transform: scale(0.9); }
-        .p-item.disabled { opacity: 0.3; filter: grayscale(1); cursor: not-allowed; }
-        
-        .p-badge {
-            position: absolute; top: -5px; right: -5px;
-            background: var(--neon-gold); color: black;
-            font-size: 0.6rem; font-weight: bold;
-            width: 20px; height: 20px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-        }
-
-        /* ==================== 6. NEW COMPONENTS ==================== */
-        
-        /* Admin Panel */
-        .admin-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin-top: 20px;
-            overflow-y: auto;
-            max-height: 400px;
-        }
-
-        .admin-card {
-            background: rgba(255, 0, 85, 0.1);
-            border: 1px solid var(--neon-pink);
-            border-radius: 20px;
-            padding: 15px;
-            text-align: center;
-            cursor: pointer;
-        }
-
-        /* Countdown Display */
-        #countdown-display {
-            font-family: var(--font-numbers);
-            font-size: 4rem;
-            font-weight: 900;
-            color: var(--neon-cyan);
-            text-shadow: 0 0 20px var(--neon-cyan);
-            margin: 20px 0;
-            text-align: center;
-        }
-
-        .countdown-message {
-            text-align: center;
-            color: rgba(255,255,255,0.7);
-            margin-bottom: 10px;
-        }
-
-        /* Ad Container */
-        #ad-container {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.95);
-            z-index: 1000;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            display: none;
-        }
-
-        .ad-video {
-            width: 90%;
-            max-width: 400px;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 0 50px rgba(188, 19, 254, 0.5);
-        }
-
-        .skip-ad {
-            margin-top: 20px;
-            background: rgba(255,255,255,0.1);
-            border: none;
-            color: white;
-            padding: 10px 20px;
+        ::-webkit-scrollbar-thumb {
+            background: var(--hologram-purple);
             border-radius: 10px;
-            cursor: pointer;
         }
 
-        /* Profile Picture Upload */
-        .profile-pic-container {
-            width: 120px;
-            height: 120px;
-            margin: 20px auto;
-            border-radius: 50%;
-            overflow: hidden;
-            background: var(--grad-main);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            position: relative;
-            cursor: pointer;
-        }
-
-        .profile-pic-overlay {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            background: rgba(0,0,0,0.7);
-            padding: 5px;
-            font-size: 0.8rem;
-            text-align: center;
-            display: none;
-        }
-
-        .profile-pic-container:hover .profile-pic-overlay {
-            display: block;
-        }
-
-        /* Shop Admin */
-        .shop-admin-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px;
-            background: rgba(255,255,255,0.05);
-            border-radius: 15px;
-            margin-bottom: 10px;
-        }
-
-        .shop-admin-controls {
-            display: flex;
-            gap: 10px;
-        }
-
-        /* Login Form */
-        .login-form {
-            background: var(--glass-surface);
-            border-radius: 24px;
-            padding: 30px;
-            max-width: 400px;
-            width: 90%;
-            margin: auto;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: rgba(255,255,255,0.7);
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 15px;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid var(--glass-border);
-            border-radius: 12px;
-            color: white;
-            font-family: var(--font-kurdish);
-            font-size: 1rem;
-        }
-
-        .form-group input:focus {
-            outline: none;
-            border-color: var(--neon-cyan);
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--cyber-purple);
         }
     </style>
 </head>
 <body>
-    <div class="universe-container">
-        <div class="cyber-grid"></div>
-        <div class="nebula-orb orb-1"></div>
-        <div class="nebula-orb orb-2"></div>
-        <div class="stars"></div>
+    <!-- Quantum Universe Background -->
+    <div class="quantum-universe">
+        <div class="quantum-grid"></div>
+        <div id="quantum-particles"></div>
     </div>
 
-    <div id="loader-overlay">
-        <div class="loader-content">
-            <div class="spinner-ring"></div>
-            <div class="loader-logo">S-U</div>
+    <!-- Navigation Bar -->
+    <div class="quantum-navbar">
+        <a href="#" class="nav-btn active" onclick="showScreen('home')">
+            <i class="fas fa-home"></i>
+            <span>سەرەکی</span>
+        </a>
+        <a href="#" class="nav-btn" onclick="showScreen('profile')">
+            <i class="fas fa-user"></i>
+            <span>پڕۆفایل</span>
+        </a>
+        <a href="#" class="nav-btn" onclick="showScreen('shop')">
+            <i class="fas fa-store"></i>
+            <span>کۆگا</span>
+        </a>
+        <a href="#" class="nav-btn" onclick="showScreen('admin')">
+            <i class="fas fa-user-shield"></i>
+            <span>ئەدمین</span>
+        </a>
+        <a href="#" class="nav-btn" onclick="showScreen('settings')">
+            <i class="fas fa-cog"></i>
+            <span>ڕێکخستن</span>
+        </a>
+    </div>
+
+    <!-- Home Screen -->
+    <section id="home" class="screen active">
+        <div class="quantum-card" style="margin-bottom: 30px; text-align: center;">
+            <h1 style="font-family: var(--font-tech); font-size: 3.5rem; margin-bottom: 20px;" class="text-gradient">
+                SURVIVOR<br><span style="color: var(--quantum-blue)">ULTRA PRO</span>
+            </h1>
+            <p style="opacity: 0.8; font-size: 1.2rem; margin-bottom: 30px;">بەرنامەی یارییە پڕۆفیشناڵەکەت</p>
+            
+            <div style="display: flex; gap: 20px; justify-content: center;">
+                <div class="quantum-btn quantum-btn-primary" onclick="Game.start()">
+                    <i class="fas fa-play"></i>
+                    دەستپێکردنی یاری
+                </div>
+                <div class="quantum-btn quantum-btn-secondary" onclick="showScreen('leaderboard')">
+                    <i class="fas fa-trophy"></i>
+                    پلەبەندی
+                </div>
+            </div>
         </div>
-        <div class="loading-text">INITIALIZING SYSTEM...</div>
-    </div>
 
-    <!-- Ad Container -->
-    <div id="ad-container">
-        <video id="ad-video" class="ad-video" controls>
-            <source src="" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-        <button class="skip-ad" onclick="hideAd()">تێپەڕاندنی ڕیکلام (5s)</button>
-    </div>
+        <div class="quantum-card" style="margin-bottom: 30px;">
+            <h2 style="margin-bottom: 25px; color: var(--quantum-blue);">
+                <i class="fas fa-gamepad"></i> یاریەکانی ئەمڕۆ
+            </h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                <div style="padding: 20px; background: rgba(0, 243, 255, 0.05); border-radius: 20px;">
+                    <h3 style="color: var(--quantum-blue); margin-bottom: 10px;">کاتژمێر 8 شەوانە</h3>
+                    <p style="opacity: 0.7; margin-bottom: 15px;">یاری سەرەکی</p>
+                    <div class="quantum-btn" style="width: 100%;">چوونە ناوەوە</div>
+                </div>
+                <div style="padding: 20px; background: rgba(255, 0, 85, 0.05); border-radius: 20px;">
+                    <h3 style="color: var(--plasma-pink); margin-bottom: 10px;">خێرا</h3>
+                    <p style="opacity: 0.7; margin-bottom: 15px;">10 پرسیاری خێرا</p>
+                    <div class="quantum-btn quantum-btn-danger" style="width: 100%;">دەستپێکردن</div>
+                </div>
+            </div>
+        </div>
 
-    <main class="screen-container">
-        
-        <!-- Login Screen -->
-        <section id="screen-login" class="screen active">
-            <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-                <h1 class="game-title" style="margin-bottom: 40px;">SURVIVOR<br><span style="color:var(--neon-cyan)">ULTRA</span></h1>
-                
-                <div class="login-form">
-                    <div class="form-group">
-                        <label for="login-email"><i class="fas fa-envelope"></i> ئیمەیڵ</label>
-                        <input type="email" id="login-email" placeholder="example@gmail.com">
+        <div class="quantum-card">
+            <h2 style="margin-bottom: 25px; color: var(--supernova-gold);">
+                <i class="fas fa-gem"></i> پێشکەوتنەکانت
+            </h2>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+                <div>
+                    <div style="font-size: 2.5rem; color: var(--quantum-blue);">🎯</div>
+                    <div style="font-family: var(--font-tech); font-size: 1.8rem;">1,250</div>
+                    <div style="opacity: 0.7;">خاڵ</div>
+                </div>
+                <div>
+                    <div style="font-size: 2.5rem; color: var(--supernova-gold);">🏆</div>
+                    <div style="font-family: var(--font-tech); font-size: 1.8rem;">15</div>
+                    <div style="opacity: 0.7;">مەدالیایا</div>
+                </div>
+                <div>
+                    <div style="font-size: 2.5rem; color: var(--quantum-green);">⚡</div>
+                    <div style="font-family: var(--font-tech); font-size: 1.8rem;">3</div>
+                    <div style="opacity: 0.7;">ئاست</div>
+                </div>
+                <div>
+                    <div style="font-size: 2.5rem; color: var(--plasma-pink);">🔥</div>
+                    <div style="font-family: var(--font-tech); font-size: 1.8rem;">7</div>
+                    <div style="opacity: 0.7;">ڕیزبەندی</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Profile Screen -->
+    <section id="profile" class="screen">
+        <div class="profile-header">
+            <div class="profile-avatar-container" onclick="changeAvatar()">
+                <div class="profile-avatar">👨‍🚀</div>
+                <button class="avatar-edit-btn">
+                    <i class="fas fa-camera"></i>
+                </button>
+            </div>
+            
+            <h1 class="profile-name" id="user-name">یاریزانێکی پڕۆ</h1>
+            
+            <div class="profile-badges">
+                <div class="profile-badge">
+                    <i class="fas fa-crown"></i>
+                    ئاست ٥
+                </div>
+                <div class="profile-badge gold">
+                    <i class="fas fa-coins"></i>
+                    ٢٥٠٠ سکە
+                </div>
+                <div class="profile-badge">
+                    <i class="fas fa-fire"></i>
+                    ستریک ٧
+                </div>
+            </div>
+        </div>
+
+        <div class="stats-container">
+            <div class="stat-card">
+                <div class="progress-ring">
+                    <svg viewBox="0 0 100 100">
+                        <circle class="progress-bg" cx="50" cy="50" r="45"></circle>
+                        <circle class="progress-bar" cx="50" cy="50" r="45" style="stroke-dashoffset: 157;"></circle>
+                    </svg>
+                </div>
+                <div class="stat-value">٥٠٪</div>
+                <div class="stat-label">پێشکەوتنی ئاست</div>
+            </div>
+
+            <div class="stat-card">
+                <div style="font-size: 3rem; color: var(--plasma-pink); margin-bottom: 15px;">🔥</div>
+                <div class="stat-value">١,٢٥٠</div>
+                <div class="stat-label">بەرزترین خاڵ</div>
+            </div>
+
+            <div class="stat-card">
+                <div style="font-size: 3rem; color: var(--quantum-green); margin-bottom: 15px;">⚡</div>
+                <div class="stat-value">٤٧</div>
+                <div class="stat-label">یاری تەواوکراو</div>
+            </div>
+
+            <div class="stat-card">
+                <div style="font-size: 3rem; color: var(--supernova-gold); margin-bottom: 15px;">🏆</div>
+                <div class="stat-value">١٠</div>
+                <div class="stat-label">سەرکەوتنەکان</div>
+            </div>
+        </div>
+
+        <div class="quantum-card" style="margin-bottom: 30px;">
+            <h2 style="margin-bottom: 25px; color: var(--quantum-blue);">
+                <i class="fas fa-chart-line"></i> ئاماری ورد
+            </h2>
+            
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
+                <div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                        <span style="opacity: 0.7;">باشترین وەڵام:</span>
+                        <span style="color: var(--quantum-green);">٩٨٪</span>
                     </div>
-                    
-                    <div class="form-group">
-                        <label for="login-password"><i class="fas fa-lock"></i> وشەی نهێنی</label>
-                        <input type="password" id="login-password" placeholder="••••••••">
-                    </div>
-                    
-                    <button class="btn btn-primary" style="width: 100%;" onclick="Auth.login()">
-                        <i class="fas fa-sign-in-alt"></i> چوونەژوورەوە
-                    </button>
-                    
-                    <div style="text-align: center; margin-top: 20px;">
-                        <a href="#" style="color: var(--neon-cyan); text-decoration: none;" onclick="Auth.showRegister()">
-                            <i class="fas fa-user-plus"></i> تۆمارکردنی نوێ
-                        </a>
+                    <div style="height: 10px; background: rgba(255,255,255,0.1); border-radius: 5px; overflow: hidden;">
+                        <div style="width: 98%; height: 100%; background: var(--quantum-green);"></div>
                     </div>
                 </div>
                 
-                <div style="margin-top: 30px; text-align: center; color: rgba(255,255,255,0.5);">
-                    <p>نوێکارەیت؟ بەبێ تۆمارکردن تاقی بکەوە:</p>
-                    <button class="btn" onclick="Auth.guestLogin()">
-                        <i class="fas fa-user"></i> یاریکردن بەبێ تۆمارکردن
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <!-- Admin Login Screen -->
-        <section id="screen-admin-login" class="screen">
-            <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-                <h1 class="game-title" style="margin-bottom: 40px; color: var(--neon-pink);">
-                    ADMIN<br>PANEL
-                </h1>
-                
-                <div class="login-form">
-                    <div class="form-group">
-                        <label for="admin-email"><i class="fas fa-user-shield"></i> ئیمەیڵی ئەدمین</label>
-                        <input type="email" id="admin-email" placeholder="admin@survivor.com">
+                <div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                        <span style="opacity: 0.7;">کاتێکی ناوەند:</span>
+                        <span style="color: var(--quantum-blue);">٢.٥s</span>
                     </div>
-                    
-                    <div class="form-group">
-                        <label for="admin-password"><i class="fas fa-key"></i> وشەی نهێنی</label>
-                        <input type="password" id="admin-password" placeholder="••••••••">
+                    <div style="height: 10px; background: rgba(255,255,255,0.1); border-radius: 5px; overflow: hidden;">
+                        <div style="width: 75%; height: 100%; background: var(--quantum-blue);"></div>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="profile-actions">
+            <button class="quantum-btn quantum-btn-secondary" onclick="editProfile()">
+                <i class="fas fa-edit"></i>
+                دەستکاری پڕۆفایل
+            </button>
+            <button class="quantum-btn quantum-btn-primary" onclick="shareProfile()">
+                <i class="fas fa-share-alt"></i>
+                هاوبەشی پڕۆفایل
+            </button>
+        </div>
+    </section>
+
+    <!-- Shop Screen -->
+    <section id="shop" class="screen">
+        <div class="shop-header">
+            <h1 class="shop-title">کۆگای سەرکەوتن</h1>
+            <div class="shop-balance">
+                <i class="fas fa-coins" style="font-size: 2.5rem; color: var(--supernova-gold);"></i>
+                <div>
+                    <div style="font-size: 0.9rem; opacity: 0.7;">سکەکانت</div>
+                    <div class="shop-coins">٢,٥٠٠</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="shop-categories">
+            <div class="shop-category active">هەموو</div>
+            <div class="shop-category">توانای تایبەت</div>
+            <div class="shop-category">ڕووکارەکان</div>
+            <div class="shop-category">نیشانەکان</div>
+            <div class="shop-category">پاکەتەکان</div>
+            <div class="shop-category">دیاری</div>
+        </div>
+
+        <div class="shop-items-grid">
+            <!-- Featured Item -->
+            <div class="shop-item-card featured">
+                <div class="item-featured-badge">پێشنیارکراو</div>
+                <div class="item-image" style="background: var(--hologram-gold);">
+                    👑
+                </div>
+                <div class="item-content">
+                    <h3 class="item-name">پاشای یاری</h3>
+                    <p class="item-description">پاکەتی پاشایەتی بۆ ٣٠ ڕۆژ. هەموو تواناکان چالاک دەبن!</p>
                     
-                    <button class="btn" style="width: 100%; background: var(--grad-fire);" onclick="Admin.login()">
-                        <i class="fas fa-lock"></i> چوونەژوورەوەی ئەدمین
-                    </button>
-                    
-                    <button class="btn" style="width: 100%; margin-top: 10px;" onclick="UI.nav('screen-home')">
-                        <i class="fas fa-arrow-right"></i> گەڕانەوە
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <!-- Home Screen -->
-        <section id="screen-home" class="screen">
-            <!-- Countdown Display (Visible only before 8 PM) -->
-            <div id="countdown-section" style="display: none;">
-                <div class="glass-card" style="text-align: center; margin-bottom: 20px;">
-                    <h3 style="color: var(--neon-pink); margin-bottom: 10px;"><i class="fas fa-clock"></i> یاری دەست ناکات تا</h3>
-                    <div id="countdown-display">20:00:00</div>
-                    <p class="countdown-message">یاری لە کاتژمێر ٨ شەوانە دەست پێدەکات!</p>
-                </div>
-            </div>
-
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <button class="btn btn-icon" onclick="UI.toggleSettings()"><i class="fas fa-cog"></i></button>
-                <div class="level-badge"><i class="fas fa-crown"></i> LVL <span id="home-lvl">1</span></div>
-                <div class="level-badge" style="border-color: var(--neon-gold); color: var(--neon-gold);">
-                    <i class="fas fa-coins"></i> <span id="home-coins">0</span>
-                </div>
-            </div>
-
-            <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
-                <div id="home-avatar" style="font-size: 5rem; margin-bottom: 20px; animation: floatOrb 6s infinite;">🪐</div>
-                <h1 class="game-title">SURVIVOR<br><span style="color:var(--neon-cyan)">ULTRA</span></h1>
-                <p style="opacity: 0.7; margin-top: 10px;">باشترین یاری زانیاری گشتی</p>
-                <p id="welcome-text" style="margin-top: 5px; color: var(--neon-cyan);">بەخێربێیت!</p>
-            </div>
-
-            <div style="display: flex; flex-direction: column; gap: 15px; margin-bottom: 20px;">
-                <button id="start-game-btn" class="btn btn-primary" onclick="Game.init()">
-                    <i class="fas fa-play"></i> دەستپێکردن
-                </button>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-                    <button class="btn" onclick="UI.nav('screen-shop')"><i class="fas fa-store"></i> کۆگا</button>
-                    <button class="btn" onclick="UI.nav('screen-profile')"><i class="fas fa-user"></i> پڕۆفایل</button>
-                </div>
-                <button class="btn" style="background: rgba(255,0,85,0.1); border-color: var(--neon-pink);" onclick="UI.nav('screen-admin-login')">
-                    <i class="fas fa-user-shield"></i> پەڕەی ئەدمین
-                </button>
-            </div>
-        </section>
-
-        <!-- Game Screen -->
-        <section id="screen-game" class="screen">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                <button class="btn btn-icon" onclick="Game.pause()"><i class="fas fa-pause"></i></button>
-                <div style="font-family: var(--font-numbers); font-size: 1.4rem; color: var(--neon-cyan);">
-                    <span id="game-score">0</span> PTS
-                </div>
-            </div>
-
-            <div class="timer-container"><div id="timer-bar" class="timer-bar"></div></div>
-
-            <div class="glass-card" style="min-height: 180px; display: flex; align-items: center; justify-content: center; margin-bottom: 25px; text-align: center;">
-                <h2 id="question-text" style="font-size: 1.4rem; line-height: 1.6;">Text loads here...</h2>
-            </div>
-
-            <div id="answers-grid">
-                <!-- Answers will be inserted here -->
-            </div>
-
-            <div class="powerup-row">
-                <button class="p-item" id="pu-5050" onclick="Game.usePowerup('5050')">
-                    <i class="fas fa-ban"></i> <span>50/50</span> <div class="p-badge" id="cost-5050">20</div>
-                </button>
-                <button class="p-item" id="pu-time" onclick="Game.usePowerup('time')">
-                    <i class="fas fa-clock"></i> <span>Time</span> <div class="p-badge" id="cost-time">15</div>
-                </button>
-                <button class="p-item" id="pu-skip" onclick="Game.usePowerup('skip')">
-                    <i class="fas fa-forward"></i> <span>Skip</span> <div class="p-badge" id="cost-skip">30</div>
-                </button>
-            </div>
-        </section>
-
-        <!-- Profile Screen -->
-        <section id="screen-profile" class="screen">
-            <div class="glass-card" style="text-align: center; margin-bottom: 20px; padding-top: 40px;">
-                <button class="btn btn-icon" style="position: absolute; top: 15px; right: 15px;" onclick="UI.nav('screen-home')">
-                    <i class="fas fa-times"></i>
-                </button>
-                
-                <div class="profile-pic-container" onclick="Profile.uploadPicture()">
-                    <div id="profile-avatar">👻</div>
-                    <div class="profile-pic-overlay">گۆڕینی وێنە</div>
-                </div>
-                
-                <h2 id="profile-name" style="font-size: 1.8rem;">Survival Player</h2>
-                <div class="level-badge" style="margin-top: 10px;">LEVEL <span id="profile-lvl">1</span></div>
-                
-                <button class="btn" style="margin-top: 15px; padding: 10px;" onclick="Profile.editName()">
-                    <i class="fas fa-edit"></i> گۆڕینی ناو
-                </button>
-            </div>
-
-            <div class="glass-card">
-                <h3 style="margin-bottom: 15px; border-bottom: 1px solid var(--glass-border); padding-bottom: 10px;">ئامارەکان</h3>
-                
-                <div class="stat-row"><span>XP بۆ ئاستی داهاتوو</span> <span id="xp-text">0/500</span></div>
-                <div class="progress-bg" style="margin-bottom: 15px;"><div id="xp-bar" class="progress-fill"></div></div>
-
-                <div class="stat-row"><span>بەرزترین خاڵ (High Score)</span> <span id="profile-highscore" style="color: var(--neon-cyan)">0</span></div>
-                <div class="stat-row"><span>کۆی یارییەکان</span> <span id="profile-games">0</span></div>
-                <div class="stat-row"><span>تۆکنەکان</span> <span id="profile-coins" style="color: var(--neon-gold)">0</span></div>
-            </div>
-        </section>
-
-        <!-- Shop Screen -->
-        <section id="screen-shop" class="screen">
-            <div class="glass-card" style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
-                <button class="btn btn-icon" onclick="UI.nav('screen-home')"><i class="fas fa-arrow-right"></i></button>
-                <h2 style="font-size: 1.5rem;">کۆگا</h2>
-                <div class="level-badge" style="color: var(--neon-gold); border-color: var(--neon-gold);">
-                    <span id="shop-coins">0</span> <i class="fas fa-coins"></i>
-                </div>
-            </div>
-
-            <div id="shop-items" class="shop-grid">
-                <!-- Shop items will be loaded from Firebase -->
-            </div>
-        </section>
-
-        <!-- Admin Panel -->
-        <section id="screen-admin" class="screen">
-            <div class="glass-card" style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
-                <button class="btn btn-icon" onclick="UI.nav('screen-home')"><i class="fas fa-arrow-right"></i></button>
-                <h2 style="font-size: 1.5rem; color: var(--neon-pink);"><i class="fas fa-user-shield"></i> پەڕەی ئەدمین</h2>
-                <button class="btn btn-icon" onclick="Admin.logout()"><i class="fas fa-sign-out-alt"></i></button>
-            </div>
-
-            <div style="overflow-y: auto; padding-bottom: 20px;">
-                <!-- Question Management -->
-                <div class="glass-card" style="margin-bottom: 20px;">
-                    <h3 style="margin-bottom: 15px;"><i class="fas fa-question-circle"></i> بەڕێوەبردنی پرسیارەکان</h3>
-                    <div class="admin-grid">
-                        <div class="admin-card" onclick="Admin.showAddQuestion()">
-                            <i class="fas fa-plus" style="font-size: 2rem; margin-bottom: 10px;"></i>
-                            <h4>زیادکردنی پرسیار</h4>
+                    <div class="item-stats">
+                        <div class="item-stat">
+                            <i class="fas fa-bolt" style="color: var(--quantum-blue);"></i>
+                            +٥٠٪ XP
                         </div>
-                        <div class="admin-card" onclick="Admin.showQuestionsList()">
-                            <i class="fas fa-list" style="font-size: 2rem; margin-bottom: 10px;"></i>
-                            <h4>بینینی پرسیارەکان</h4>
+                        <div class="item-stat">
+                            <i class="fas fa-coins" style="color: var(--supernova-gold);"></i>
+                            +٢ سکە لە یاری
                         </div>
                     </div>
-                </div>
-
-                <!-- Shop Management -->
-                <div class="glass-card" style="margin-bottom: 20px;">
-                    <h3 style="margin-bottom: 15px;"><i class="fas fa-store"></i> بەڕێوەبردنی کۆگا</h3>
-                    <div class="admin-grid">
-                        <div class="admin-card" onclick="Admin.showAddShopItem()">
-                            <i class="fas fa-plus" style="font-size: 2rem; margin-bottom: 10px;"></i>
-                            <h4>زیادکردنی کاڵا</h4>
+                    
+                    <div class="item-footer">
+                        <div class="item-price">
+                            <i class="fas fa-coins"></i>
+                            ٩٩٩
                         </div>
-                        <div class="admin-card" onclick="Admin.showShopItems()">
-                            <i class="fas fa-edit" style="font-size: 2rem; margin-bottom: 10px;"></i>
-                            <h4>دەستکاری کاڵاکان</h4>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Ad Management -->
-                <div class="glass-card" style="margin-bottom: 20px;">
-                    <h3 style="margin-bottom: 15px;"><i class="fas fa-video"></i> بەڕێوەبردنی ڕیکلام</h3>
-                    <div style="display: flex; flex-direction: column; gap: 10px;">
-                        <input type="file" id="ad-video-upload" accept="video/*" style="display: none;" onchange="Admin.uploadAd(this.files[0])">
-                        <button class="btn" onclick="document.getElementById('ad-video-upload').click()">
-                            <i class="fas fa-upload"></i> بارکردنی ڤیدیۆی ڕیکلام
-                        </button>
-                        <button class="btn" onclick="Admin.testAd()">
-                            <i class="fas fa-play"></i> تاقیکردنەوەی ڕیکلام
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Game Settings -->
-                <div class="glass-card">
-                    <h3 style="margin-bottom: 15px;"><i class="fas fa-sliders-h"></i> ڕێکخستنەکانی یاری</h3>
-                    <div style="display: flex; flex-direction: column; gap: 15px;">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <span>کاتژمێری دەستپێکردنی یاری:</span>
-                            <input type="time" id="game-start-time" value="20:00" style="background: rgba(255,255,255,0.1); border: 1px solid var(--glass-border); color: white; padding: 8px; border-radius: 8px;">
-                        </div>
-                        <button class="btn btn-primary" onclick="Admin.saveSettings()">
-                            <i class="fas fa-save"></i> پاشەکەوتکردن
+                        <button class="quantum-btn quantum-btn-primary" style="padding: 12px 25px;">
+                            کڕین
                         </button>
                     </div>
                 </div>
             </div>
-        </section>
 
-    </main>
-
-    <!-- Result Modal -->
-    <div id="modal-result" class="modal-overlay">
-        <div class="glass-card modal-content">
-            <div id="res-icon" style="font-size: 5rem; margin-bottom: 10px; filter: drop-shadow(0 0 20px rgba(255,255,255,0.5));">🏆</div>
-            <h2 id="res-title" style="font-size: 2rem; margin-bottom: 5px;">سەرکەوتن!</h2>
-            <p style="opacity: 0.7;">کۆی خاڵەکانت</p>
-            
-            <div class="score-big" id="res-score">0</div>
-            
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0;">
-                <div class="glass-card" style="padding: 10px;">
-                    <div style="color: var(--neon-gold); font-size: 1.2rem;"><i class="fas fa-coins"></i></div>
-                    <div style="font-family: var(--font-numbers); font-weight: bold;" id="res-coins">+0</div>
+            <!-- Power-up Item -->
+            <div class="shop-item-card">
+                <div class="item-image" style="background: var(--hologram-purple);">
+                    ⚡
                 </div>
-                <div class="glass-card" style="padding: 10px;">
-                    <div style="color: var(--neon-cyan); font-size: 1.2rem;"><i class="fas fa-bolt"></i></div>
-                    <div style="font-family: var(--font-numbers); font-weight: bold;" id="res-xp">+0 XP</div>
+                <div class="item-content">
+                    <h3 class="item-name">توانای خێرایی</h3>
+                    <p class="item-description">کاتی یاری زیاد بکە بۆ ٢٠ چرکە زیاتر</p>
+                    
+                    <div class="item-footer">
+                        <div class="item-price">
+                            <i class="fas fa-coins"></i>
+                            ١٠٠
+                        </div>
+                        <button class="quantum-btn" style="padding: 12px 25px;">
+                            کڕین
+                        </button>
+                    </div>
                 </div>
             </div>
 
-            <div style="display: flex; gap: 10px;">
-                <button class="btn" style="flex: 1;" onclick="UI.nav('screen-home'); UI.closeModal()"><i class="fas fa-home"></i></button>
-                <button class="btn btn-primary" style="flex: 2;" onclick="Game.init(); UI.closeModal()"><i class="fas fa-redo"></i> دووبارە</button>
+            <!-- Theme Item -->
+            <div class="shop-item-card">
+                <div class="item-image" style="background: var(--hologram-matrix);">
+                    🟢
+                </div>
+                <div class="item-content">
+                    <h3 class="item-name">ڕووکاری ماتریکس</h3>
+                    <p class="item-description">ڕووکاری سەرنجڕاکێشی ماتریکس</p>
+                    
+                    <div class="item-footer">
+                        <div class="item-price">
+                            <i class="fas fa-coins"></i>
+                            ٥٠٠
+                        </div>
+                        <button class="quantum-btn" style="padding: 12px 25px;">
+                            کڕین
+                        </button>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
 
-    <!-- Admin Modals -->
-    <div id="modal-add-question" class="modal-overlay">
-        <div class="glass-card modal-content" style="max-width: 500px;">
-            <h2 style="margin-bottom: 20px;"><i class="fas fa-plus"></i> زیادکردنی پرسیاری نوێ</h2>
-            
-            <div class="form-group">
-                <label>پرسیار</label>
-                <textarea id="new-question" rows="3" style="width: 100%; padding: 15px; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); border-radius: 12px; color: white;"></textarea>
+            <!-- Badge Item -->
+            <div class="shop-item-card">
+                <div class="item-image" style="background: var(--hologram-fire);">
+                    🔥
+                </div>
+                <div class="item-content">
+                    <h3 class="item-name">نیشانەی ئاگرین</h3>
+                    <p class="item-description">نیشانەی تایبەت بۆ پڕۆفایلت</p>
+                    
+                    <div class="item-footer">
+                        <div class="item-price">
+                            <i class="fas fa-coins"></i>
+                            ٢٥٠
+                        </div>
+                        <button class="quantum-btn" style="padding: 12px 25px;">
+                            کڕین
+                        </button>
+                    </div>
+                </div>
             </div>
-            
-            <div class="form-group">
-                <label>وەڵامەکان</label>
-                <input type="text" id="new-answer1" placeholder="وەڵامی ١ (وەڵامی ڕاست)" style="margin-bottom: 10px;">
-                <input type="text" id="new-answer2" placeholder="وەڵامی ٢" style="margin-bottom: 10px;">
-                <input type="text" id="new-answer3" placeholder="وەڵامی ٣" style="margin-bottom: 10px;">
-                <input type="text" id="new-answer4" placeholder="وەڵامی ٤">
+
+            <!-- Package Item -->
+            <div class="shop-item-card">
+                <div class="item-image" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                    🎁
+                </div>
+                <div class="item-content">
+                    <h3 class="item-name">پاکەتی دەستپێک</h3>
+                    <p class="item-description">پاکەتی یەکەم کڕین - ٥٠٠ سکەی بێھا</p>
+                    
+                    <div class="item-footer">
+                        <div class="item-price">
+                            <i class="fas fa-coins"></i>
+                            ٧٥٠
+                        </div>
+                        <button class="quantum-btn quantum-btn-success" style="padding: 12px 25px;">
+                            کڕین
+                        </button>
+                    </div>
+                </div>
             </div>
-            
-            <div class="form-group">
-                <label>ژمارەی وەڵامی ڕاست (١-٤)</label>
-                <input type="number" id="new-correct" min="1" max="4" value="1">
-            </div>
-            
-            <div style="display: flex; gap: 10px; margin-top: 20px;">
-                <button class="btn" style="flex: 1;" onclick="UI.closeModal()"><i class="fas fa-times"></i> هەڵوەشاندنەوە</button>
-                <button class="btn btn-primary" style="flex: 1;" onclick="Admin.addQuestion()"><i class="fas fa-save"></i> پاشەکەوتکردن</button>
+
+            <!-- Gift Item -->
+            <div class="shop-item-card">
+                <div class="item-image" style="background: linear-gradient(135deg, #f093fb, #f5576c);">
+                    🎯
+                </div>
+                <div class="item-content">
+                    <h3 class="item-name">دیاری تایبەت</h3>
+                    <p class="item-description">دیاری تایبەت بۆ هاوڕێکانت</p>
+                    
+                    <div class="item-footer">
+                        <div class="item-price">
+                            <i class="fas fa-coins"></i>
+                            ٣٠٠
+                        </div>
+                        <button class="quantum-btn" style="padding: 12px 25px;">
+                            دیاری بدە
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
+
+    <!-- Admin Screen -->
+    <section id="admin" class="screen">
+        <div class="admin-header">
+            <h1 class="admin-title">پەڕەی ئەدمین</h1>
+            <div style="display: flex; gap: 15px;">
+                <button class="quantum-btn quantum-btn-secondary" onclick="Admin.refresh()">
+                    <i class="fas fa-sync"></i>
+                    نوێکردنەوە
+                </button>
+                <button class="quantum-btn quantum-btn-danger" onclick="Admin.logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    چوونەدەرەوە
+                </button>
+            </div>
+        </div>
+
+        <div class="admin-nav">
+            <div class="admin-nav-btn active" onclick="showAdminSection('dashboard')">داشبۆرد</div>
+            <div class="admin-nav-btn" onclick="showAdminSection('users')">بەکارهێنەران</div>
+            <div class="admin-nav-btn" onclick="showAdminSection('questions')">پرسیارەکان</div>
+            <div class="admin-nav-btn" onclick="showAdminSection('shop')">کۆگا</div>
+            <div class="admin-nav-btn" onclick="showAdminSection('ads')">ڕیکلام</div>
+            <div class="admin-nav-btn" onclick="showAdminSection('settings')">ڕێکخستن</div>
+        </div>
+
+        <!-- Dashboard Section -->
+        <div id="admin-dashboard" class="admin-section active">
+            <div class="quantum-card" style="margin-bottom: 30px;">
+                <h2 style="margin-bottom: 25px; color: var(--quantum-blue);">
+                    <i class="fas fa-chart-bar"></i> ئاماری گشتی
+                </h2>
+                
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 2.5rem; color: var(--quantum-blue);">👥</div>
+                        <div style="font-family: var(--font-tech); font-size: 2rem; margin: 10px 0;">١,٢٣٤</div>
+                        <div style="opacity: 0.7;">بەکارهێنەر</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2.5rem; color: var(--quantum-green);">❓</div>
+                        <div style="font-family: var(--font-tech); font-size: 2rem; margin: 10px 0;">٥٦٧</div>
+                        <div style="opacity: 0.7;">پرسیار</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2.5rem; color: var(--supernova-gold);">💰</div>
+                        <div style="font-family: var(--font-tech); font-size: 2rem; margin: 10px 0;">١٢,٥٠٠</div>
+                        <div style="opacity: 0.7;">سکە کۆکراوە</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2.5rem; color: var(--plasma-pink);">🎮</div>
+                        <div style="font-family: var(--font-tech); font-size: 2rem; margin: 10px 0;">٤,٥٦٧</div>
+                        <div style="opacity: 0.7;">یاری</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="admin-card-grid">
+                <div class="admin-feature-card" onclick="Admin.manageUsers()">
+                    <div class="admin-feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 style="margin-bottom: 15px;">بەڕێوەبردنی بەکارهێنەران</h3>
+                    <p style="opacity: 0.7;">دەستکاری و چاودێری هەموو بەکارهێنەرەکان</p>
+                </div>
+
+                <div class="admin-feature-card" onclick="Admin.addQuestion()">
+                    <div class="admin-feature-icon">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <h3 style="margin-bottom: 15px;">زیادکردنی پرسیار</h3>
+                    <p style="opacity: 0.7;">زیادکردنی پرسیاری نوێ بۆ یاریەکە</p>
+                </div>
+
+                <div class="admin-feature-card" onclick="Admin.manageShop()">
+                    <div class="admin-feature-icon">
+                        <i class="fas fa-store"></i>
+                    </div>
+                    <h3 style="margin-bottom: 15px;">بەڕێوەبردنی کۆگا</h3>
+                    <p style="opacity: 0.7;">زیادکردن و دەستکاری کاڵاکانی کۆگا</p>
+                </div>
+
+                <div class="admin-feature-card" onclick="Admin.manageAds()">
+                    <div class="admin-feature-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3 style="margin-bottom: 15px;">بەڕێوەبردنی ڕیکلام</h3>
+                    <p style="opacity: 0.7;">ڕێکخستنی ڕیکلامەکانی یاری</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Users Section -->
+        <div id="admin-users" class="admin-section">
+            <div class="quantum-card">
+                <h2 style="margin-bottom: 25px; color: var(--quantum-blue);">
+                    <i class="fas fa-user-cog"></i> بەڕێوەبردنی بەکارهێنەران
+                </h2>
+                
+                <div class="admin-table">
+                    <div class="table-header">هەموو بەکارهێنەران</div>
+                    
+                    <div class="table-row">
+                        <div class="table-cell"><strong>ناو</strong></div>
+                        <div class="table-cell"><strong>ئیمەیڵ</strong></div>
+                        <div class="table-cell"><strong>ئاست</strong></div>
+                        <div class="table-cell"><strong>کردارەکان</strong></div>
+                    </div>
+                    
+                    <div class="table-row">
+                        <div class="table-cell">ئەحمەد</div>
+                        <div class="table-cell">ahmed@example.com</div>
+                        <div class="table-cell">٥</div>
+                        <div class="table-cell">
+                            <button class="quantum-btn" style="padding: 8px 15px; font-size: 0.9rem;">
+                                دەستکاری
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="table-row">
+                        <div class="table-cell">سارا</div>
+                        <div class="table-cell">sara@example.com</div>
+                        <div class="table-cell">٣</div>
+                        <div class="table-cell">
+                            <button class="quantum-btn" style="padding: 8px 15px; font-size: 0.9rem;">
+                                دەستکاری
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Questions Section -->
+        <div id="admin-questions" class="admin-section">
+            <div class="quantum-card">
+                <h2 style="margin-bottom: 25px; color: var(--quantum-green);">
+                    <i class="fas fa-question"></i> زیادکردنی پرسیاری نوێ
+                </h2>
+                
+                <div class="admin-form">
+                    <div class="form-group">
+                        <label for="question-text">پرسیار</label>
+                        <textarea id="question-text" class="form-input" rows="3" placeholder="پرسیارەکەت لێرە بنووسە..."></textarea>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-bottom: 25px;">
+                        <div class="form-group">
+                            <label for="answer1">وەڵامی ١</label>
+                            <input type="text" id="answer1" class="form-input" placeholder="وەڵامی یەکەم">
+                        </div>
+                        <div class="form-group">
+                            <label for="answer2">وەڵامی ٢</label>
+                            <input type="text" id="answer2" class="form-input" placeholder="وەڵامی دووەم">
+                        </div>
+                        <div class="form-group">
+                            <label for="answer3">وەڵامی ٣</label>
+                            <input type="text" id="answer3" class="form-input" placeholder="وەڵامی سێیەم">
+                        </div>
+                        <div class="form-group">
+                            <label for="answer4">وەڵامی ٤</label>
+                            <input type="text" id="answer4" class="form-input" placeholder="وەڵامی چوارەم">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="correct-answer">ژمارەی وەڵامی ڕاست (١-٤)</label>
+                        <select id="correct-answer" class="form-input">
+                            <option value="1">١</option>
+                            <option value="2">٢</option>
+                            <option value="3">٣</option>
+                            <option value="4">٤</option>
+                        </select>
+                    </div>
+                    
+                    <div style="display: flex; gap: 15px; margin-top: 30px;">
+                        <button class="quantum-btn quantum-btn-primary" style="flex: 1;">
+                            <i class="fas fa-save"></i>
+                            پاشەکەوتکردن
+                        </button>
+                        <button class="quantum-btn" style="flex: 1;">
+                            <i class="fas fa-times"></i>
+                            پاککردنەوە
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Settings Screen -->
+    <section id="settings" class="screen">
+        <div class="quantum-card" style="margin-bottom: 30px;">
+            <h1 style="margin-bottom: 30px; color: var(--quantum-blue);">
+                <i class="fas fa-sliders-h"></i> ڕێکخستنەکان
+            </h1>
+            
+            <div class="admin-form">
+                <div class="form-group">
+                    <label for="game-time">کاتی یاری (شەوانە)</label>
+                    <input type="time" id="game-time" class="form-input" value="20:00">
+                </div>
+                
+                <div class="form-group">
+                    <label for="sound-volume">بەرزی دەنگ</label>
+                    <input type="range" id="sound-volume" class="form-input" min="0" max="100" value="80">
+                </div>
+                
+                <div class="form-group">
+                    <label for="notifications">
+                        <input type="checkbox" id="notifications" checked>
+                        ئاگادارکردنەوەکان
+                    </label>
+                </div>
+                
+                <div class="form-group">
+                    <label for="language">زمان</label>
+                    <select id="language" class="form-input">
+                        <option value="ckb" selected>کوردی (سۆرانی)</option>
+                        <option value="ar">عەرەبی</option>
+                        <option value="en">ئینگلیزی</option>
+                    </select>
+                </div>
+                
+                <div style="display: flex; gap: 15px; margin-top: 40px;">
+                    <button class="quantum-btn quantum-btn-primary" style="flex: 1;">
+                        <i class="fas fa-save"></i>
+                        پاشەکەوتکردن
+                    </button>
+                    <button class="quantum-btn quantum-btn-secondary" style="flex: 1;" onclick="showScreen('home')">
+                        <i class="fas fa-arrow-right"></i>
+                        گەڕانەوە
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <script>
-        /**
-         * ==========================================
-         * FIREBASE CONFIGURATION
-         * ==========================================
-         */
-        
-        // 🔥 REPLACE WITH YOUR FIREBASE CONFIG
-        const firebaseConfig = {
-            apiKey: "AIzaSyYourAPIKeyHere",
-            authDomain: "your-project-id.firebaseapp.com",
-            projectId: "your-project-id",
-            storageBucket: "your-project-id.appspot.com",
-            messagingSenderId: "your-messaging-sender-id",
-            appId: "your-app-id"
-        };
-
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
-        const db = firebase.firestore();
-        const storage = firebase.storage();
-
-        /**
-         * ==========================================
-         * 1. AUTHENTICATION SYSTEM
-         * ==========================================
-         */
-        const Auth = {
-            currentUser: null,
-            
-            async login() {
-                const email = document.getElementById('login-email').value;
-                const password = document.getElementById('login-password').value;
-                
-                if (!email || !password) {
-                    alert("تکایە هەموو خانەکان پڕ بکەوە");
-                    return;
-                }
-                
-                try {
-                    const userCredential = await auth.signInWithEmailAndPassword(email, password);
-                    this.currentUser = userCredential.user;
-                    await User.load(this.currentUser.uid);
-                    UI.nav('screen-home');
-                    document.getElementById('welcome-text').innerText = `بەخێربێیت ${User.state.displayName || 'یاریزان'}!`;
-                } catch (error) {
-                    alert(`هەڵە: ${error.message}`);
-                }
-            },
-            
-            async register() {
-                const email = document.getElementById('login-email').value;
-                const password = document.getElementById('login-password').value;
-                
-                if (!email || !password) {
-                    alert("تکایە هەموو خانەکان پڕ بکەوە");
-                    return;
-                }
-                
-                try {
-                    const userCredential = await auth.createUserWithEmailAndPassword(email, password);
-                    this.currentUser = userCredential.user;
-                    
-                    // Create user profile
-                    await db.collection('users').doc(this.currentUser.uid).set({
-                        email: email,
-                        displayName: email.split('@')[0],
-                        coins: 100,
-                        level: 1,
-                        xp: 0,
-                        highScore: 0,
-                        gamesPlayed: 0,
-                        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-                        profilePic: null
-                    });
-                    
-                    await User.load(this.currentUser.uid);
-                    UI.nav('screen-home');
-                    document.getElementById('welcome-text').innerText = `بەخێربێیت ${User.state.displayName}!`;
-                } catch (error) {
-                    alert(`هەڵە: ${error.message}`);
-                }
-            },
-            
-            async guestLogin() {
-                // Create anonymous user
-                try {
-                    const userCredential = await auth.signInAnonymously();
-                    this.currentUser = userCredential.user;
-                    
-                    // Create guest profile
-                    await db.collection('users').doc(this.currentUser.uid).set({
-                        email: null,
-                        displayName: 'میوان',
-                        coins: 50,
-                        level: 1,
-                        xp: 0,
-                        highScore: 0,
-                        gamesPlayed: 0,
-                        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-                        profilePic: null,
-                        isGuest: true
-                    });
-                    
-                    await User.load(this.currentUser.uid);
-                    UI.nav('screen-home');
-                    document.getElementById('welcome-text').innerText = `بەخێربێیت میوان!`;
-                } catch (error) {
-                    alert(`هەڵە: ${error.message}`);
-                }
-            },
-            
-            showRegister() {
-                document.getElementById('login-email').value = '';
-                document.getElementById('login-password').value = '';
-                alert("تۆمارکردنی نوێ: ئیمەیڵ و وشەی نهێنیت بنووسە و دووبارە کلیک بکە بۆ تۆمارکردن");
-                // In full version, we would show separate register form
-            },
-            
-            logout() {
-                auth.signOut();
-                UI.nav('screen-login');
+        // Create quantum particles
+        function createParticles() {
+            const container = document.getElementById('quantum-particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'quantum-particle';
+                particle.style.left = Math.random() * 100 + 'vw';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                container.appendChild(particle);
             }
-        };
+        }
 
-        /**
-         * ==========================================
-         * 2. USER PROFILE SYSTEM
-         * ==========================================
-         */
-        const User = {
-            state: {
-                uid: null,
-                email: null,
-                displayName: 'یاریزان',
-                coins: 0,
-                level: 1,
-                xp: 0,
-                highScore: 0,
-                gamesPlayed: 0,
-                profilePic: null,
-                inventory: ['neon'],
-                currentTheme: 'neon'
-            },
+        // Screen navigation
+        function showScreen(screenId) {
+            // Hide all screens
+            document.querySelectorAll('.screen').forEach(screen => {
+                screen.classList.remove('active');
+            });
             
-            async load(uid) {
-                if (!uid) return;
-                
-                const doc = await db.collection('users').doc(uid).get();
-                if (doc.exists) {
-                    this.state = { ...this.state, ...doc.data(), uid: uid };
+            // Show selected screen
+            document.getElementById(screenId).classList.add('active');
+            
+            // Update navigation buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.onclick.toString().includes(`'${screenId}'`)) {
+                    btn.classList.add('active');
                 }
-                
-                this.applyTheme(this.state.currentTheme);
-                this.updateUI();
-            },
+            });
+        }
+
+        // Admin section navigation
+        function showAdminSection(sectionId) {
+            // Update nav buttons
+            document.querySelectorAll('.admin-nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
             
-            async save() {
-                if (!this.state.uid) return;
-                
-                const { uid, ...data } = this.state;
-                await db.collection('users').doc(uid).set(data, { merge: true });
-                this.updateUI();
-            },
+            // Hide all sections
+            document.querySelectorAll('.admin-section').forEach(section => {
+                section.classList.remove('active');
+            });
             
-            addCoins(amount) {
-                this.state.coins += amount;
-                // Animate coin counter
-                const el = document.getElementById('home-coins');
-                el.style.transform = "scale(1.5)";
-                setTimeout(() => el.style.transform = "scale(1)", 200);
-                this.save();
-            },
-            
-            addXP(amount) {
-                this.state.xp += amount;
-                const reqXP = this.state.level * 500;
-                
-                if (this.state.xp >= reqXP) {
-                    this.state.level++;
-                    this.state.xp = this.state.xp - reqXP;
-                    AudioSys.play('win');
-                    alert(`🎉 پیرۆزە! گەیشتیتە ئاستی ${this.state.level}`);
-                }
-                this.save();
-            },
-            
-            updateUI() {
-                // Home Screen
-                document.getElementById('home-coins').innerText = this.state.coins;
-                document.getElementById('home-lvl').innerText = this.state.level;
-                document.getElementById('welcome-text').innerText = `بەخێربێیت ${this.state.displayName}!`;
-                
-                // Shop Screen
-                document.getElementById('shop-coins').innerText = this.state.coins;
-                
-                // Profile Screen
-                document.getElementById('profile-name').innerText = this.state.displayName;
-                document.getElementById('profile-lvl').innerText = this.state.level;
-                document.getElementById('profile-highscore').innerText = this.state.highScore;
-                document.getElementById('profile-games').innerText = this.state.gamesPlayed;
-                document.getElementById('profile-coins').innerText = this.state.coins;
-                
-                // XP Bar
-                const reqXP = this.state.level * 500;
-                const pct = (this.state.xp / reqXP) * 100;
-                document.getElementById('xp-bar').style.width = `${pct}%`;
-                document.getElementById('xp-text').innerText = `${this.state.xp} / ${reqXP}`;
-                
-                // Update avatar
-                const avatar = document.getElementById('home-avatar');
-                const profileAvatar = document.getElementById('profile-avatar');
-                if (this.state.profilePic) {
-                    avatar.innerHTML = `<img src="${this.state.profilePic}" style="width: 80px; height: 80px; border-radius: 50%;">`;
-                    profileAvatar.innerHTML = `<img src="${this.state.profilePic}" style="width: 100%; height: 100%; border-radius: 50%;">`;
-                } else {
-                    // Default avatars based on level
-                    const avatars = ['🪐', '🚀', '👨‍🚀', '🛸', '🌠', '⚡', '🔥', '💫'];
-                    const avatarIndex = Math.min(this.state.level - 1, avatars.length - 1);
-                    avatar.innerText = avatars[avatarIndex];
-                    profileAvatar.innerText = avatars[avatarIndex];
-                }
-            },
-            
-            applyTheme(themeName) {
-                const root = document.documentElement;
-                const themes = {
-                    neon: {
-                        cyan: '#00f3ff',
-                        purple: '#bc13fe',
-                        gradient: 'linear-gradient(135deg, #bc13fe, #00f3ff)'
-                    },
-                    gold: {
-                        cyan: '#ffd700',
-                        purple: '#ffaa00',
-                        gradient: 'linear-gradient(135deg, #ffd700, #ffaa00)'
-                    },
-                    fire: {
-                        cyan: '#ff4d00',
-                        purple: '#ff0000',
-                        gradient: 'linear-gradient(135deg, #ff4d00, #ff0000)'
-                    },
-                    matrix: {
-                        cyan: '#00ff00',
-                        purple: '#003300',
-                        gradient: 'linear-gradient(135deg, #00ff00, #004400)'
-                    }
-                };
-                
-                if (themes[themeName]) {
-                    root.style.setProperty('--neon-cyan', themes[themeName].cyan);
-                    root.style.setProperty('--neon-purple', themes[themeName].purple);
-                    root.style.setProperty('--grad-main', themes[themeName].gradient);
-                    this.state.currentTheme = themeName;
-                }
+            // Show selected section
+            document.getElementById(`admin-${sectionId}`).classList.add('active');
+        }
+
+        // Profile functions
+        function changeAvatar() {
+            alert("گۆڕینی وێنەی پڕۆفایل لە وەشانی داھاتوودا بەردەست دەبێت!");
+        }
+
+        function editProfile() {
+            const newName = prompt("ناوی نوێت بنووسە:", document.getElementById('user-name').textContent);
+            if (newName && newName.trim()) {
+                document.getElementById('user-name').textContent = newName;
             }
-        };
+        }
 
-        /**
-         * ==========================================
-         * 3. PROFILE MANAGEMENT
-         * ==========================================
-         */
-        const Profile = {
-            async uploadPicture() {
-                const input = document.createElement('input');
-                input.type = 'file';
-                input.accept = 'image/*';
-                
-                input.onchange = async (e) => {
-                    const file = e.target.files[0];
-                    if (!file) return;
-                    
-                    try {
-                        // Upload to Firebase Storage
-                        const storageRef = storage.ref();
-                        const fileRef = storageRef.child(`profile_pictures/${User.state.uid}/${Date.now()}_${file.name}`);
-                        await fileRef.put(file);
-                        
-                        // Get download URL
-                        const downloadURL = await fileRef.getDownloadURL();
-                        
-                        // Update user profile
-                        User.state.profilePic = downloadURL;
-                        await User.save();
-                        
-                        alert("وێنەکەت بە سەرکەوتوویی بارکرا!");
-                    } catch (error) {
-                        alert(`هەڵە لە بارکردنی وێنە: ${error.message}`);
-                    }
-                };
-                
-                input.click();
-            },
-            
-            editName() {
-                const newName = prompt("ناوی نوێت بنووسە:", User.state.displayName);
-                if (newName && newName.trim() !== '') {
-                    User.state.displayName = newName.trim();
-                    User.save();
-                }
-            }
-        };
+        function shareProfile() {
+            alert("پڕۆفایلت هاوبەش کرا!\nلینک: https://survivor-ultra.com/profile/user123");
+        }
 
-        /**
-         * ==========================================
-         * 4. ADMIN SYSTEM
-         * ==========================================
-         */
+        // Admin functions
         const Admin = {
-            isAdmin: false,
-            
-            async login() {
-                const email = document.getElementById('admin-email').value;
-                const password = document.getElementById('admin-password').value;
-                
-                // Hardcoded admin credentials (for demo)
-                // In production, use Firebase Admin SDK or custom claims
-                if (email === "admin@survivor.com" && password === "admin123") {
-                    this.isAdmin = true;
-                    
-                    // Load admin data
-                    await this.loadQuestions();
-                    await this.loadShopItems();
-                    
-                    UI.nav('screen-admin');
-                    alert("بەخێربێیت بە پەڕەی ئەدمین!");
-                } else {
-                    alert("هەڵە: ئیمەیڵ یان وشەی نهێنی هەڵەیە");
-                }
+            refresh() {
+                alert("زانیاریەکان نوێکرانەوە!");
             },
             
             logout() {
-                this.isAdmin = false;
-                UI.nav('screen-home');
-            },
-            
-            async loadQuestions() {
-                // Load questions from Firebase
-                const snapshot = await db.collection('questions').orderBy('createdAt', 'desc').limit(50).get();
-                Game.questionsDB = [];
-                
-                snapshot.forEach(doc => {
-                    const data = doc.data();
-                    Game.questionsDB.push({
-                        id: doc.id,
-                        q: data.question,
-                        a: [data.answer1, data.answer2, data.answer3, data.answer4],
-                        c: data.correctAnswer - 1 // Convert to 0-indexed
-                    });
-                });
-                
-                console.log(`Loaded ${Game.questionsDB.length} questions from Firebase`);
-            },
-            
-            async loadShopItems() {
-                const snapshot = await db.collection('shop_items').orderBy('price').get();
-                const shopGrid = document.getElementById('shop-items');
-                shopGrid.innerHTML = '';
-                
-                snapshot.forEach(doc => {
-                    const item = doc.data();
-                    const div = document.createElement('div');
-                    div.className = 'shop-item';
-                    div.innerHTML = `
-                        <div style="font-size: 2rem; margin-bottom: 10px;">${item.emoji || '🎁'}</div>
-                        <h4>${item.name}</h4>
-                        <p style="font-size: 0.8rem; opacity: 0.6;">${item.description || ''}</p>
-                        <button class="btn" onclick="Shop.buy('${doc.id}', ${item.price})" style="padding: 5px 15px; font-size: 0.8rem; width: 100%; margin-top: 5px;">
-                            ${item.price} <i class="fas fa-coins"></i>
-                        </button>
-                    `;
-                    shopGrid.appendChild(div);
-                });
-            },
-            
-            showAddQuestion() {
-                document.getElementById('modal-add-question').classList.add('open');
-            },
-            
-            async addQuestion() {
-                const question = document.getElementById('new-question').value;
-                const answer1 = document.getElementById('new-answer1').value;
-                const answer2 = document.getElementById('new-answer2').value;
-                const answer3 = document.getElementById('new-answer3').value;
-                const answer4 = document.getElementById('new-answer4').value;
-                const correct = parseInt(document.getElementById('new-correct').value);
-                
-                if (!question || !answer1 || !answer2 || !answer3 || !answer4) {
-                    alert("تکایە هەموو خانەکان پڕ بکەوە");
-                    return;
-                }
-                
-                try {
-                    await db.collection('questions').add({
-                        question: question,
-                        answer1: answer1,
-                        answer2: answer2,
-                        answer3: answer3,
-                        answer4: answer4,
-                        correctAnswer: correct,
-                        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-                        addedBy: User.state.uid
-                    });
-                    
-                    alert("پرسیار بە سەرکەوتوویی زیادکرا!");
-                    UI.closeModal();
-                    this.loadQuestions();
-                } catch (error) {
-                    alert(`هەڵە: ${error.message}`);
+                if (confirm("دڵنیایت دەتەوێت لە پەڕەی ئەدمین دەرچیت؟")) {
+                    showScreen('home');
                 }
             },
             
-            showAddShopItem() {
-                // Implementation for adding shop items
-                const name = prompt("ناوی کاڵا:");
-                const price = prompt("نرخ (تۆکن):");
-                const emoji = prompt("ئێمۆجی:");
-                const description = prompt("شڕۆڤە:");
-                
-                if (name && price && emoji) {
-                    db.collection('shop_items').add({
-                        name: name,
-                        price: parseInt(price),
-                        emoji: emoji,
-                        description: description,
-                        createdAt: firebase.firestore.FieldValue.serverTimestamp()
-                    }).then(() => {
-                        alert("کاڵا زیادکرا!");
-                        this.loadShopItems();
-                    });
-                }
+            manageUsers() {
+                showAdminSection('users');
             },
             
-            async uploadAd(file) {
-                if (!file) return;
-                
-                try {
-                    const storageRef = storage.ref();
-                    const adRef = storageRef.child(`ads/main_ad_${Date.now()}`);
-                    await adRef.put(file);
-                    
-                    const downloadURL = await adRef.getDownloadURL();
-                    
-                    // Save ad URL to Firestore
-                    await db.collection('settings').doc('ads').set({
-                        mainAd: downloadURL,
-                        updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-                    }, { merge: true });
-                    
-                    alert("ڕیکلامەکە بە سەرکەوتوویی بارکرا!");
-                } catch (error) {
-                    alert(`هەڵە لە بارکردنی ڕیکلام: ${error.message}`);
-                }
+            addQuestion() {
+                showAdminSection('questions');
             },
             
-            async testAd() {
-                const doc = await db.collection('settings').doc('ads').get();
-                if (doc.exists && doc.data().mainAd) {
-                    showAd(doc.data().mainAd);
-                } else {
-                    alert("هیچ ڕیکلامێک بار نەکراوە!");
-                }
+            manageShop() {
+                showAdminSection('shop');
             },
             
-            async saveSettings() {
-                const gameTime = document.getElementById('game-start-time').value;
-                
-                await db.collection('settings').doc('game').set({
-                    startTime: gameTime,
-                    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-                }, { merge: true });
-                
-                alert("ڕێکخستنەکان پاشەکەوتکران!");
+            manageAds() {
+                alert("بەشی بەڕێوەبردنی ڕیکلام");
             }
         };
 
-        /**
-         * ==========================================
-         * 5. GAME COUNTDOWN SYSTEM
-         * ==========================================
-         */
-        const Countdown = {
-            gameStartTime: "20:00", // 8 PM
-            countdownInterval: null,
-            
-            async init() {
-                // Load game time from Firebase
-                try {
-                    const doc = await db.collection('settings').doc('game').get();
-                    if (doc.exists && doc.data().startTime) {
-                        this.gameStartTime = doc.data().startTime;
-                    }
-                    document.getElementById('game-start-time').value = this.gameStartTime;
-                } catch (error) {
-                    console.log("Using default game time");
-                }
-                
-                this.updateCountdown();
-                this.countdownInterval = setInterval(() => this.updateCountdown(), 1000);
-            },
-            
-            updateCountdown() {
-                const now = new Date();
-                const [targetHour, targetMinute] = this.gameStartTime.split(':').map(Number);
-                
-                let targetTime = new Date();
-                targetTime.setHours(targetHour, targetMinute, 0, 0);
-                
-                // If target time has passed today, set for tomorrow
-                if (now > targetTime) {
-                    targetTime.setDate(targetTime.getDate() + 1);
-                }
-                
-                const diffMs = targetTime - now;
-                const diffSec = Math.floor(diffMs / 1000);
-                
-                // Check if game should be available
-                const gameAvailable = diffSec <= 0;
-                
-                // Update UI
-                const countdownSection = document.getElementById('countdown-section');
-                const startButton = document.getElementById('start-game-btn');
-                
-                if (gameAvailable) {
-                    countdownSection.style.display = 'none';
-                    startButton.disabled = false;
-                    startButton.innerHTML = '<i class="fas fa-play"></i> دەستپێکردن';
-                } else {
-                    countdownSection.style.display = 'block';
-                    startButton.disabled = true;
-                    startButton.innerHTML = '<i class="fas fa-clock"></i> چاوەڕوان بکە...';
-                    
-                    // Calculate hours, minutes, seconds
-                    const hours = Math.floor(diffSec / 3600);
-                    const minutes = Math.floor((diffSec % 3600) / 60);
-                    const seconds = diffSec % 60;
-                    
-                    // Format as HH:MM:SS
-                    const timeString = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-                    document.getElementById('countdown-display').innerText = timeString;
-                    
-                    // Show ad 1 minute before game starts
-                    if (diffSec === 60) {
-                        this.showAdBeforeGame();
-                    }
-                }
-            },
-            
-            async showAdBeforeGame() {
-                try {
-                    const doc = await db.collection('settings').doc('ads').get();
-                    if (doc.exists && doc.data().mainAd) {
-                        showAd(doc.data().mainAd);
-                    }
-                } catch (error) {
-                    console.log("No ad to show");
-                }
-            }
-        };
-
-        /**
-         * ==========================================
-         * 6. SHOP SYSTEM
-         * ==========================================
-         */
-        const Shop = {
-            async buy(itemId, cost) {
-                if (User.state.coins < cost) {
-                    alert("پارەی پێویستت نییە!");
-                    return;
-                }
-                
-                if (confirm(`دەتەوێت ئەم کاڵایە بکڕیت بە ${cost} تۆکن؟`)) {
-                    // Deduct coins
-                    User.addCoins(-cost);
-                    
-                    // Add to inventory
-                    if (!User.state.inventory.includes(itemId)) {
-                        User.state.inventory.push(itemId);
-                        User.save();
-                    }
-                    
-                    alert("پیرۆزە! کاڵاکە کڕدرا!");
-                }
-            }
-        };
-
-        /**
-         * ==========================================
-         * 7. AD SYSTEM
-         * ==========================================
-         */
-        function showAd(videoUrl) {
-            const adContainer = document.getElementById('ad-container');
-            const adVideo = document.getElementById('ad-video');
-            const skipBtn = document.querySelector('.skip-ad');
-            
-            adVideo.src = videoUrl;
-            adContainer.style.display = 'flex';
-            
-            // Auto-skip after 5 seconds
-            let skipTimer = 5;
-            skipBtn.textContent = `تێپەڕاندنی ڕیکلام (${skipTimer}s)`;
-            
-            const skipInterval = setInterval(() => {
-                skipTimer--;
-                skipBtn.textContent = `تێپەڕاندنی ڕیکلام (${skipTimer}s)`;
-                
-                if (skipTimer <= 0) {
-                    clearInterval(skipInterval);
-                    hideAd();
-                }
-            }, 1000);
-        }
-        
-        function hideAd() {
-            document.getElementById('ad-container').style.display = 'none';
-            document.getElementById('ad-video').pause();
-        }
-
-        /**
-         * ==========================================
-         * 8. GAME LOGIC (Updated for Firebase)
-         * ==========================================
-         */
+        // Game functions
         const Game = {
-            data: {
-                score: 0,
-                qIndex: 0,
-                questions: [],
-                timer: null,
-                isPaused: false,
-                activePowerups: []
-            },
-            
-            questionsDB: [], // Will be loaded from Firebase
-            
-            async init() {
-                // Check if game is available
-                const now = new Date();
-                const [targetHour, targetMinute] = Countdown.gameStartTime.split(':').map(Number);
-                let targetTime = new Date();
-                targetTime.setHours(targetHour, targetMinute, 0, 0);
-                
-                if (now < targetTime) {
-                    alert(`یاری تەنها لە کاتژمێر ${Countdown.gameStartTime} دەست پێدەکات!`);
-                    return;
-                }
-                
-                UI.nav('screen-game');
-                this.data.score = 0;
-                this.data.qIndex = 0;
-                this.data.activePowerups = [];
-                
-                // Use questions from Firebase or fallback to local
-                if (this.questionsDB.length > 0) {
-                    this.data.questions = [...this.questionsDB].sort(() => 0.5 - Math.random()).slice(0, 10);
-                } else {
-                    // Fallback to local questions
-                    this.data.questions = [...localDB].sort(() => 0.5 - Math.random()).slice(0, 10);
-                }
-                
-                document.querySelectorAll('.p-item').forEach(b => b.classList.remove('disabled'));
-                this.nextQuestion();
-            },
-            
-            nextQuestion() {
-                if (this.data.qIndex >= this.data.questions.length) {
-                    this.gameOver(true);
-                    return;
-                }
-
-                const q = this.data.questions[this.data.qIndex];
-                
-                document.getElementById('game-score').innerText = this.data.score;
-                document.getElementById('question-text').innerText = q.q;
-                
-                const grid = document.getElementById('answers-grid');
-                grid.innerHTML = '';
-                
-                q.a.forEach((ansText, i) => {
-                    const btn = document.createElement('button');
-                    btn.className = 'btn btn-game';
-                    btn.innerHTML = `<span>${ansText}</span> <i class="far fa-circle"></i>`;
-                    btn.onclick = () => this.checkAnswer(i, btn);
-                    grid.appendChild(btn);
-                });
-
-                this.startTimer();
-            },
-            
-            startTimer() {
-                clearTimeout(this.data.timer);
-                const bar = document.getElementById('timer-bar');
-                
-                bar.style.transition = 'none';
-                bar.style.width = '100%';
-                void bar.offsetWidth;
-                bar.style.transition = 'width 15s linear';
-                bar.style.width = '0%';
-
-                this.data.timer = setTimeout(() => {
-                    this.checkAnswer(-1, null);
-                }, 15000);
-            },
-            
-            checkAnswer(selectedIndex, btnElement) {
-                clearTimeout(this.data.timer);
-                const buttons = document.querySelectorAll('.btn-game');
-                buttons.forEach(b => b.disabled = true);
-
-                const correctIndex = this.data.questions[this.data.qIndex].c;
-                const isCorrect = (selectedIndex === correctIndex);
-
-                if (isCorrect) {
-                    AudioSys.play('correct');
-                    btnElement.classList.add('correct');
-                    btnElement.querySelector('i').className = 'fas fa-check-circle';
-                    
-                    const timeBonus = parseInt(document.getElementById('timer-bar').offsetWidth / 2);
-                    this.data.score += (100 + timeBonus);
-                } else {
-                    AudioSys.play('wrong');
-                    if (btnElement) {
-                        btnElement.classList.add('wrong');
-                        btnElement.querySelector('i').className = 'fas fa-times-circle';
-                    }
-                    buttons[correctIndex].classList.add('correct');
-                    buttons[correctIndex].querySelector('i').className = 'fas fa-check-circle';
-                }
-
-                setTimeout(() => {
-                    this.data.qIndex++;
-                    this.nextQuestion();
-                }, 1500);
-            },
-            
-            usePowerup(type) {
-                const btn = document.getElementById(`pu-${type}`);
-                if (btn.classList.contains('disabled')) return;
-
-                const costs = { '5050': 20, 'time': 15, 'skip': 30 };
-                const cost = costs[type];
-
-                if (User.state.coins < cost) {
-                    alert("پارەی پێویستت نییە!");
-                    return;
-                }
-
-                User.addCoins(-cost);
-                btn.classList.add('disabled');
-                AudioSys.play('click');
-
-                if (type === '5050') {
-                    const correct = this.data.questions[this.data.qIndex].c;
-                    const buttons = document.querySelectorAll('.btn-game');
-                    let removed = 0;
-                    buttons.forEach((b, i) => {
-                        if (i !== correct && removed < 2) {
-                            b.style.visibility = 'hidden';
-                            removed++;
-                        }
-                    });
-                } 
-                else if (type === 'time') {
-                    this.startTimer();
-                } 
-                else if (type === 'skip') {
-                    clearTimeout(this.data.timer);
-                    this.data.qIndex++;
-                    this.nextQuestion();
-                }
-            },
-            
-            pause() {
-                alert("یاری وەستا. کلیک بکە بۆ بەردەوامبوون.");
-            },
-            
-            gameOver(completed) {
-                const modal = document.getElementById('modal-result');
-                const title = document.getElementById('res-title');
-                
-                if (completed) {
-                    title.innerText = "سەرکەوتن!";
-                    AudioSys.play('win');
-                } else {
-                    title.innerText = "یاری تەواو!";
-                    AudioSys.play('wrong');
-                }
-
-                // Calculate Rewards
-                const coinsEarned = Math.floor(this.data.score / 10);
-                const xpEarned = Math.floor(this.data.score / 2);
-
-                document.getElementById('res-score').innerText = this.data.score;
-                document.getElementById('res-coins').innerText = "+" + coinsEarned;
-                document.getElementById('res-xp').innerText = "+" + xpEarned + " XP";
-
-                // Update User Data
-                if (this.data.score > User.state.highScore) {
-                    User.state.highScore = this.data.score;
-                }
-                User.state.gamesPlayed++;
-                User.addCoins(coinsEarned);
-                User.addXP(xpEarned);
-
-                modal.classList.add('open');
+            start() {
+                alert("یاریەکە دەست پێدەکات! بەختێکی باش!");
+                // Here you would start the actual game
             }
         };
 
-        /**
-         * ==========================================
-         * 9. UI CONTROLLER
-         * ==========================================
-         */
-        const UI = {
-            nav(screenId) {
-                AudioSys.play('click');
-                document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-                document.getElementById(screenId).classList.add('active');
-            },
-
-            toggleSettings() {
-                alert("⚙️ ڕێکخستنەکان:\n- دەنگ: چالاکە\n- وەشان: 2.0 Super Ultra\n- Firebase: چالاکە");
-            },
-
-            closeModal() {
-                document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('open'));
-            }
-        };
-
-        /**
-         * ==========================================
-         * 10. AUDIO SYSTEM
-         * ==========================================
-         */
-        const AudioSys = {
-            ctx: null,
-            init() {
-                if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)();
-            },
-            play(type) {
-                if (!this.ctx) this.init();
-                if (this.ctx.state === 'suspended') this.ctx.resume();
-
-                const osc = this.ctx.createOscillator();
-                const gain = this.ctx.createGain();
-                osc.connect(gain);
-                gain.connect(this.ctx.destination);
-
-                const now = this.ctx.currentTime;
-
-                if (type === 'click') {
-                    osc.type = 'sine';
-                    osc.frequency.setValueAtTime(800, now);
-                    osc.frequency.exponentialRampToValueAtTime(300, now + 0.1);
-                    gain.gain.setValueAtTime(0.1, now);
-                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
-                    osc.start(now); osc.stop(now + 0.1);
-                } 
-                else if (type === 'correct') {
-                    osc.type = 'triangle';
-                    osc.frequency.setValueAtTime(600, now);
-                    osc.frequency.linearRampToValueAtTime(1200, now + 0.1);
-                    gain.gain.setValueAtTime(0, now);
-                    gain.gain.linearRampToValueAtTime(0.2, now + 0.05);
-                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.4);
-                    osc.start(now); osc.stop(now + 0.4);
-                } 
-                else if (type === 'wrong') {
-                    osc.type = 'sawtooth';
-                    osc.frequency.setValueAtTime(150, now);
-                    osc.frequency.linearRampToValueAtTime(100, now + 0.3);
-                    gain.gain.setValueAtTime(0.2, now);
-                    gain.gain.linearRampToValueAtTime(0, now + 0.3);
-                    osc.start(now); osc.stop(now + 0.3);
-                }
-                else if (type === 'win') {
-                    osc.type = 'square';
-                    osc.frequency.setValueAtTime(440, now);
-                    osc.frequency.setValueAtTime(554, now + 0.1);
-                    osc.frequency.setValueAtTime(659, now + 0.2);
-                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.6);
-                    osc.start(now); osc.stop(now + 0.6);
-                }
-            }
-        };
-
-        /**
-         * ==========================================
-         * 11. LOCAL QUESTION DATABASE (Fallback)
-         * ==========================================
-         */
-        const localDB = [
-            { q: "پایتەختی وڵاتی ژاپۆن کوێیە؟", a: ["تۆکیۆ", "ئۆساکا", "کیۆتۆ", "سیۆل"], c: 0 },
-            { q: "خێرایی ڕووناکی چەندە لە چرکەیەکدا؟", a: ["٣٠٠ هەزار کم", "١٥٠ هەزار کم", "١ ملیۆن کم", "٣٤٠ مەتـر"], c: 0 },
-            { q: "کێ خاوەنی کۆمپانیای تێسلا و سپەیس ئێکسە؟", a: ["جێف بێزۆس", "ئیلۆن مەسک", "بیل گەیتس", "مارک زوکەربێرگ"], c: 1 },
-            { q: "یەکەم ڕۆژنامەی کوردی چی بوو؟", a: ["خەبات", "کوردستان", "ژین", "هاواری کورد"], c: 1 },
-            { q: "گەورەترین کیشوەری جیهان کامەیە؟", a: ["ئەفریقا", "ئەمریکای باکور", "ئاسیا", "ئەورووپا"], c: 2 },
-            { q: "توخمە کیمیایی O هێمایە بۆ چی؟", a: ["زێڕ", "ئۆکسجین", "ئاسن", "زیوە"], c: 1 },
-            { q: "ژمارەی دڵەکانی ئەختەبووت (Octopus) چەندە؟", a: ["١", "٢", "٣", "٤"], c: 2 },
-            { q: "کامەیان سیستەمی وەگەڕخەری مۆبایل نییە؟", a: ["Android", "iOS", "Windows", "HTML"], c: 3 },
-            { q: "بەرزترین لوتکە چیای کوردستان؟", a: ["پیرەمەگرون", "هەڵگورد", "سەفین", "کۆڕەک"], c: 1 },
-            { q: "داهێنەری تۆڕی جیهانی (WWW) کێیە؟", a: ["تیم بێرنەرز لی", "ستیڤ جۆبس", "ئالان تورینگ", "تۆماس ئەدیسۆن"], c: 0 },
-            { q: "کام هەسارە بە 'هەسارەی سوور' ناسراوە؟", a: ["موستەری", "مەریخ", "زوحەل", "عەتارد"], c: 1 },
-            { q: "ساڵی ٢٠٢٤ ساڵی چ ئاژەڵێکە لە ڕۆژمێری چینی؟", a: ["مار", "ئەژدیها", "مەیمون", "پڵنگ"], c: 1 },
-            { q: "کۆمپیوتەر تەنها لە چ دوو ژمارەیەک تێدەگات؟", a: ["1 و 2", "0 و 1", "0 و 9", "A و B"], c: 1 },
-            { q: "چەند % ی جەستەی مرۆڤ لە ئاو پێکهاتووە؟", a: ["٣٠٪", "٥٠٪", "٦٠-٧٠٪", "٩٠٪"], c: 2 },
-            { q: "قووڵترین خاڵ لە زەریادا ناوی چییە؟", a: ["ماریانا", "بەرمۆدا", "ئەتڵەسی", "پاسێفیک"], c: 0 }
-        ];
-
-        /**
-         * ==========================================
-         * 12. INITIALIZATION
-         * ==========================================
-         */
-        window.onload = async () => {
-            // Remove loading screen
-            setTimeout(() => {
-                const loader = document.getElementById('loader-overlay');
-                loader.style.opacity = '0';
-                loader.style.visibility = 'hidden';
-            }, 2000);
-
-            // Initialize countdown system
-            Countdown.init();
+        // Initialize on load
+        window.onload = function() {
+            createParticles();
             
-            // Auto login as guest for demo
-            // Comment this out for real authentication
-            setTimeout(() => {
-                Auth.guestLogin();
-            }, 2500);
+            // Set progress circles
+            document.querySelectorAll('.progress-bar').forEach(bar => {
+                const percent = parseInt(bar.style.strokeDashoffset) / 314 * 100;
+                bar.style.strokeDashoffset = 314 - (percent / 100 * 314);
+            });
         };
     </script>
 </body>
