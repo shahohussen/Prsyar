@@ -2,1475 +2,910 @@
 <html lang="ckb" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#090014">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>SURVIVOR ULTRA | PRO EDITION</title>
+    <title>SURVIVOR ULTRA | FAST EDITION</title>
     
+    <!-- Remove heavy libraries -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rudaw:wght@400;700;900&family=Noto+Sans+Arabic:wght@300;400;500;700;800&display=swap" rel="stylesheet">
     
     <style>
-        /* ==================== 1. SUPER ULTRA DESIGN SYSTEM ==================== */
+        /* ==================== 1. ULTRA LIGHT DESIGN ==================== */
         :root {
-            /* Galactic Palette */
-            --cosmic-black: #05000a;
-            --nebula-purple: #1a0033;
-            --star-dust: rgba(255, 255, 255, 0.1);
-            --black-hole: rgba(0, 0, 0, 0.8);
-            
-            /* Neon Spectrum */
-            --quantum-blue: #00f3ff;
-            --cyber-purple: #bc13fe;
-            --plasma-pink: #ff0055;
-            --supernova-gold: #ffd700;
-            --quantum-green: #00ff9d;
-            --nova-orange: #ff5e00;
-            
-            /* Holographic Gradients */
-            --hologram-purple: linear-gradient(135deg, var(--cyber-purple), var(--quantum-blue));
-            --hologram-fire: linear-gradient(135deg, var(--plasma-pink), var(--nova-orange));
-            --hologram-gold: linear-gradient(135deg, var(--supernova-gold), #ffaa00);
-            --hologram-matrix: linear-gradient(135deg, #00ff00, #003300);
-            
-            /* Quantum Glass */
-            --quantum-glass: linear-gradient(145deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
-            --quantum-border: rgba(255, 255, 255, 0.15);
-            
-            /* Typography */
-            --font-kurdish: 'Noto Sans Arabic', sans-serif;
-            --font-tech: 'Orbitron', sans-serif;
-            
-            /* Quantum Effects */
-            --quantum-glow: 0 0 30px rgba(188, 19, 254, 0.4);
-            --deep-shadow: 0 15px 50px rgba(0,0,0,0.7);
-            --float-effect: translateY(-5px);
+            /* Simplified Color Palette */
+            --bg: #05000a;
+            --card: rgba(20, 20, 35, 0.9);
+            --border: rgba(255, 255, 255, 0.1);
+            --primary: #00f3ff;
+            --secondary: #bc13fe;
+            --accent: #ff0055;
+            --gold: #ffd700;
+            --success: #00ff9d;
+            --font: system-ui, -apple-system, sans-serif;
         }
 
-        /* ==================== 2. QUANTUM RESET ==================== */
+        /* ==================== 2. MINIMAL RESET ==================== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
-            user-select: none;
         }
 
         body {
-            background-color: var(--cosmic-black);
+            background: var(--bg);
             color: white;
-            font-family: var(--font-kurdish);
-            height: 100vh;
-            width: 100vw;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
+            font-family: var(--font);
+            min-height: 100vh;
+            overflow-x: hidden;
             position: relative;
         }
 
-        /* ==================== 3. QUANTUM UNIVERSE BACKGROUND ==================== */
-        .quantum-universe {
+        /* Remove heavy background effects */
+        .bg-overlay {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, #0a0015, #1a0025);
             z-index: -1;
-            overflow: hidden;
-            background: 
-                radial-gradient(circle at 20% 30%, var(--nebula-purple) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(255, 0, 85, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 40% 80%, rgba(0, 243, 255, 0.1) 0%, transparent 50%);
         }
 
-        .quantum-grid {
-            position: absolute;
-            width: 200%; height: 200%;
-            top: -50%; left: -50%;
-            background-image: 
-                linear-gradient(var(--quantum-blue) 1px, transparent 1px),
-                linear-gradient(90deg, var(--quantum-blue) 1px, transparent 1px);
-            background-size: 80px 80px;
-            background-position: 0 0;
-            opacity: 0.1;
-            animation: quantumFlow 30s linear infinite;
+        /* ==================== 3. FAST SCREENS ==================== */
+        .screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding: 20px;
+            overflow-y: auto;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            background: var(--bg);
+            z-index: 10;
         }
 
-        @keyframes quantumFlow {
-            0% { transform: translateX(0) translateY(0); }
-            100% { transform: translateX(40px) translateY(40px); }
+        .screen.active {
+            transform: translateX(0);
         }
 
-        .quantum-particle {
-            position: absolute;
-            width: 3px; height: 3px;
-            background: var(--quantum-blue);
-            border-radius: 50%;
-            filter: blur(1px);
-            animation: particleFloat 20s linear infinite;
+        /* ==================== 4. OPTIMIZED CARDS ==================== */
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(5px);
         }
 
-        @keyframes particleFloat {
-            0% { transform: translateY(100vh) translateX(0); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-100px) translateX(100px); opacity: 0; }
-        }
-
-        /* ==================== 4. SUPER ULTRA BUTTONS ==================== */
-        .quantum-btn {
-            position: relative;
-            border: none;
-            background: var(--quantum-glass);
-            backdrop-filter: blur(20px);
-            border: 2px solid var(--quantum-border);
-            color: white;
-            padding: 18px 28px;
-            border-radius: 20px;
-            font-family: var(--font-kurdish);
-            font-weight: 700;
-            font-size: 1.1rem;
-            cursor: pointer;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        /* ==================== 5. FAST BUTTONS ==================== */
+        .btn {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 15px;
-            box-shadow: var(--quantum-glow);
-        }
-
-        .quantum-btn::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-            transition: left 0.6s;
-        }
-
-        .quantum-btn:hover::before {
-            left: 100%;
-        }
-
-        .quantum-btn:hover {
-            transform: var(--float-effect);
-            box-shadow: 0 0 40px rgba(188, 19, 254, 0.6);
-            border-color: var(--cyber-purple);
-        }
-
-        .quantum-btn:active {
-            transform: scale(0.95);
-        }
-
-        .quantum-btn-primary {
-            background: var(--hologram-purple);
-            border: none;
-            font-size: 1.2rem;
-            padding: 20px 32px;
-        }
-
-        .quantum-btn-secondary {
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px solid var(--quantum-blue);
-        }
-
-        .quantum-btn-danger {
-            background: var(--hologram-fire);
-            border: none;
-        }
-
-        .quantum-btn-success {
-            background: var(--hologram-matrix);
-            border: none;
-        }
-
-        /* ==================== 5. QUANTUM CARDS ==================== */
-        .quantum-card {
-            background: var(--quantum-glass);
-            backdrop-filter: blur(25px);
-            border: 2px solid var(--quantum-border);
-            border-radius: 28px;
-            padding: 28px;
-            box-shadow: var(--deep-shadow);
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s ease;
-        }
-
-        .quantum-card::after {
-            content: '';
-            position: absolute;
-            top: -2px; left: -2px;
-            right: -2px; bottom: -2px;
-            background: var(--hologram-purple);
-            border-radius: 30px;
-            z-index: -1;
-            opacity: 0;
-            transition: opacity 0.4s;
-        }
-
-        .quantum-card:hover::after {
-            opacity: 0.3;
-        }
-
-        .quantum-card:hover {
-            transform: var(--float-effect);
-            border-color: var(--cyber-purple);
-        }
-
-        /* ==================== 6. PROFILE SCREEN SUPER DESIGN ==================== */
-        #screen-profile {
-            background: rgba(5, 0, 10, 0.95);
-        }
-
-        .profile-header {
-            position: relative;
-            padding: 40px 30px 30px;
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .profile-avatar-container {
-            width: 160px;
-            height: 160px;
-            margin: 0 auto 25px;
-            position: relative;
-            cursor: pointer;
-        }
-
-        .profile-avatar {
-            width: 100%;
-            height: 100%;
-            background: var(--hologram-purple);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4.5rem;
-            box-shadow: 0 0 50px var(--cyber-purple);
-            border: 4px solid var(--quantum-blue);
-            transition: all 0.4s;
-        }
-
-        .profile-avatar:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 70px var(--cyber-purple);
-        }
-
-        .avatar-edit-btn {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            width: 45px;
-            height: 45px;
-            background: var(--hologram-fire);
-            border: none;
-            border-radius: 50%;
-            color: white;
-            font-size: 1.2rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s;
-        }
-
-        .avatar-edit-btn:hover {
-            transform: scale(1.1) rotate(15deg);
-        }
-
-        .profile-name {
-            font-family: var(--font-tech);
-            font-size: 2.5rem;
-            font-weight: 900;
-            margin-bottom: 15px;
-            background: linear-gradient(to right, var(--quantum-blue), var(--cyber-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .profile-badges {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-
-        .profile-badge {
-            background: rgba(0, 243, 255, 0.1);
-            border: 2px solid var(--quantum-blue);
-            padding: 12px 25px;
-            border-radius: 50px;
-            font-family: var(--font-tech);
-            font-size: 1.1rem;
-            display: flex;
-            align-items: center;
             gap: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--border);
+            color: white;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            width: 100%;
+            margin-bottom: 12px;
         }
 
-        .profile-badge.gold {
-            background: rgba(255, 215, 0, 0.1);
-            border-color: var(--supernova-gold);
-            color: var(--supernova-gold);
+        .btn:active {
+            transform: scale(0.98);
         }
 
-        .stats-container {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            margin-bottom: 30px;
+        .btn-primary {
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            border: none;
         }
 
-        .stat-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 25px;
-            text-align: center;
-            transition: all 0.3s;
+        .btn-secondary {
+            background: rgba(0, 243, 255, 0.1);
+            border-color: var(--primary);
         }
 
-        .stat-card:hover {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: var(--quantum-blue);
+        .btn-danger {
+            background: rgba(255, 0, 85, 0.1);
+            border-color: var(--accent);
+            color: var(--accent);
         }
 
-        .stat-value {
-            font-family: var(--font-tech);
-            font-size: 2.8rem;
-            font-weight: 900;
-            margin: 10px 0;
-            color: var(--quantum-blue);
-        }
-
-        .stat-label {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.95rem;
-        }
-
-        .progress-ring {
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 20px;
-        }
-
-        .progress-circle {
-            transform: rotate(-90deg);
-            transform-origin: 50% 50%;
-        }
-
-        .progress-bg {
-            fill: none;
-            stroke: rgba(255, 255, 255, 0.1);
-            stroke-width: 10;
-        }
-
-        .progress-bar {
-            fill: none;
-            stroke: var(--hologram-purple);
-            stroke-width: 10;
-            stroke-linecap: round;
-            stroke-dasharray: 314;
-            stroke-dashoffset: 314;
-            transition: stroke-dashoffset 1s ease;
-        }
-
-        .profile-actions {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            margin-top: 30px;
-        }
-
-        /* ==================== 7. ADMIN SCREEN SUPER DESIGN ==================== */
-        #screen-admin {
-            background: rgba(10, 0, 20, 0.98);
-        }
-
-        .admin-header {
+        /* ==================== 6. HEADER BAR ==================== */
+        .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
-            padding: 20px;
-            background: rgba(255, 0, 85, 0.1);
-            border-radius: 25px;
-            border: 2px solid var(--plasma-pink);
+            padding: 15px 0;
+            margin-bottom: 20px;
         }
 
-        .admin-title {
-            font-family: var(--font-tech);
-            font-size: 2.2rem;
-            background: var(--hologram-fire);
+        .header-title {
+            font-size: 24px;
+            font-weight: bold;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .admin-nav {
+        .header-stats {
             display: flex;
-            gap: 15px;
-            margin-bottom: 30px;
+            gap: 10px;
         }
 
-        .admin-nav-btn {
-            flex: 1;
-            padding: 18px;
-            text-align: center;
-            border-radius: 18px;
+        .stat-badge {
             background: rgba(255, 255, 255, 0.05);
-            border: 2px solid transparent;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-family: var(--font-kurdish);
-            font-weight: 700;
+            border: 1px solid var(--primary);
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
-        .admin-nav-btn.active {
-            background: rgba(255, 0, 85, 0.15);
-            border-color: var(--plasma-pink);
-            color: var(--plasma-pink);
+        /* ==================== 7. NAVIGATION BAR ==================== */
+        .nav-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--card);
+            border-top: 1px solid var(--border);
+            display: flex;
+            padding: 10px;
+            z-index: 100;
+            backdrop-filter: blur(10px);
         }
 
-        .admin-section {
-            display: none;
-            animation: fadeIn 0.5s;
+        .nav-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 8px;
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: none;
+            font-size: 12px;
+            transition: all 0.2s;
         }
 
-        .admin-section.active {
-            display: block;
+        .nav-item.active {
+            color: var(--primary);
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .nav-item i {
+            font-size: 20px;
+            margin-bottom: 4px;
         }
 
-        .admin-card-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
+        /* ==================== 8. HOME SCREEN OPTIMIZED ==================== */
+        .hero-section {
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .hero-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .hero-title {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .hero-subtitle {
+            color: rgba(255, 255, 255, 0.6);
             margin-bottom: 30px;
         }
 
-        .admin-feature-card {
-            background: rgba(0, 243, 255, 0.05);
-            border: 2px solid var(--quantum-blue);
-            border-radius: 25px;
-            padding: 30px;
+        /* ==================== 9. PROFILE SCREEN OPTIMIZED ==================== */
+        .profile-header {
+            text-align: center;
+            padding: 30px 0;
+        }
+
+        .avatar {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+        }
+
+        .profile-name {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .profile-level {
+            background: rgba(0, 243, 255, 0.1);
+            border: 1px solid var(--primary);
+            padding: 8px 20px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 5px 0;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* ==================== 10. ADMIN SCREEN OPTIMIZED ==================== */
+        .admin-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .admin-card {
+            background: rgba(255, 0, 85, 0.05);
+            border: 1px solid var(--accent);
+            border-radius: 12px;
+            padding: 20px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.4s;
         }
 
-        .admin-feature-card:hover {
-            transform: var(--float-effect);
-            background: rgba(0, 243, 255, 0.1);
-            box-shadow: 0 0 40px rgba(0, 243, 255, 0.3);
+        .admin-icon {
+            font-size: 30px;
+            color: var(--accent);
+            margin-bottom: 10px;
         }
 
-        .admin-feature-icon {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            color: var(--quantum-blue);
-        }
-
-        .admin-form {
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 25px;
-            padding: 30px;
-            margin-top: 25px;
+        .admin-title {
+            font-size: 16px;
+            font-weight: 600;
         }
 
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
         .form-label {
             display: block;
-            margin-bottom: 12px;
-            color: var(--quantum-blue);
-            font-family: var(--font-tech);
-            font-size: 1.1rem;
+            margin-bottom: 8px;
+            color: rgba(255, 255, 255, 0.8);
         }
 
         .form-input {
             width: 100%;
-            padding: 18px;
+            padding: 14px;
             background: rgba(255, 255, 255, 0.05);
-            border: 2px solid var(--quantum-border);
-            border-radius: 15px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
             color: white;
-            font-family: var(--font-kurdish);
-            font-size: 1.1rem;
-            transition: all 0.3s;
+            font-size: 16px;
         }
 
         .form-input:focus {
             outline: none;
-            border-color: var(--quantum-blue);
-            background: rgba(0, 243, 255, 0.05);
+            border-color: var(--primary);
         }
 
-        .admin-table {
-            width: 100%;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 20px;
-            overflow: hidden;
-        }
-
-        .table-header {
-            background: rgba(0, 243, 255, 0.1);
-            padding: 20px;
-            font-family: var(--font-tech);
-            font-size: 1.2rem;
-            color: var(--quantum-blue);
-        }
-
-        .table-row {
-            display: flex;
-            padding: 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            align-items: center;
-        }
-
-        .table-row:last-child {
-            border-bottom: none;
-        }
-
-        .table-cell {
-            flex: 1;
-            padding: 10px;
-        }
-
-        /* ==================== 8. SHOP SCREEN SUPER DESIGN ==================== */
-        #screen-shop {
-            background: rgba(5, 0, 10, 0.95);
-        }
-
+        /* ==================== 11. SHOP SCREEN OPTIMIZED ==================== */
         .shop-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
-            padding: 25px;
-            background: rgba(255, 215, 0, 0.1);
-            border-radius: 25px;
-            border: 2px solid var(--supernova-gold);
-        }
-
-        .shop-title {
-            font-family: var(--font-tech);
-            font-size: 2.5rem;
-            background: var(--hologram-gold);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
         }
 
         .shop-balance {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            background: rgba(0, 0, 0, 0.5);
-            padding: 15px 25px;
-            border-radius: 50px;
-            border: 2px solid var(--supernova-gold);
-        }
-
-        .shop-coins {
-            font-family: var(--font-tech);
-            font-size: 2rem;
-            font-weight: 900;
-            color: var(--supernova-gold);
-        }
-
-        .shop-categories {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 30px;
-            overflow-x: auto;
-            padding-bottom: 15px;
-        }
-
-        .shop-category {
-            padding: 15px 30px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px solid transparent;
-            border-radius: 50px;
-            cursor: pointer;
-            white-space: nowrap;
-            transition: all 0.3s;
-            font-family: var(--font-kurdish);
-            font-weight: 700;
-        }
-
-        .shop-category.active {
-            background: rgba(0, 243, 255, 0.15);
-            border-color: var(--quantum-blue);
-            color: var(--quantum-blue);
-        }
-
-        .shop-items-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
-            padding-bottom: 30px;
-        }
-
-        .shop-item-card {
-            background: var(--quantum-glass);
-            border: 2px solid var(--quantum-border);
-            border-radius: 25px;
-            overflow: hidden;
-            transition: all 0.4s;
-            position: relative;
-        }
-
-        .shop-item-card.featured {
-            border-color: var(--supernova-gold);
-            box-shadow: 0 0 40px rgba(255, 215, 0, 0.3);
-        }
-
-        .shop-item-card:hover {
-            transform: var(--float-effect);
-            border-color: var(--cyber-purple);
-            box-shadow: 0 0 50px rgba(188, 19, 254, 0.4);
-        }
-
-        .item-featured-badge {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: var(--hologram-gold);
-            color: black;
-            padding: 8px 15px;
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid var(--gold);
+            padding: 10px 20px;
             border-radius: 20px;
-            font-family: var(--font-tech);
-            font-weight: 700;
-            font-size: 0.9rem;
-            z-index: 2;
-        }
-
-        .item-image {
-            width: 100%;
-            height: 180px;
-            background: var(--hologram-purple);
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 4rem;
+            gap: 8px;
         }
 
-        .item-content {
-            padding: 25px;
+        .shop-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .shop-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .shop-item.featured {
+            border-color: var(--gold);
+            background: rgba(255, 215, 0, 0.05);
+        }
+
+        .item-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
         }
 
         .item-name {
-            font-family: var(--font-tech);
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-            color: var(--quantum-blue);
-        }
-
-        .item-description {
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
-
-        .item-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 20px;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 5px;
         }
 
         .item-price {
-            font-family: var(--font-tech);
-            font-size: 1.8rem;
-            color: var(--supernova-gold);
+            color: var(--gold);
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        /* ==================== 12. GAME SCREEN OPTIMIZED ==================== */
+        .game-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .game-score {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .timer {
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .timer-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), #ff5e00);
+            width: 100%;
+            transition: width 0.1s linear;
+        }
+
+        .question-card {
+            min-height: 120px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            justify-content: center;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 18px;
+            line-height: 1.4;
         }
 
-        .item-stats {
+        .answers-grid {
+            display: grid;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .answer-btn {
+            text-align: right;
+            justify-content: space-between;
+        }
+
+        .answer-btn.correct {
+            background: rgba(0, 255, 157, 0.1);
+            border-color: var(--success);
+            color: var(--success);
+        }
+
+        .answer-btn.wrong {
+            background: rgba(255, 0, 85, 0.1);
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .powerups {
             display: flex;
-            gap: 20px;
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
         }
 
-        .item-stat {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        /* ==================== 9. NAVIGATION SUPER DESIGN ==================== */
-        .quantum-navbar {
-            position: fixed;
-            bottom: 25px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(5, 0, 10, 0.9);
-            backdrop-filter: blur(20px);
-            border: 2px solid var(--quantum-border);
-            border-radius: 25px;
-            padding: 15px;
-            z-index: 1000;
-            display: flex;
-            gap: 10px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-        }
-
-        .nav-btn {
-            width: 70px;
-            height: 70px;
+        .powerup-btn {
+            width: 60px;
+            height: 60px;
             background: rgba(255, 255, 255, 0.05);
-            border: 2px solid transparent;
-            border-radius: 20px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            font-size: 20px;
             cursor: pointer;
-            transition: all 0.3s;
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
         }
 
-        .nav-btn i {
-            font-size: 1.5rem;
+        .powerup-label {
+            font-size: 10px;
+            margin-top: 4px;
+            color: rgba(255, 255, 255, 0.6);
         }
 
-        .nav-btn span {
-            font-size: 0.8rem;
-            font-family: var(--font-kurdish);
-        }
-
-        .nav-btn:hover {
-            background: rgba(0, 243, 255, 0.1);
-            border-color: var(--quantum-blue);
-            color: var(--quantum-blue);
-            transform: translateY(-5px);
-        }
-
-        .nav-btn.active {
-            background: var(--hologram-purple);
-            border-color: var(--cyber-purple);
-            color: white;
-            box-shadow: 0 0 30px rgba(188, 19, 254, 0.5);
-        }
-
-        /* ==================== 10. MODALS & OVERLAYS ==================== */
-        .quantum-modal {
+        /* ==================== 13. MODAL ==================== */
+        .modal {
             position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
             background: rgba(5, 0, 10, 0.95);
-            backdrop-filter: blur(20px);
-            z-index: 2000;
-            display: flex;
+            display: none;
             align-items: center;
             justify-content: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.4s;
+            z-index: 1000;
         }
 
-        .quantum-modal.active {
-            opacity: 1;
-            pointer-events: all;
+        .modal.active {
+            display: flex;
         }
 
         .modal-content {
-            background: var(--quantum-glass);
-            border: 2px solid var(--quantum-border);
-            border-radius: 30px;
-            padding: 40px;
-            max-width: 500px;
-            width: 90%;
-            transform: scale(0.9);
-            transition: transform 0.4s;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
-        }
-
-        .quantum-modal.active .modal-content {
-            transform: scale(1);
-        }
-
-        /* ==================== 11. UTILITY CLASSES ==================== */
-        .screen {
-            position: absolute;
-            inset: 0;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
             padding: 30px;
-            overflow-y: auto;
-            opacity: 0;
-            pointer-events: none;
-            transform: translateY(30px);
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            max-width: 90%;
+            width: 400px;
+            text-align: center;
         }
 
-        .screen.active {
-            opacity: 1;
-            pointer-events: all;
-            transform: translateY(0);
-            z-index: 100;
+        /* ==================== 14. RESPONSIVE DESIGN ==================== */
+        @media (max-width: 480px) {
+            .screen {
+                padding: 15px;
+            }
+            
+            .hero-title {
+                font-size: 28px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .admin-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .shop-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .btn {
+                padding: 14px;
+                font-size: 15px;
+            }
+            
+            .card {
+                padding: 15px;
+            }
         }
 
-        .text-gradient {
-            background: var(--hologram-purple);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        @media (min-width: 768px) {
+            .screen {
+                max-width: 500px;
+                margin: 0 auto;
+                left: 50%;
+                transform: translateX(100%) translateX(-50%);
+            }
+            
+            .screen.active {
+                transform: translateX(0) translateX(-50%);
+            }
+            
+            .nav-bar {
+                max-width: 500px;
+                left: 50%;
+                transform: translateX(-50%);
+            }
         }
 
-        .neon-text {
-            text-shadow: 0 0 10px currentColor;
+        /* ==================== 15. LOADING ==================== */
+        #loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--bg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.3s;
         }
 
-        .pulse-animation {
-            animation: pulse 2s infinite;
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
         }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
-        }
-
-        /* ==================== 12. SCROLLBAR DESIGN ==================== */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--hologram-purple);
-            border-radius: 10px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--cyber-purple);
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
     </style>
 </head>
 <body>
-    <!-- Quantum Universe Background -->
-    <div class="quantum-universe">
-        <div class="quantum-grid"></div>
-        <div id="quantum-particles"></div>
+    <!-- Simple Background -->
+    <div class="bg-overlay"></div>
+
+    <!-- Loading Screen -->
+    <div id="loading">
+        <div class="spinner"></div>
+        <div style="margin-top: 20px; color: rgba(255,255,255,0.6);">بارکردن...</div>
     </div>
 
     <!-- Navigation Bar -->
-    <div class="quantum-navbar">
-        <a href="#" class="nav-btn active" onclick="showScreen('home')">
+    <div class="nav-bar">
+        <a href="#" class="nav-item active" onclick="showScreen('home')">
             <i class="fas fa-home"></i>
-            <span>سەرەکی</span>
+            سەرەکی
         </a>
-        <a href="#" class="nav-btn" onclick="showScreen('profile')">
+        <a href="#" class="nav-item" onclick="showScreen('profile')">
             <i class="fas fa-user"></i>
-            <span>پڕۆفایل</span>
+            پڕۆفایل
         </a>
-        <a href="#" class="nav-btn" onclick="showScreen('shop')">
+        <a href="#" class="nav-item" onclick="showScreen('game')">
+            <i class="fas fa-play"></i>
+            یاری
+        </a>
+        <a href="#" class="nav-item" onclick="showScreen('shop')">
             <i class="fas fa-store"></i>
-            <span>کۆگا</span>
+            کۆگا
         </a>
-        <a href="#" class="nav-btn" onclick="showScreen('admin')">
-            <i class="fas fa-user-shield"></i>
-            <span>ئەدمین</span>
-        </a>
-        <a href="#" class="nav-btn" onclick="showScreen('settings')">
+        <a href="#" class="nav-item" onclick="showScreen('admin')">
             <i class="fas fa-cog"></i>
-            <span>ڕێکخستن</span>
+            ئەدمین
         </a>
     </div>
 
     <!-- Home Screen -->
     <section id="home" class="screen active">
-        <div class="quantum-card" style="margin-bottom: 30px; text-align: center;">
-            <h1 style="font-family: var(--font-tech); font-size: 3.5rem; margin-bottom: 20px;" class="text-gradient">
-                SURVIVOR<br><span style="color: var(--quantum-blue)">ULTRA PRO</span>
-            </h1>
-            <p style="opacity: 0.8; font-size: 1.2rem; margin-bottom: 30px;">بەرنامەی یارییە پڕۆفیشناڵەکەت</p>
-            
-            <div style="display: flex; gap: 20px; justify-content: center;">
-                <div class="quantum-btn quantum-btn-primary" onclick="Game.start()">
-                    <i class="fas fa-play"></i>
-                    دەستپێکردنی یاری
+        <div class="header">
+            <div class="header-title">SURVIVOR</div>
+            <div class="header-stats">
+                <div class="stat-badge">
+                    <i class="fas fa-coins"></i> 1000
                 </div>
-                <div class="quantum-btn quantum-btn-secondary" onclick="showScreen('leaderboard')">
+                <div class="stat-badge">
+                    <i class="fas fa-crown"></i> 5
+                </div>
+            </div>
+        </div>
+
+        <div class="hero-section">
+            <div class="hero-icon">🎮</div>
+            <h1 class="hero-title">SURVIVOR ULTRA</h1>
+            <p class="hero-subtitle">خێراترین یاری زانیاری</p>
+        </div>
+
+        <div class="card">
+            <button class="btn btn-primary" onclick="startGame()">
+                <i class="fas fa-play"></i>
+                دەستپێکردنی یاری
+            </button>
+            
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 20px;">
+                <button class="btn btn-secondary" onclick="showScreen('shop')">
+                    <i class="fas fa-store"></i>
+                    کۆگا
+                </button>
+                <button class="btn btn-secondary" onclick="showScreen('leaderboard')">
                     <i class="fas fa-trophy"></i>
                     پلەبەندی
-                </div>
+                </button>
             </div>
         </div>
 
-        <div class="quantum-card" style="margin-bottom: 30px;">
-            <h2 style="margin-bottom: 25px; color: var(--quantum-blue);">
-                <i class="fas fa-gamepad"></i> یاریەکانی ئەمڕۆ
-            </h2>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
-                <div style="padding: 20px; background: rgba(0, 243, 255, 0.05); border-radius: 20px;">
-                    <h3 style="color: var(--quantum-blue); margin-bottom: 10px;">کاتژمێر 8 شەوانە</h3>
-                    <p style="opacity: 0.7; margin-bottom: 15px;">یاری سەرەکی</p>
-                    <div class="quantum-btn" style="width: 100%;">چوونە ناوەوە</div>
-                </div>
-                <div style="padding: 20px; background: rgba(255, 0, 85, 0.05); border-radius: 20px;">
-                    <h3 style="color: var(--plasma-pink); margin-bottom: 10px;">خێرا</h3>
-                    <p style="opacity: 0.7; margin-bottom: 15px;">10 پرسیاری خێرا</p>
-                    <div class="quantum-btn quantum-btn-danger" style="width: 100%;">دەستپێکردن</div>
-                </div>
+        <div class="card">
+            <h3 style="margin-bottom: 15px;">یاریەکانی ئەمڕۆ</h3>
+            <div class="btn" onclick="startDailyGame()">
+                <span>یاری سەرەکی - کاتژمێر 8</span>
+                <i class="fas fa-arrow-left"></i>
             </div>
-        </div>
-
-        <div class="quantum-card">
-            <h2 style="margin-bottom: 25px; color: var(--supernova-gold);">
-                <i class="fas fa-gem"></i> پێشکەوتنەکانت
-            </h2>
-            <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
-                <div>
-                    <div style="font-size: 2.5rem; color: var(--quantum-blue);">🎯</div>
-                    <div style="font-family: var(--font-tech); font-size: 1.8rem;">1,250</div>
-                    <div style="opacity: 0.7;">خاڵ</div>
-                </div>
-                <div>
-                    <div style="font-size: 2.5rem; color: var(--supernova-gold);">🏆</div>
-                    <div style="font-family: var(--font-tech); font-size: 1.8rem;">15</div>
-                    <div style="opacity: 0.7;">مەدالیایا</div>
-                </div>
-                <div>
-                    <div style="font-size: 2.5rem; color: var(--quantum-green);">⚡</div>
-                    <div style="font-family: var(--font-tech); font-size: 1.8rem;">3</div>
-                    <div style="opacity: 0.7;">ئاست</div>
-                </div>
-                <div>
-                    <div style="font-size: 2.5rem; color: var(--plasma-pink);">🔥</div>
-                    <div style="font-family: var(--font-tech); font-size: 1.8rem;">7</div>
-                    <div style="opacity: 0.7;">ڕیزبەندی</div>
-                </div>
+            <div class="btn" onclick="startQuickGame()">
+                <span>یاری خێرا</span>
+                <i class="fas fa-arrow-left"></i>
             </div>
         </div>
     </section>
 
     <!-- Profile Screen -->
     <section id="profile" class="screen">
+        <div class="header">
+            <button class="btn" onclick="showScreen('home')" style="width: auto; padding: 10px 20px;">
+                <i class="fas fa-arrow-right"></i>
+            </button>
+            <div class="header-title">پڕۆفایل</div>
+            <div style="width: 60px;"></div>
+        </div>
+
         <div class="profile-header">
-            <div class="profile-avatar-container" onclick="changeAvatar()">
-                <div class="profile-avatar">👨‍🚀</div>
-                <button class="avatar-edit-btn">
-                    <i class="fas fa-camera"></i>
-                </button>
-            </div>
-            
-            <h1 class="profile-name" id="user-name">یاریزانێکی پڕۆ</h1>
-            
-            <div class="profile-badges">
-                <div class="profile-badge">
-                    <i class="fas fa-crown"></i>
-                    ئاست ٥
+            <div class="avatar">👤</div>
+            <h2 class="profile-name">یاریزان</h2>
+            <div class="profile-level">ئاست ٥</div>
+        </div>
+
+        <div class="card">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-value">١,٢٥٠</div>
+                    <div class="stat-label">بەرزترین خاڵ</div>
                 </div>
-                <div class="profile-badge gold">
-                    <i class="fas fa-coins"></i>
-                    ٢٥٠٠ سکە
+                <div class="stat-item">
+                    <div class="stat-value">٤٧</div>
+                    <div class="stat-label">یاری</div>
                 </div>
-                <div class="profile-badge">
-                    <i class="fas fa-fire"></i>
-                    ستریک ٧
+                <div class="stat-item">
+                    <div class="stat-value">٩٨٪</div>
+                    <div class="stat-label">وەڵامی ڕاست</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">٢.٥s</div>
+                    <div class="stat-label">کاتی ناوەند</div>
                 </div>
             </div>
         </div>
 
-        <div class="stats-container">
-            <div class="stat-card">
-                <div class="progress-ring">
-                    <svg viewBox="0 0 100 100">
-                        <circle class="progress-bg" cx="50" cy="50" r="45"></circle>
-                        <circle class="progress-bar" cx="50" cy="50" r="45" style="stroke-dashoffset: 157;"></circle>
-                    </svg>
-                </div>
-                <div class="stat-value">٥٠٪</div>
-                <div class="stat-label">پێشکەوتنی ئاست</div>
-            </div>
-
-            <div class="stat-card">
-                <div style="font-size: 3rem; color: var(--plasma-pink); margin-bottom: 15px;">🔥</div>
-                <div class="stat-value">١,٢٥٠</div>
-                <div class="stat-label">بەرزترین خاڵ</div>
-            </div>
-
-            <div class="stat-card">
-                <div style="font-size: 3rem; color: var(--quantum-green); margin-bottom: 15px;">⚡</div>
-                <div class="stat-value">٤٧</div>
-                <div class="stat-label">یاری تەواوکراو</div>
-            </div>
-
-            <div class="stat-card">
-                <div style="font-size: 3rem; color: var(--supernova-gold); margin-bottom: 15px;">🏆</div>
-                <div class="stat-value">١٠</div>
-                <div class="stat-label">سەرکەوتنەکان</div>
-            </div>
-        </div>
-
-        <div class="quantum-card" style="margin-bottom: 30px;">
-            <h2 style="margin-bottom: 25px; color: var(--quantum-blue);">
-                <i class="fas fa-chart-line"></i> ئاماری ورد
-            </h2>
-            
-            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
-                <div>
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
-                        <span style="opacity: 0.7;">باشترین وەڵام:</span>
-                        <span style="color: var(--quantum-green);">٩٨٪</span>
-                    </div>
-                    <div style="height: 10px; background: rgba(255,255,255,0.1); border-radius: 5px; overflow: hidden;">
-                        <div style="width: 98%; height: 100%; background: var(--quantum-green);"></div>
-                    </div>
-                </div>
-                
-                <div>
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
-                        <span style="opacity: 0.7;">کاتێکی ناوەند:</span>
-                        <span style="color: var(--quantum-blue);">٢.٥s</span>
-                    </div>
-                    <div style="height: 10px; background: rgba(255,255,255,0.1); border-radius: 5px; overflow: hidden;">
-                        <div style="width: 75%; height: 100%; background: var(--quantum-blue);"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="profile-actions">
-            <button class="quantum-btn quantum-btn-secondary" onclick="editProfile()">
+        <div class="card">
+            <h3 style="margin-bottom: 15px;">کردارەکان</h3>
+            <button class="btn btn-secondary" onclick="editProfile()">
                 <i class="fas fa-edit"></i>
                 دەستکاری پڕۆفایل
             </button>
-            <button class="quantum-btn quantum-btn-primary" onclick="shareProfile()">
-                <i class="fas fa-share-alt"></i>
-                هاوبەشی پڕۆفایل
+            <button class="btn btn-secondary" onclick="showAchievements()">
+                <i class="fas fa-trophy"></i>
+                سەرکەوتنەکان
             </button>
+        </div>
+    </section>
+
+    <!-- Game Screen -->
+    <section id="game" class="screen">
+        <div class="game-header">
+            <button class="btn" onclick="pauseGame()" style="width: auto; padding: 10px 15px;">
+                <i class="fas fa-pause"></i>
+            </button>
+            <div class="game-score">خاڵ: <span id="score">0</span></div>
+        </div>
+
+        <div class="timer">
+            <div id="timerBar" class="timer-bar"></div>
+        </div>
+
+        <div class="card question-card">
+            <div id="question">پرسیار لێرە دێت...</div>
+        </div>
+
+        <div class="answers-grid" id="answers">
+            <!-- Answers will be added here -->
+        </div>
+
+        <div class="powerups">
+            <div class="powerup-btn" onclick="usePowerup('5050')">
+                <i class="fas fa-ban"></i>
+                <div class="powerup-label">٥٠/٥٠</div>
+            </div>
+            <div class="powerup-btn" onclick="usePowerup('time')">
+                <i class="fas fa-clock"></i>
+                <div class="powerup-label">کات</div>
+            </div>
+            <div class="powerup-btn" onclick="usePowerup('skip')">
+                <i class="fas fa-forward"></i>
+                <div class="powerup-label">تێپەڕاندن</div>
+            </div>
         </div>
     </section>
 
     <!-- Shop Screen -->
     <section id="shop" class="screen">
-        <div class="shop-header">
-            <h1 class="shop-title">کۆگای سەرکەوتن</h1>
+        <div class="header">
+            <button class="btn" onclick="showScreen('home')" style="width: auto; padding: 10px 20px;">
+                <i class="fas fa-arrow-right"></i>
+            </button>
+            <div class="header-title">کۆگا</div>
             <div class="shop-balance">
-                <i class="fas fa-coins" style="font-size: 2.5rem; color: var(--supernova-gold);"></i>
-                <div>
-                    <div style="font-size: 0.9rem; opacity: 0.7;">سکەکانت</div>
-                    <div class="shop-coins">٢,٥٠٠</div>
-                </div>
+                <i class="fas fa-coins"></i>
+                <span>١٠٠٠</span>
             </div>
         </div>
 
-        <div class="shop-categories">
-            <div class="shop-category active">هەموو</div>
-            <div class="shop-category">توانای تایبەت</div>
-            <div class="shop-category">ڕووکارەکان</div>
-            <div class="shop-category">نیشانەکان</div>
-            <div class="shop-category">پاکەتەکان</div>
-            <div class="shop-category">دیاری</div>
-        </div>
-
-        <div class="shop-items-grid">
-            <!-- Featured Item -->
-            <div class="shop-item-card featured">
-                <div class="item-featured-badge">پێشنیارکراو</div>
-                <div class="item-image" style="background: var(--hologram-gold);">
-                    👑
-                </div>
-                <div class="item-content">
-                    <h3 class="item-name">پاشای یاری</h3>
-                    <p class="item-description">پاکەتی پاشایەتی بۆ ٣٠ ڕۆژ. هەموو تواناکان چالاک دەبن!</p>
-                    
-                    <div class="item-stats">
-                        <div class="item-stat">
-                            <i class="fas fa-bolt" style="color: var(--quantum-blue);"></i>
-                            +٥٠٪ XP
-                        </div>
-                        <div class="item-stat">
-                            <i class="fas fa-coins" style="color: var(--supernova-gold);"></i>
-                            +٢ سکە لە یاری
-                        </div>
-                    </div>
-                    
-                    <div class="item-footer">
-                        <div class="item-price">
-                            <i class="fas fa-coins"></i>
-                            ٩٩٩
-                        </div>
-                        <button class="quantum-btn quantum-btn-primary" style="padding: 12px 25px;">
-                            کڕین
-                        </button>
-                    </div>
-                </div>
+        <div class="shop-grid">
+            <div class="shop-item featured">
+                <div class="item-icon">👑</div>
+                <div class="item-name">پاشای یاری</div>
+                <div class="item-price">٩٩٩ سکە</div>
+                <button class="btn btn-primary" style="padding: 10px;">کڕین</button>
             </div>
 
-            <!-- Power-up Item -->
-            <div class="shop-item-card">
-                <div class="item-image" style="background: var(--hologram-purple);">
-                    ⚡
-                </div>
-                <div class="item-content">
-                    <h3 class="item-name">توانای خێرایی</h3>
-                    <p class="item-description">کاتی یاری زیاد بکە بۆ ٢٠ چرکە زیاتر</p>
-                    
-                    <div class="item-footer">
-                        <div class="item-price">
-                            <i class="fas fa-coins"></i>
-                            ١٠٠
-                        </div>
-                        <button class="quantum-btn" style="padding: 12px 25px;">
-                            کڕین
-                        </button>
-                    </div>
-                </div>
+            <div class="shop-item">
+                <div class="item-icon">⚡</div>
+                <div class="item-name">توانای خێرایی</div>
+                <div class="item-price">١٠٠ سکە</div>
+                <button class="btn" style="padding: 10px;">کڕین</button>
             </div>
 
-            <!-- Theme Item -->
-            <div class="shop-item-card">
-                <div class="item-image" style="background: var(--hologram-matrix);">
-                    🟢
-                </div>
-                <div class="item-content">
-                    <h3 class="item-name">ڕووکاری ماتریکس</h3>
-                    <p class="item-description">ڕووکاری سەرنجڕاکێشی ماتریکس</p>
-                    
-                    <div class="item-footer">
-                        <div class="item-price">
-                            <i class="fas fa-coins"></i>
-                            ٥٠٠
-                        </div>
-                        <button class="quantum-btn" style="padding: 12px 25px;">
-                            کڕین
-                        </button>
-                    </div>
-                </div>
+            <div class="shop-item">
+                <div class="item-icon">🎨</div>
+                <div class="item-name">ڕووکاری نوێ</div>
+                <div class="item-price">٥٠٠ سکە</div>
+                <button class="btn" style="padding: 10px;">کڕین</button>
             </div>
 
-            <!-- Badge Item -->
-            <div class="shop-item-card">
-                <div class="item-image" style="background: var(--hologram-fire);">
-                    🔥
-                </div>
-                <div class="item-content">
-                    <h3 class="item-name">نیشانەی ئاگرین</h3>
-                    <p class="item-description">نیشانەی تایبەت بۆ پڕۆفایلت</p>
-                    
-                    <div class="item-footer">
-                        <div class="item-price">
-                            <i class="fas fa-coins"></i>
-                            ٢٥٠
-                        </div>
-                        <button class="quantum-btn" style="padding: 12px 25px;">
-                            کڕین
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Package Item -->
-            <div class="shop-item-card">
-                <div class="item-image" style="background: linear-gradient(135deg, #667eea, #764ba2);">
-                    🎁
-                </div>
-                <div class="item-content">
-                    <h3 class="item-name">پاکەتی دەستپێک</h3>
-                    <p class="item-description">پاکەتی یەکەم کڕین - ٥٠٠ سکەی بێھا</p>
-                    
-                    <div class="item-footer">
-                        <div class="item-price">
-                            <i class="fas fa-coins"></i>
-                            ٧٥٠
-                        </div>
-                        <button class="quantum-btn quantum-btn-success" style="padding: 12px 25px;">
-                            کڕین
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Gift Item -->
-            <div class="shop-item-card">
-                <div class="item-image" style="background: linear-gradient(135deg, #f093fb, #f5576c);">
-                    🎯
-                </div>
-                <div class="item-content">
-                    <h3 class="item-name">دیاری تایبەت</h3>
-                    <p class="item-description">دیاری تایبەت بۆ هاوڕێکانت</p>
-                    
-                    <div class="item-footer">
-                        <div class="item-price">
-                            <i class="fas fa-coins"></i>
-                            ٣٠٠
-                        </div>
-                        <button class="quantum-btn" style="padding: 12px 25px;">
-                            دیاری بدە
-                        </button>
-                    </div>
-                </div>
+            <div class="shop-item">
+                <div class="item-icon">🏆</div>
+                <div class="item-name">نیشانە</div>
+                <div class="item-price">٢٥٠ سکە</div>
+                <button class="btn" style="padding: 10px;">کڕین</button>
             </div>
         </div>
     </section>
 
     <!-- Admin Screen -->
     <section id="admin" class="screen">
-        <div class="admin-header">
-            <h1 class="admin-title">پەڕەی ئەدمین</h1>
-            <div style="display: flex; gap: 15px;">
-                <button class="quantum-btn quantum-btn-secondary" onclick="Admin.refresh()">
-                    <i class="fas fa-sync"></i>
-                    نوێکردنەوە
-                </button>
-                <button class="quantum-btn quantum-btn-danger" onclick="Admin.logout()">
-                    <i class="fas fa-sign-out-alt"></i>
-                    چوونەدەرەوە
-                </button>
+        <div class="header">
+            <button class="btn" onclick="showScreen('home')" style="width: auto; padding: 10px 20px;">
+                <i class="fas fa-arrow-right"></i>
+            </button>
+            <div class="header-title">ئەدمین</div>
+            <button class="btn btn-danger" onclick="logoutAdmin()" style="width: auto; padding: 10px 15px;">
+                <i class="fas fa-sign-out-alt"></i>
+            </button>
+        </div>
+
+        <div class="admin-grid">
+            <div class="admin-card" onclick="manageUsers()">
+                <div class="admin-icon"><i class="fas fa-users"></i></div>
+                <div class="admin-title">بەکارهێنەران</div>
+            </div>
+
+            <div class="admin-card" onclick="manageQuestions()">
+                <div class="admin-icon"><i class="fas fa-question"></i></div>
+                <div class="admin-title">پرسیارەکان</div>
+            </div>
+
+            <div class="admin-card" onclick="manageShop()">
+                <div class="admin-icon"><i class="fas fa-store"></i></div>
+                <div class="admin-title">کۆگا</div>
+            </div>
+
+            <div class="admin-card" onclick="manageSettings()">
+                <div class="admin-icon"><i class="fas fa-sliders-h"></i></div>
+                <div class="admin-title">ڕێکخستن</div>
             </div>
         </div>
 
-        <div class="admin-nav">
-            <div class="admin-nav-btn active" onclick="showAdminSection('dashboard')">داشبۆرد</div>
-            <div class="admin-nav-btn" onclick="showAdminSection('users')">بەکارهێنەران</div>
-            <div class="admin-nav-btn" onclick="showAdminSection('questions')">پرسیارەکان</div>
-            <div class="admin-nav-btn" onclick="showAdminSection('shop')">کۆگا</div>
-            <div class="admin-nav-btn" onclick="showAdminSection('ads')">ڕیکلام</div>
-            <div class="admin-nav-btn" onclick="showAdminSection('settings')">ڕێکخستن</div>
-        </div>
-
-        <!-- Dashboard Section -->
-        <div id="admin-dashboard" class="admin-section active">
-            <div class="quantum-card" style="margin-bottom: 30px;">
-                <h2 style="margin-bottom: 25px; color: var(--quantum-blue);">
-                    <i class="fas fa-chart-bar"></i> ئاماری گشتی
-                </h2>
-                
-                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px;">
-                    <div style="text-align: center;">
-                        <div style="font-size: 2.5rem; color: var(--quantum-blue);">👥</div>
-                        <div style="font-family: var(--font-tech); font-size: 2rem; margin: 10px 0;">١,٢٣٤</div>
-                        <div style="opacity: 0.7;">بەکارهێنەر</div>
-                    </div>
-                    <div style="text-align: center;">
-                        <div style="font-size: 2.5rem; color: var(--quantum-green);">❓</div>
-                        <div style="font-family: var(--font-tech); font-size: 2rem; margin: 10px 0;">٥٦٧</div>
-                        <div style="opacity: 0.7;">پرسیار</div>
-                    </div>
-                    <div style="text-align: center;">
-                        <div style="font-size: 2.5rem; color: var(--supernova-gold);">💰</div>
-                        <div style="font-family: var(--font-tech); font-size: 2rem; margin: 10px 0;">١٢,٥٠٠</div>
-                        <div style="opacity: 0.7;">سکە کۆکراوە</div>
-                    </div>
-                    <div style="text-align: center;">
-                        <div style="font-size: 2.5rem; color: var(--plasma-pink);">🎮</div>
-                        <div style="font-family: var(--font-tech); font-size: 2rem; margin: 10px 0;">٤,٥٦٧</div>
-                        <div style="opacity: 0.7;">یاری</div>
-                    </div>
-                </div>
+        <div class="card">
+            <h3 style="margin-bottom: 15px;">زیادکردنی پرسیار</h3>
+            <div class="form-group">
+                <label class="form-label">پرسیار</label>
+                <textarea class="form-input" rows="3" placeholder="پرسیارەکەت لێرە بنووسە..."></textarea>
             </div>
 
-            <div class="admin-card-grid">
-                <div class="admin-feature-card" onclick="Admin.manageUsers()">
-                    <div class="admin-feature-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <h3 style="margin-bottom: 15px;">بەڕێوەبردنی بەکارهێنەران</h3>
-                    <p style="opacity: 0.7;">دەستکاری و چاودێری هەموو بەکارهێنەرەکان</p>
-                </div>
-
-                <div class="admin-feature-card" onclick="Admin.addQuestion()">
-                    <div class="admin-feature-icon">
-                        <i class="fas fa-question-circle"></i>
-                    </div>
-                    <h3 style="margin-bottom: 15px;">زیادکردنی پرسیار</h3>
-                    <p style="opacity: 0.7;">زیادکردنی پرسیاری نوێ بۆ یاریەکە</p>
-                </div>
-
-                <div class="admin-feature-card" onclick="Admin.manageShop()">
-                    <div class="admin-feature-icon">
-                        <i class="fas fa-store"></i>
-                    </div>
-                    <h3 style="margin-bottom: 15px;">بەڕێوەبردنی کۆگا</h3>
-                    <p style="opacity: 0.7;">زیادکردن و دەستکاری کاڵاکانی کۆگا</p>
-                </div>
-
-                <div class="admin-feature-card" onclick="Admin.manageAds()">
-                    <div class="admin-feature-icon">
-                        <i class="fas fa-video"></i>
-                    </div>
-                    <h3 style="margin-bottom: 15px;">بەڕێوەبردنی ڕیکلام</h3>
-                    <p style="opacity: 0.7;">ڕێکخستنی ڕیکلامەکانی یاری</p>
-                </div>
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 15px 0;">
+                <input class="form-input" placeholder="وەڵامی ١">
+                <input class="form-input" placeholder="وەڵامی ٢">
+                <input class="form-input" placeholder="وەڵامی ٣">
+                <input class="form-input" placeholder="وەڵامی ٤">
             </div>
-        </div>
 
-        <!-- Users Section -->
-        <div id="admin-users" class="admin-section">
-            <div class="quantum-card">
-                <h2 style="margin-bottom: 25px; color: var(--quantum-blue);">
-                    <i class="fas fa-user-cog"></i> بەڕێوەبردنی بەکارهێنەران
-                </h2>
-                
-                <div class="admin-table">
-                    <div class="table-header">هەموو بەکارهێنەران</div>
-                    
-                    <div class="table-row">
-                        <div class="table-cell"><strong>ناو</strong></div>
-                        <div class="table-cell"><strong>ئیمەیڵ</strong></div>
-                        <div class="table-cell"><strong>ئاست</strong></div>
-                        <div class="table-cell"><strong>کردارەکان</strong></div>
-                    </div>
-                    
-                    <div class="table-row">
-                        <div class="table-cell">ئەحمەد</div>
-                        <div class="table-cell">ahmed@example.com</div>
-                        <div class="table-cell">٥</div>
-                        <div class="table-cell">
-                            <button class="quantum-btn" style="padding: 8px 15px; font-size: 0.9rem;">
-                                دەستکاری
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="table-row">
-                        <div class="table-cell">سارا</div>
-                        <div class="table-cell">sara@example.com</div>
-                        <div class="table-cell">٣</div>
-                        <div class="table-cell">
-                            <button class="quantum-btn" style="padding: 8px 15px; font-size: 0.9rem;">
-                                دەستکاری
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Questions Section -->
-        <div id="admin-questions" class="admin-section">
-            <div class="quantum-card">
-                <h2 style="margin-bottom: 25px; color: var(--quantum-green);">
-                    <i class="fas fa-question"></i> زیادکردنی پرسیاری نوێ
-                </h2>
-                
-                <div class="admin-form">
-                    <div class="form-group">
-                        <label for="question-text">پرسیار</label>
-                        <textarea id="question-text" class="form-input" rows="3" placeholder="پرسیارەکەت لێرە بنووسە..."></textarea>
-                    </div>
-                    
-                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-bottom: 25px;">
-                        <div class="form-group">
-                            <label for="answer1">وەڵامی ١</label>
-                            <input type="text" id="answer1" class="form-input" placeholder="وەڵامی یەکەم">
-                        </div>
-                        <div class="form-group">
-                            <label for="answer2">وەڵامی ٢</label>
-                            <input type="text" id="answer2" class="form-input" placeholder="وەڵامی دووەم">
-                        </div>
-                        <div class="form-group">
-                            <label for="answer3">وەڵامی ٣</label>
-                            <input type="text" id="answer3" class="form-input" placeholder="وەڵامی سێیەم">
-                        </div>
-                        <div class="form-group">
-                            <label for="answer4">وەڵامی ٤</label>
-                            <input type="text" id="answer4" class="form-input" placeholder="وەڵامی چوارەم">
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="correct-answer">ژمارەی وەڵامی ڕاست (١-٤)</label>
-                        <select id="correct-answer" class="form-input">
-                            <option value="1">١</option>
-                            <option value="2">٢</option>
-                            <option value="3">٣</option>
-                            <option value="4">٤</option>
-                        </select>
-                    </div>
-                    
-                    <div style="display: flex; gap: 15px; margin-top: 30px;">
-                        <button class="quantum-btn quantum-btn-primary" style="flex: 1;">
-                            <i class="fas fa-save"></i>
-                            پاشەکەوتکردن
-                        </button>
-                        <button class="quantum-btn" style="flex: 1;">
-                            <i class="fas fa-times"></i>
-                            پاککردنەوە
-                        </button>
-                    </div>
-                </div>
-            </div>
+            <button class="btn btn-primary">
+                <i class="fas fa-save"></i>
+                پاشەکەوتکردن
+            </button>
         </div>
     </section>
 
-    <!-- Settings Screen -->
-    <section id="settings" class="screen">
-        <div class="quantum-card" style="margin-bottom: 30px;">
-            <h1 style="margin-bottom: 30px; color: var(--quantum-blue);">
-                <i class="fas fa-sliders-h"></i> ڕێکخستنەکان
-            </h1>
+    <!-- Result Modal -->
+    <div id="resultModal" class="modal">
+        <div class="modal-content">
+            <div style="font-size: 50px; margin-bottom: 20px;">🏆</div>
+            <h2 style="margin-bottom: 10px;">سەرکەوتن!</h2>
+            <p style="color: rgba(255,255,255,0.6); margin-bottom: 20px;">کۆی خاڵەکانت</p>
+            <div style="font-size: 48px; font-weight: bold; color: var(--primary); margin-bottom: 30px;" id="finalScore">0</div>
             
-            <div class="admin-form">
-                <div class="form-group">
-                    <label for="game-time">کاتی یاری (شەوانە)</label>
-                    <input type="time" id="game-time" class="form-input" value="20:00">
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 30px;">
+                <div class="stat-item">
+                    <div class="stat-value">+٥٠</div>
+                    <div class="stat-label">سکە</div>
                 </div>
-                
-                <div class="form-group">
-                    <label for="sound-volume">بەرزی دەنگ</label>
-                    <input type="range" id="sound-volume" class="form-input" min="0" max="100" value="80">
-                </div>
-                
-                <div class="form-group">
-                    <label for="notifications">
-                        <input type="checkbox" id="notifications" checked>
-                        ئاگادارکردنەوەکان
-                    </label>
-                </div>
-                
-                <div class="form-group">
-                    <label for="language">زمان</label>
-                    <select id="language" class="form-input">
-                        <option value="ckb" selected>کوردی (سۆرانی)</option>
-                        <option value="ar">عەرەبی</option>
-                        <option value="en">ئینگلیزی</option>
-                    </select>
-                </div>
-                
-                <div style="display: flex; gap: 15px; margin-top: 40px;">
-                    <button class="quantum-btn quantum-btn-primary" style="flex: 1;">
-                        <i class="fas fa-save"></i>
-                        پاشەکەوتکردن
-                    </button>
-                    <button class="quantum-btn quantum-btn-secondary" style="flex: 1;" onclick="showScreen('home')">
-                        <i class="fas fa-arrow-right"></i>
-                        گەڕانەوە
-                    </button>
+                <div class="stat-item">
+                    <div class="stat-value">+١٠٠</div>
+                    <div class="stat-label">XP</div>
                 </div>
             </div>
+
+            <div style="display: flex; gap: 10px;">
+                <button class="btn" onclick="closeModal()" style="flex: 1;">
+                    <i class="fas fa-home"></i>
+                    سەرەکی
+                </button>
+                <button class="btn btn-primary" onclick="restartGame()" style="flex: 2;">
+                    <i class="fas fa-redo"></i>
+                    دووبارە
+                </button>
+            </div>
         </div>
-    </section>
+    </div>
 
     <script>
-        // Create quantum particles
-        function createParticles() {
-            const container = document.getElementById('quantum-particles');
-            for (let i = 0; i < 50; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'quantum-particle';
-                particle.style.left = Math.random() * 100 + 'vw';
-                particle.style.animationDelay = Math.random() * 20 + 's';
-                container.appendChild(particle);
-            }
-        }
+        // ==================== FAST JAVASCRIPT ====================
+        
+        // Remove heavy animations
+        // Use simple data structures
+        
+        const gameData = {
+            score: 0,
+            currentQuestion: 0,
+            questions: [
+                {
+                    q: "پایتەختی وڵاتی ژاپۆن کوێیە؟",
+                    a: ["تۆکیۆ", "ئۆساکا", "کیۆتۆ", "سیۆل"],
+                    c: 0
+                },
+                {
+                    q: "خێرایی ڕووناکی چەندە لە چرکەیەکدا؟",
+                    a: ["٣٠٠ هەزار کم", "١٥٠ هەزار کم", "١ ملیۆن کم", "٣٤٠ مەتـر"],
+                    c: 0
+                }
+                // Add more questions as needed
+            ],
+            timer: null,
+            timeLeft: 15
+        };
 
-        // Screen navigation
+        // Fast screen switching
         function showScreen(screenId) {
             // Hide all screens
             document.querySelectorAll('.screen').forEach(screen => {
@@ -1480,94 +915,171 @@
             // Show selected screen
             document.getElementById(screenId).classList.add('active');
             
-            // Update navigation buttons
-            document.querySelectorAll('.nav-btn').forEach(btn => {
-                btn.classList.remove('active');
-                if (btn.onclick.toString().includes(`'${screenId}'`)) {
-                    btn.classList.add('active');
-                }
-            });
-        }
-
-        // Admin section navigation
-        function showAdminSection(sectionId) {
-            // Update nav buttons
-            document.querySelectorAll('.admin-nav-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.target.classList.add('active');
-            
-            // Hide all sections
-            document.querySelectorAll('.admin-section').forEach(section => {
-                section.classList.remove('active');
+            // Update nav
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
             });
             
-            // Show selected section
-            document.getElementById(`admin-${sectionId}`).classList.add('active');
-        }
-
-        // Profile functions
-        function changeAvatar() {
-            alert("گۆڕینی وێنەی پڕۆفایل لە وەشانی داھاتوودا بەردەست دەبێت!");
-        }
-
-        function editProfile() {
-            const newName = prompt("ناوی نوێت بنووسە:", document.getElementById('user-name').textContent);
-            if (newName && newName.trim()) {
-                document.getElementById('user-name').textContent = newName;
+            // Find and activate corresponding nav item
+            const navItems = document.querySelectorAll('.nav-item');
+            const navMap = {
+                'home': 0,
+                'profile': 1,
+                'game': 2,
+                'shop': 3,
+                'admin': 4
+            };
+            
+            if (navMap[screenId] !== undefined) {
+                navItems[navMap[screenId]].classList.add('active');
             }
         }
 
-        function shareProfile() {
-            alert("پڕۆفایلت هاوبەش کرا!\nلینک: https://survivor-ultra.com/profile/user123");
+        // Fast game functions
+        function startGame() {
+            gameData.score = 0;
+            gameData.currentQuestion = 0;
+            gameData.timeLeft = 15;
+            
+            document.getElementById('score').textContent = '0';
+            showScreen('game');
+            loadQuestion();
+            startTimer();
+        }
+
+        function loadQuestion() {
+            if (gameData.currentQuestion >= gameData.questions.length) {
+                endGame();
+                return;
+            }
+            
+            const q = gameData.questions[gameData.currentQuestion];
+            document.getElementById('question').textContent = q.q;
+            
+            const answersDiv = document.getElementById('answers');
+            answersDiv.innerHTML = '';
+            
+            q.a.forEach((answer, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'btn answer-btn';
+                btn.innerHTML = `
+                    <span>${answer}</span>
+                    <i class="far fa-circle"></i>
+                `;
+                btn.onclick = () => checkAnswer(index, btn);
+                answersDiv.appendChild(btn);
+            });
+            
+            gameData.timeLeft = 15;
+            updateTimer();
+        }
+
+        function checkAnswer(selectedIndex, btn) {
+            clearInterval(gameData.timer);
+            
+            const correctIndex = gameData.questions[gameData.currentQuestion].c;
+            const isCorrect = selectedIndex === correctIndex;
+            
+            if (isCorrect) {
+                gameData.score += 100;
+                document.getElementById('score').textContent = gameData.score;
+                btn.classList.add('correct');
+                btn.querySelector('i').className = 'fas fa-check-circle';
+            } else {
+                btn.classList.add('wrong');
+                btn.querySelector('i').className = 'fas fa-times-circle';
+                
+                // Show correct answer
+                const btns = document.querySelectorAll('.answer-btn');
+                btns[correctIndex].classList.add('correct');
+                btns[correctIndex].querySelector('i').className = 'fas fa-check-circle';
+            }
+            
+            // Disable all buttons
+            document.querySelectorAll('.answer-btn').forEach(b => {
+                b.onclick = null;
+                b.style.opacity = '0.7';
+            });
+            
+            // Next question after delay
+            setTimeout(() => {
+                gameData.currentQuestion++;
+                loadQuestion();
+                startTimer();
+            }, 1500);
+        }
+
+        function startTimer() {
+            clearInterval(gameData.timer);
+            gameData.timeLeft = 15;
+            updateTimer();
+            
+            gameData.timer = setInterval(() => {
+                gameData.timeLeft--;
+                updateTimer();
+                
+                if (gameData.timeLeft <= 0) {
+                    clearInterval(gameData.timer);
+                    // Time's up - move to next question
+                    gameData.currentQuestion++;
+                    loadQuestion();
+                    startTimer();
+                }
+            }, 1000);
+        }
+
+        function updateTimer() {
+            const percent = (gameData.timeLeft / 15) * 100;
+            document.getElementById('timerBar').style.width = percent + '%';
+        }
+
+        function endGame() {
+            document.getElementById('finalScore').textContent = gameData.score;
+            document.getElementById('resultModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('resultModal').classList.remove('active');
+            showScreen('home');
+        }
+
+        function restartGame() {
+            document.getElementById('resultModal').classList.remove('active');
+            startGame();
+        }
+
+        function usePowerup(type) {
+            // Simple powerup implementation
+            alert(`توانای ${type} بەکارهێنرا!`);
         }
 
         // Admin functions
-        const Admin = {
-            refresh() {
-                alert("زانیاریەکان نوێکرانەوە!");
-            },
-            
-            logout() {
-                if (confirm("دڵنیایت دەتەوێت لە پەڕەی ئەدمین دەرچیت؟")) {
-                    showScreen('home');
-                }
-            },
-            
-            manageUsers() {
-                showAdminSection('users');
-            },
-            
-            addQuestion() {
-                showAdminSection('questions');
-            },
-            
-            manageShop() {
-                showAdminSection('shop');
-            },
-            
-            manageAds() {
-                alert("بەشی بەڕێوەبردنی ڕیکلام");
+        function logoutAdmin() {
+            if (confirm("دڵنیایت دەتەوێت لە ئەدمین دەرچیت؟")) {
+                showScreen('home');
             }
-        };
+        }
 
-        // Game functions
-        const Game = {
-            start() {
-                alert("یاریەکە دەست پێدەکات! بەختێکی باش!");
-                // Here you would start the actual game
+        // Profile functions
+        function editProfile() {
+            const newName = prompt("ناوی نوێت بنووسە:", "یاریزان");
+            if (newName) {
+                document.querySelector('.profile-name').textContent = newName;
             }
-        };
+        }
 
-        // Initialize on load
+        // Initialize
         window.onload = function() {
-            createParticles();
+            // Hide loading screen
+            setTimeout(() => {
+                document.getElementById('loading').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loading').style.display = 'none';
+                }, 300);
+            }, 500);
             
-            // Set progress circles
-            document.querySelectorAll('.progress-bar').forEach(bar => {
-                const percent = parseInt(bar.style.strokeDashoffset) / 314 * 100;
-                bar.style.strokeDashoffset = 314 - (percent / 100 * 314);
-            });
+            // Initialize first screen
+            showScreen('home');
         };
     </script>
 </body>
