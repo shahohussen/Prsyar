@@ -6,22 +6,23 @@
     <meta name="theme-color" content="#090014">
     <title>SURVIVOR ULTRA | FAST EDITION</title>
     
-    <!-- Remove heavy libraries -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <style>
         /* ==================== 1. ULTRA LIGHT DESIGN ==================== */
         :root {
-            /* Simplified Color Palette */
             --bg: #05000a;
-            --card: rgba(20, 20, 35, 0.9);
-            --border: rgba(255, 255, 255, 0.1);
+            --card: rgba(20, 20, 35, 0.95);
+            --border: rgba(255, 255, 255, 0.15);
             --primary: #00f3ff;
             --secondary: #bc13fe;
             --accent: #ff0055;
             --gold: #ffd700;
             --success: #00ff9d;
-            --font: system-ui, -apple-system, sans-serif;
+            --warning: #ffaa00;
+            --font: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         }
 
         /* ==================== 2. MINIMAL RESET ==================== */
@@ -38,66 +39,96 @@
             font-family: var(--font);
             min-height: 100vh;
             overflow-x: hidden;
-            position: relative;
+            line-height: 1.6;
         }
 
-        /* Remove heavy background effects */
+        /* ==================== 3. BACKGROUND ==================== */
         .bg-overlay {
             position: fixed;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, #0a0015, #1a0025);
-            z-index: -1;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(188, 19, 254, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 80% 20%, rgba(0, 243, 255, 0.1) 0%, transparent 40%),
+                linear-gradient(45deg, #0a0015 0%, #1a0025 100%);
+            z-index: -2;
         }
 
-        /* ==================== 3. FAST SCREENS ==================== */
+        /* ==================== 4. SCREENS SYSTEM ==================== */
         .screen {
             position: fixed;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
+            width: 100%;
+            height: 100%;
             padding: 20px;
+            padding-bottom: 80px; /* Space for nav */
             overflow-y: auto;
             transform: translateX(100%);
-            transition: transform 0.3s ease;
-            background: var(--bg);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: transparent;
             z-index: 10;
+            opacity: 0;
         }
 
         .screen.active {
             transform: translateX(0);
+            opacity: 1;
         }
 
-        /* ==================== 4. OPTIMIZED CARDS ==================== */
+        /* ==================== 5. ENHANCED CARDS ==================== */
         .card {
             background: var(--card);
             border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 20px;
+            border-radius: 20px;
+            padding: 24px;
             margin-bottom: 20px;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        /* ==================== 5. FAST BUTTONS ==================== */
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        /* ==================== 6. ENHANCED BUTTONS ==================== */
         .btn {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid var(--border);
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 2px solid transparent;
             color: white;
-            padding: 16px;
-            border-radius: 12px;
+            padding: 18px 24px;
+            border-radius: 16px;
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.3s ease;
             width: 100%;
             margin-bottom: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
         }
 
         .btn:active {
@@ -107,64 +138,85 @@
         .btn-primary {
             background: linear-gradient(135deg, var(--secondary), var(--primary));
             border: none;
+            box-shadow: 0 4px 20px rgba(188, 19, 254, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            box-shadow: 0 6px 25px rgba(0, 243, 255, 0.4);
         }
 
         .btn-secondary {
-            background: rgba(0, 243, 255, 0.1);
+            background: rgba(0, 243, 255, 0.15);
             border-color: var(--primary);
         }
 
         .btn-danger {
-            background: rgba(255, 0, 85, 0.1);
+            background: rgba(255, 0, 85, 0.15);
             border-color: var(--accent);
             color: var(--accent);
         }
 
-        /* ==================== 6. HEADER BAR ==================== */
+        .btn-success {
+            background: rgba(0, 255, 157, 0.15);
+            border-color: var(--success);
+            color: var(--success);
+        }
+
+        /* ==================== 7. ENHANCED HEADER ==================== */
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 15px 0;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
 
         .header-title {
-            font-size: 24px;
-            font-weight: bold;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
+            font-size: 28px;
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 10px rgba(188, 19, 254, 0.3);
         }
 
         .header-stats {
             display: flex;
-            gap: 10px;
+            gap: 12px;
         }
 
         .stat-badge {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.07);
             border: 1px solid var(--primary);
-            padding: 8px 12px;
-            border-radius: 20px;
+            padding: 10px 16px;
+            border-radius: 25px;
             font-size: 14px;
+            font-weight: 600;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
+            transition: all 0.3s ease;
         }
 
-        /* ==================== 7. NAVIGATION BAR ==================== */
+        .stat-badge:hover {
+            background: rgba(0, 243, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        /* ==================== 8. ENHANCED NAVIGATION ==================== */
         .nav-bar {
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
-            background: var(--card);
+            background: rgba(20, 20, 35, 0.95);
             border-top: 1px solid var(--border);
             display: flex;
-            padding: 10px;
-            z-index: 100;
-            backdrop-filter: blur(10px);
+            padding: 12px 20px;
+            z-index: 1000;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 -5px 30px rgba(0, 0, 0, 0.3);
         }
 
         .nav-item {
@@ -172,270 +224,216 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 8px;
-            color: rgba(255, 255, 255, 0.5);
+            padding: 10px 5px;
+            color: rgba(255, 255, 255, 0.6);
             text-decoration: none;
             font-size: 12px;
-            transition: all 0.2s;
+            transition: all 0.3s ease;
+            border-radius: 12px;
         }
 
         .nav-item.active {
             color: var(--primary);
+            background: rgba(0, 243, 255, 0.1);
+            transform: translateY(-5px);
         }
 
         .nav-item i {
-            font-size: 20px;
-            margin-bottom: 4px;
+            font-size: 22px;
+            margin-bottom: 6px;
+            transition: all 0.3s ease;
         }
 
-        /* ==================== 8. HOME SCREEN OPTIMIZED ==================== */
+        .nav-item.active i {
+            transform: scale(1.2);
+        }
+
+        /* ==================== 9. HOME SCREEN ENHANCED ==================== */
         .hero-section {
             text-align: center;
             padding: 40px 0;
-        }
-
-        .hero-icon {
-            font-size: 60px;
-            margin-bottom: 20px;
-            color: var(--primary);
-        }
-
-        .hero-title {
-            font-size: 32px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .hero-subtitle {
-            color: rgba(255, 255, 255, 0.6);
             margin-bottom: 30px;
         }
 
-        /* ==================== 9. PROFILE SCREEN OPTIMIZED ==================== */
+        .hero-icon {
+            font-size: 80px;
+            margin-bottom: 25px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .hero-title {
+            font-size: 42px;
+            font-weight: 900;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 4px 20px rgba(188, 19, 254, 0.4);
+        }
+
+        .hero-subtitle {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 18px;
+            margin-bottom: 40px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ==================== 10. PROFILE SCREEN ENHANCED ==================== */
         .profile-header {
             text-align: center;
             padding: 30px 0;
+            margin-bottom: 30px;
         }
 
         .avatar {
-            width: 100px;
-            height: 100px;
+            width: 120px;
+            height: 120px;
             background: linear-gradient(135deg, var(--secondary), var(--primary));
             border-radius: 50%;
-            margin: 0 auto 20px;
+            margin: 0 auto 25px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 40px;
+            font-size: 48px;
+            box-shadow: 0 8px 32px rgba(188, 19, 254, 0.4);
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .avatar:hover {
+            transform: scale(1.05);
         }
 
         .profile-name {
-            font-size: 24px;
+            font-size: 28px;
             font-weight: bold;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
 
         .profile-level {
-            background: rgba(0, 243, 255, 0.1);
-            border: 1px solid var(--primary);
-            padding: 8px 20px;
-            border-radius: 20px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
             display: inline-block;
+            font-weight: bold;
+            color: white;
+            box-shadow: 0 4px 20px rgba(0, 243, 255, 0.3);
         }
 
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin: 20px 0;
+            gap: 20px;
+            margin: 30px 0;
         }
 
         .stat-item {
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(255, 255, 255, 0.05);
             border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 15px;
+            border-radius: 16px;
+            padding: 20px;
             text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover {
+            background: rgba(0, 243, 255, 0.1);
+            border-color: var(--primary);
+            transform: translateY(-3px);
         }
 
         .stat-value {
-            font-size: 24px;
-            font-weight: bold;
-            margin: 5px 0;
+            font-size: 32px;
+            font-weight: 800;
+            margin: 10px 0;
             color: var(--primary);
         }
 
         .stat-label {
-            font-size: 12px;
+            font-size: 14px;
             color: rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        /* ==================== 10. ADMIN SCREEN OPTIMIZED ==================== */
-        .admin-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin: 20px 0;
-        }
-
-        .admin-card {
-            background: rgba(255, 0, 85, 0.05);
-            border: 1px solid var(--accent);
-            border-radius: 12px;
-            padding: 20px;
-            text-align: center;
-            cursor: pointer;
-        }
-
-        .admin-icon {
-            font-size: 30px;
-            color: var(--accent);
-            margin-bottom: 10px;
-        }
-
-        .admin-title {
-            font-size: 16px;
-            font-weight: 600;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-label {
-            display: block;
-            margin-bottom: 8px;
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 14px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            color: white;
-            font-size: 16px;
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-
-        /* ==================== 11. SHOP SCREEN OPTIMIZED ==================== */
-        .shop-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .shop-balance {
-            background: rgba(255, 215, 0, 0.1);
-            border: 1px solid var(--gold);
-            padding: 10px 20px;
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .shop-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-        }
-
-        .shop-item {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 15px;
-            text-align: center;
-        }
-
-        .shop-item.featured {
-            border-color: var(--gold);
-            background: rgba(255, 215, 0, 0.05);
-        }
-
-        .item-icon {
-            font-size: 40px;
-            margin-bottom: 10px;
-        }
-
-        .item-name {
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-
-        .item-price {
-            color: var(--gold);
-            font-weight: bold;
-            margin: 10px 0;
-        }
-
-        /* ==================== 12. GAME SCREEN OPTIMIZED ==================== */
+        /* ==================== 11. GAME SCREEN ENHANCED ==================== */
         .game-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
 
         .game-score {
-            font-size: 24px;
-            font-weight: bold;
+            font-size: 28px;
+            font-weight: 800;
             color: var(--primary);
+            text-shadow: 0 2px 10px rgba(0, 243, 255, 0.3);
         }
 
         .timer {
-            height: 6px;
+            height: 8px;
             background: rgba(255, 255, 255, 0.1);
-            border-radius: 3px;
-            margin: 20px 0;
+            border-radius: 4px;
+            margin: 25px 0;
             overflow: hidden;
+            position: relative;
         }
 
         .timer-bar {
             height: 100%;
-            background: linear-gradient(90deg, var(--accent), #ff5e00);
+            background: linear-gradient(90deg, var(--accent), #ff5e00, #ffaa00);
             width: 100%;
             transition: width 0.1s linear;
+            border-radius: 4px;
         }
 
         .question-card {
-            min-height: 120px;
+            min-height: 150px;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            margin-bottom: 20px;
-            font-size: 18px;
-            line-height: 1.4;
+            margin-bottom: 30px;
+            font-size: 22px;
+            line-height: 1.5;
+            font-weight: 600;
+            padding: 30px;
+            background: linear-gradient(135deg, rgba(0, 243, 255, 0.1), rgba(188, 19, 254, 0.1));
+            border: 2px solid var(--primary);
         }
 
         .answers-grid {
             display: grid;
-            gap: 12px;
-            margin-bottom: 30px;
+            gap: 15px;
+            margin-bottom: 40px;
         }
 
         .answer-btn {
             text-align: right;
             justify-content: space-between;
+            padding: 20px 25px;
+            font-size: 18px;
+            border: 2px solid var(--border);
         }
 
         .answer-btn.correct {
-            background: rgba(0, 255, 157, 0.1);
+            background: rgba(0, 255, 157, 0.2);
             border-color: var(--success);
             color: var(--success);
+            box-shadow: 0 4px 20px rgba(0, 255, 157, 0.3);
         }
 
         .answer-btn.wrong {
-            background: rgba(255, 0, 85, 0.1);
+            background: rgba(255, 0, 85, 0.2);
             border-color: var(--accent);
             color: var(--accent);
         }
@@ -443,42 +441,214 @@
         .powerups {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin-top: 20px;
+            gap: 20px;
+            margin-top: 30px;
         }
 
         .powerup-btn {
-            width: 60px;
-            height: 60px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border);
-            border-radius: 12px;
+            width: 70px;
+            height: 70px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 2px solid var(--border);
+            border-radius: 16px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
+            font-size: 24px;
             cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .powerup-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s;
+        }
+
+        .powerup-btn:active::after {
+            width: 100%;
+            height: 100%;
+        }
+
+        .powerup-btn:hover {
+            background: rgba(0, 243, 255, 0.15);
+            border-color: var(--primary);
+            transform: translateY(-3px);
         }
 
         .powerup-label {
-            font-size: 10px;
-            margin-top: 4px;
-            color: rgba(255, 255, 255, 0.6);
+            font-size: 11px;
+            margin-top: 6px;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 600;
         }
 
-        /* ==================== 13. MODAL ==================== */
+        /* ==================== 12. SHOP SCREEN ENHANCED ==================== */
+        .shop-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .shop-balance {
+            background: rgba(255, 215, 0, 0.15);
+            border: 2px solid var(--gold);
+            padding: 12px 24px;
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: bold;
+            font-size: 18px;
+            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.2);
+        }
+
+        .shop-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .shop-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid var(--border);
+            border-radius: 20px;
+            padding: 25px 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .shop-item.featured {
+            border-color: var(--gold);
+            background: rgba(255, 215, 0, 0.1);
+            box-shadow: 0 8px 32px rgba(255, 215, 0, 0.2);
+            grid-column: 1 / -1;
+        }
+
+        .shop-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .item-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .item-name {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .item-price {
+            color: var(--gold);
+            font-weight: 800;
+            font-size: 20px;
+            margin: 15px 0;
+        }
+
+        /* ==================== 13. ADMIN SCREEN ENHANCED ==================== */
+        .admin-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .admin-card {
+            background: rgba(255, 0, 85, 0.08);
+            border: 2px solid var(--accent);
+            border-radius: 20px;
+            padding: 25px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .admin-card:hover {
+            background: rgba(255, 0, 85, 0.15);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(255, 0, 85, 0.2);
+        }
+
+        .admin-icon {
+            font-size: 36px;
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+
+        .admin-title {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 12px;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 18px;
+            background: rgba(255, 255, 255, 0.07);
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            color: white;
+            font-size: 16px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: rgba(0, 243, 255, 0.1);
+            box-shadow: 0 0 0 3px rgba(0, 243, 255, 0.1);
+        }
+
+        textarea.form-input {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* ==================== 14. MODAL ENHANCED ==================== */
         .modal {
             position: fixed;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(5, 0, 10, 0.95);
+            width: 100%;
+            height: 100%;
+            background: rgba(5, 0, 10, 0.98);
             display: none;
             align-items: center;
             justify-content: center;
-            z-index: 1000;
+            z-index: 2000;
+            backdrop-filter: blur(10px);
+            animation: modalFadeIn 0.4s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .modal.active {
@@ -487,26 +657,167 @@
 
         .modal-content {
             background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 30px;
+            border: 2px solid var(--border);
+            border-radius: 30px;
+            padding: 40px 30px;
             max-width: 90%;
-            width: 400px;
+            width: 450px;
             text-align: center;
+            animation: modalSlideUp 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow);
         }
 
-        /* ==================== 14. RESPONSIVE DESIGN ==================== */
-        @media (max-width: 480px) {
+        @keyframes modalSlideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(50px) scale(0.9);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* ==================== 15. NOTIFICATION ==================== */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--card);
+            border-left: 4px solid var(--primary);
+            border-radius: 12px;
+            padding: 16px 20px;
+            box-shadow: var(--shadow);
+            transform: translateX(100%);
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1001;
+            max-width: 350px;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        .notification.success {
+            border-left-color: var(--success);
+        }
+
+        .notification.error {
+            border-left-color: var(--accent);
+        }
+
+        /* ==================== 16. LOADING ==================== */
+        #loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1.2s linear infinite;
+            margin-bottom: 25px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* ==================== 17. PROGRESS BARS ==================== */
+        .progress-bar {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 15px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        /* ==================== 18. LEADERBOARD SCREEN ==================== */
+        .leaderboard-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            margin-bottom: 12px;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .leaderboard-item:hover {
+            background: rgba(0, 243, 255, 0.1);
+            border-color: var(--primary);
+            transform: translateX(5px);
+        }
+
+        .leaderboard-rank {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            font-size: 14px;
+        }
+
+        .leaderboard-user {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex: 1;
+            margin: 0 20px;
+        }
+
+        .leaderboard-score {
+            font-weight: 800;
+            color: var(--primary);
+            font-size: 20px;
+        }
+
+        /* ==================== 19. RESPONSIVE DESIGN ==================== */
+        @media (max-width: 768px) {
             .screen {
                 padding: 15px;
+                padding-bottom: 70px;
             }
             
             .hero-title {
-                font-size: 28px;
+                font-size: 36px;
+            }
+            
+            .hero-icon {
+                font-size: 70px;
             }
             
             .stats-grid {
                 grid-template-columns: 1fr;
+                gap: 15px;
             }
             
             .admin-grid {
@@ -518,18 +829,31 @@
             }
             
             .btn {
-                padding: 14px;
+                padding: 16px 20px;
                 font-size: 15px;
             }
             
             .card {
-                padding: 15px;
+                padding: 20px;
+            }
+            
+            .nav-bar {
+                padding: 10px 15px;
+            }
+            
+            .nav-item {
+                padding: 8px 4px;
+                font-size: 11px;
+            }
+            
+            .nav-item i {
+                font-size: 20px;
             }
         }
 
-        @media (min-width: 768px) {
+        @media (min-width: 1200px) {
             .screen {
-                max-width: 500px;
+                max-width: 600px;
                 margin: 0 auto;
                 left: 50%;
                 transform: translateX(100%) translateX(-50%);
@@ -540,51 +864,53 @@
             }
             
             .nav-bar {
-                max-width: 500px;
+                max-width: 600px;
                 left: 50%;
                 transform: translateX(-50%);
             }
         }
 
-        /* ==================== 15. LOADING ==================== */
-        #loading {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: var(--bg);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            transition: opacity 0.3s;
+        /* ==================== 20. UTILITY CLASSES ==================== */
+        .text-gradient {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 3px solid rgba(255, 255, 255, 0.1);
-            border-top-color: var(--primary);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
+        .pulse {
+            animation: pulse 2s infinite;
         }
 
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 243, 255, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(0, 243, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 243, 255, 0); }
+        }
+
+        .shake {
+            animation: shake 0.5s;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
         }
     </style>
 </head>
 <body>
-    <!-- Simple Background -->
+    <!-- Background -->
     <div class="bg-overlay"></div>
 
     <!-- Loading Screen -->
     <div id="loading">
         <div class="spinner"></div>
-        <div style="margin-top: 20px; color: rgba(255,255,255,0.6);">بارکردن...</div>
+        <div style="margin-top: 20px; color: var(--primary); font-size: 18px; font-weight: 600;">SURVIVOR ULTRA</div>
+        <div style="margin-top: 10px; color: rgba(255,255,255,0.6);">خێرابە بۆ خێراترین یاری زانیاری...</div>
     </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification"></div>
 
     <!-- Navigation Bar -->
     <div class="nav-bar">
@@ -613,13 +939,15 @@
     <!-- Home Screen -->
     <section id="home" class="screen active">
         <div class="header">
-            <div class="header-title">SURVIVOR</div>
+            <div class="header-title">SURVIVOR ULTRA</div>
             <div class="header-stats">
                 <div class="stat-badge">
-                    <i class="fas fa-coins"></i> 1000
+                    <i class="fas fa-coins"></i>
+                    <span id="coins">1,250</span>
                 </div>
                 <div class="stat-badge">
-                    <i class="fas fa-crown"></i> 5
+                    <i class="fas fa-crown"></i>
+                    <span id="streak">5</span>
                 </div>
             </div>
         </div>
@@ -627,16 +955,17 @@
         <div class="hero-section">
             <div class="hero-icon">🎮</div>
             <h1 class="hero-title">SURVIVOR ULTRA</h1>
-            <p class="hero-subtitle">خێراترین یاری زانیاری</p>
+            <p class="hero-subtitle">خێراترین یاری زانیاری | FAST EDITION</p>
         </div>
 
         <div class="card">
             <button class="btn btn-primary" onclick="startGame()">
                 <i class="fas fa-play"></i>
                 دەستپێکردنی یاری
+                <span class="pulse" style="margin-right: auto;">🔥</span>
             </button>
             
-            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 20px;">
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-top: 20px;">
                 <button class="btn btn-secondary" onclick="showScreen('shop')">
                     <i class="fas fa-store"></i>
                     کۆگا
@@ -649,14 +978,46 @@
         </div>
 
         <div class="card">
-            <h3 style="margin-bottom: 15px;">یاریەکانی ئەمڕۆ</h3>
+            <h3 style="margin-bottom: 20px; color: var(--primary);">یاریەکانی ئەمڕۆ</h3>
+            
             <div class="btn" onclick="startDailyGame()">
-                <span>یاری سەرەکی - کاتژمێر 8</span>
-                <i class="fas fa-arrow-left"></i>
+                <div style="display: flex; align-items: center; gap: 15px; flex: 1;">
+                    <div style="text-align: right; flex: 1;">
+                        <div style="font-weight: 700; margin-bottom: 5px;">یاری سەرەکی</div>
+                        <div style="font-size: 14px; color: rgba(255,255,255,0.6);">کاتژمێر 20:00</div>
+                    </div>
+                    <div style="background: var(--primary); color: var(--bg); padding: 8px 15px; border-radius: 12px; font-weight: bold;">
+                        🏆
+                    </div>
+                </div>
             </div>
+            
             <div class="btn" onclick="startQuickGame()">
-                <span>یاری خێرا</span>
-                <i class="fas fa-arrow-left"></i>
+                <div style="display: flex; align-items: center; gap: 15px; flex: 1;">
+                    <div style="text-align: right; flex: 1;">
+                        <div style="font-weight: 700; margin-bottom: 5px;">یاری خێرا</div>
+                        <div style="font-size: 14px; color: rgba(255,255,255,0.6);">10 پرسیار | 2 خولەک</div>
+                    </div>
+                    <div style="background: var(--secondary); color: white; padding: 8px 15px; border-radius: 12px; font-weight: bold;">
+                        ⚡
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3 style="margin-bottom: 20px; color: var(--primary);">خاڵە سەرەکییەکان</h3>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                <span>بەرزترین خاڵ:</span>
+                <span style="color: var(--primary); font-weight: bold;">1,250</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                <span>وەڵامی ڕاست:</span>
+                <span style="color: var(--success); font-weight: bold;">98%</span>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+                <span>ڕیزبەندی جیهانی:</span>
+                <span style="color: var(--gold); font-weight: bold;">#47</span>
             </div>
         </div>
     </section>
@@ -664,7 +1025,7 @@
     <!-- Profile Screen -->
     <section id="profile" class="screen">
         <div class="header">
-            <button class="btn" onclick="showScreen('home')" style="width: auto; padding: 10px 20px;">
+            <button class="btn" onclick="showScreen('home')" style="width: auto; padding: 12px 20px;">
                 <i class="fas fa-arrow-right"></i>
             </button>
             <div class="header-title">پڕۆفایل</div>
@@ -672,34 +1033,57 @@
         </div>
 
         <div class="profile-header">
-            <div class="avatar">👤</div>
-            <h2 class="profile-name">یاریزان</h2>
-            <div class="profile-level">ئاست ٥</div>
+            <div class="avatar" onclick="changeAvatar()">👤</div>
+            <h2 class="profile-name" id="playerName">یاریزان</h2>
+            <div class="profile-level">ئاست <span id="playerLevel">5</span></div>
+            
+            <div class="progress-bar" style="margin: 25px 50px;">
+                <div class="progress-fill" style="width: 75%;"></div>
+            </div>
+            <div style="color: rgba(255,255,255,0.6); font-size: 14px;">١,٢٠٠ / ٢,٠٠٠ XP</div>
         </div>
 
         <div class="card">
             <div class="stats-grid">
                 <div class="stat-item">
-                    <div class="stat-value">١,٢٥٠</div>
+                    <div class="stat-value" id="highScore">١,٢٥٠</div>
                     <div class="stat-label">بەرزترین خاڵ</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-value">٤٧</div>
-                    <div class="stat-label">یاری</div>
+                    <div class="stat-value" id="totalGames">٤٧</div>
+                    <div class="stat-label">کۆی یاری</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-value">٩٨٪</div>
+                    <div class="stat-value" id="accuracy">٩٨٪</div>
                     <div class="stat-label">وەڵامی ڕاست</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-value">٢.٥s</div>
+                    <div class="stat-value" id="avgTime">٢.٥s</div>
                     <div class="stat-label">کاتی ناوەند</div>
                 </div>
             </div>
         </div>
 
         <div class="card">
-            <h3 style="margin-bottom: 15px;">کردارەکان</h3>
+            <h3 style="margin-bottom: 20px; color: var(--primary);">سەرکەوتنەکان</h3>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; text-align: center;">
+                <div style="background: rgba(255,215,0,0.1); padding: 15px; border-radius: 12px; border: 2px solid var(--gold);">
+                    <div style="font-size: 24px;">🥇</div>
+                    <div style="font-size: 12px; margin-top: 8px; color: var(--gold);">یەکەم یاری</div>
+                </div>
+                <div style="background: rgba(0,243,255,0.1); padding: 15px; border-radius: 12px; border: 2px solid var(--primary);">
+                    <div style="font-size: 24px;">⚡</div>
+                    <div style="font-size: 12px; margin-top: 8px; color: var(--primary);">خێرایی</div>
+                </div>
+                <div style="background: rgba(188,19,254,0.1); padding: 15px; border-radius: 12px; border: 2px solid var(--secondary);">
+                    <div style="font-size: 24px;">🎯</div>
+                    <div style="font-size: 12px; margin-top: 8px; color: var(--secondary);">ئامانج</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3 style="margin-bottom: 20px; color: var(--primary);">کردارەکان</h3>
             <button class="btn btn-secondary" onclick="editProfile()">
                 <i class="fas fa-edit"></i>
                 دەستکاری پڕۆفایل
@@ -708,16 +1092,24 @@
                 <i class="fas fa-trophy"></i>
                 سەرکەوتنەکان
             </button>
+            <button class="btn" onclick="showSettings()">
+                <i class="fas fa-cog"></i>
+                ڕێکخستنەکان
+            </button>
         </div>
     </section>
 
     <!-- Game Screen -->
     <section id="game" class="screen">
         <div class="game-header">
-            <button class="btn" onclick="pauseGame()" style="width: auto; padding: 10px 15px;">
+            <button class="btn" onclick="pauseGame()" style="width: auto; padding: 12px 18px; background: rgba(255,0,85,0.1);">
                 <i class="fas fa-pause"></i>
             </button>
             <div class="game-score">خاڵ: <span id="score">0</span></div>
+            <div class="stat-badge" style="background: rgba(255,215,0,0.1); border-color: var(--gold);">
+                <i class="fas fa-star" style="color: var(--gold);"></i>
+                <span id="multiplier">1x</span>
+            </div>
         </div>
 
         <div class="timer">
@@ -733,17 +1125,21 @@
         </div>
 
         <div class="powerups">
-            <div class="powerup-btn" onclick="usePowerup('5050')">
+            <div class="powerup-btn" onclick="usePowerup('5050')" id="powerup5050">
                 <i class="fas fa-ban"></i>
-                <div class="powerup-label">٥٠/٥٠</div>
+                <div class="powerup-label">٥٠/٥٠ <span id="powerup5050Count">2</span></div>
             </div>
-            <div class="powerup-btn" onclick="usePowerup('time')">
+            <div class="powerup-btn" onclick="usePowerup('time')" id="powerupTime">
                 <i class="fas fa-clock"></i>
-                <div class="powerup-label">کات</div>
+                <div class="powerup-label">کات <span id="powerupTimeCount">3</span></div>
             </div>
-            <div class="powerup-btn" onclick="usePowerup('skip')">
+            <div class="powerup-btn" onclick="usePowerup('skip')" id="powerupSkip">
                 <i class="fas fa-forward"></i>
-                <div class="powerup-label">تێپەڕاندن</div>
+                <div class="powerup-label">تێپەڕاندن <span id="powerupSkipCount">1</span></div>
+            </div>
+            <div class="powerup-btn" onclick="usePowerup('double')" id="powerupDouble">
+                <i class="fas fa-bolt"></i>
+                <div class="powerup-label">٢ هێندە <span id="powerupDoubleCount">1</span></div>
             </div>
         </div>
     </section>
@@ -751,13 +1147,13 @@
     <!-- Shop Screen -->
     <section id="shop" class="screen">
         <div class="header">
-            <button class="btn" onclick="showScreen('home')" style="width: auto; padding: 10px 20px;">
+            <button class="btn" onclick="showScreen('home')" style="width: auto; padding: 12px 20px;">
                 <i class="fas fa-arrow-right"></i>
             </button>
             <div class="header-title">کۆگا</div>
             <div class="shop-balance">
                 <i class="fas fa-coins"></i>
-                <span>١٠٠٠</span>
+                <span id="shopCoins">١,٠٠٠</span>
             </div>
         </div>
 
@@ -765,29 +1161,72 @@
             <div class="shop-item featured">
                 <div class="item-icon">👑</div>
                 <div class="item-name">پاشای یاری</div>
+                <div class="item-desc" style="color: rgba(255,255,255,0.7); font-size: 14px; margin: 10px 0;">ڕووکاری تایبەت + توانای تایبەت</div>
                 <div class="item-price">٩٩٩ سکە</div>
-                <button class="btn btn-primary" style="padding: 10px;">کڕین</button>
+                <button class="btn btn-primary" style="padding: 14px;" onclick="buyItem('king')">
+                    <i class="fas fa-shopping-cart"></i>
+                    کڕین
+                </button>
             </div>
 
             <div class="shop-item">
                 <div class="item-icon">⚡</div>
                 <div class="item-name">توانای خێرایی</div>
+                <div class="item-desc" style="color: rgba(255,255,255,0.7); font-size: 14px; margin: 10px 0;">کاتی زیاتر بۆ پرسیارەکان</div>
                 <div class="item-price">١٠٠ سکە</div>
-                <button class="btn" style="padding: 10px;">کڕین</button>
+                <button class="btn" style="padding: 14px;" onclick="buyItem('speed')">
+                    <i class="fas fa-shopping-cart"></i>
+                    کڕین
+                </button>
             </div>
 
             <div class="shop-item">
                 <div class="item-icon">🎨</div>
                 <div class="item-name">ڕووکاری نوێ</div>
+                <div class="item-desc" style="color: rgba(255,255,255,0.7); font-size: 14px; margin: 10px 0;">ڕەنگی نوێ بۆ یاریەکەت</div>
                 <div class="item-price">٥٠٠ سکە</div>
-                <button class="btn" style="padding: 10px;">کڕین</button>
+                <button class="btn" style="padding: 14px;" onclick="buyItem('theme')">
+                    <i class="fas fa-shopping-cart"></i>
+                    کڕین
+                </button>
             </div>
 
             <div class="shop-item">
                 <div class="item-icon">🏆</div>
                 <div class="item-name">نیشانە</div>
+                <div class="item-desc" style="color: rgba(255,255,255,0.7); font-size: 14px; margin: 10px 0;">نیشانەی تایبەت بۆ پڕۆفایل</div>
                 <div class="item-price">٢٥٠ سکە</div>
-                <button class="btn" style="padding: 10px;">کڕین</button>
+                <button class="btn" style="padding: 14px;" onclick="buyItem('badge')">
+                    <i class="fas fa-shopping-cart"></i>
+                    کڕین
+                </button>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3 style="margin-bottom: 20px; color: var(--primary);">پاکەتەکان</h3>
+            <div class="btn" onclick="buyPackage('starter')" style="background: linear-gradient(135deg, rgba(0,243,255,0.1), rgba(188,19,254,0.1));">
+                <div style="display: flex; align-items: center; gap: 15px; width: 100%;">
+                    <div style="text-align: right; flex: 1;">
+                        <div style="font-weight: 700; margin-bottom: 5px;">پاکەتی سەرەتایی</div>
+                        <div style="font-size: 14px; color: rgba(255,255,255,0.7);">٥٠٠ سکە + ٣ توانا</div>
+                    </div>
+                    <div style="background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; padding: 10px 20px; border-radius: 12px; font-weight: bold; font-size: 20px;">
+                        ٤٩٩ سکە
+                    </div>
+                </div>
+            </div>
+            
+            <div class="btn" onclick="buyPackage('pro')" style="background: linear-gradient(135deg, rgba(255,215,0,0.1), rgba(255,0,85,0.1)); margin-top: 10px;">
+                <div style="display: flex; align-items: center; gap: 15px; width: 100%;">
+                    <div style="text-align: right; flex: 1;">
+                        <div style="font-weight: 700; margin-bottom: 5px;">پاکەتی پرۆ</div>
+                        <div style="font-size: 14px; color: rgba(255,255,255,0.7);">٢,٠٠٠ سکە + ١٠ توانا</div>
+                    </div>
+                    <div style="background: linear-gradient(135deg, var(--gold), var(--accent)); color: white; padding: 10px 20px; border-radius: 12px; font-weight: bold; font-size: 20px;">
+                        ١,٩٩٩ سکە
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -795,11 +1234,11 @@
     <!-- Admin Screen -->
     <section id="admin" class="screen">
         <div class="header">
-            <button class="btn" onclick="showScreen('home')" style="width: auto; padding: 10px 20px;">
+            <button class="btn" onclick="showScreen('home')" style="width: auto; padding: 12px 20px;">
                 <i class="fas fa-arrow-right"></i>
             </button>
             <div class="header-title">ئەدمین</div>
-            <button class="btn btn-danger" onclick="logoutAdmin()" style="width: auto; padding: 10px 15px;">
+            <button class="btn btn-danger" onclick="logoutAdmin()" style="width: auto; padding: 12px 18px;">
                 <i class="fas fa-sign-out-alt"></i>
             </button>
         </div>
@@ -808,104 +1247,811 @@
             <div class="admin-card" onclick="manageUsers()">
                 <div class="admin-icon"><i class="fas fa-users"></i></div>
                 <div class="admin-title">بەکارهێنەران</div>
+                <div style="font-size: 12px; color: rgba(255,255,255,0.6); margin-top: 8px;">١,٢٤٧ بەکارهێنەر</div>
             </div>
 
             <div class="admin-card" onclick="manageQuestions()">
-                <div class="admin-icon"><i class="fas fa-question"></i></div>
+                <div class="admin-icon"><i class="fas fa-question-circle"></i></div>
                 <div class="admin-title">پرسیارەکان</div>
+                <div style="font-size: 12px; color: rgba(255,255,255,0.6); margin-top: 8px;">٥٤٨ پرسیار</div>
             </div>
 
             <div class="admin-card" onclick="manageShop()">
                 <div class="admin-icon"><i class="fas fa-store"></i></div>
                 <div class="admin-title">کۆگا</div>
+                <div style="font-size: 12px; color: rgba(255,255,255,0.6); margin-top: 8px;">٣٢ کاڵا</div>
             </div>
 
             <div class="admin-card" onclick="manageSettings()">
                 <div class="admin-icon"><i class="fas fa-sliders-h"></i></div>
                 <div class="admin-title">ڕێکخستن</div>
+                <div style="font-size: 12px; color: rgba(255,255,255,0.6); margin-top: 8px;">ڕێکخستنەکان</div>
             </div>
         </div>
 
         <div class="card">
-            <h3 style="margin-bottom: 15px;">زیادکردنی پرسیار</h3>
+            <h3 style="margin-bottom: 20px; color: var(--primary);">زیادکردنی پرسیار</h3>
             <div class="form-group">
                 <label class="form-label">پرسیار</label>
-                <textarea class="form-input" rows="3" placeholder="پرسیارەکەت لێرە بنووسە..."></textarea>
+                <textarea class="form-input" id="questionInput" rows="3" placeholder="پرسیارەکەت لێرە بنووسە..."></textarea>
             </div>
 
-            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 15px 0;">
-                <input class="form-input" placeholder="وەڵامی ١">
-                <input class="form-input" placeholder="وەڵامی ٢">
-                <input class="form-input" placeholder="وەڵامی ٣">
-                <input class="form-input" placeholder="وەڵامی ٤">
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 20px 0;">
+                <input class="form-input" id="answer1" placeholder="وەڵامی ١" data-correct="false">
+                <input class="form-input" id="answer2" placeholder="وەڵامی ٢" data-correct="false">
+                <input class="form-input" id="answer3" placeholder="وەڵامی ٣" data-correct="false">
+                <input class="form-input" id="answer4" placeholder="وەڵامی ٤" data-correct="false">
             </div>
 
-            <button class="btn btn-primary">
+            <div class="form-group">
+                <label class="form-label">وەڵامی ڕاست</label>
+                <select class="form-input" id="correctAnswer">
+                    <option value="0">وەڵامی ١</option>
+                    <option value="1">وەڵامی ٢</option>
+                    <option value="2">وەڵامی ٣</option>
+                    <option value="3">وەڵامی ٤</option>
+                </select>
+            </div>
+
+            <button class="btn btn-primary" onclick="saveQuestion()">
                 <i class="fas fa-save"></i>
-                پاشەکەوتکردن
+                پاشەکەوتکردنی پرسیار
             </button>
+        </div>
+    </section>
+
+    <!-- Leaderboard Screen -->
+    <section id="leaderboard" class="screen">
+        <div class="header">
+            <button class="btn" onclick="showScreen('home')" style="width: auto; padding: 12px 20px;">
+                <i class="fas fa-arrow-right"></i>
+            </button>
+            <div class="header-title">پلەبەندی</div>
+            <div class="stat-badge" style="background: rgba(255,215,0,0.1); border-color: var(--gold);">
+                <i class="fas fa-trophy" style="color: var(--gold);"></i>
+                <span>#٤٧</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3 style="margin-bottom: 20px; color: var(--primary);">باشترین یاریزانەکان</h3>
+            <div id="leaderboardList">
+                <!-- Leaderboard items will be added here -->
+            </div>
         </div>
     </section>
 
     <!-- Result Modal -->
     <div id="resultModal" class="modal">
         <div class="modal-content">
-            <div style="font-size: 50px; margin-bottom: 20px;">🏆</div>
-            <h2 style="margin-bottom: 10px;">سەرکەوتن!</h2>
-            <p style="color: rgba(255,255,255,0.6); margin-bottom: 20px;">کۆی خاڵەکانت</p>
-            <div style="font-size: 48px; font-weight: bold; color: var(--primary); margin-bottom: 30px;" id="finalScore">0</div>
+            <div style="font-size: 60px; margin-bottom: 20px;">🏆</div>
+            <h2 style="margin-bottom: 10px; font-size: 32px;">سەرکەوتن!</h2>
+            <p style="color: rgba(255,255,255,0.7); margin-bottom: 30px;">تۆ یاریەکەت تەواو کرد!</p>
+            <div style="font-size: 56px; font-weight: 800; color: var(--primary); margin-bottom: 30px;" id="finalScore">0</div>
             
-            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 30px;">
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-bottom: 40px;">
                 <div class="stat-item">
-                    <div class="stat-value">+٥٠</div>
+                    <div class="stat-value" id="rewardCoins">+٥٠</div>
                     <div class="stat-label">سکە</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-value">+١٠٠</div>
+                    <div class="stat-value" id="rewardXP">+١٠٠</div>
                     <div class="stat-label">XP</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="correctAnswers">0/10</div>
+                    <div class="stat-label">وەڵامی ڕاست</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="gameTime">0s</div>
+                    <div class="stat-label">کات</div>
                 </div>
             </div>
 
-            <div style="display: flex; gap: 10px;">
+            <div style="display: flex; gap: 15px;">
                 <button class="btn" onclick="closeModal()" style="flex: 1;">
                     <i class="fas fa-home"></i>
                     سەرەکی
                 </button>
+                <button class="btn btn-primary" onclick="shareResult()" style="flex: 1;">
+                    <i class="fas fa-share"></i>
+                    هاوبەشکردن
+                </button>
                 <button class="btn btn-primary" onclick="restartGame()" style="flex: 2;">
                     <i class="fas fa-redo"></i>
-                    دووبارە
+                    دووبارە یاریکردن
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pause Modal -->
+    <div id="pauseModal" class="modal">
+        <div class="modal-content">
+            <div style="font-size: 60px; margin-bottom: 20px;">⏸️</div>
+            <h2 style="margin-bottom: 10px; font-size: 32px;">یاریەکەت ڕاگرا</h2>
+            <p style="color: rgba(255,255,255,0.7); margin-bottom: 40px;">ئایا دەتەوێت بەردەوام بیت یان کۆتایی بە یاریەکە بهێنیت؟</p>
+            
+            <div style="display: flex; flex-direction: column; gap: 15px;">
+                <button class="btn btn-primary" onclick="resumeGame()">
+                    <i class="fas fa-play"></i>
+                    بەردەوامبوون
+                </button>
+                <button class="btn" onclick="quitGame()">
+                    <i class="fas fa-home"></i>
+                    گەڕانەوە بۆ سەرەکی
+                </button>
+                <button class="btn btn-secondary" onclick="showSettings()">
+                    <i class="fas fa-cog"></i>
+                    ڕێکخستنەکان
                 </button>
             </div>
         </div>
     </div>
 
     <script>
-        // ==================== FAST JAVASCRIPT ====================
+        // ==================== ENHANCED GAME SYSTEM ====================
         
-        // Remove heavy animations
-        // Use simple data structures
-        
-        const gameData = {
-            score: 0,
-            currentQuestion: 0,
+        const Game = {
+            // Game State
+            state: {
+                score: 0,
+                currentQuestion: 0,
+                timeLeft: 15,
+                timer: null,
+                multiplier: 1,
+                correctAnswers: 0,
+                totalQuestions: 0,
+                gameStartTime: null,
+                isPaused: false,
+                powerups: {
+                    '5050': 2,
+                    'time': 3,
+                    'skip': 1,
+                    'double': 1
+                }
+            },
+            
+            // Enhanced Questions Database
             questions: [
                 {
                     q: "پایتەختی وڵاتی ژاپۆن کوێیە؟",
                     a: ["تۆکیۆ", "ئۆساکا", "کیۆتۆ", "سیۆل"],
-                    c: 0
+                    c: 0,
+                    category: "جغرافیا",
+                    difficulty: "ئاسان"
                 },
                 {
                     q: "خێرایی ڕووناکی چەندە لە چرکەیەکدا؟",
                     a: ["٣٠٠ هەزار کم", "١٥٠ هەزار کم", "١ ملیۆن کم", "٣٤٠ مەتـر"],
-                    c: 0
+                    c: 0,
+                    category: "زانست",
+                    difficulty: "مامناوەند"
+                },
+                {
+                    q: "کام یەک لەم هونەرمەندانەی خوارەوە گۆرانیبێژی کوردە؟",
+                    a: ["محەممەد ڕەئووف", "عەبدوڵڵا کەشمیری", "شڤان پەروەر", "حوسێن نەژاد"],
+                    c: 2,
+                    category: "هونەر",
+                    difficulty: "ئاسان"
+                },
+                {
+                    q: "کام یەک لەم شوێنانە کۆنترین شارە لە جیهاندا؟",
+                    a: ["بەغداد", "ئەریحا", "رۆما", "ئەسکەندەریە"],
+                    c: 1,
+                    category: "مێژوو",
+                    difficulty: "قورس"
+                },
+                {
+                    q: "کام یەک لەم سیانەی خوارەوە پێکهاتەی ئاوی نیە؟",
+                    a: ["H₂O", "CO₂", "NH₃", "CH₄"],
+                    c: 3,
+                    category: "کیمیا",
+                    difficulty: "مامناوەند"
                 }
-                // Add more questions as needed
             ],
-            timer: null,
-            timeLeft: 15
+            
+            // Leaderboard Data
+            leaderboard: [
+                { name: "ئەسڵان", score: 2450, level: 15 },
+                { name: "شیرین", score: 2100, level: 13 },
+                { name: "ڕۆژان", score: 1950, level: 12 },
+                { name: "کارۆ", score: 1800, level: 11 },
+                { name: "نازنین", score: 1650, level: 10 },
+                { name: "هێرۆ", score: 1500, level: 9 },
+                { name: "ڤیان", score: 1350, level: 8 },
+                { name: "سارا", score: 1200, level: 7 },
+                { name: "یاریزان", score: 1250, level: 5 },
+                { name: "ئازاد", score: 1100, level: 6 }
+            ],
+            
+            // Player Data
+            player: {
+                name: "یاریزان",
+                level: 5,
+                xp: 1200,
+                xpNeeded: 2000,
+                coins: 1250,
+                highScore: 1250,
+                totalGames: 47,
+                correctAnswers: 46,
+                avgTime: 2.5,
+                streak: 5,
+                achievements: ['first_win', 'speed_demon', 'perfect_score']
+            },
+            
+            // Initialize Game
+            init() {
+                this.loadPlayerData();
+                this.updateUI();
+                this.showNotification("بەخێربێیت بۆ SURVIVOR ULTRA!", "success");
+            },
+            
+            // Load player data from localStorage
+            loadPlayerData() {
+                const saved = localStorage.getItem('survivorPlayer');
+                if (saved) {
+                    this.player = { ...this.player, ...JSON.parse(saved) };
+                }
+            },
+            
+            // Save player data to localStorage
+            savePlayerData() {
+                localStorage.setItem('survivorPlayer', JSON.stringify(this.player));
+            },
+            
+            // Update UI elements
+            updateUI() {
+                // Update player stats
+                document.getElementById('playerName').textContent = this.player.name;
+                document.getElementById('playerLevel').textContent = this.player.level;
+                document.getElementById('highScore').textContent = this.formatNumber(this.player.highScore);
+                document.getElementById('totalGames').textContent = this.player.totalGames;
+                document.getElementById('accuracy').textContent = Math.round((this.player.correctAnswers / this.player.totalGames) * 100) + '%';
+                document.getElementById('avgTime').textContent = this.player.avgTime.toFixed(1) + 's';
+                document.getElementById('coins').textContent = this.formatNumber(this.player.coins);
+                document.getElementById('streak').textContent = this.player.streak;
+                document.getElementById('shopCoins').textContent = this.formatNumber(this.player.coins);
+                
+                // Update progress bar
+                const xpPercent = (this.player.xp / this.player.xpNeeded) * 100;
+                document.querySelector('.progress-fill').style.width = `${xpPercent}%`;
+                
+                // Update powerup counts
+                for (const [type, count] of Object.entries(this.state.powerups)) {
+                    const element = document.getElementById(`powerup${type.charAt(0).toUpperCase() + type.slice(1)}Count`);
+                    if (element) element.textContent = count;
+                }
+            },
+            
+            // Format numbers with commas
+            formatNumber(num) {
+                return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            },
+            
+            // Show notification
+            showNotification(message, type = 'info') {
+                const notification = document.getElementById('notification');
+                notification.textContent = message;
+                notification.className = `notification ${type}`;
+                notification.classList.add('show');
+                
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 3000);
+            },
+            
+            // Start Game
+            startGame() {
+                this.state.score = 0;
+                this.state.currentQuestion = 0;
+                this.state.timeLeft = 15;
+                this.state.multiplier = 1;
+                this.state.correctAnswers = 0;
+                this.state.totalQuestions = 0;
+                this.state.gameStartTime = Date.now();
+                this.state.isPaused = false;
+                
+                // Reset powerups for new game
+                this.state.powerups = {
+                    '5050': 2,
+                    'time': 3,
+                    'skip': 1,
+                    'double': 1
+                };
+                
+                document.getElementById('score').textContent = '0';
+                document.getElementById('multiplier').textContent = '1x';
+                showScreen('game');
+                this.loadQuestion();
+                this.startTimer();
+            },
+            
+            // Load current question
+            loadQuestion() {
+                if (this.state.currentQuestion >= this.questions.length) {
+                    this.endGame();
+                    return;
+                }
+                
+                const q = this.questions[this.state.currentQuestion];
+                document.getElementById('question').textContent = q.q;
+                
+                const answersDiv = document.getElementById('answers');
+                answersDiv.innerHTML = '';
+                
+                q.a.forEach((answer, index) => {
+                    const btn = document.createElement('button');
+                    btn.className = 'btn answer-btn';
+                    btn.innerHTML = `
+                        <span>${answer}</span>
+                        <i class="far fa-circle"></i>
+                    `;
+                    btn.onclick = () => this.checkAnswer(index, btn);
+                    answersDiv.appendChild(btn);
+                });
+                
+                this.state.timeLeft = 15;
+                this.updateTimer();
+                this.state.totalQuestions++;
+            },
+            
+            // Check answer
+            checkAnswer(selectedIndex, btn) {
+                if (this.state.isPaused) return;
+                
+                clearInterval(this.state.timer);
+                
+                const correctIndex = this.questions[this.state.currentQuestion].c;
+                const isCorrect = selectedIndex === correctIndex;
+                
+                // Add animation
+                btn.classList.add('shake');
+                
+                if (isCorrect) {
+                    // Calculate score with multiplier
+                    const baseScore = 100;
+                    const timeBonus = Math.max(5, this.state.timeLeft);
+                    const scoreEarned = Math.floor((baseScore + timeBonus) * this.state.multiplier);
+                    
+                    this.state.score += scoreEarned;
+                    this.state.correctAnswers++;
+                    
+                    // Increase multiplier for consecutive correct answers
+                    if (this.state.multiplier < 5) {
+                        this.state.multiplier += 0.25;
+                    }
+                    
+                    document.getElementById('score').textContent = this.formatNumber(this.state.score);
+                    document.getElementById('multiplier').textContent = this.state.multiplier.toFixed(1) + 'x';
+                    
+                    btn.classList.add('correct');
+                    btn.querySelector('i').className = 'fas fa-check-circle';
+                    
+                    this.showNotification(`+${scoreEarned} خاڵ! (${this.state.multiplier.toFixed(1)}x)`, "success");
+                } else {
+                    // Reset multiplier on wrong answer
+                    this.state.multiplier = 1;
+                    document.getElementById('multiplier').textContent = '1x';
+                    
+                    btn.classList.add('wrong');
+                    btn.querySelector('i').className = 'fas fa-times-circle';
+                    
+                    // Show correct answer
+                    const btns = document.querySelectorAll('.answer-btn');
+                    btns[correctIndex].classList.add('correct');
+                    btns[correctIndex].querySelector('i').className = 'fas fa-check-circle';
+                    
+                    this.showNotification("وەڵامەکەت هەڵەبوو!", "error");
+                }
+                
+                // Disable all buttons
+                document.querySelectorAll('.answer-btn').forEach(b => {
+                    b.onclick = null;
+                    b.style.opacity = '0.7';
+                    b.style.pointerEvents = 'none';
+                });
+                
+                // Next question after delay
+                setTimeout(() => {
+                    this.state.currentQuestion++;
+                    this.loadQuestion();
+                    this.startTimer();
+                }, 1500);
+            },
+            
+            // Start timer
+            startTimer() {
+                clearInterval(this.state.timer);
+                this.state.timeLeft = 15;
+                this.updateTimer();
+                
+                this.state.timer = setInterval(() => {
+                    if (this.state.isPaused) return;
+                    
+                    this.state.timeLeft--;
+                    this.updateTimer();
+                    
+                    if (this.state.timeLeft <= 0) {
+                        clearInterval(this.state.timer);
+                        // Time's up - move to next question
+                        this.showNotification("کات تەواو بوو!", "error");
+                        this.state.multiplier = 1;
+                        document.getElementById('multiplier').textContent = '1x';
+                        
+                        setTimeout(() => {
+                            this.state.currentQuestion++;
+                            this.loadQuestion();
+                            this.startTimer();
+                        }, 1000);
+                    }
+                }, 1000);
+            },
+            
+            // Update timer display
+            updateTimer() {
+                const percent = (this.state.timeLeft / 15) * 100;
+                const timerBar = document.getElementById('timerBar');
+                timerBar.style.width = percent + '%';
+                
+                // Change color based on time left
+                if (this.state.timeLeft < 5) {
+                    timerBar.style.background = "linear-gradient(90deg, var(--accent), #ff0000)";
+                } else if (this.state.timeLeft < 10) {
+                    timerBar.style.background = "linear-gradient(90deg, #ff5e00, #ffaa00)";
+                } else {
+                    timerBar.style.background = "linear-gradient(90deg, var(--accent), #ff5e00, #ffaa00)";
+                }
+            },
+            
+            // Use powerup
+            usePowerup(type) {
+                if (this.state.isPaused) return;
+                
+                if (this.state.powerups[type] <= 0) {
+                    this.showNotification("ئەم توانایەت بەسەر چووە!", "error");
+                    return;
+                }
+                
+                switch (type) {
+                    case '5050':
+                        this.use5050();
+                        break;
+                    case 'time':
+                        this.addTime();
+                        break;
+                    case 'skip':
+                        this.skipQuestion();
+                        break;
+                    case 'double':
+                        this.doublePoints();
+                        break;
+                }
+                
+                this.state.powerups[type]--;
+                this.updateUI();
+            },
+            
+            // 50/50 powerup
+            use5050() {
+                const correctIndex = this.questions[this.state.currentQuestion].c;
+                const answers = document.querySelectorAll('.answer-btn');
+                let wrongAnswersRemoved = 0;
+                
+                // Remove two wrong answers
+                for (let i = 0; i < answers.length; i++) {
+                    if (i !== correctIndex && wrongAnswersRemoved < 2) {
+                        answers[i].style.opacity = '0.3';
+                        answers[i].style.pointerEvents = 'none';
+                        answers[i].querySelector('span').textContent = '---';
+                        wrongAnswersRemoved++;
+                    }
+                }
+                
+                this.showNotification("٢ وەڵامی هەڵە سڕێنرایەوە!", "success");
+            },
+            
+            // Add time powerup
+            addTime() {
+                this.state.timeLeft += 10;
+                if (this.state.timeLeft > 15) this.state.timeLeft = 15;
+                this.updateTimer();
+                this.showNotification("+١٠ چرکە کات زیادکرا!", "success");
+            },
+            
+            // Skip question powerup
+            skipQuestion() {
+                clearInterval(this.state.timer);
+                this.state.currentQuestion++;
+                this.loadQuestion();
+                this.startTimer();
+                this.showNotification("پرسیارەکە تێپەڕێندرا!", "success");
+            },
+            
+            // Double points powerup
+            doublePoints() {
+                this.state.multiplier *= 2;
+                document.getElementById('multiplier').textContent = this.state.multiplier.toFixed(1) + 'x';
+                this.showNotification(`٢ هێندە خاڵ! (${this.state.multiplier.toFixed(1)}x)`, "success");
+            },
+            
+            // Pause game
+            pauseGame() {
+                this.state.isPaused = true;
+                clearInterval(this.state.timer);
+                document.getElementById('pauseModal').classList.add('active');
+            },
+            
+            // Resume game
+            resumeGame() {
+                this.state.isPaused = false;
+                document.getElementById('pauseModal').classList.remove('active');
+                this.startTimer();
+            },
+            
+            // Quit game
+            quitGame() {
+                clearInterval(this.state.timer);
+                this.state.isPaused = false;
+                document.getElementById('pauseModal').classList.remove('active');
+                showScreen('home');
+            },
+            
+            // End game
+            endGame() {
+                clearInterval(this.state.timer);
+                
+                // Calculate game time
+                const gameTime = Math.floor((Date.now() - this.state.gameStartTime) / 1000);
+                
+                // Calculate rewards
+                const coinsEarned = Math.floor(this.state.score / 10);
+                const xpEarned = Math.floor(this.state.score / 5);
+                const accuracy = Math.round((this.state.correctAnswers / this.state.totalQuestions) * 100);
+                
+                // Update player stats
+                this.player.coins += coinsEarned;
+                this.player.xp += xpEarned;
+                this.player.totalGames++;
+                this.player.correctAnswers += this.state.correctAnswers;
+                
+                // Update high score
+                if (this.state.score > this.player.highScore) {
+                    this.player.highScore = this.state.score;
+                    this.showNotification("بەرزترین خاڵەکەت تازەکردنەوە!", "success");
+                }
+                
+                // Level up check
+                if (this.player.xp >= this.player.xpNeeded) {
+                    this.player.level++;
+                    this.player.xp = this.player.xp - this.player.xpNeeded;
+                    this.player.xpNeeded = Math.floor(this.player.xpNeeded * 1.5);
+                    this.showNotification(`ئاستی ${this.player.level} گەیشتیت!`, "success");
+                }
+                
+                // Update streak
+                if (accuracy >= 70) {
+                    this.player.streak++;
+                } else {
+                    this.player.streak = 0;
+                }
+                
+                // Update average time
+                const totalTime = (this.player.avgTime * (this.player.totalGames - 1) + gameTime / this.state.totalQuestions) / this.player.totalGames;
+                this.player.avgTime = parseFloat(totalTime.toFixed(1));
+                
+                // Save player data
+                this.savePlayerData();
+                this.updateUI();
+                
+                // Update result modal
+                document.getElementById('finalScore').textContent = this.formatNumber(this.state.score);
+                document.getElementById('rewardCoins').textContent = `+${coinsEarned}`;
+                document.getElementById('rewardXP').textContent = `+${xpEarned}`;
+                document.getElementById('correctAnswers').textContent = `${this.state.correctAnswers}/${this.state.totalQuestions}`;
+                document.getElementById('gameTime').textContent = `${gameTime}s`;
+                
+                // Show result modal
+                document.getElementById('resultModal').classList.add('active');
+            },
+            
+            // Restart game
+            restartGame() {
+                document.getElementById('resultModal').classList.remove('active');
+                this.startGame();
+            },
+            
+            // Share result
+            shareResult() {
+                const text = `من ${this.state.score} خاڵم بەدەستهێنا لە SURVIVOR ULTRA!`;
+                
+                if (navigator.share) {
+                    navigator.share({
+                        title: 'SURVIVOR ULTRA',
+                        text: text,
+                        url: window.location.href
+                    });
+                } else {
+                    navigator.clipboard.writeText(text).then(() => {
+                        this.showNotification("ئەنجامەکە لە بەردەستدا کۆپی کرا!", "success");
+                    });
+                }
+            },
+            
+            // Edit profile
+            editProfile() {
+                const newName = prompt("ناوی نوێت بنووسە:", this.player.name);
+                if (newName && newName.trim() !== '') {
+                    this.player.name = newName.trim();
+                    this.savePlayerData();
+                    this.updateUI();
+                    this.showNotification("ناوەکەت تازەکرایەوە!", "success");
+                }
+            },
+            
+            // Change avatar
+            changeAvatar() {
+                const avatars = ['👤', '👨', '👩', '🧔', '👱', '🧑', '👨‍💻', '👩‍🎓', '🦸', '🧙'];
+                const currentAvatar = document.querySelector('.avatar').textContent;
+                const currentIndex = avatars.indexOf(currentAvatar);
+                const nextIndex = (currentIndex + 1) % avatars.length;
+                
+                document.querySelector('.avatar').textContent = avatars[nextIndex];
+                this.showNotification("وێنەکەت گۆڕدرا!", "success");
+            },
+            
+            // Buy item from shop
+            buyItem(item) {
+                const prices = {
+                    'king': 999,
+                    'speed': 100,
+                    'theme': 500,
+                    'badge': 250
+                };
+                
+                const price = prices[item];
+                
+                if (this.player.coins >= price) {
+                    this.player.coins -= price;
+                    this.savePlayerData();
+                    this.updateUI();
+                    this.showNotification("کاڵاکە کڕدرا!", "success");
+                } else {
+                    this.showNotification("سکەت بەس نیە!", "error");
+                }
+            },
+            
+            // Buy package
+            buyPackage(packageType) {
+                const packages = {
+                    'starter': { price: 499, coins: 500, powerups: 3 },
+                    'pro': { price: 1999, coins: 2000, powerups: 10 }
+                };
+                
+                const pkg = packages[packageType];
+                
+                if (this.player.coins >= pkg.price) {
+                    this.player.coins += pkg.coins;
+                    
+                    // Add powerups
+                    for (const type in this.state.powerups) {
+                        this.state.powerups[type] += pkg.powerups;
+                    }
+                    
+                    this.savePlayerData();
+                    this.updateUI();
+                    this.showNotification(`پاکەتی ${packageType} کڕدرا!`, "success");
+                } else {
+                    this.showNotification("سکەت بەس نیە!", "error");
+                }
+            },
+            
+            // Save question (admin)
+            saveQuestion() {
+                const question = document.getElementById('questionInput').value.trim();
+                const answers = [
+                    document.getElementById('answer1').value.trim(),
+                    document.getElementById('answer2').value.trim(),
+                    document.getElementById('answer3').value.trim(),
+                    document.getElementById('answer4').value.trim()
+                ];
+                const correctAnswer = parseInt(document.getElementById('correctAnswer').value);
+                
+                if (!question || answers.some(a => !a)) {
+                    this.showNotification("تکایە هەموو خانەکان پڕبکەرەوە!", "error");
+                    return;
+                }
+                
+                const newQuestion = {
+                    q: question,
+                    a: answers,
+                    c: correctAnswer,
+                    category: "گشتی",
+                    difficulty: "مامناوەند"
+                };
+                
+                this.questions.push(newQuestion);
+                
+                // Clear form
+                document.getElementById('questionInput').value = '';
+                document.getElementById('answer1').value = '';
+                document.getElementById('answer2').value = '';
+                document.getElementById('answer3').value = '';
+                document.getElementById('answer4').value = '';
+                document.getElementById('correctAnswer').value = '0';
+                
+                this.showNotification("پرسیارەکە پاشەکەوت کرا!", "success");
+            },
+            
+            // Load leaderboard
+            loadLeaderboard() {
+                const leaderboardList = document.getElementById('leaderboardList');
+                leaderboardList.innerHTML = '';
+                
+                this.leaderboard.sort((a, b) => b.score - a.score);
+                
+                this.leaderboard.forEach((player, index) => {
+                    const item = document.createElement('div');
+                    item.className = 'leaderboard-item';
+                    item.innerHTML = `
+                        <div class="leaderboard-rank" style="background: ${index < 3 ? 'linear-gradient(135deg, var(--gold), var(--accent))' : 'linear-gradient(135deg, var(--primary), var(--secondary))'}">
+                            ${index + 1}
+                        </div>
+                        <div class="leaderboard-user">
+                            <div style="font-size: 24px;">👤</div>
+                            <div style="text-align: right; flex: 1;">
+                                <div style="font-weight: 700;">${player.name}</div>
+                                <div style="font-size: 12px; color: rgba(255,255,255,0.6);">ئاست ${player.level}</div>
+                            </div>
+                        </div>
+                        <div class="leaderboard-score">${this.formatNumber(player.score)}</div>
+                    `;
+                    leaderboardList.appendChild(item);
+                });
+            },
+            
+            // Start daily game
+            startDailyGame() {
+                // Check if it's time for daily game
+                const now = new Date();
+                const targetTime = new Date();
+                targetTime.setHours(20, 0, 0, 0);
+                
+                if (now >= targetTime) {
+                    this.startGame();
+                } else {
+                    const timeDiff = targetTime - now;
+                    const hours = Math.floor(timeDiff / (1000 * 60 * 60));
+                    const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+                    
+                    this.showNotification(`یاری سەرەکی دەست پێ دەکات لە ${hours} کاتژمێر و ${minutes} خولەک!`, "info");
+                }
+            },
+            
+            // Start quick game
+            startQuickGame() {
+                // Set up quick game (10 questions)
+                this.questions = this.getRandomQuestions(10);
+                this.startGame();
+            },
+            
+            // Get random questions
+            getRandomQuestions(count) {
+                const shuffled = [...this.questions].sort(() => 0.5 - Math.random());
+                return shuffled.slice(0, count);
+            },
+            
+            // Logout admin
+            logoutAdmin() {
+                if (confirm("دڵنیایت دەتەوێت لە ئەدمین دەرچیت؟")) {
+                    showScreen('home');
+                    this.showNotification("سەرکەوتووانە لە ئەدمین دەرچوویت", "success");
+                }
+            }
         };
-
-        // Fast screen switching
+        
+        // ==================== SCREEN MANAGEMENT ====================
+        
         function showScreen(screenId) {
             // Hide all screens
             document.querySelectorAll('.screen').forEach(screen => {
@@ -913,7 +2059,15 @@
             });
             
             // Show selected screen
-            document.getElementById(screenId).classList.add('active');
+            const screen = document.getElementById(screenId);
+            if (screen) {
+                screen.classList.add('active');
+                
+                // Load leaderboard if needed
+                if (screenId === 'leaderboard') {
+                    Game.loadLeaderboard();
+                }
+            }
             
             // Update nav
             document.querySelectorAll('.nav-item').forEach(item => {
@@ -934,153 +2088,79 @@
                 navItems[navMap[screenId]].classList.add('active');
             }
         }
-
-        // Fast game functions
-        function startGame() {
-            gameData.score = 0;
-            gameData.currentQuestion = 0;
-            gameData.timeLeft = 15;
-            
-            document.getElementById('score').textContent = '0';
-            showScreen('game');
-            loadQuestion();
-            startTimer();
-        }
-
-        function loadQuestion() {
-            if (gameData.currentQuestion >= gameData.questions.length) {
-                endGame();
-                return;
-            }
-            
-            const q = gameData.questions[gameData.currentQuestion];
-            document.getElementById('question').textContent = q.q;
-            
-            const answersDiv = document.getElementById('answers');
-            answersDiv.innerHTML = '';
-            
-            q.a.forEach((answer, index) => {
-                const btn = document.createElement('button');
-                btn.className = 'btn answer-btn';
-                btn.innerHTML = `
-                    <span>${answer}</span>
-                    <i class="far fa-circle"></i>
-                `;
-                btn.onclick = () => checkAnswer(index, btn);
-                answersDiv.appendChild(btn);
-            });
-            
-            gameData.timeLeft = 15;
-            updateTimer();
-        }
-
-        function checkAnswer(selectedIndex, btn) {
-            clearInterval(gameData.timer);
-            
-            const correctIndex = gameData.questions[gameData.currentQuestion].c;
-            const isCorrect = selectedIndex === correctIndex;
-            
-            if (isCorrect) {
-                gameData.score += 100;
-                document.getElementById('score').textContent = gameData.score;
-                btn.classList.add('correct');
-                btn.querySelector('i').className = 'fas fa-check-circle';
-            } else {
-                btn.classList.add('wrong');
-                btn.querySelector('i').className = 'fas fa-times-circle';
-                
-                // Show correct answer
-                const btns = document.querySelectorAll('.answer-btn');
-                btns[correctIndex].classList.add('correct');
-                btns[correctIndex].querySelector('i').className = 'fas fa-check-circle';
-            }
-            
-            // Disable all buttons
-            document.querySelectorAll('.answer-btn').forEach(b => {
-                b.onclick = null;
-                b.style.opacity = '0.7';
-            });
-            
-            // Next question after delay
-            setTimeout(() => {
-                gameData.currentQuestion++;
-                loadQuestion();
-                startTimer();
-            }, 1500);
-        }
-
-        function startTimer() {
-            clearInterval(gameData.timer);
-            gameData.timeLeft = 15;
-            updateTimer();
-            
-            gameData.timer = setInterval(() => {
-                gameData.timeLeft--;
-                updateTimer();
-                
-                if (gameData.timeLeft <= 0) {
-                    clearInterval(gameData.timer);
-                    // Time's up - move to next question
-                    gameData.currentQuestion++;
-                    loadQuestion();
-                    startTimer();
-                }
-            }, 1000);
-        }
-
-        function updateTimer() {
-            const percent = (gameData.timeLeft / 15) * 100;
-            document.getElementById('timerBar').style.width = percent + '%';
-        }
-
-        function endGame() {
-            document.getElementById('finalScore').textContent = gameData.score;
-            document.getElementById('resultModal').classList.add('active');
-        }
-
+        
+        // ==================== GLOBAL FUNCTIONS ====================
+        
         function closeModal() {
             document.getElementById('resultModal').classList.remove('active');
             showScreen('home');
         }
-
-        function restartGame() {
-            document.getElementById('resultModal').classList.remove('active');
-            startGame();
+        
+        function showAchievements() {
+            Game.showNotification("سەرکەوتنەکان لە بەردەستدایە!", "info");
         }
-
-        function usePowerup(type) {
-            // Simple powerup implementation
-            alert(`توانای ${type} بەکارهێنرا!`);
+        
+        function showSettings() {
+            Game.showNotification("ڕێکخستنەکان لە بەردەستن!", "info");
         }
-
-        // Admin functions
-        function logoutAdmin() {
-            if (confirm("دڵنیایت دەتەوێت لە ئەدمین دەرچیت؟")) {
-                showScreen('home');
-            }
+        
+        function manageUsers() {
+            Game.showNotification("بەڕێوەبردنی بەکارهێنەران", "info");
         }
-
-        // Profile functions
-        function editProfile() {
-            const newName = prompt("ناوی نوێت بنووسە:", "یاریزان");
-            if (newName) {
-                document.querySelector('.profile-name').textContent = newName;
-            }
+        
+        function manageQuestions() {
+            Game.showNotification("بەڕێوەبردنی پرسیارەکان", "info");
         }
-
-        // Initialize
+        
+        function manageShop() {
+            Game.showNotification("بەڕێوەبردنی کۆگا", "info");
+        }
+        
+        function manageSettings() {
+            Game.showNotification("بەڕێوەبردنی ڕێکخستنەکان", "info");
+        }
+        
+        // ==================== INITIALIZATION ====================
+        
         window.onload = function() {
             // Hide loading screen
             setTimeout(() => {
                 document.getElementById('loading').style.opacity = '0';
                 setTimeout(() => {
                     document.getElementById('loading').style.display = 'none';
-                }, 300);
-            }, 500);
+                }, 500);
+            }, 1000);
             
-            // Initialize first screen
+            // Initialize game
+            Game.init();
+            
+            // Show home screen
             showScreen('home');
         };
+        
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                if (document.getElementById('pauseModal').classList.contains('active')) {
+                    Game.resumeGame();
+                } else if (document.getElementById('resultModal').classList.contains('active')) {
+                    closeModal();
+                } else if (document.getElementById('game').classList.contains('active')) {
+                    Game.pauseGame();
+                }
+            }
+            
+            // Number keys for answers (1-4)
+            if (document.getElementById('game').classList.contains('active')) {
+                const key = parseInt(e.key);
+                if (key >= 1 && key <= 4) {
+                    const answers = document.querySelectorAll('.answer-btn');
+                    if (answers[key - 1] && answers[key - 1].onclick) {
+                        answers[key - 1].click();
+                    }
+                }
+            }
+        });
     </script>
 </body>
 </html>
