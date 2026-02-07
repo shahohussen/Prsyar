@@ -1000,7 +1000,7 @@
 
         /* Fix for iOS */
         input, textarea, select {
-            font-size: 16px !important; /* Prevent zoom on iOS */
+            font-size: 16px !important;
         }
 
         /* Fix for mobile viewport */
@@ -1035,83 +1035,45 @@
             }
         }
 
-        /* User List for Admin */
-        .user-list {
-            max-height: 300px;
+        /* Admin Sections */
+        .admin-section {
+            display: none;
+        }
+        
+        .admin-section.active {
+            display: block;
+        }
+        
+        .questions-list, .shop-items-list, .winners-list {
+            max-height: 400px;
             overflow-y: auto;
             margin: 15px 0;
             border-radius: 12px;
             background: rgba(255, 255, 255, 0.05);
             padding: 10px;
         }
-
-        .user-item {
+        
+        .question-item, .shop-item-admin, .winner-item {
             display: flex;
-            align-items: center;
             justify-content: space-between;
+            align-items: center;
             padding: 12px 15px;
             background: rgba(255, 255, 255, 0.03);
             border-radius: 10px;
             margin-bottom: 8px;
             border: 1px solid var(--border);
         }
-
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 12px;
+        
+        .question-text {
             flex: 1;
+            margin-right: 15px;
         }
-
-        .user-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--secondary), var(--primary));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-        }
-
-        .user-details {
-            flex: 1;
-        }
-
-        .user-name {
-            font-weight: 600;
-            margin-bottom: 3px;
-        }
-
-        .user-email {
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.6);
-        }
-
-        .user-role {
-            font-size: 11px;
-            padding: 3px 10px;
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.1);
-            margin-top: 3px;
-            display: inline-block;
-        }
-
-        .user-role.admin {
-            background: rgba(255, 0, 85, 0.2);
-            color: var(--accent);
-        }
-
-        .user-role.super-admin {
-            background: rgba(255, 215, 0, 0.2);
-            color: var(--gold);
-        }
-
-        .user-actions {
+        
+        .question-actions, .shop-item-actions, .winner-actions {
             display: flex;
             gap: 8px;
         }
-
+        
         .action-btn {
             width: 36px;
             height: 36px;
@@ -1125,28 +1087,35 @@
             color: white;
             transition: all 0.3s ease;
         }
-
+        
         .action-btn:hover {
             background: rgba(0, 243, 255, 0.2);
             color: var(--primary);
         }
-
-        .action-btn.make-admin {
+        
+        .action-btn.edit {
+            background: rgba(0, 243, 255, 0.1);
+            color: var(--primary);
+        }
+        
+        .action-btn.delete {
             background: rgba(255, 0, 85, 0.1);
             color: var(--accent);
         }
-
-        .action-btn.make-admin:hover {
-            background: rgba(255, 0, 85, 0.2);
+        
+        /* Online Users Counter */
+        .online-users.real {
+            background: rgba(0, 243, 255, 0.1);
+            border-color: var(--primary);
         }
-
-        .action-btn.remove-admin {
-            background: rgba(255, 215, 0, 0.1);
-            color: var(--gold);
-        }
-
-        .action-btn.remove-admin:hover {
-            background: rgba(255, 215, 0, 0.2);
+        
+        .online-users.real .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--success);
+            border-radius: 50%;
+            margin-left: 5px;
+            animation: pulse 1.5s infinite;
         }
     </style>
 </head>
@@ -1165,12 +1134,12 @@
             
             <div class="auth-form" id="loginForm">
                 <div class="form-group">
-                    <input type="email" id="loginEmail" class="form-input" placeholder="ئیمەیڵ">
+                    <input type="email" id="loginEmail" class="form-input" placeholder="ئیمەیڵ" value="">
                     <div class="error-message" id="loginEmailError"></div>
                 </div>
                 
                 <div class="form-group">
-                    <input type="password" id="loginPassword" class="form-input" placeholder="پاسۆرد">
+                    <input type="password" id="loginPassword" class="form-input" placeholder="پاسۆرد" value="">
                     <div class="error-message" id="loginPasswordError"></div>
                 </div>
                 
@@ -1191,22 +1160,22 @@
             
             <div class="auth-form" id="registerForm" style="display: none;">
                 <div class="form-group">
-                    <input type="text" id="registerName" class="form-input" placeholder="ناوی یاریزان">
+                    <input type="text" id="registerName" class="form-input" placeholder="ناوی یاریزان" value="">
                     <div class="error-message" id="registerNameError"></div>
                 </div>
                 
                 <div class="form-group">
-                    <input type="email" id="registerEmail" class="form-input" placeholder="ئیمەیڵ">
+                    <input type="email" id="registerEmail" class="form-input" placeholder="ئیمەیڵ" value="">
                     <div class="error-message" id="registerEmailError"></div>
                 </div>
                 
                 <div class="form-group">
-                    <input type="password" id="registerPassword" class="form-input" placeholder="پاسۆرد (کمینە ٨ نووسە)">
+                    <input type="password" id="registerPassword" class="form-input" placeholder="پاسۆرد (کمینە ٨ نووسە)" value="">
                     <div class="error-message" id="registerPasswordError"></div>
                 </div>
                 
                 <div class="form-group">
-                    <input type="password" id="registerConfirm" class="form-input" placeholder="دووبارەی پاسۆرد">
+                    <input type="password" id="registerConfirm" class="form-input" placeholder="دووبارەی پاسۆرد" value="">
                     <div class="error-message" id="registerConfirmError"></div>
                 </div>
                 
@@ -1238,9 +1207,10 @@
         <div class="ad-container" id="adContainer">
             <div class="ad-icon">📺</div>
             <div class="ad-text">سەیری ڕیکلامەکە بکە بۆ بەدەست هێنانی ١٠ تۆکن!</div>
-            <button class="btn btn-primary" onclick="watchAd()">
+            <div id="adTimer" style="font-size: 24px; font-weight: bold; color: var(--primary); margin: 15px 0;">٥</div>
+            <button class="btn btn-primary" onclick="watchAd()" id="watchAdBtn" disabled>
                 <i class="fas fa-play"></i>
-                سەیرکردنی ڕیکلام
+                سەیرکردنی ڕیکلام (٥)
             </button>
         </div>
     </div>
@@ -1274,9 +1244,10 @@
         <div class="header">
             <div class="header-title">SURVIVOR</div>
             <div class="header-stats">
-                <div class="online-users" id="onlineUsers">
+                <div class="online-users real" id="onlineUsers">
                     <i class="fas fa-wifi"></i>
-                    <span>٢٤٧ ئۆنڵاین</span>
+                    <span>٠ ئۆنڵاین</span>
+                    <div class="pulse-dot"></div>
                 </div>
                 <div class="stat-badge">
                     <i class="fas fa-coins"></i>
@@ -1447,22 +1418,22 @@
                 <button class="btn" onclick="usePowerup('time')" id="powerupTime">
                     <i class="fas fa-clock"></i>
                     +٥ چرکە کات
-                    <span style="margin-right: auto; font-size: 13px;">١٠ تۆکن</span>
+                    <span style="margin-right: auto; font-size: 13px;">٢٠٠ تۆکن</span>
                 </button>
                 <button class="btn" onclick="usePowerup('5050')" id="powerup5050">
                     <i class="fas fa-ban"></i>
                     لابردنی ٢ وەڵام
-                    <span style="margin-right: auto; font-size: 13px;">٢٥ تۆکن</span>
+                    <span style="margin-right: auto; font-size: 13px;">١٠٠٠ تۆکن</span>
                 </button>
                 <button class="btn" onclick="usePowerup('skip')" id="powerupSkip">
                     <i class="fas fa-forward"></i>
                     تێپەڕاندن
-                    <span style="margin-right: auto; font-size: 13px;">٥٠ تۆکن</span>
+                    <span style="margin-right: auto; font-size: 13px;">٥٠٠ تۆکن</span>
                 </button>
                 <button class="btn" onclick="usePowerup('double')" id="powerupDouble">
                     <i class="fas fa-bolt"></i>
                     ٢ هێندە خاڵ
-                    <span style="margin-right: auto; font-size: 13px;">١٠٠ تۆکن</span>
+                    <span style="margin-right: auto; font-size: 13px;">٣٠٠ تۆکن</span>
                 </button>
             </div>
         </div>
@@ -1475,7 +1446,7 @@
                 <i class="fas fa-arrow-right"></i>
             </button>
             <div class="header-title">کۆگا</div>
-            <div class="shop-balance">
+            <div class="stat-badge">
                 <i class="fas fa-coins"></i>
                 <span id="shopTokens">٠</span> تۆکن
             </div>
@@ -1488,7 +1459,7 @@
                     <div class="item-icon">⏱️</div>
                     <div class="item-name">کاتی زیادە</div>
                     <div class="item-desc">+٥ چرکە کات لە یاری</div>
-                    <div class="item-price">١٠ تۆکن</div>
+                    <div class="item-price">٢٠٠ تۆکن</div>
                     <button class="btn" onclick="buyPowerup('time')" style="padding: 12px; font-size: 14px;">
                         <i class="fas fa-shopping-cart"></i>
                         کڕین
@@ -1499,7 +1470,7 @@
                     <div class="item-icon">❌</div>
                     <div class="item-name">لابردنی وەڵام</div>
                     <div class="item-desc">٢ وەڵامی هەڵە دەسڕێتەوە</div>
-                    <div class="item-price">٢٥ تۆکن</div>
+                    <div class="item-price">١٠٠٠ تۆکن</div>
                     <button class="btn" onclick="buyPowerup('5050')" style="padding: 12px; font-size: 14px;">
                         <i class="fas fa-shopping-cart"></i>
                         کڕین
@@ -1510,7 +1481,7 @@
                     <div class="item-icon">⏭️</div>
                     <div class="item-name">تێپەڕاندن</div>
                     <div class="item-desc">پرسیارێک تێپەڕێنە</div>
-                    <div class="item-price">٥٠ تۆکن</div>
+                    <div class="item-price">٥٠٠ تۆکن</div>
                     <button class="btn" onclick="buyPowerup('skip')" style="padding: 12px; font-size: 14px;">
                         <i class="fas fa-shopping-cart"></i>
                         کڕین
@@ -1521,7 +1492,7 @@
                     <div class="item-icon">⚡</div>
                     <div class="item-name">٢ هێندە خاڵ</div>
                     <div class="item-desc">٢ هێندە خاڵ بۆ ٥ پرسیار</div>
-                    <div class="item-price">١٠٠ تۆکن</div>
+                    <div class="item-price">٣٠٠ تۆکن</div>
                     <button class="btn" onclick="buyPowerup('double')" style="padding: 12px; font-size: 14px;">
                         <i class="fas fa-shopping-cart"></i>
                         کڕین
@@ -1544,73 +1515,132 @@
         </div>
 
         <div class="admin-grid">
-            <div class="admin-card" onclick="manageQuestions()">
+            <div class="admin-card" onclick="showAdminSection('questions')">
                 <div class="admin-icon"><i class="fas fa-question-circle"></i></div>
                 <div class="admin-title">پرسیارەکان</div>
                 <div style="font-size: 11px; color: rgba(255,255,255,0.6); margin-top: 8px;">زیادکردن / سڕینەوە / دەستکاری</div>
             </div>
 
-            <div class="admin-card" onclick="manageShop()">
+            <div class="admin-card" onclick="showAdminSection('shop')">
                 <div class="admin-icon"><i class="fas fa-store"></i></div>
                 <div class="admin-title">کۆگا</div>
                 <div style="font-size: 11px; color: rgba(255,255,255,0.6); margin-top: 8px;">زیادکردنی کاڵا / نرخی</div>
             </div>
 
-            <div class="admin-card" onclick="viewWinners()">
+            <div class="admin-card" onclick="showAdminSection('winners')">
                 <div class="admin-icon"><i class="fas fa-trophy"></i></div>
                 <div class="admin-title">براوەکان</div>
                 <div style="font-size: 11px; color: rgba(255,255,255,0.6); margin-top: 8px;">یاریەکانی پێشوو و تازە</div>
             </div>
 
-            <div class="admin-card" onclick="manageUsers()">
+            <div class="admin-card" onclick="showAdminSection('users')">
                 <div class="admin-icon"><i class="fas fa-users"></i></div>
                 <div class="admin-title">یاریزانەکان</div>
                 <div style="font-size: 11px; color: rgba(255,255,255,0.6); margin-top: 8px;">لیست و ئامارەکان</div>
             </div>
         </div>
 
-        <div class="card">
-            <h3 style="margin-bottom: 15px; color: var(--primary); font-size: 18px;">زیادکردنی پرسیار</h3>
-            <div class="form-group">
-                <textarea class="form-input" id="adminQuestion" rows="3" placeholder="پرسیار..."></textarea>
+        <!-- Questions Management -->
+        <div id="questionsSection" class="admin-section active">
+            <div class="card">
+                <h3 style="margin-bottom: 15px; color: var(--primary); font-size: 18px;">زیادکردنی پرسیار</h3>
+                <div class="form-group">
+                    <textarea class="form-input" id="adminQuestion" rows="3" placeholder="پرسیار..."></textarea>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 15px 0;">
+                    <input class="form-input" id="adminAnswer1" placeholder="وەڵامی ١">
+                    <input class="form-input" id="adminAnswer2" placeholder="وەڵامی ٢">
+                    <input class="form-input" id="adminAnswer3" placeholder="وەڵامی ٣">
+                    <input class="form-input" id="adminAnswer4" placeholder="وەڵامی ٤">
+                </div>
+
+                <div class="form-group">
+                    <select class="form-input" id="adminCorrectAnswer">
+                        <option value="0">وەڵامی ١</option>
+                        <option value="1">وەڵامی ٢</option>
+                        <option value="2">وەڵامی ٣</option>
+                        <option value="3">وەڵامی ٤</option>
+                    </select>
+                </div>
+
+                <button class="btn btn-primary" onclick="adminAddQuestion()">
+                    <i class="fas fa-plus"></i>
+                    زیادکردنی پرسیار
+                </button>
             </div>
 
-            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 15px 0;">
-                <input class="form-input" id="adminAnswer1" placeholder="وەڵامی ١">
-                <input class="form-input" id="adminAnswer2" placeholder="وەڵامی ٢">
-                <input class="form-input" id="adminAnswer3" placeholder="وەڵامی ٣">
-                <input class="form-input" id="adminAnswer4" placeholder="وەڵامی ٤">
+            <div class="card">
+                <h3 style="margin-bottom: 15px; color: var(--primary); font-size: 18px;">لیستی پرسیارەکان</h3>
+                <div id="questionsList" class="questions-list">
+                    <!-- Questions will be loaded here -->
+                </div>
             </div>
-
-            <div class="form-group">
-                <select class="form-input" id="adminCorrectAnswer">
-                    <option value="0">وەڵامی ١</option>
-                    <option value="1">وەڵامی ٢</option>
-                    <option value="2">وەڵامی ٣</option>
-                    <option value="3">وەڵامی ٤</option>
-                </select>
-            </div>
-
-            <button class="btn btn-primary" onclick="adminAddQuestion()">
-                <i class="fas fa-plus"></i>
-                زیادکردنی پرسیار
-            </button>
         </div>
-    </section>
 
-    <!-- Admin Users Management -->
-    <section id="adminUsers" class="screen">
-        <div class="header">
-            <button class="btn" onclick="showScreen('admin')" style="width: auto; padding: 10px 16px; min-width: auto;">
-                <i class="fas fa-arrow-right"></i>
-            </button>
-            <div class="header-title">بەڕێوەبردنی یاریزانەکان</div>
+        <!-- Shop Management -->
+        <div id="shopSection" class="admin-section">
+            <div class="card">
+                <h3 style="margin-bottom: 15px; color: var(--primary); font-size: 18px;">زیادکردنی کاڵای نوێ</h3>
+                <div class="form-group">
+                    <input type="text" id="shopItemName" class="form-input" placeholder="ناوی کاڵا">
+                </div>
+                
+                <div class="form-group">
+                    <textarea id="shopItemDesc" class="form-input" rows="2" placeholder="شرحی کاڵا"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <input type="number" id="shopItemPrice" class="form-input" placeholder="نرخ (تۆکن)">
+                </div>
+                
+                <div class="form-group">
+                    <select class="form-input" id="shopItemType">
+                        <option value="powerup">توانا</option>
+                        <option value="theme">ڕووکاری</option>
+                        <option value="badge">نیشانە</option>
+                        <option value="other">دیگر</option>
+                    </select>
+                </div>
+
+                <button class="btn btn-primary" onclick="adminAddShopItem()">
+                    <i class="fas fa-plus"></i>
+                    زیادکردنی کاڵا
+                </button>
+            </div>
+
+            <div class="card">
+                <h3 style="margin-bottom: 15px; color: var(--primary); font-size: 18px;">لیستی کاڵاکان</h3>
+                <div id="shopItemsList" class="shop-items-list">
+                    <!-- Shop items will be loaded here -->
+                </div>
+            </div>
         </div>
 
-        <div class="card">
-            <h3 style="margin-bottom: 15px; color: var(--primary); font-size: 18px;">لیستی یاریزانەکان</h3>
-            <div id="usersList" class="user-list">
-                <!-- Users will be loaded here -->
+        <!-- Winners Management -->
+        <div id="winnersSection" class="admin-section">
+            <div class="card">
+                <h3 style="margin-bottom: 15px; color: var(--primary); font-size: 18px;">براوەکانی ئەمڕۆ</h3>
+                <div id="todayWinners" class="winners-list">
+                    <!-- Today's winners will be loaded here -->
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3 style="margin-bottom: 15px; color: var(--primary); font-size: 18px;">براوەکانی هەفتە</h3>
+                <div id="weeklyWinners" class="winners-list">
+                    <!-- Weekly winners will be loaded here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Users Management -->
+        <div id="usersSection" class="admin-section">
+            <div class="card">
+                <h3 style="margin-bottom: 15px; color: var(--primary); font-size: 18px;">لیستی یاریزانەکان</h3>
+                <div id="usersList" class="questions-list">
+                    <!-- Users will be loaded here -->
+                </div>
             </div>
         </div>
     </section>
@@ -1670,36 +1700,34 @@
     </div>
 
     <script>
-        // ==================== ENHANCED SERVER API ====================
-        class ServerAPI {
+        // ==================== REAL-TIME DATABASE ====================
+        class RealTimeDatabase {
             constructor() {
-                this.token = localStorage.getItem('authToken');
                 this.users = JSON.parse(localStorage.getItem('survivorUsers') || '[]');
                 this.questions = JSON.parse(localStorage.getItem('survivorQuestions') || '[]');
                 this.games = JSON.parse(localStorage.getItem('survivorGames') || '[]');
+                this.shopItems = JSON.parse(localStorage.getItem('survivorShopItems') || '[]');
                 this.onlineUsers = new Set();
+                this.activeGames = new Set();
                 this.currentUser = null;
+                this.token = localStorage.getItem('authToken');
                 
-                // دروستکردنی سووپەر ئەدمین
-                this.initSuperAdmin();
                 this.initDefaultData();
+                this.loadFromSession();
             }
             
-            initSuperAdmin() {
-                const superAdminEmail = 'shahohussen870@gmail.com';
-                const superAdminPassword = 'daliahusseN0&';
-                
-                // پشکنین بۆ ئەوەی سووپەر ئەدمین بوونی هەبێت
+            initDefaultData() {
+                // سووپەر ئەدمین
                 const superAdminExists = this.users.some(user => 
-                    user.email === superAdminEmail && user.role === 'super-admin'
+                    user.email === 'shahohussen870@gmail.com' && user.role === 'super-admin'
                 );
                 
                 if (!superAdminExists) {
                     const superAdmin = {
                         id: 'super_admin_001',
                         name: 'سووپەر ئەدمین',
-                        email: superAdminEmail,
-                        password: superAdminPassword,
+                        email: 'shahohussen870@gmail.com',
+                        password: 'daliahusseN0&',
                         avatar: '👑',
                         level: 99,
                         xp: 999999,
@@ -1714,40 +1742,92 @@
                     };
                     
                     this.users.push(superAdmin);
-                    localStorage.setItem('survivorUsers', JSON.stringify(this.users));
                 }
-            }
-            
-            initDefaultData() {
+                
+                // پرسیارەکانی بنەڕەت
                 if (this.questions.length === 0) {
                     this.questions = [
                         {
-                            id: '1',
+                            id: 'q_1',
                             question: "پایتەختی وڵاتی ژاپۆن کوێیە؟",
                             answers: ["تۆکیۆ", "ئۆساکا", "کیۆتۆ", "سیۆل"],
                             correct: 0,
                             category: "جغرافیا",
-                            difficulty: "ئاسان"
+                            difficulty: "ئاسان",
+                            addedBy: 'super_admin_001',
+                            addedAt: new Date().toISOString()
                         },
                         {
-                            id: '2',
+                            id: 'q_2',
                             question: "خێرایی ڕووناکی چەندە لە چرکەیەکدا؟",
                             answers: ["٣٠٠ هەزار کم", "١٥٠ هەزار کم", "١ ملیۆن کم", "٣٤٠ مەتـر"],
                             correct: 0,
                             category: "زانست",
-                            difficulty: "مامناوەند"
+                            difficulty: "مامناوەند",
+                            addedBy: 'super_admin_001',
+                            addedAt: new Date().toISOString()
                         }
                     ];
-                    localStorage.setItem('survivorQuestions', JSON.stringify(this.questions));
+                }
+                
+                // کاڵاکانی کۆگا
+                if (this.shopItems.length === 0) {
+                    this.shopItems = [
+                        {
+                            id: 'shop_1',
+                            name: "کاتی زیادە",
+                            description: "+٥ چرکە کات لە یاری",
+                            price: 200,
+                            type: "powerup",
+                            icon: "⏱️",
+                            available: true
+                        },
+                        {
+                            id: 'shop_2',
+                            name: "لابردنی وەڵام",
+                            description: "٢ وەڵامی هەڵە دەسڕێتەوە",
+                            price: 1000,
+                            type: "powerup",
+                            icon: "❌",
+                            available: true
+                        },
+                        {
+                            id: 'shop_3',
+                            name: "تێپەڕاندن",
+                            description: "پرسیارێک تێپەڕێنە",
+                            price: 500,
+                            type: "powerup",
+                            icon: "⏭️",
+                            available: true
+                        },
+                        {
+                            id: 'shop_4',
+                            name: "٢ هێندە خاڵ",
+                            description: "٢ هێندە خاڵ بۆ ٥ پرسیار",
+                            price: 300,
+                            type: "powerup",
+                            icon: "⚡",
+                            available: true
+                        }
+                    ];
+                }
+                
+                this.saveAll();
+            }
+            
+            loadFromSession() {
+                const sessionUser = sessionStorage.getItem('currentUser');
+                if (sessionUser) {
+                    this.currentUser = JSON.parse(sessionUser);
+                    this.onlineUsers.add(this.currentUser.id);
                 }
             }
             
-            showError(message) {
-                showNotification(message, 'error');
-            }
-            
-            showSuccess(message) {
-                showNotification(message, 'success');
+            saveAll() {
+                localStorage.setItem('survivorUsers', JSON.stringify(this.users));
+                localStorage.setItem('survivorQuestions', JSON.stringify(this.questions));
+                localStorage.setItem('survivorGames', JSON.stringify(this.games));
+                localStorage.setItem('survivorShopItems', JSON.stringify(this.shopItems));
             }
             
             // چوونەژوورەوەی یاریزان
@@ -1760,20 +1840,17 @@
                             this.currentUser = user;
                             this.token = `token_${Date.now()}_${user.id}`;
                             localStorage.setItem('authToken', this.token);
-                            localStorage.setItem('currentUserId', user.id);
+                            sessionStorage.setItem('currentUser', JSON.stringify(user));
                             this.onlineUsers.add(user.id);
                             
-                            // نوێکردنەوەی کاتی چوونەژوورەوە
                             user.lastLogin = new Date().toISOString();
-                            localStorage.setItem('survivorUsers', JSON.stringify(this.users));
+                            this.saveAll();
                             
-                            this.showSuccess(`بەخێربێیت ${user.name}! بە سەرکەوتوویی چوویتە ژوورەوە`);
                             resolve({ success: true, user });
                         } else {
-                            this.showError('ئیمەیڵ یان پاسۆرد هەڵەیە!');
-                            resolve({ success: false });
+                            resolve({ success: false, error: 'USER_NOT_FOUND' });
                         }
-                    }, 800);
+                    }, 500);
                 });
             }
             
@@ -1781,23 +1858,17 @@
             async register(name, email, password) {
                 return new Promise((resolve) => {
                     setTimeout(() => {
-                        // پشکنین بۆ ئەوەی ئیمەیڵ پێشتر تۆمار کرابێت
                         if (this.users.some(u => u.email === email)) {
-                            this.showError('ئەم ئیمەیڵە پێشتر تۆمار کراوە!');
                             resolve({ success: false, error: 'EMAIL_EXISTS' });
                             return;
                         }
                         
-                        // پشکنینی دروستی ئیمەیڵ
                         if (!this.isValidEmail(email)) {
-                            this.showError('تکایە ئیمەیڵێکی دروست بنووسە!');
                             resolve({ success: false, error: 'INVALID_EMAIL' });
                             return;
                         }
                         
-                        // پشکنینی درێژی پاسۆرد
                         if (password.length < 8) {
-                            this.showError('پاسۆرد دەبێت کەمینە ٨ نووسە بێت!');
                             resolve({ success: false, error: 'WEAK_PASSWORD' });
                             return;
                         }
@@ -1811,7 +1882,7 @@
                             level: 1,
                             xp: 0,
                             xpNeeded: 1000,
-                            tokens: 100,
+                            tokens: 500,
                             points: 0,
                             wins: 0,
                             totalGames: 0,
@@ -1821,45 +1892,36 @@
                         };
                         
                         this.users.push(newUser);
-                        localStorage.setItem('survivorUsers', JSON.stringify(this.users));
+                        this.saveAll();
                         
-                        // چوونەژوورەوەی ئۆتۆماتیکی
                         this.currentUser = newUser;
                         this.token = `token_${Date.now()}_${newUser.id}`;
                         localStorage.setItem('authToken', this.token);
-                        localStorage.setItem('currentUserId', newUser.id);
+                        sessionStorage.setItem('currentUser', JSON.stringify(newUser));
                         this.onlineUsers.add(newUser.id);
                         
-                        this.showSuccess(`بەخێربێیت ${name}! هەژمارەکەت بە سەرکەوتوویی دروست کرا`);
                         resolve({ success: true, user: newUser });
-                    }, 1000);
+                    }, 500);
                 });
-            }
-            
-            isValidEmail(email) {
-                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                return re.test(email);
             }
             
             // چوونەژوورەوە بە گووگڵ
             async loginWithGoogle(email, name) {
                 return new Promise((resolve) => {
                     setTimeout(() => {
-                        // پشکنین بۆ ئەوەی بەکارهێنەر بوونی هەبێت
                         let user = this.users.find(u => u.email === email);
                         
                         if (!user) {
-                            // دروستکردنی هەژمارەکی نوێ
                             user = {
                                 id: `google_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
                                 name: name || 'یاریزان',
                                 email: email,
-                                password: null, // پاسۆرد نیە بۆ هەژماری گووگڵ
+                                password: null,
                                 avatar: '👤',
                                 level: 1,
                                 xp: 0,
                                 xpNeeded: 1000,
-                                tokens: 100,
+                                tokens: 500,
                                 points: 0,
                                 wins: 0,
                                 totalGames: 0,
@@ -1870,18 +1932,17 @@
                             };
                             
                             this.users.push(user);
-                            localStorage.setItem('survivorUsers', JSON.stringify(this.users));
+                            this.saveAll();
                         }
                         
                         this.currentUser = user;
                         this.token = `google_token_${Date.now()}_${user.id}`;
                         localStorage.setItem('authToken', this.token);
-                        localStorage.setItem('currentUserId', user.id);
+                        sessionStorage.setItem('currentUser', JSON.stringify(user));
                         this.onlineUsers.add(user.id);
                         
-                        this.showSuccess(`بەخێربێیت ${user.name}!`);
                         resolve({ success: true, user });
-                    }, 800);
+                    }, 500);
                 });
             }
             
@@ -1899,297 +1960,279 @@
                             this.currentUser = user;
                             this.token = `admin_token_${Date.now()}_${user.id}`;
                             localStorage.setItem('authToken', this.token);
-                            localStorage.setItem('currentUserId', user.id);
+                            sessionStorage.setItem('currentUser', JSON.stringify(user));
                             this.onlineUsers.add(user.id);
                             
-                            this.showSuccess(`بەخێربێیت ${user.name}! بە سەرکەوتوویی چوویتە ژوورەوەی ئەدمین`);
                             resolve({ success: true, user });
                         } else {
-                            this.showError('هەژماری ئەدمین نیە یان هەڵەیە!');
                             resolve({ success: false });
                         }
-                    }, 800);
-                });
-            }
-            
-            // وەرگرتنی هەموو یاریزانەکان (بۆ ئەدمین)
-            async getAllUsers() {
-                return new Promise((resolve) => {
-                    setTimeout(() => {
-                        // پێشکەشکردنی هەموو بەکارهێنەرەکان بە جیا کردنی سووپەر ئەدمین
-                        const sortedUsers = [...this.users]
-                            .sort((a, b) => {
-                                if (a.role === 'super-admin') return -1;
-                                if (b.role === 'super-admin') return 1;
-                                if (a.role === 'admin' && b.role !== 'admin') return -1;
-                                if (b.role === 'admin' && a.role !== 'admin') return 1;
-                                return b.points - a.points;
-                            });
-                        
-                        resolve(sortedUsers);
                     }, 500);
                 });
             }
             
-            // کردنی یاریزان بە ئەدمین (تەنها سووپەر ئەدمین)
+            // کڕینی توانا
+            async buyPowerup(userId, powerupType) {
+                const powerupPrices = {
+                    'time': 200,
+                    '5050': 1000,
+                    'skip': 500,
+                    'double': 300
+                };
+                
+                const price = powerupPrices[powerupType];
+                const userIndex = this.users.findIndex(u => u.id === userId);
+                
+                if (userIndex === -1) return { success: false };
+                
+                if (this.users[userIndex].tokens < price) {
+                    return { success: false, error: 'INSUFFICIENT_TOKENS' };
+                }
+                
+                this.users[userIndex].tokens -= price;
+                this.saveAll();
+                
+                return { success: true, tokens: this.users[userIndex].tokens };
+            }
+            
+            // زیادکردنی پرسیار
+            async addQuestion(question, answers, correctAnswer) {
+                const newQuestion = {
+                    id: `q_${Date.now()}`,
+                    question: question.trim(),
+                    answers: answers.map(a => a.trim()),
+                    correct: parseInt(correctAnswer),
+                    category: "گشتی",
+                    difficulty: "مامناوەند",
+                    addedBy: this.currentUser?.id || 'unknown',
+                    addedAt: new Date().toISOString()
+                };
+                
+                this.questions.push(newQuestion);
+                this.saveAll();
+                
+                return { success: true, question: newQuestion };
+            }
+            
+            // سڕینەوەی پرسیار
+            async deleteQuestion(questionId) {
+                const initialLength = this.questions.length;
+                this.questions = this.questions.filter(q => q.id !== questionId);
+                this.saveAll();
+                
+                return { success: this.questions.length < initialLength };
+            }
+            
+            // زیادکردنی کاڵای کۆگا
+            async addShopItem(name, description, price, type) {
+                const newItem = {
+                    id: `shop_${Date.now()}`,
+                    name: name.trim(),
+                    description: description.trim(),
+                    price: parseInt(price),
+                    type: type,
+                    icon: this.getIconForType(type),
+                    available: true,
+                    addedAt: new Date().toISOString()
+                };
+                
+                this.shopItems.push(newItem);
+                this.saveAll();
+                
+                return { success: true, item: newItem };
+            }
+            
+            getIconForType(type) {
+                const icons = {
+                    'powerup': '⚡',
+                    'theme': '🎨',
+                    'badge': '🏆',
+                    'other': '📦'
+                };
+                return icons[type] || '📦';
+            }
+            
+            // وەرگرتنی ژمارەی ڕاستەقینەی ئۆنڵاین
+            getRealOnlineCount() {
+                return this.onlineUsers.size;
+            }
+            
+            // زیادکردنی یاریزان بە ئەدمین
             async makeAdmin(userId) {
-                return new Promise((resolve) => {
-                    setTimeout(() => {
-                        if (!this.currentUser || this.currentUser.role !== 'super-admin') {
-                            this.showError('تەنها سووپەر ئەدمین دەتوانێت ئەدمین زیاد بکات!');
-                            resolve({ success: false });
-                            return;
-                        }
-                        
-                        const userIndex = this.users.findIndex(u => u.id === userId);
-                        if (userIndex === -1) {
-                            this.showError('یاریزان نەدۆزرایەوە!');
-                            resolve({ success: false });
-                            return;
-                        }
-                        
-                        // نەکردنی سووپەر ئەدمینەکە خۆی
-                        if (this.users[userIndex].role === 'super-admin') {
-                            this.showError('ناتوانیت سووپەر ئەدمین بگۆڕیت!');
-                            resolve({ success: false });
-                            return;
-                        }
-                        
-                        this.users[userIndex].role = 'admin';
-                        this.users[userIndex].isAdmin = true;
-                        localStorage.setItem('survivorUsers', JSON.stringify(this.users));
-                        
-                        this.showSuccess('یاریزان کرایە ئەدمین!');
-                        resolve({ success: true, user: this.users[userIndex] });
-                    }, 500);
-                });
+                const userIndex = this.users.findIndex(u => u.id === userId);
+                if (userIndex === -1) return { success: false };
+                
+                this.users[userIndex].role = 'admin';
+                this.users[userIndex].isAdmin = true;
+                this.saveAll();
+                
+                return { success: true, user: this.users[userIndex] };
             }
             
-            // لابردنی مافی ئەدمین (تەنها سووپەر ئەدمین)
+            // لابردنی مافی ئەدمین
             async removeAdmin(userId) {
-                return new Promise((resolve) => {
-                    setTimeout(() => {
-                        if (!this.currentUser || this.currentUser.role !== 'super-admin') {
-                            this.showError('تەنها سووپەر ئەدمین دەتوانێت ئەدمین لاببات!');
-                            resolve({ success: false });
-                            return;
-                        }
-                        
-                        const userIndex = this.users.findIndex(u => u.id === userId);
-                        if (userIndex === -1) {
-                            this.showError('یاریزان نەدۆزرایەوە!');
-                            resolve({ success: false });
-                            return;
-                        }
-                        
-                        // نەکردنی سووپەر ئەدمینەکە خۆی
-                        if (this.users[userIndex].role === 'super-admin') {
-                            this.showError('ناتوانیت سووپەر ئەدمین لاببەیت!');
-                            resolve({ success: false });
-                            return;
-                        }
-                        
-                        this.users[userIndex].role = 'user';
-                        this.users[userIndex].isAdmin = false;
-                        localStorage.setItem('survivorUsers', JSON.stringify(this.users));
-                        
-                        this.showSuccess('مافی ئەدمینی یاریزان لابرا!');
-                        resolve({ success: true, user: this.users[userIndex] });
-                    }, 500);
-                });
+                const userIndex = this.users.findIndex(u => u.id === userId);
+                if (userIndex === -1) return { success: false };
+                
+                this.users[userIndex].role = 'user';
+                this.users[userIndex].isAdmin = false;
+                this.saveAll();
+                
+                return { success: true, user: this.users[userIndex] };
+            }
+            
+            // تۆمارکردنی یاری
+            async recordGame(userId, score, correctAnswers, totalQuestions) {
+                const userIndex = this.users.findIndex(u => u.id === userId);
+                if (userIndex === -1) return { success: false };
+                
+                // زیادکردنی خاڵ و تۆکن
+                const tokensEarned = Math.floor(score / 10);
+                this.users[userIndex].points += score;
+                this.users[userIndex].tokens += tokensEarned;
+                this.users[userIndex].totalGames += 1;
+                
+                if (correctAnswers === totalQuestions) {
+                    this.users[userIndex].wins += 1;
+                }
+                
+                // زیادکردنی XP
+                this.users[userIndex].xp += Math.floor(score / 2);
+                
+                // پێوانەی ئاست
+                if (this.users[userIndex].xp >= this.users[userIndex].xpNeeded) {
+                    this.users[userIndex].level += 1;
+                    this.users[userIndex].xp = this.users[userIndex].xp - this.users[userIndex].xpNeeded;
+                    this.users[userIndex].xpNeeded = Math.floor(this.users[userIndex].xpNeeded * 1.5);
+                }
+                
+                // تۆمارکردنی یاری
+                const gameRecord = {
+                    id: `game_${Date.now()}`,
+                    userId,
+                    score,
+                    tokensEarned,
+                    correctAnswers,
+                    totalQuestions,
+                    date: new Date().toISOString(),
+                    isWinner: correctAnswers === totalQuestions
+                };
+                
+                this.games.push(gameRecord);
+                this.saveAll();
+                
+                return { 
+                    success: true, 
+                    user: this.users[userIndex],
+                    game: gameRecord 
+                };
+            }
+            
+            // وەرگرتنی براوەکان
+            getWinners(limit = 10) {
+                const today = new Date().toDateString();
+                const lastWeek = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+                
+                const todayWinners = this.games
+                    .filter(game => {
+                        const gameDate = new Date(game.date).toDateString();
+                        return gameDate === today && game.isWinner;
+                    })
+                    .slice(0, limit);
+                
+                const weeklyWinners = this.games
+                    .filter(game => new Date(game.date) >= lastWeek && game.isWinner)
+                    .slice(0, limit);
+                
+                return { todayWinners, weeklyWinners };
+            }
+            
+            // وەرگرتنی هەموو یاریزانەکان
+            getAllUsers() {
+                return [...this.users].sort((a, b) => b.points - a.points);
+            }
+            
+            // وەرگرتنی هەموو پرسیارەکان
+            getAllQuestions() {
+                return [...this.questions].reverse();
+            }
+            
+            // وەرگرتنی هەموو کاڵاکانی کۆگا
+            getAllShopItems() {
+                return [...this.shopItems];
+            }
+            
+            isValidEmail(email) {
+                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return re.test(email);
+            }
+            
+            // زیادکردنی تۆکن بە سەیرکردنی ڕیکلام
+            async addTokensForAd(userId, tokens = 10) {
+                const userIndex = this.users.findIndex(u => u.id === userId);
+                if (userIndex === -1) return { success: false };
+                
+                this.users[userIndex].tokens += tokens;
+                this.saveAll();
+                
+                return { success: true, tokens: this.users[userIndex].tokens };
             }
             
             // نوێکردنەوەی پڕۆفایل
             async updateProfile(userId, updates) {
-                return new Promise((resolve) => {
-                    setTimeout(() => {
-                        const userIndex = this.users.findIndex(u => u.id === userId);
-                        if (userIndex === -1) {
-                            this.showError('یاریزان نەدۆزرایەوە!');
-                            resolve({ success: false });
-                            return;
-                        }
-                        
-                        // دڵنیایی لەسەر نەگۆڕینی ئایدی و ڕۆڵ
-                        delete updates.id;
-                        delete updates.role;
-                        delete updates.isAdmin;
-                        
-                        // پشکنینی ئیمەیڵی نوێ
-                        if (updates.email && updates.email !== this.users[userIndex].email) {
-                            if (this.users.some(u => u.email === updates.email && u.id !== userId)) {
-                                this.showError('ئەم ئیمەیڵە پێشتر تۆمار کراوە!');
-                                resolve({ success: false });
-                                return;
-                            }
-                        }
-                        
-                        // بەڕۆژی ناوەجۆڕ
-                        this.users[userIndex] = { ...this.users[userIndex], ...updates };
-                        localStorage.setItem('survivorUsers', JSON.stringify(this.users));
-                        
-                        this.currentUser = this.users[userIndex];
-                        this.showSuccess('پڕۆفایلەکەت نوێ کرا!');
-                        resolve({ success: true, user: this.users[userIndex] });
-                    }, 500);
-                });
+                const userIndex = this.users.findIndex(u => u.id === userId);
+                if (userIndex === -1) return { success: false };
+                
+                // دڵنیایی لە نەگۆڕینی ئایدی و ڕۆڵ
+                delete updates.id;
+                delete updates.role;
+                delete updates.isAdmin;
+                
+                // پشکنینی ئیمەیڵی نوێ
+                if (updates.email && updates.email !== this.users[userIndex].email) {
+                    if (this.users.some(u => u.email === updates.email && u.id !== userId)) {
+                        return { success: false, error: 'EMAIL_EXISTS' };
+                    }
+                }
+                
+                this.users[userIndex] = { ...this.users[userIndex], ...updates };
+                this.saveAll();
+                
+                this.currentUser = this.users[userIndex];
+                sessionStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+                
+                return { success: true, user: this.users[userIndex] };
             }
             
             // سڕینەوەی هەژمار
             async deleteAccount(userId, password) {
-                return new Promise((resolve) => {
-                    setTimeout(() => {
-                        const user = this.users.find(u => u.id === userId);
-                        
-                        if (!user) {
-                            this.showError('یاریزان نەدۆزرایەوە!');
-                            resolve({ success: false });
-                            return;
-                        }
-                        
-                        // پشکنینی پاسۆرد
-                        if (user.password !== password) {
-                            this.showError('پاسۆرد هەڵەیە!');
-                            resolve({ success: false });
-                            return;
-                        }
-                        
-                        // نەسڕینەوەی سووپەر ئەدمین
-                        if (user.role === 'super-admin') {
-                            this.showError('ناتوانیت هەژماری سووپەر ئەدمین بسڕیتەوە!');
-                            resolve({ success: false });
-                            return;
-                        }
-                        
-                        this.users = this.users.filter(u => u.id !== userId);
-                        localStorage.setItem('survivorUsers', JSON.stringify(this.users));
-                        
-                        // سڕینەوەی تۆکن و زانیاریەکانی بەکارهێنەر
-                        localStorage.removeItem('authToken');
-                        localStorage.removeItem('currentUserId');
-                        
-                        this.onlineUsers.delete(userId);
-                        this.currentUser = null;
-                        this.token = null;
-                        
-                        this.showSuccess('هەژمارەکەت سڕدرایەوە!');
-                        resolve({ success: true });
-                    }, 800);
-                });
-            }
-            
-            // زیادکردنی پرسیار (ئەدمین)
-            async addQuestion(question, answers, correctAnswer) {
-                return new Promise((resolve) => {
-                    setTimeout(() => {
-                        if (!this.currentUser?.isAdmin) {
-                            this.showError('تۆ مافی ئەدمینت نیە!');
-                            resolve({ success: false });
-                            return;
-                        }
-                        
-                        const newQuestion = {
-                            id: `q_${Date.now()}`,
-                            question: question.trim(),
-                            answers: answers.map(a => a.trim()),
-                            correct: parseInt(correctAnswer),
-                            category: "گشتی",
-                            difficulty: "مامناوەند",
-                            addedBy: this.currentUser.id,
-                            addedAt: new Date().toISOString()
-                        };
-                        
-                        this.questions.push(newQuestion);
-                        localStorage.setItem('survivorQuestions', JSON.stringify(this.questions));
-                        
-                        this.showSuccess('پرسیارەکە زیاد کرا!');
-                        resolve({ success: true, question: newQuestion });
-                    }, 500);
-                });
-            }
-            
-            // وەرگرتنی ژمارەی ئۆنڵاینەکان
-            getOnlineCount() {
-                return this.onlineUsers.size + Math.floor(Math.random() * 50) + 200;
-            }
-            
-            // تۆمارکردنی یاری
-            async recordGameResult(userId, score, tokensEarned) {
-                return new Promise((resolve) => {
-                    setTimeout(() => {
-                        const userIndex = this.users.findIndex(u => u.id === userId);
-                        if (userIndex === -1) {
-                            resolve({ success: false });
-                            return;
-                        }
-                        
-                        // زیادکردنی خاڵ و تۆکن
-                        this.users[userIndex].points += score;
-                        this.users[userIndex].tokens += tokensEarned;
-                        this.users[userIndex].totalGames += 1;
-                        
-                        if (score > 300) {
-                            this.users[userIndex].wins += 1;
-                        }
-                        
-                        // زیادکردنی XP
-                        this.users[userIndex].xp += Math.floor(score / 2);
-                        
-                        // پێوانەی ئاست
-                        if (this.users[userIndex].xp >= this.users[userIndex].xpNeeded) {
-                            this.users[userIndex].level += 1;
-                            this.users[userIndex].xp = this.users[userIndex].xp - this.users[userIndex].xpNeeded;
-                            this.users[userIndex].xpNeeded = Math.floor(this.users[userIndex].xpNeeded * 1.5);
-                        }
-                        
-                        localStorage.setItem('survivorUsers', JSON.stringify(this.users));
-                        
-                        // تۆمارکردنی یاری
-                        const gameRecord = {
-                            id: `game_${Date.now()}`,
-                            userId,
-                            score,
-                            tokensEarned,
-                            date: new Date().toISOString()
-                        };
-                        
-                        this.games.push(gameRecord);
-                        localStorage.setItem('survivorGames', JSON.stringify(this.games));
-                        
-                        resolve({ 
-                            success: true, 
-                            user: this.users[userIndex],
-                            game: gameRecord
-                        });
-                    }, 500);
-                });
-            }
-            
-            // وەرگرتنی باشترین یاریزانەکان
-            async getTopPlayers(limit = 5) {
-                return new Promise((resolve) => {
-                    setTimeout(() => {
-                        const sorted = [...this.users]
-                            .filter(u => u.role !== 'super-admin') // نەناساندنی سووپەر ئەدمین
-                            .sort((a, b) => b.points - a.points)
-                            .slice(0, limit)
-                            .map(user => ({
-                                id: user.id,
-                                name: user.name,
-                                points: user.points,
-                                level: user.level,
-                                avatar: user.avatar,
-                                role: user.role
-                            }));
-                        
-                        resolve(sorted);
-                    }, 300);
-                });
+                const user = this.users.find(u => u.id === userId);
+                
+                if (!user) return { success: false };
+                
+                if (user.password !== password) {
+                    return { success: false, error: 'WRONG_PASSWORD' };
+                }
+                
+                if (user.role === 'super-admin') {
+                    return { success: false, error: 'CANNOT_DELETE_SUPER_ADMIN' };
+                }
+                
+                this.users = this.users.filter(u => u.id !== userId);
+                this.saveAll();
+                
+                localStorage.removeItem('authToken');
+                sessionStorage.removeItem('currentUser');
+                this.onlineUsers.delete(userId);
+                this.currentUser = null;
+                this.token = null;
+                
+                return { success: true };
             }
         }
         
         // ==================== GAME MANAGER ====================
-        const server = new ServerAPI();
+        const database = new RealTimeDatabase();
         
         class GameManager {
             constructor() {
@@ -2198,7 +2241,7 @@
                 this.currentGame = null;
                 this.gameInterval = null;
                 this.countdownInterval = null;
-                this.adCountdownInterval = null;
+                this.adTimerInterval = null;
                 this.gameState = {
                     score: 0,
                     currentQuestion: 0,
@@ -2209,7 +2252,9 @@
                         '5050': 0,
                         skip: 0,
                         double: 0
-                    }
+                    },
+                    correctAnswers: 0,
+                    totalQuestions: 0
                 };
                 
                 this.scheduleTimes = {
@@ -2222,21 +2267,10 @@
             }
             
             async init() {
-                const token = localStorage.getItem('authToken');
-                const userId = localStorage.getItem('currentUserId');
-                
-                if (token && userId) {
-                    // پێشگرتن لە بەکارهێنەر لە localStorage
-                    const user = server.users.find(u => u.id === userId);
-                    if (user) {
-                        server.currentUser = user;
-                        server.token = token;
-                        this.isAuthenticated = true;
-                        this.isAdmin = user.isAdmin || false;
-                        this.showApp();
-                    } else {
-                        this.showAuth();
-                    }
+                if (database.currentUser) {
+                    this.isAuthenticated = true;
+                    this.isAdmin = database.currentUser.isAdmin || false;
+                    this.showApp();
                 } else {
                     this.showAuth();
                 }
@@ -2245,9 +2279,9 @@
                 this.updateCountdowns();
                 setInterval(() => this.updateCountdowns(), 1000);
                 
-                // نوێکردنەوەی ژمارەی ئۆنڵاینەکان
-                this.updateOnlineCount();
-                setInterval(() => this.updateOnlineCount(), 30000);
+                // نوێکردنەوەی ژمارەی ڕاستەقینەی ئۆنڵاینەکان
+                this.updateRealOnlineCount();
+                setInterval(() => this.updateRealOnlineCount(), 5000);
             }
             
             showAuth() {
@@ -2268,7 +2302,6 @@
                     el.textContent = '';
                 });
                 
-                // گۆڕینی بۆ تابی چوونەژوورەوە
                 switchAuthTab('login');
             }
             
@@ -2277,19 +2310,19 @@
                 document.getElementById('loading').style.display = 'none';
                 document.querySelector('.nav-bar').style.display = 'flex';
                 
-                if (server.currentUser) {
+                if (database.currentUser) {
                     this.updateUserUI();
-                    server.addToOnline(server.currentUser.id);
                     this.loadTopPlayers();
+                    this.loadAdminSections();
                 }
                 
                 showScreen('home');
             }
             
             updateUserUI() {
-                if (!server.currentUser) return;
+                if (!database.currentUser) return;
                 
-                const user = server.currentUser;
+                const user = database.currentUser;
                 
                 document.getElementById('homeCoins').textContent = user.tokens;
                 document.getElementById('profileName').textContent = user.name;
@@ -2301,12 +2334,9 @@
                 document.getElementById('totalTokens').textContent = user.tokens;
                 document.getElementById('totalGames').textContent = user.totalGames;
                 document.getElementById('shopTokens').textContent = user.tokens;
-                
-                // نوێکردنەوەی خانەکانی دەستکاری
                 document.getElementById('editName').value = user.name;
                 document.getElementById('editEmail').value = user.email;
                 
-                // زیادکردنی وێنەی پڕۆفایل
                 if (user.avatar && user.avatar.startsWith('data:image')) {
                     document.getElementById('profileAvatar').innerHTML = 
                         `<img src="${user.avatar}" alt="Profile">`;
@@ -2346,18 +2376,20 @@
                 });
             }
             
-            updateOnlineCount() {
-                const count = server.getOnlineCount();
+            updateRealOnlineCount() {
+                const count = database.getRealOnlineCount();
                 document.getElementById('onlineUsers').innerHTML = 
-                    `<i class="fas fa-wifi"></i><span>${count} ئۆنڵاین</span>`;
+                    `<i class="fas fa-wifi"></i>
+                    <span>${count} ئۆنڵاین</span>
+                    <div class="pulse-dot"></div>`;
             }
             
             async loadTopPlayers() {
-                const topPlayers = await server.getTopPlayers(5);
+                const users = database.getAllUsers().slice(0, 5);
                 const container = document.getElementById('topPlayers');
                 container.innerHTML = '';
                 
-                topPlayers.forEach((player, index) => {
+                users.forEach((player, index) => {
                     const playerElement = document.createElement('div');
                     playerElement.className = 'schedule-item';
                     playerElement.style.marginBottom = '8px';
@@ -2380,38 +2412,147 @@
                 });
             }
             
-            async loadUsersList() {
-                if (!this.isAdmin) {
-                    showNotification('تۆ مافی ئەدمینت نیە!', 'error');
-                    return;
-                }
+            async loadAdminSections() {
+                if (!this.isAdmin) return;
                 
-                const users = await server.getAllUsers();
-                const container = document.getElementById('usersList');
-                container.innerHTML = '';
+                // پرسیارەکان
+                const questions = database.getAllQuestions();
+                const questionsList = document.getElementById('questionsList');
+                questionsList.innerHTML = '';
                 
-                users.forEach((user) => {
-                    const userElement = document.createElement('div');
-                    userElement.className = 'user-item';
-                    userElement.innerHTML = `
-                        <div class="user-info">
-                            <div class="user-avatar">${user.avatar}</div>
-                            <div class="user-details">
-                                <div class="user-name">${user.name}</div>
-                                <div class="user-email">${user.email}</div>
-                                <div class="user-role ${user.role}">
-                                    ${user.role === 'super-admin' ? 'سووپەر ئەدمین 👑' : 
-                                      user.role === 'admin' ? 'ئەدمین 🔧' : 'یاریزان 🎮'}
+                questions.forEach(question => {
+                    const questionElement = document.createElement('div');
+                    questionElement.className = 'question-item';
+                    questionElement.innerHTML = `
+                        <div class="question-text">
+                            <div style="font-weight: 600; margin-bottom: 5px;">${question.question}</div>
+                            <div style="font-size: 12px; color: rgba(255,255,255,0.6);">
+                                وەڵامی ڕاست: ${question.answers[question.correct]}
+                            </div>
+                        </div>
+                        <div class="question-actions">
+                            <button class="action-btn edit" onclick="editQuestion('${question.id}')" title="دەستکاری">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="action-btn delete" onclick="deleteQuestion('${question.id}')" title="سڕینەوە">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    `;
+                    questionsList.appendChild(questionElement);
+                });
+                
+                // کۆگا
+                const shopItems = database.getAllShopItems();
+                const shopItemsList = document.getElementById('shopItemsList');
+                shopItemsList.innerHTML = '';
+                
+                shopItems.forEach(item => {
+                    const itemElement = document.createElement('div');
+                    itemElement.className = 'shop-item-admin';
+                    itemElement.innerHTML = `
+                        <div style="flex: 1;">
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <div style="font-size: 24px;">${item.icon}</div>
+                                <div>
+                                    <div style="font-weight: 600;">${item.name}</div>
+                                    <div style="font-size: 12px; color: rgba(255,255,255,0.6);">${item.description}</div>
+                                    <div style="font-size: 14px; color: var(--gold); font-weight: bold; margin-top: 5px;">
+                                        ${item.price} تۆکن
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="user-actions">
+                        <div class="shop-item-actions">
+                            <button class="action-btn edit" onclick="editShopItem('${item.id}')" title="دەستکاری">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="action-btn delete" onclick="deleteShopItem('${item.id}')" title="سڕینەوە">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    `;
+                    shopItemsList.appendChild(itemElement);
+                });
+                
+                // براوەکان
+                const winners = database.getWinners(10);
+                const todayWinners = document.getElementById('todayWinners');
+                const weeklyWinners = document.getElementById('weeklyWinners');
+                
+                todayWinners.innerHTML = winners.todayWinners.length > 0 ? 
+                    winners.todayWinners.map(game => {
+                        const user = database.users.find(u => u.id === game.userId);
+                        return `
+                            <div class="winner-item">
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div style="font-size: 20px;">${user?.avatar || '👤'}</div>
+                                    <div>
+                                        <div style="font-weight: 600;">${user?.name || 'یاریزان'}</div>
+                                        <div style="font-size: 12px; color: rgba(255,255,255,0.6);">
+                                            ${game.score} خاڵ | ${game.correctAnswers}/${game.totalQuestions}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="font-size: 18px; font-weight: bold; color: var(--gold);">
+                                    🏆
+                                </div>
+                            </div>
+                        `;
+                    }).join('') : '<div style="text-align: center; color: rgba(255,255,255,0.5);">هیچ براوەیەک نیە</div>';
+                
+                weeklyWinners.innerHTML = winners.weeklyWinners.length > 0 ?
+                    winners.weeklyWinners.map(game => {
+                        const user = database.users.find(u => u.id === game.userId);
+                        return `
+                            <div class="winner-item">
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div style="font-size: 20px;">${user?.avatar || '👤'}</div>
+                                    <div>
+                                        <div style="font-weight: 600;">${user?.name || 'یاریزان'}</div>
+                                        <div style="font-size: 12px; color: rgba(255,255,255,0.6);">
+                                            ${new Date(game.date).toLocaleDateString('fa-IR')} | ${game.score} خاڵ
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="font-size: 18px; font-weight: bold; color: var(--gold);">
+                                    🏆
+                                </div>
+                            </div>
+                        `;
+                    }).join('') : '<div style="text-align: center; color: rgba(255,255,255,0.5);">هیچ براوەیەک نیە</div>';
+                
+                // یاریزانەکان
+                const users = database.getAllUsers();
+                const usersList = document.getElementById('usersList');
+                usersList.innerHTML = '';
+                
+                users.forEach(user => {
+                    const userElement = document.createElement('div');
+                    userElement.className = 'question-item';
+                    userElement.innerHTML = `
+                        <div style="display: flex; align-items: center; gap: 12px; flex: 1;">
+                            <div style="font-size: 24px;">${user.avatar}</div>
+                            <div>
+                                <div style="font-weight: 600;">${user.name}</div>
+                                <div style="font-size: 12px; color: rgba(255,255,255,0.6);">${user.email}</div>
+                                <div style="display: flex; gap: 10px; margin-top: 5px;">
+                                    <span style="font-size: 11px; padding: 2px 8px; border-radius: 10px; background: ${user.role === 'super-admin' ? 'rgba(255,215,0,0.2)' : user.role === 'admin' ? 'rgba(255,0,85,0.2)' : 'rgba(0,243,255,0.2)'}; color: ${user.role === 'super-admin' ? 'var(--gold)' : user.role === 'admin' ? 'var(--accent)' : 'var(--primary)'}">
+                                        ${user.role === 'super-admin' ? 'سووپەر ئەدمین' : user.role === 'admin' ? 'ئەدمین' : 'یاریزان'}
+                                    </span>
+                                    <span style="font-size: 11px; padding: 2px 8px; border-radius: 10px; background: rgba(255,255,255,0.1);">
+                                        ئاست ${user.level}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question-actions">
                             ${user.role === 'user' ? 
-                                `<button class="action-btn make-admin" onclick="makeUserAdmin('${user.id}')" title="کردن بە ئەدمین">
+                                `<button class="action-btn edit" onclick="makeUserAdmin('${user.id}')" title="کردن بە ئەدمین">
                                     <i class="fas fa-user-shield"></i>
                                 </button>` : 
                               user.role === 'admin' ? 
-                                `<button class="action-btn remove-admin" onclick="removeUserAdmin('${user.id}')" title="لابردنی مافی ئەدمین">
+                                `<button class="action-btn delete" onclick="removeUserAdmin('${user.id}')" title="لابردنی مافی ئەدمین">
                                     <i class="fas fa-user-times"></i>
                                 </button>` : 
                                 `<button class="action-btn" disabled title="سووپەر ئەدمین">
@@ -2420,41 +2561,39 @@
                             }
                         </div>
                     `;
-                    container.appendChild(userElement);
+                    usersList.appendChild(userElement);
                 });
-                
-                showScreen('adminUsers');
             }
             
-            // چوونەژوورەوە
             async login(email, password) {
-                const result = await server.login(email, password);
+                const result = await database.login(email, password);
                 if (result.success) {
                     this.isAuthenticated = true;
                     this.isAdmin = result.user.isAdmin || false;
                     this.showApp();
+                    return true;
+                } else {
+                    return false;
                 }
-                return result;
             }
             
-            // دروستکردنی هەژمار
             async register(name, email, password) {
-                const result = await server.register(name, email, password);
+                const result = await database.register(name, email, password);
                 if (result.success) {
                     this.isAuthenticated = true;
                     this.isAdmin = result.user.isAdmin || false;
                     this.showApp();
+                    return true;
+                } else {
+                    return result.error;
                 }
-                return result;
             }
             
-            // چوونەژوورەوە بە گووگڵ
             async loginWithGoogle() {
-                // لە وێبسایتێکی ڕاستەقینەدا، ئێرە دەبێت APIی گووگڵ بێت
                 showNotification('خزمەتگوزاری گووگڵ لە بەردەستدا نیە. تکایە بە ئیمەیڵ و پاسۆرد چوونەژوورەوە بکە.', 'info');
+                return false;
             }
             
-            // یاری سەرەکی
             async startMainGame() {
                 const now = new Date();
                 const [hours, minutes] = this.scheduleTimes.evening.split(':').map(Number);
@@ -2467,7 +2606,6 @@
                     timeUntilGame += 24 * 60 * 60 * 1000;
                 }
                 
-                // ئەگەر کات نزیکە لە یاری (کەمتر لە ٥ خولەک)
                 if (timeUntilGame < 5 * 60 * 1000) {
                     this.showCountdown(Math.floor(timeUntilGame / 1000));
                 } else {
@@ -2476,7 +2614,6 @@
                 }
             }
             
-            // یاری خێرا
             startQuickGame() {
                 if (!this.isAuthenticated) {
                     showNotification('تکایە یەکەم چوونەژوورەوە بکە!', 'error');
@@ -2488,8 +2625,10 @@
                     score: 0,
                     currentQuestion: 0,
                     timeLeft: 15,
-                    questions: [...server.questions].sort(() => 0.5 - Math.random()).slice(0, 10),
-                    powerups: { ...this.gameState.powerups }
+                    questions: [...database.questions].sort(() => 0.5 - Math.random()).slice(0, 10),
+                    powerups: { time: 0, '5050': 0, skip: 0, double: 0 },
+                    correctAnswers: 0,
+                    totalQuestions: 10
                 };
                 
                 showScreen('game');
@@ -2497,21 +2636,27 @@
                 this.startTimer();
             }
             
-            // نیشاندانی کاونتداون
             showCountdown(startFrom = 5) {
                 document.getElementById('countdownScreen').classList.add('active');
                 document.getElementById('adContainer').innerHTML = `
                     <div class="ad-icon">📺</div>
                     <div class="ad-text">سەیری ڕیکلامەکە بکە بۆ بەدەست هێنانی ١٠ تۆکن!</div>
-                    <button class="btn btn-primary" onclick="watchAd()">
+                    <div id="adTimer" style="font-size: 24px; font-weight: bold; color: var(--primary); margin: 15px 0;">٥</div>
+                    <button class="btn btn-primary" onclick="watchAd()" id="watchAdBtn" disabled>
                         <i class="fas fa-play"></i>
-                        سەیرکردنی ڕیکلام
+                        سەیرکردنی ڕیکلام (٥)
                     </button>
                 `;
                 
                 let count = startFrom;
                 const countdownElement = document.getElementById('countdownNumber');
+                const adTimerElement = document.getElementById('adTimer');
+                const watchAdBtn = document.getElementById('watchAdBtn');
+                
                 countdownElement.textContent = count;
+                adTimerElement.textContent = '٥';
+                
+                this.startAdTimer(5);
                 
                 this.countdownInterval = setInterval(() => {
                     count--;
@@ -2524,16 +2669,36 @@
                 }, 1000);
             }
             
-            // دەستپێکردنی یاری دوای کاونتداون
+            startAdTimer(seconds) {
+                let timeLeft = seconds;
+                const adTimerElement = document.getElementById('adTimer');
+                const watchAdBtn = document.getElementById('watchAdBtn');
+                
+                this.adTimerInterval = setInterval(() => {
+                    timeLeft--;
+                    adTimerElement.textContent = timeLeft;
+                    watchAdBtn.innerHTML = `<i class="fas fa-play"></i> سەیرکردنی ڕیکلام (${timeLeft})`;
+                    
+                    if (timeLeft <= 0) {
+                        clearInterval(this.adTimerInterval);
+                        watchAdBtn.disabled = false;
+                        watchAdBtn.innerHTML = `<i class="fas fa-play"></i> سەیرکردنی ڕیکلام`;
+                    }
+                }, 1000);
+            }
+            
             startCountdownGame() {
                 document.getElementById('countdownScreen').classList.remove('active');
+                clearInterval(this.adTimerInterval);
                 
                 this.gameState = {
                     score: 0,
                     currentQuestion: 0,
                     timeLeft: 15,
-                    questions: [...server.questions].sort(() => 0.5 - Math.random()).slice(0, 15),
-                    powerups: { ...this.gameState.powerups }
+                    questions: [...database.questions].sort(() => 0.5 - Math.random()).slice(0, 15),
+                    powerups: { time: 0, '5050': 0, skip: 0, double: 0 },
+                    correctAnswers: 0,
+                    totalQuestions: 15
                 };
                 
                 showScreen('game');
@@ -2541,7 +2706,6 @@
                 this.startTimer();
             }
             
-            // بارکردنی پرسیار
             loadQuestion() {
                 if (this.gameState.currentQuestion >= this.gameState.questions.length) {
                     this.endGame();
@@ -2569,7 +2733,6 @@
                 this.updateTimer();
             }
             
-            // پشکنینی وەڵام
             async checkAnswer(selectedIndex) {
                 clearInterval(this.gameInterval);
                 
@@ -2585,6 +2748,7 @@
                     const scoreEarned = Math.floor((baseScore + timeBonus) * multiplier);
                     
                     this.gameState.score += scoreEarned;
+                    this.gameState.correctAnswers++;
                     document.getElementById('score').textContent = this.gameState.score;
                     
                     btns[selectedIndex].classList.add('correct');
@@ -2617,7 +2781,6 @@
                 }, 2000);
             }
             
-            // دەستپێکردنی کاتژمێر
             startTimer() {
                 clearInterval(this.gameInterval);
                 this.gameState.timeLeft = 15;
@@ -2636,14 +2799,12 @@
                 }, 1000);
             }
             
-            // نوێکردنەوەی کاتژمێر
             updateTimer() {
                 document.getElementById('timeLeft').textContent = this.gameState.timeLeft;
                 const percent = (this.gameState.timeLeft / 15) * 100;
                 document.getElementById('timerBar').style.width = percent + '%';
             }
             
-            // بەکارهێنانی توانا
             async usePowerup(type) {
                 if (this.gameState.powerups[type] <= 0) {
                     showNotification('ئەم توانایەت نیە!', 'error');
@@ -2693,45 +2854,30 @@
                 }
             }
             
-            // کڕینی توانا
             async buyPowerup(type) {
-                const costs = {
-                    time: 10,
-                    '5050': 25,
-                    skip: 50,
-                    double: 100
-                };
-                
-                const cost = costs[type];
-                
-                if (server.currentUser.tokens < cost) {
-                    showNotification('تۆکنی پێویستت نیە!', 'error');
-                    return;
-                }
-                
-                const result = await server.buyPowerup(server.currentUser.id, type, cost);
+                const result = await database.buyPowerup(database.currentUser.id, type);
                 if (result.success) {
                     this.gameState.powerups[type] = (this.gameState.powerups[type] || 0) + 1;
                     this.updateUserUI();
                     showNotification(`توانای ${type} کڕدرا!`, 'success');
+                } else if (result.error === 'INSUFFICIENT_TOKENS') {
+                    showNotification('تۆکنی پێویستت نیە!', 'error');
                 }
             }
             
-            // کۆتایی یاری
             async endGame() {
                 clearInterval(this.gameInterval);
                 
-                const tokensEarned = Math.floor(this.gameState.score / 10);
-                
-                const result = await server.recordGameResult(
-                    server.currentUser.id,
+                const result = await database.recordGame(
+                    database.currentUser.id,
                     this.gameState.score,
-                    tokensEarned
+                    this.gameState.correctAnswers,
+                    this.gameState.totalQuestions
                 );
                 
                 if (result.success) {
                     showNotification(
-                        `یاریەکەت تەواو بوو! ${this.gameState.score} خاڵ و ${tokensEarned} تۆکن بەدەستهێنا!`,
+                        `یاریەکەت تەواو بوو! ${this.gameState.score} خاڵ و ${Math.floor(this.gameState.score/10)} تۆکن بەدەستهێنا!`,
                         'success'
                     );
                     
@@ -2744,19 +2890,18 @@
                 }
             }
             
-            // چوونەژوورەوەی ئەدمین
             async adminLogin(email, password) {
-                const result = await server.adminLogin(email, password);
+                const result = await database.adminLogin(email, password);
                 if (result.success) {
                     this.isAdmin = true;
                     showScreen('admin');
                     closeAdminLogin();
+                    this.loadAdminSections();
                 }
-                return result;
+                return result.success;
             }
             
-            // زیادکردنی پرسیار
-            async addQuestion() {
+            async adminAddQuestion() {
                 const question = document.getElementById('adminQuestion').value;
                 const answers = [
                     document.getElementById('adminAnswer1').value,
@@ -2771,7 +2916,7 @@
                     return;
                 }
                 
-                const result = await server.addQuestion(question, answers, correct);
+                const result = await database.addQuestion(question, answers, correct);
                 if (result.success) {
                     document.getElementById('adminQuestion').value = '';
                     document.getElementById('adminAnswer1').value = '';
@@ -2779,42 +2924,116 @@
                     document.getElementById('adminAnswer3').value = '';
                     document.getElementById('adminAnswer4').value = '';
                     document.getElementById('adminCorrectAnswer').value = '0';
+                    this.loadAdminSections();
+                    showNotification('پرسیارەکە زیاد کرا!', 'success');
                 }
             }
             
-            // سەیرکردنی ڕیکلام
-            watchAd() {
-                showNotification('سوپاس بۆ سەیرکردنی ڕیکلام! ١٠ تۆکن زیاد کرا.', 'success');
+            async adminAddShopItem() {
+                const name = document.getElementById('shopItemName').value;
+                const description = document.getElementById('shopItemDesc').value;
+                const price = document.getElementById('shopItemPrice').value;
+                const type = document.getElementById('shopItemType').value;
                 
-                if (server.currentUser) {
-                    server.currentUser.tokens += 10;
-                    server.updateProfile(server.currentUser.id, { tokens: server.currentUser.tokens });
-                    this.updateUserUI();
+                if (!name || !description || !price) {
+                    showNotification('تکایە هەموو خانەکان پڕبکەرەوە!', 'error');
+                    return;
                 }
                 
-                document.getElementById('adContainer').innerHTML = `
-                    <div class="ad-icon">🎁</div>
-                    <div class="ad-text" style="color: var(--success);">١٠ تۆکنت زیاد کرا!</div>
-                `;
-                
-                setTimeout(() => {
-                    document.getElementById('countdownScreen').classList.remove('active');
-                }, 2000);
+                const result = await database.addShopItem(name, description, price, type);
+                if (result.success) {
+                    document.getElementById('shopItemName').value = '';
+                    document.getElementById('shopItemDesc').value = '';
+                    document.getElementById('shopItemPrice').value = '';
+                    document.getElementById('shopItemType').value = 'powerup';
+                    this.loadAdminSections();
+                    showNotification('کاڵای نوێ زیاد کرا!', 'success');
+                }
             }
             
-            // کردنی یاریزان بە ئەدمین
+            async deleteQuestion(questionId) {
+                if (confirm('دڵنیایت دەتەوێت ئەم پرسیارە بسڕیتەوە؟')) {
+                    const result = await database.deleteQuestion(questionId);
+                    if (result.success) {
+                        this.loadAdminSections();
+                        showNotification('پرسیارەکە سڕدرایەوە!', 'success');
+                    }
+                }
+            }
+            
             async makeUserAdmin(userId) {
-                const result = await server.makeAdmin(userId);
-                if (result.success) {
-                    this.loadUsersList();
+                if (confirm('دڵنیایت دەتەوێت ئەم یاریزانە بکەیت بە ئەدمین؟')) {
+                    const result = await database.makeAdmin(userId);
+                    if (result.success) {
+                        this.loadAdminSections();
+                        showNotification('یاریزان کرایە ئەدمین!', 'success');
+                    }
                 }
             }
             
-            // لابردنی مافی ئەدمین
             async removeUserAdmin(userId) {
-                const result = await server.removeAdmin(userId);
+                if (confirm('دڵنیایت دەتەوێت مافی ئەدمینی ئەم یاریزانە لاببەیت؟')) {
+                    const result = await database.removeAdmin(userId);
+                    if (result.success) {
+                        this.loadAdminSections();
+                        showNotification('مافی ئەدمینی یاریزان لابرا!', 'success');
+                    }
+                }
+            }
+            
+            async watchAd() {
+                if (!database.currentUser) return;
+                
+                const result = await database.addTokensForAd(database.currentUser.id, 10);
                 if (result.success) {
-                    this.loadUsersList();
+                    document.getElementById('adContainer').innerHTML = `
+                        <div class="ad-icon">🎁</div>
+                        <div class="ad-text" style="color: var(--success); font-size: 18px; font-weight: bold;">
+                            ١٠ تۆکنت زیاد کرا!
+                        </div>
+                        <div style="margin-top: 15px; color: rgba(255,255,255,0.7); font-size: 14px;">
+                            سوپاس بۆ سەیرکردنی ڕیکلام!
+                        </div>
+                    `;
+                    
+                    this.updateUserUI();
+                    
+                    setTimeout(() => {
+                        document.getElementById('countdownScreen').classList.remove('active');
+                    }, 2000);
+                }
+            }
+            
+            async updateProfile() {
+                const name = document.getElementById('editName').value;
+                const email = document.getElementById('editEmail').value;
+                const password = document.getElementById('editPassword').value;
+                
+                const updates = { name, email };
+                if (password) {
+                    updates.password = password;
+                }
+                
+                const result = await database.updateProfile(database.currentUser.id, updates);
+                if (result.success) {
+                    this.updateUserUI();
+                    showNotification('پڕۆفایلەکەت نوێ کرا!', 'success');
+                } else if (result.error === 'EMAIL_EXISTS') {
+                    showNotification('ئەم ئیمەیڵە پێشتر تۆمار کراوە!', 'error');
+                }
+            }
+            
+            async deleteAccount(password) {
+                const result = await database.deleteAccount(database.currentUser.id, password);
+                if (result.success) {
+                    this.isAuthenticated = false;
+                    this.isAdmin = false;
+                    this.showAuth();
+                    showNotification('هەژمارەکەت سڕدرایەوە!', 'success');
+                } else if (result.error === 'WRONG_PASSWORD') {
+                    showNotification('پاسۆرد هەڵەیە!', 'error');
+                } else if (result.error === 'CANNOT_DELETE_SUPER_ADMIN') {
+                    showNotification('ناتوانیت هەژماری سووپەر ئەدمین بسڕیتەوە!', 'error');
                 }
             }
         }
@@ -2890,11 +3109,6 @@
             element.style.display = 'none';
         }
         
-        function validateEmail(email) {
-            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return re.test(email);
-        }
-        
         async function login() {
             const email = document.getElementById('loginEmail').value.trim();
             const password = document.getElementById('loginPassword').value;
@@ -2912,13 +3126,8 @@
                 return;
             }
             
-            if (!validateEmail(email)) {
-                showError('loginEmailError', 'تکایە ئیمەیڵێکی دروست بنووسە!');
-                return;
-            }
-            
-            const result = await game.login(email, password);
-            if (!result.success) {
+            const success = await game.login(email, password);
+            if (!success) {
                 showError('loginPasswordError', 'ئیمەیڵ یان پاسۆرد هەڵەیە!');
             }
         }
@@ -2929,7 +3138,6 @@
             const password = document.getElementById('registerPassword').value;
             const confirm = document.getElementById('registerConfirm').value;
             
-            // پاککردنەوەی هەموو هەڵەکان
             hideError('registerNameError');
             hideError('registerEmailError');
             hideError('registerPasswordError');
@@ -2944,9 +3152,6 @@
             
             if (!email) {
                 showError('registerEmailError', 'تکایە ئیمەیڵ بنووسە!');
-                hasError = true;
-            } else if (!validateEmail(email)) {
-                showError('registerEmailError', 'تکایە ئیمەیڵێکی دروست بنووسە!');
                 hasError = true;
             }
             
@@ -2969,8 +3174,10 @@
             if (hasError) return;
             
             const result = await game.register(name, email, password);
-            if (result.error === 'EMAIL_EXISTS') {
+            if (result === 'EMAIL_EXISTS') {
                 showError('registerEmailError', 'ئەم ئیمەیڵە پێشتر تۆمار کراوە!');
+            } else if (result === 'WEAK_PASSWORD') {
+                showError('registerPasswordError', 'پاسۆرد دەبێت کەمینە ٨ نووسە بێت!');
             }
         }
         
@@ -3014,8 +3221,8 @@
                         document.getElementById('profileAvatar').innerHTML = 
                             `<img src="${event.target.result}" alt="Profile">`;
                         
-                        if (server.currentUser) {
-                            server.updateProfile(server.currentUser.id, { 
+                        if (database.currentUser) {
+                            database.updateProfile(database.currentUser.id, { 
                                 avatar: event.target.result 
                             });
                             game.updateUserUI();
@@ -3065,7 +3272,11 @@
         }
         
         function adminAddQuestion() {
-            game.addQuestion();
+            game.adminAddQuestion();
+        }
+        
+        function adminAddShopItem() {
+            game.adminAddShopItem();
         }
         
         function showAdminLogin() {
@@ -3079,44 +3290,45 @@
         function logoutAdmin() {
             if (confirm('دڵنیایت دەتەوێت لە ئەدمین دەرچیت؟')) {
                 localStorage.removeItem('authToken');
-                localStorage.removeItem('currentUserId');
-                server.currentUser = null;
+                sessionStorage.removeItem('currentUser');
+                database.currentUser = null;
                 game.isAdmin = false;
                 showScreen('home');
                 showNotification('سەرکەوتووانە لە ئەدمین دەرچوویت', 'success');
             }
         }
         
-        function manageQuestions() {
+        function showAdminSection(section) {
             if (!game.isAdmin) {
                 showAdminLogin();
-            } else {
-                showNotification('بەشی بەڕێوەبردنی پرسیارەکان', 'info');
+                return;
             }
+            
+            document.querySelectorAll('.admin-section').forEach(s => {
+                s.classList.remove('active');
+            });
+            
+            document.getElementById(`${section}Section`).classList.add('active');
+        }
+        
+        function manageQuestions() {
+            showAdminSection('questions');
         }
         
         function manageShop() {
-            if (!game.isAdmin) {
-                showAdminLogin();
-            } else {
-                showNotification('بەشی بەڕێوەبردنی کۆگا', 'info');
-            }
+            showAdminSection('shop');
         }
         
         function viewWinners() {
-            if (!game.isAdmin) {
-                showAdminLogin();
-            } else {
-                showNotification('لیستی براوەکانی یاریەکان', 'info');
-            }
+            showAdminSection('winners');
         }
         
         function manageUsers() {
-            if (!game.isAdmin) {
-                showAdminLogin();
-            } else {
-                game.loadUsersList();
-            }
+            showAdminSection('users');
+        }
+        
+        function deleteQuestion(questionId) {
+            game.deleteQuestion(questionId);
         }
         
         function makeUserAdmin(userId) {
@@ -3137,7 +3349,7 @@
             }, 1000);
         };
         
-        // Event Listeners for Enter key
+        // Event Listeners
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') {
                 if (document.getElementById('loginForm').style.display !== 'none') {
@@ -3154,6 +3366,7 @@
                     closeAdminLogin();
                 } else if (document.getElementById('countdownScreen').classList.contains('active')) {
                     document.getElementById('countdownScreen').classList.remove('active');
+                    clearInterval(game.adTimerInterval);
                 }
             }
         });
